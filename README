@@ -1,4 +1,4 @@
-hack-functions 1.0
+hack-functions 1.2
 por Fernando Mercês (fernando@mentebinaria.com.br)
 
 1. O que é
@@ -38,7 +38,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
 
  bash >= 4
  bc
- curl (e acesso à internet)
+ wget (e acesso à internet)
  hexdump
  grep
  objdump
@@ -67,7 +67,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
    converte um número inteiro decimal para hexadecimal
 
    $ dec2hex 10
-	a
+   a
 
   hex2dec <número_hexa>
    converte um número em hexa para decimal
@@ -75,11 +75,17 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
    $ hex2dec 0x41
    A
 
-  dec2bin <numero>
+  dec2bin <número>
    converte decimal para binário
 
    $ dec2bin 255
    11111111
+
+  bin2dec <número>
+   converte binário para decimal
+
+	$ bin2dec 11111111
+	255
 
 
  4.2. Conversão de caracteres e strings (6)
@@ -90,6 +96,12 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
 
    $ hex2asc 0x97
    a
+
+  asc2hex <caractere>
+   converte um caractere para seu equivalente em hexadecimal
+
+	$ asc2hex A
+	41
 
   asc2dec <caractere>
    converte um caractere em seu equivalente decimal na tabela ASCII
@@ -205,11 +217,17 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
   hexcalc <numero1> <+|-> <numero2>
    soma ou subtrai dois números em hexadecimal e retorna o resultado na mesma base
 
-	$ hexcalc 1f5 + 400000
-	4001f5
+   $ hexcalc 1f5 + 400000
+   4001f5
 
 
 5. ChangeLog
+
+ hack-functions 1.2 - 24/2/2012
+  - troca do curl pelo wget na função unmd5().
+  - otimização de código em todas as funções.
+  - adicionadas as funções bin2dec() e asc2hex().
+  - adicionadas configurações de gdb e objdump para sintaxe Intel.
 
  hack-functions 1.0 - 24/2/2012
   - primeira versão com 20 funções. 
