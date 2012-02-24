@@ -1,0 +1,221 @@
+hack-functions 1.0
+por Fernando Mercês (fernando@mentebinaria.com.br)
+
+1. O que é
+2. Requisitos
+3. Instalação
+4. Funções disponíveis
+ 4.1. Conversão de base
+ 4.2. Conversão de caracteres e strings
+ 4.3. Criptografia
+ 4.4. Engenharia Reversa
+ 4.5. Cáculo numérico
+5. ChangeLog
+6. Bugs
+
+
+1. O que é
+
+ O hack-functions nada mais é do que um conjunto de funções
+ em bash (GPL) que podem ser interessantes para programadores,
+ analistas de segurança e usuários em geral que comumente
+ efetuem operações em baixo nível.
+
+ Não há, de fato, nada novo neste conjunto de funções pois todas
+ elas são feitas usando os softwares existentes na maioria das
+ distribuições GNU/Linux. O que você ganha usando este script é
+ produtividade, pois digitará comandos bem curtos para fazer
+ operações que exigiriam longas linhas.
+
+ !!! IMPORTANTE !!!
+ Não há qualquer tratamento de erro nas funções. Isso fica
+ a cargo do próprio bash e dos programas utilizados.
+
+
+2. Requisitos
+
+ Para o funcionamento de todas as funções, é esperado que você tenha:
+
+ bash >= 4
+ bc
+ curl (e acesso à internet)
+ hexdump
+ grep
+ objdump
+ base64
+ md5sum
+ cut
+
+
+3. Instalação
+ 
+ Após baixar o arquivo hack-functions.sh, basta colocá-lo num diretório
+ qualquer e adicioná-lo ao seu .bashrc, por exemplo:
+
+ $ sudo mv hack-functions.sh /opt
+ $ echo ". /opt/hack-functions.sh" >> $HOME/.bashrc
+ $ . /opt/hack-functions.sh
+
+ A partir deste momento, todas as funções devem estar disponíveis para uso.
+
+
+4. Funções disponíveis
+
+ 4.1. Conversão de base (3)
+
+  dec2hex <número>
+   converte um número inteiro decimal para hexadecimal
+
+   $ dec2hex 10
+	a
+
+  hex2dec <número_hexa>
+   converte um número em hexa para decimal
+
+   $ hex2dec 0x41
+   A
+
+  dec2bin <numero>
+   converte decimal para binário
+
+   $ dec2bin 255
+   11111111
+
+
+ 4.2. Conversão de caracteres e strings (6)
+
+
+  hex2asc <numero_hexa>
+   converte um número em hexa para seu equivalente *imprimível* (>=32 e <=126) em ASCII
+
+   $ hex2asc 0x97
+   a
+
+  asc2dec <caractere>
+   converte um caractere em seu equivalente decimal na tabela ASCII
+
+   $ asc2dec F
+   70
+
+  dec2asc <numero>
+   converte um número decimal para seu caractere equivalente em ASCII
+
+   $ dec2asc 70
+   F
+
+  str2hex <string>
+   converte uma string para bytes hexa separados por espaço
+
+   $ str2hex "ABC"
+   41 42 43
+
+  hex2str <bytes_hexa>
+   converte uma string hexa (bytes separados por espaço) em uma string de texto
+   onde os bytes podem ser precedidos por 0x ou não
+
+   $ hex2str "41 42 0x43 44 0x45"
+   ABCDE
+
+  asciitable
+    imprime a table ASCII na tela
+
+
+ 4.3. Criptografia (5)
+
+  unbase64 <string>
+   decodifica base64 numa string
+
+   $ unbase64 RmVybmFuZG8=
+   Fernando
+
+  md5 <string|arquivo>
+   gera o hash MD5 de uma string (sem considerar o caracetere de nova linha)
+   ou de um arquivo, se existir
+
+   $ md5 "123456"
+   e10adc3949ba59abbe56e057f20f883e
+
+   $ md5 /etc/passwd
+   18186ca65c92ba40cfe8ed4089496c42
+
+  unmd5 <hash>
+   tenta descobrir a string que gerou o hash md5 usando as rainbow tables do
+   site md5crack.com, com ajuda do cURL para efetuar o POST
+
+   $ unmd5 e10adc3949ba59abbe56e057f20f883e
+   123456
+
+  rot <deslocamento> <string>
+   encripta/desencripta uma string str com a cifra
+   de césar usando n deslocamentos para a direita
+
+   $ rot 1 fernando
+   gfsoboep
+
+  rot5 <string>
+   aplica ROT5 na string dada. É um alias para 'rot 5 <string>'
+
+  rot13 <string>
+   aplica ROT13 na string dada. É um alias para 'rot 13 <string>'
+
+  rot18 <string>
+   aplica ROT18 na string dada. É um alias para 'rot 18 <string>'
+
+  rot47 <string>
+   aplica ROT47 na string dada. É um alias para 'rot 47 <string>'
+
+  strxor <chave> <string>
+   calcula o ou exclusivo de cada caractere de uma string com a chave
+
+   $ strxor 4 'ieikjew$ewwewwmjew'
+   mamonas assassinas
+
+
+ 4.3. Engenharia Reversa (1)
+
+  asmgrep <regex> <executável>
+   busca instruções assembly (sintaxe intel) em binários executáveis e imprime 4 instruções 'em volta'
+
+   $ asmgrep 'push *rbp$' /bin/ls
+   411400:	41 57                	push   r15
+   411402:	41 56                	push   r14
+   411404:	41 55                	push   r13
+   411406:	41 54                	push   r12
+   411408:	55                   	push   rbp
+   411409:	53                   	push   rbx
+   41140a:	48 83 ec 68          	sub    rsp,0x68
+   41140e:	85 ff                	test   edi,edi
+   411410:	48 8b 9c 24 a0 00 00 	mov    rbx,QWORD PTR [rsp+0xa0]
+
+
+ 4.4. Cálculo Numérico (5)
+
+  xor <operando1> <operando2>
+    ou exclusivo entre dois operandos numéricos
+  
+  shl
+    empurra o operando um número x de vezes para a esquerda
+  
+  shr
+    empurra o operando um número x de vezes para a direita
+ 
+  pow
+    eleva um operando à uma determinada potência
+
+  hexcalc <numero1> <+|-> <numero2>
+   soma ou subtrai dois números em hexadecimal e retorna o resultado na mesma base
+
+	$ hexcalc 1f5 + 400000
+	4001f5
+
+
+5. ChangeLog
+
+ hack-functions 1.0 - 24/2/2012
+  - primeira versão com 20 funções. 
+
+
+6. Bugs
+
+ Ao encontrar um bug, entre em contato com fernando@mentebinaria.com.br ou
+ submeta o patch no github. Vai ajudar bastante. :)
