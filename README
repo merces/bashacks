@@ -1,5 +1,4 @@
-hack-functions 1.2
-por Fernando Mercês (fernando@mentebinaria.com.br)
+hack-functions 1.2.1
 
 1. O que é
 2. Requisitos
@@ -28,14 +27,16 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
  operações que exigiriam longas linhas.
 
  !!! IMPORTANTE !!!
- Não há qualquer tratamento de erro nas funções. Isso fica
- a cargo do próprio bash e dos programas utilizados.
+ Praticamente não há tratamento de erro nas funções. Isso fica
+ a cargo do próprio bash, dos programas utilizados e da sua
+ responsabilidade. :)
 
 
 2. Requisitos
 
  Para o funcionamento de todas as funções, é esperado que você tenha:
 
+ linux (não testo em outros sistemas)
  bash >= 4
  bc
  wget (e acesso à internet)
@@ -59,7 +60,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
  A partir deste momento, todas as funções devem estar disponíveis para uso.
 
 
-4. Funções disponíveis
+4. Funções disponíveis (22)
 
  4.1. Conversão de base (4)
 
@@ -91,7 +92,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
  4.2. Conversão de caracteres e strings (7)
 
 
-  hex2asc <numero_hexa>
+  hex2asc <número_hexa>
    converte um número em hexa para seu equivalente *imprimível* (>=32 e <=126) em ASCII
 
    $ hex2asc 0x97
@@ -109,7 +110,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
    $ asc2dec F
    70
 
-  dec2asc <numero>
+  dec2asc <número>
    converte um número decimal para seu caractere equivalente em ASCII
 
    $ dec2asc 70
@@ -152,7 +153,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
 
   unmd5 <hash>
    tenta descobrir a string que gerou o hash md5 usando as rainbow tables do
-   site md5crack.com, com ajuda do cURL para efetuar o POST
+   site md5crack.com, com ajuda do wget para efetuar o POST
 
    $ unmd5 e10adc3949ba59abbe56e057f20f883e
    123456
@@ -214,7 +215,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
   pow
     eleva um operando à uma determinada potência
 
-  hexcalc <numero1> <+|-> <numero2>
+  hexcalc <número1> <+|-> <número2>
    soma ou subtrai dois números em hexadecimal e retorna o resultado na mesma base
 
    $ hexcalc 1f5 + 400000

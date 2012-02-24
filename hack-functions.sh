@@ -1,6 +1,6 @@
 #!/bin/bash -x
 #
-# hack-functions 1.2 - bash functions to do little hacks
+# hack-functions 1.2.1 - bash functions to do little hacks
 #
 # Copyright (C) 2012 Fernando Mercês
 #
@@ -25,14 +25,7 @@
 function dec2hex { printf "%x\n" "$1"; }
 
 # hex2dec - converte um número em hexa para decimal
-function hex2dec()
-{
-	local arg1
-
-	# remove o prefixo '0x', caso exista
-	arg1=${1#0x}
-	echo $((0x$arg1))
-}
+function hex2dec(){ echo $((0x${1#0x})); }
 
 # dec2bin - converte decimal para binário
 function dec2bin { echo "obase=2;$1" | bc; }
@@ -45,13 +38,7 @@ function bin2dec { echo $((2#$1)); }
 
 
 # hex2asc - converte um número em hexa para seu equivalente em ASCII
-function hex2asc()
-{
-	local arg1
-
-	arg1=${1#0x}
-	echo -e "\x$arg1"
-}
+function hex2asc() { echo -e "\x${1#0x}"; }
 
 # asc2hex - converte um caractere em hexadecimal
 function asc2hex() { printf "%x\n" "'$1"; }
@@ -108,6 +95,7 @@ function asciitable
  14 0E SO   30 1E RS   46 2E .  62 3E >  78 4E N  94 5E ^  110 6E n  126 7E ~\n\
  15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL\n"
 }
+
 
 ############################# Criptografia ###########################
 
@@ -203,20 +191,14 @@ function pow { echo $(($1**$2)); }
 # e retorna o resultado na mesma base
 function hexcalc
 {
-	local arg1
-	local arg2
-
 	test $# -eq 3 || return 1
 	test $2 == "-" -o $2 == "+" || return 1
 
-	arg1=${1#0x}
-	arg2=${3#0x}
-
-	dec2hex $((0x$arg1$20x$arg2))
+	dec2hex $((0x${1#0x} $2 0x${3#0x}))
 }
 
 
-#################### Configuraçõe úteis ##############################
+#################### Configurações úteis ##############################
 
 # sintaxe intel automática para gdb e objdump
 GDBINIT="$HOME/.gdbinit"
