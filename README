@@ -61,7 +61,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
 
 4. Funções disponíveis
 
- 4.1. Conversão de base (3)
+ 4.1. Conversão de base (4)
 
   dec2hex <número>
    converte um número inteiro decimal para hexadecimal
@@ -88,7 +88,7 @@ por Fernando Mercês (fernando@mentebinaria.com.br)
 	255
 
 
- 4.2. Conversão de caracteres e strings (6)
+ 4.2. Conversão de caracteres e strings (7)
 
 
   hex2asc <numero_hexa>
