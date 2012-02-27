@@ -1,6 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash
 #
-# hack-functions 1.2.1 - bash functions to do little hacks
+# hack-functions 1.4 - bash functions to do little hacks
 #
 # Copyright (C) 2012 Fernando Mercês
 #
@@ -20,61 +20,100 @@
 
 ########################### Conversão de base ###########################
 
+# dec2hex - converte decimal para hexadecimal
+dec2hex() { printf "%x\n" "$1"; }
 
-# dec2hex - converte um número decimal para hexadecimal
-function dec2hex { printf "%x\n" "$1"; }
-
-# hex2dec - converte um número em hexa para decimal
-function hex2dec(){ echo $((0x${1#0x})); }
+# hex2dec - converte hexadecimal para decimal
+hex2dec() { echo $((0x${1#0x})); }
 
 # dec2bin - converte decimal para binário
-function dec2bin { echo "obase=2;$1" | bc; }
+dec2bin() { echo "obase=2;$1" | bc; }
 
-# bin2dec - converte dbinário para decimal
-function bin2dec { echo $((2#$1)); }
+# bin2dec - converte binário para decimal
+bin2dec() { echo $((2#$1)); }
 
 
-################# Conversão de caracteres em strings ####################
-
+################# Conversão de caracteres e strings #####################
 
 # hex2asc - converte um número em hexa para seu equivalente em ASCII
-function hex2asc() { echo -e "\x${1#0x}"; }
+hex2asc() { echo -e "\x${1#0x}"; }
 
-# asc2hex - converte um caractere em hexadecimal
-function asc2hex() { printf "%x\n" "'$1"; }
+# asc2hex - converte um caractere ASCII em hexadecimal
+asc2hex() { printf "%x\n" "'$1"; }
 
 # dec2asc - converte um número decimal para seu caractere equivalente em ASCII
-function dec2asc { echo -e $(printf "\\\x%x" $1); }
+dec2asc() { echo -e $(printf "\\\x%x" $1); }
 
-# asc2dec - converte um caractere em seu equivalente decimal na tabela ASCII
-function asc2dec { printf "%d\n" "'$1"; }
+# asc2dec - converte um caractere ASCII em decimal
+asc2dec() { printf "%d\n" "'$1"; }
 
-# str2hex - converte uma string para bytes hexa separados por espaço
-function str2hex
+# str2hex - converte uma string para bytes em hexadecimal
+str2hex()
 {
-	echo -n "$1" | hexdump -v -e '/1 "%02x "'
-	echo
+	case "$1" in
+		"-x")
+			echo -n "$2" | hexdump -v -e '/1 "%02x"' | sed 's/../\\x&/g'
+			echo
+			;;
+		"-0x")
+			echo -n "$2" | hexdump -v -e '/1 "0x%02x "' | sed 's/\(.*\) /\1/'
+			echo
+			;;
+		"-c")
+			echo -n '{'
+			echo -n "$2" | hexdump -v -e '/1 "0x%02x, "' | sed 's/\(.*\), /\1/'
+			echo '}'
+			;;
+		*)
+			echo -n "$1" | hexdump -v -e '/1 "%02x "' | sed 's/\(.*\) /\1/'
+			echo
+			;;
+	esac
 }
 
-# hex2str - converte uma string hexa (bytes separados por espaço) em uma string de texto
-function hex2str
+# hex2str - converte bytes em hexadecimal para string
+hex2str()
 {
-	local arg1
-	local aux
+	local hex
+	local str
 
-	# remove todos os '0x', se houver
-	arg1=$(echo $1 | sed 's/0x//g')
+	# remove todos os '0x', '\x', espaços, vírgulas e chaves
+	hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
+
+	# insere um espaço a cada dois caracteres
+	hex=$(echo $hex | sed 's/../& /g')
 
 	# prefixa os bytes hexa com '\x' (necessário para o echo)
-	for i in $arg1; do
-		aux="$aux\\x$i"
+	for i in $hex; do
+		str="$str\\x$i"
 	done
 
-	echo -e $aux
+	echo -e $str
+}
+
+# charcalc - efetua cálculos com caracteres
+charcalc()
+{
+	local char
+	local res
+
+	case $2 in
+		+|-)
+			char=$(asc2dec $1)
+			res=$(($char $2 $3))
+			dec2asc $res
+		;;
+		'*')
+			for (( i=0; i<$3; i++ )); do
+				res="$res$1"
+			done
+			echo $res
+		;;
+	esac
 }
 
 # asciitable - imprime a tabela ASCII
-function asciitable
+asciitable()
 {
 	echo -en \
 	"Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex\n\
@@ -100,11 +139,10 @@ function asciitable
 ############################# Criptografia ###########################
 
 # unbase64 - decodifica base64 numa string
-function unbase64 { echo $1 | base64 -d; }
+unbase64() { echo $1 | base64 -d; }
 
-# md5 - gera o hash MD5 de uma string (sem considerar o caracetere de nova linha)
-# ou de um arquivo, se existir
-function md5
+# md5 - calcula o hash MD5 de uma string ou arquivo
+md5()
 {
 	test -e $1 && \
 		md5sum < "$1" | cut -d' ' -f1 \
@@ -112,9 +150,8 @@ function md5
 		echo -n "$1" | md5sum | cut -d' ' -f1
 }
 
-# unmd5 - tenta descobrir a string que gerou o hash md5 usando as rainbow
-# tables do site md5crack.com, com ajuda do cURL para efetuar o POST
-function unmd5
+# unmd5 - tenta descobrir a string que gerou o hash md5
+unmd5()
 {
 	site="http://md5crack.com/crackmd5.php"
 
@@ -123,9 +160,8 @@ function unmd5
 	 sed 's/.*md5("\(.*\)").*<\/div>/\1/'
 }
 
-# rot - encripta/desencripta uma string str com a cifra
-# de César usando n deslocamentos para a direita
-function rot
+# rot - cifra a string com a Cifra de César
+rot()
 {
 	local n
 
@@ -138,70 +174,83 @@ function rot
 	echo $2 | tr a-z $n-za-z | tr A-Z ${n^^}-ZA-Z
 }
 
+rotall()
+{
+	test -n "$1" || return 1
+
+	for ((i=1; i<=25; i++ )); do
+		echo "ROT$i $(rot $i "$1")"
+	done
+}
+
 # aliases para funções mais comuns de ROT
 alias rot5='rot 5'
 alias rot13='rot 13'
 alias rot18='rot 18'
 alias rot47='rot 47'
 
-# strxor - calcula o ou exclusivo de cada caractere de uma
-# string com a chave
-function strxor
+# strxor - faz o xor de uma string com uma chave
+strxor()
 {
-	local arg1
-	local aux
+	local str
+	local xored
 
 	# $2 é a string e $1 é a chave
-	arg1=$(str2hex "$2")
+	str=$(str2hex "$2")
 
-	for i in $arg1; do
-		aux="$aux $(dec2hex $((0x$i^$1)))"
+	for i in $str; do
+		xored="$xored $(dec2hex $((0x$i^$1)))"
 	done
 
-	hex2str "$aux"
+	hex2str "$xored"
 }
 
 
 ####################### Engenharia Reversa ###########################
 
-# asmgrep - busca instruções assembly (sintaxe intel) em binários
-# executáveis e imprime 4 instruções 'em volta'
-function asmgrep()
-{
-	objdump -M intel-mnemonics -d "$2" |
-	 grep --color -C 4 -E "$1"
-}
+# asmgrep - busca instruções assembly em binários executáveis
+asmgrep() { objdump -d "$2" | grep --color -C 4 -E "$1"; }
 
 
 ########################### Cálculo ##################################
 
 # xor - efetua xor (ou exclusivo) bit a bit entre dois números
-function xor { echo $(($1^$2)); }
+xor() { echo $(($1^$2)); }
 
 # shl - efetua deslocamento de bits à esquerda em um número
-function shl { echo $(($2<<$1)); }
+shl() { echo $(($1<<$2)); }
 
 # shr - efetua deslocamento de bits à direita em um número
-function shr { echo $(($2>>$1)); }
+shr() { echo $(($1>>$2)); }
 
 # xor - eleva um número à uma potência
-function pow { echo $(($1**$2)); }
+pow() { echo $(($1**$2)); }
 
-# hexcalc - soma ou subtrai dois números em hexadecimal
-# e retorna o resultado na mesma base
-function hexcalc
+# hexcalc - faz operaçãos entre dois números hexa
+hexcalc()
 {
 	test $# -eq 3 || return 1
-	test $2 == "-" -o $2 == "+" || return 1
 
+	echo -n 0x
 	dec2hex $((0x${1#0x} $2 0x${3#0x}))
 }
 
 
 #################### Configurações úteis ##############################
 
-# sintaxe intel automática para gdb e objdump
-GDBINIT="$HOME/.gdbinit"
-grep -s 'disassembly-flavor' "$GDBINIT" &> /dev/null || echo "set disassembly-flavor intel" >> "$GDBINIT"
-alias gdb='gdb -q'
-alias objdump='objdump -M intel-mnemonics'
+# habilita/desabilita sintaxe Intel automática no gdb e objdump
+intel()
+{
+	local	GDBINIT="$HOME/.gdbinit"
+
+	if [ "$1" == "on" ]; then
+		grep -s 'disassembly-flavor' "$GDBINIT" &> /dev/null || \
+		 echo "set disassembly-flavor intel" >> "$GDBINIT"
+		alias gdb='gdb -q'
+		alias objdump='objdump -M intel-mnemonics'
+	elif [ "$1" == "off" ]; then
+		sed -i 's/set disassembly-flavor intel//' "$GDBINIT"
+		unalias objdump
+		unalias gdb
+	fi
+}

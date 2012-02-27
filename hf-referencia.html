@@ -1,0 +1,691 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hack-functions - guia referência de funções</title>
+
+<style type="text/css">
+
+body {
+	font-family: "Verdana";
+	font-size: 12px;
+}
+
+li {
+	margin: 5px 0 5px 0;
+}
+
+#box {
+	background-color: #eef;
+	width: 600px;
+	border: 1px dotted #ccc;
+	margin: 30px 30px 30px 30px;
+	padding: 2px 10px 2px 10px;
+}
+
+h1, h2, h3, h4 {
+	margin: 4px 0px 4px 0px;
+}
+</style>
+
+</head>
+<body>
+
+<div align="center">
+<h2>hack-functions 1.4 - Guia de Referência de Funções</h2>
+<p style="font-size: 10px;">por Fernando Mercês &lt;fernando (a) mentebinaria.com.br&gt;</p>
+</div>
+
+<ol>
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Conversão de base</p></li>
+	<ul>
+	<li><a href="#dec2hex">dec2hex</a> - converte um número inteiro em decimal para hexadecimal</li>
+	<li><a href="#hex2dec">hex2dec</a> - converte um número em hexadecimal para decimal</li>
+	<li><a href="#dec2bin">dec2bin</a> - converte um número decimal em binário</li>
+	<li><a href="#bin2dec">bin2dec</a> - converte um número binário em decimal</li>
+	</ul>
+	
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Conversão de caracteres e strings</p></li>
+	<ul>
+		<li><a href="#hex2asc">hex2asc</a> - converte um número em hexadecimal para seu caractere equivalente na tabela ASCII</li>
+		<li><a href="#asc2hex">asc2hex</a> - converte um caractere para seu valor equivalente na tabela ASCII, em hexadecimal</li>
+		<li><a href="#dec2asc">dec2asc</a> - converte um número em decimal para seu caractere equivalente na tabela ASCII</li>
+		<li><a href="#asc2dec">asc2dec</a> - converte um caractere para seu valor equivalente na tabela ASCII, em decimal</li>
+		<li><a href="#str2hex">str2hex</a> - converte uma string para bytes hexa equivalentes a cada caractere (string hexa)</li>
+		<li><a href="#hex2str">hex2str</a> - converte um ou mais bytes hexa em uma string</li>
+		<li><a href="#charcalc">charcalc</a> - converte um ou mais bytes hexa em uma string</li>
+		<li><a href="#asciitable">asciitable</a> - imprime a table ASCII</li>
+	</ul>
+
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Criptografia</p></li>
+	<ul>
+		<li><a href="#unbase64">unbase64</a> - decodifica BASE64 de uma string</li>
+		<li><a href="#md5">md5</a> - calcula o hash MD5 de uma string ou arquivo</li>
+		<li><a href="#unmd5">unmd5</a> - tenta descobrir a string que gerou o hash MD5 informado</li>
+		<li><a href="#rot">rot</a> - encripta/desencripta uma string com a Cifra de César</li>
+		<li><a href="#rotall">rotall</a> - aplica vários ROTs numa string</li>
+		<li><a href="#strxor">strxor</a> - faz XOR de uma string com uma chave</li>
+	</ul>
+	
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Engenharia Reversa</p></li>
+	<ul>
+		<li><a href="#asmgrep">asmgrep</a> - busca instruções assembly em binários executáveis</li>
+	</ul>
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Cáculo numérico</p></li>
+	<ul>
+		<li><a href="#xor">xor</a> - calcula o ou exclusivo entre dois números</li>
+		<li><a href="#shl">shl</a> - empurra bits para a esquerda de um número</li>
+		<li><a href="#shr">shr</a> - empurra bits para a direita de um número</li>
+		<li><a href="#pow">pow</a> - eleva um número a uma potência</li>
+		<li><a href="#hexcalc">hexcalc</a> - faz cálculo entre números em hexadecimal</li>
+	</ul>
+	
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Configurações úteis</p></li>
+	<ul>
+		<li><a href="#intel">intel</a> - configura o ambiente para disassemblar na sintaxe Intel</li>
+	</ul>
+
+</ol>
+
+<div id="box">
+<a name="dec2hex">
+<h3 style="color: blue;">dec2hex()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">dec2hex &lt;número&gt;</p>
+<p>Converte um número inteiro em decimal para hexadecimal</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em hexadecimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ dec2hex 10<br />
+a</p>
+</div>
+
+<div id="box">
+<a name="hex2dec">
+<h3 style="color: blue;">hex2dec()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">hex2dec &lt;número_hexa&gt;</p>
+<p>Converte um número em hexadecimal para decimal. Aceita entrada
+prefixada com '0x' ou não.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em hexadecimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ hex2dec a<br />
+10</p>
+<p>$ hex2dec 0x0a<br />
+10</p>
+</div>
+
+<div id="box">
+<a name="dec2bin">
+<h3 style="color: blue;">dec2bin()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">dec2bin &lt;número&gt;</p>
+<p>Converte um número decimal em binário.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em binário</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ dec2bin 255<br />
+11111111</p>
+</div>
+
+<div id="box">
+<a name="bin2dec">
+<h3 style="color: blue;">bin2dec()</h3>
+(hack-functions >= 1.2)
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">bin2dec &lt;número_binário&gt;</p>
+<p>Converte um número binário em decimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em binário a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ bin2dec 111<br />
+7</p>
+</div>
+
+<div id="box">
+<a name="hex2asc">
+<h3 style="color: blue;">hex2asc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">hex2asc &lt;número_hexa&gt;</p>
+<p>Converte um número em hexadecimal para seu caractere
+equivalente na tabela ASCII. Aceita entradas com ou sem
+o prefixo '0x'.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em hexadecimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O caractere correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ hex2asc 41<br />
+A</p>
+<p>$ hex2asc 0x41<br />
+A</p>
+</div>
+
+<div id="box">
+<a name="asc2hex">
+<h3 style="color: blue;">asc2hex()</h3>
+(hack-functions >= 1.2)
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">asc2hex &lt;caractere&gt;</p>
+<p>Converte um caractere para seu valor equivalente
+na tabela ASCII, em hexadecimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o caractere a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O valor em hexadecimal correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ asc2hex M<br />
+4d</p>
+</div>
+
+<div id="box">
+<a name="dec2asc">
+<h3 style="color: blue;">dec2asc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">dec2asc &lt;número&gt;</p>
+<p>Converte um número em decimal para seu caractere
+equivalente na tabela ASCII.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O caractere correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ dec2asc 78<br />
+N</p>
+</div>
+
+<div id="box">
+<a name="asc2dec">
+<h3 style="color: blue;">asc2dec()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">asc2dec &lt;caractere&gt;</p>
+<p>Converte um caractere para seu valor equivalente
+na tabela ASCII, em decimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o caractere a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O valor em decimal correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ asc2dec M<br />
+77</p>
+</div>
+
+<div id="box">
+<a name="str2hex">
+<h3 style="color: blue;">str2hex()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">str2hex &lt;prefixo&gt; &lt;string&gt;</p>
+<p>Converte uma string para bytes hexa equivalentes
+a cada caractere (string hexa).</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>prefixo (opcional)<br />
+ -x&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixados com '\x'.<br />
+ -0x&nbsp;: bytes de saída espaçados e prefixados com '0x'.<br />
+ -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C. 
+</p>
+<p>string - a string a ser convertida</p>
+<hr>
+<h4>Saída</h4>
+<p>Os bytes em hexadecimal correspondentes</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ str2hex "Fernando"<br />
+46 65 72 6e 61 6e 64 6f<br /></p>
+<p>$ str2hex -x "Fernando"<br />
+\x46\x65\x72\x6e\x61\x6e\x64\x6f</p>
+<p>$ str2hex -0x "Fernando"<br />
+0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f</p>
+<p>$ str2hex -c "Fernando"<br />
+{0x46, 0x65, 0x72, 0x6e, 0x61, 0x6e, 0x64, 0x6f}</p>
+</div>
+
+<div id="box">
+<a name="hex2str">
+<h3 style="color: blue;">hex2str()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">hex2str &lt;bytes_hexa&gt;</p>
+<p>Converte um ou mais bytes hexa em uma string. Aceita
+como entrada todos os formatos de saída da função
+<a href="#str2hex">str2hex</a>.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>bytes_hexa - os bytes a serem convertidos</p>
+<hr>
+<h4>Saída</h4>
+<p>A string convertida</p>
+<hr>
+<h4>Exemplos</h4>
+
+<p>$ hex2str '72 6f 63 6b'<br />
+rock<br /></p>
+<p>$ hex2str '\x72\x6f\x63\x6b'<br />
+rock</p>
+<p>$ hex2str '0x72 0x6f 0x63 0x6b'<br />
+rock</p>
+<p>$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'<br />
+rock</p>
+</div>
+
+<div id="box">
+<a name="charcalc">
+<h3 style="color: blue;">charcalc()</h3>
+(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">charcalc &lt;caractere&gt;
+&lt;operador&gt; &lt;número&gt;</p>
+<p>Efetua cálculos especiais entre caracteres e números.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>caractere - um caractere qualquer ou uma string quando a operação for multiplicação.</p>
+<p>operador - +, - ou *</p>
+<p>número - um número.</p>
+<hr>
+<h4>Saída</h4>
+<p>O(s) caractere(s) correspondente(s)</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ charcalc f + 2<br />
+h</p>
+<p>$ charcalc B - 1<br />
+A</p>
+<p>$ charcalc A \* 16<br />
+AAAAAAAAAAAAAAAA
+</p>
+<p>$ charcalc isso \* 3<br />
+issoissoisso
+</div>
+
+<div id="box">
+<a name="asciitable">
+<h3 style="color: blue;">asciitable()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">asciitable</p>
+<p>Imprime a tabela ASCII.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Nenhum.</p>
+<hr>
+<h4>Saída</h4>
+<p>A tabela ASCII, em 80 colunas.</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ asciitable</p>
+</div>
+
+<div id="box">
+<a name="unbase64">
+<h3 style="color: blue;">unbase64()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">unbase64 &lt;string&gt;</p>
+<p>Decodifica BASE64 de uma string.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string - a string codificada com BASE64</p>
+<hr>
+<h4>Saída</h4>
+<p>A string decodificada</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ unbase64 b3p6eSBvc2JvdXJuZQ==<br />
+ozzy osbourne<br /></p>
+</div>
+
+<div id="box">
+<a name="md5">
+<h3 style="color: blue;">md5()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">md5 &lt;string|arquivo&gt;</p>
+<p>Calcula o hash MD5 de uma string
+(sem considerar o caracetere de nova linha)
+ou de um arquivo, caso este exista</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string ou arquivo a ter o hash calculado</p>
+<hr>
+<h4>Saída</h4>
+<p>O hash MD5 correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ md5 "123456"<br />
+e10adc3949ba59abbe56e057f20f883e</p>
+<p>$ md5 /etc/passwd<br />
+18186ca65c92ba40cfe8ed4089496c42</p>
+</div>
+
+<div id="box">
+<a name="unmd5">
+<h3 style="color: blue;">unmd5()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">unmd5 &lt;hash&gt;</p>
+<p>Tenta descobrir a string que gerou o hash
+MD5 informado usando a internet (exige que
+esteja conectado).</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>hash - o hash MD5 a ser quebrado</p>
+<hr>
+<h4>Saída</h4>
+<p>A string correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ unmd5 e10adc3949ba59abbe56e057f20f883e<br />
+123456</p>
+</div>
+
+<div id="box">
+<a name="rot">
+<h3 style="color: blue;">rot()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">rot &lt;deslocamento&gt; &lt;string&gt;</p>
+<p>Encripta/desencripta uma string com a Cifra
+de César usando n deslocamentos para a direita.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>deslocamento - o número de deslocamentos a ser aplicado na string</p>
+<p>string - a string que sofrerá o ROT</p>
+<hr>
+<h4>Saída</h4>
+<p>A string depois do ROT</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ rot 1 'iron maiden'<br />
+jspo nbjefo
+</p>
+<p># simulando rotall()<br />
+$ for i in {1..8}; do echo -n "rot$i: "; rot $i 'ewlsd'; done<br />
+rot1: fxmte<br />
+rot2: gynuf<br />
+rot3: hzovg<br />
+rot4: iapwh<br />
+rot5: jbqxi<br />
+rot6: kcryj<br />
+rot7: ldszk<br />
+rot8: metal
+</p>
+<h4>Nota</h4>
+Essa função possui os aliases rot5(), rot13(), rot18() e rot47(), onde
+o número de deslocamentos não precisa ser informado, pois já
+está no nome da função.
+</div>
+
+<div id="box">
+<a name="rotall">
+<h3 style="color: blue;">rotall()</h3>
+(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">rotall &lt;string&gt;</p>
+<p>Encripta/desencripta uma string com a Cifra
+de César usando deslocamentos de 1 a 25.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string - a string que sofrerá todos os ROT</p>
+<hr>
+<h4>Saída</h4>
+<p>Cada string com ROT</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ rotall ewlsd<br />
+ROT1 fxmte<br />
+ROT2 gynuf<br />
+ROT3 hzovg<br />
+<...><br />
+ROT25 dvkrc
+</p>
+</div>
+
+<div id="box">
+<a name="strxor">
+<h3 style="color: blue;">strxor()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">strxor &lt;chave&gt; &lt;string&gt;</p>
+<p>Calcula o ou exclusivo de cada caractere
+de uma string com uma chave.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>chave - o valor, em decimal ou hexadecimal (prefixado com '0x')
+para efetuar o XOR com os caracteres da string.</p>
+<p>string - a string que será 'XOReada'</p>
+<hr>
+<h4>Saída</h4>
+<p>A string após o XOR com a chave</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ strxor 4 'ieikjew$ewwewwmjew'<br />
+mamonas assassinas
+</p>
+<p>$ strxor 0xa 'pink floyd'<br />
+zcda*lfesn
+</p>
+</div>
+
+<div id="box">
+<a name="asmgrep">
+<h3 style="color: blue;">asmgrep()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">asmgrep &lt;regex&gt; &lt;arquivo&gt;</p>
+<p>Busca instruções assembly em binários executáveis e imprime
+4 instruções 'em volta'. Você deve atentar-se à sintaxe (Intel ou
+AT&amp;T) utilizada em seu ambiente.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>regex - a expressão regular (ERE).</p>
+<p>arquivo - um binário executável.'</p>
+<hr>
+<h4>Saída</h4>
+<p>Caso a expressão regular case, 9 instruções são impressas, sendo
+4 anteriores à instrução buscadas e 4 posteriores, além dela mesma.</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ asmgrep 'push *rbp$' /bin/ls<br />
+411400:&nbsp;&nbsp;41&nbsp;57&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   r15<br />
+411402:&nbsp;&nbsp;41 56&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   r14<br />
+411404:&nbsp;&nbsp;41 55&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   r13<br />
+411406:&nbsp;&nbsp;41 54&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   r12<br />
+411408:&nbsp;&nbsp;55&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   rbp<br />
+411409:&nbsp;&nbsp;53&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push   rbx<br />
+41140a:&nbsp;&nbsp;48 83 ec 68&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub    rsp,0x68<br />
+41140e:&nbsp;&nbsp;85 ff&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test   edi,edi<br />
+411410:&nbsp;&nbsp;48 8b 9c 24 a0 00 00&nbsp;&nbsp;mov rbx,QWORD PTR [rsp+0xa0]<br />
+</p>
+</p>
+</div>
+
+<div id="box">
+<a name="xor">
+<h3 style="color: blue;">xor()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">xor &lt;número1&gt; &lt;número2&gt;</p>
+<p>Calcula o ou exclusivo entre dois números.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número1 - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>número2 - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ xor 0xdead 0xdead<br />
+0
+</p>
+<p>$ xor 45 20<br />
+57
+</p>
+</div>
+
+<div id="box">
+<a name="shl">
+<h3 style="color: blue;">shl()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">shl &lt;número&gt; &lt;bits&gt;</p>
+<p>Empurra bits para a esquerda de um número.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>bits - o número de bits para serem empurrados.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ shl 4 1<br />
+8
+</p>
+<p>$ shl 0x4 1<br />
+8
+</p>
+</div>
+
+<div id="box">
+<a name="shr">
+<h3 style="color: blue;">shr()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">shl &lt;número&gt; &lt;bits&gt;</p>
+<p>Empurra bits para a direita de um número.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>bits - o número de bits para serem empurrados.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ shr 4 1<br />
+2
+</p>
+<p>$ shr 0x4 1<br />
+2
+</p>
+</div>
+
+<div id="box">
+<a name="shr">
+<h3 style="color: blue;">shr()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">shl &lt;número&gt; &lt;potência&gt;</p>
+<p>Eleva um número a uma potência.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>potência - a potência desejada.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ pow 8 2<br />
+64
+</p>
+<p>$ pow 0xa 3<br />
+1000
+</p>
+</div>
+
+<div id="box">
+<a name="hexcalc">
+<h3 style="color: blue;">hexcalc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">hexcalc &lt;número_hexa1&gt;
+&lt;operador&gt; &lt;número_hexa2&gt;</p>
+<p>Faz cálculo entre números em hexadecimal e dá o resultado
+também em hexadecimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número_hexa1 - número em hexadecimal (com ou sem o prefixo '0x')</p>
+<p>operador - +, -, * ou /.</p>
+<p>número_hexa2 - número em hexadecimal (com ou sem o prefixo '0x')</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em hexadecimal (prefixado com '0x')</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ hexcalc 5f7 \* 2<br />
+0xbee
+</p>
+<p>$ hexcalc 0xdead / dead<br />
+0x1
+</p>
+</div>
+
+<div id="box">
+<a name="intel">
+<h3 style="color: blue;">intel()</h3>
+(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">intel &lt;on|off&gt;</p>
+<p>Configura o ambiente (gdb e objdump) para disassemblar
+na sintaxe Intel.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>on - ativa a sintaxe Intel.</p>
+<p>off - ativa a sintaxe AT&amp;T (desativa a Intel).</p>
+<hr>
+<h4>Saída</h4>
+Nenhuma.
+<hr>
+<h4>Exemplos</h4>
+<p>$ intel on</p>
+</div>
+
+</body>
+</html>
