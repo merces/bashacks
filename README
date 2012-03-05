@@ -49,8 +49,8 @@ hack-functions
  qualquer e adicioná-lo ao seu .bashrc, por exemplo:
 
  $ sudo mv hack-functions.sh /opt
- $ echo ". /opt/hack-functions.sh" >> $HOME/.bashrc
- $ . /opt/hack-functions.sh
+ $ echo "source /opt/hack-functions.sh" >> $HOME/.bashrc
+ $ source /opt/hack-functions.sh
 
  A partir deste momento, todas as funções devem estar disponíveis para uso.
 
@@ -58,6 +58,7 @@ hack-functions
 4. Documentação
 
  O Guia de Referência encontra-se no arquivo hf-referencia.html
+ (http://www.mentebinaria.com.br/files/hf-referencia.html)
 
 
 5. ChangeLog
