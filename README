@@ -41,6 +41,7 @@ hack-functions
  base64
  md5sum
  cut
+ gdb
 
 
 3. Instalação
@@ -58,10 +59,9 @@ hack-functions
 4. Documentação
 
  O Guia de Referência encontra-se no arquivo hf-referencia.html
- (http://www.mentebinaria.com.br/files/hf-referencia.html)
 
 
-5. ChangeLog
+5. ChangeLo
 
  hack-functions 1.4 - 27/2/2012
   + função nova: charcalc() - faz cálculo com caracteres.

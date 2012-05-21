@@ -70,6 +70,7 @@ h1, h2, h3, h4 {
 	<li><p style="margin-bottom: 4px; font-weight: bold;">Engenharia Reversa</p></li>
 	<ul>
 		<li><a href="#asmgrep">asmgrep</a> - busca instruções assembly em binários executáveis</li>
+		<li><a href="#dumpstack">dumpstack</a> - cria um arquivo em disco com o conteúdo da pilha de memória de um processo</li>
 	</ul>
 	<li><p style="margin-bottom: 4px; font-weight: bold;">Cáculo numérico</p></li>
 	<ul>
@@ -541,6 +542,26 @@ AT&amp;T) utilizada em seu ambiente.</p>
 411410:&nbsp;&nbsp;48 8b 9c 24 a0 00 00&nbsp;&nbsp;mov rbx,QWORD PTR [rsp+0xa0]<br />
 </p>
 </p>
+</div>
+
+<div id="box">
+<a name="dumpstack">
+<h3 style="color: blue;">dumpstack()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">dumpstack &lt;pid&gt; &lt;outfile&gt;</p>
+<p>Cria um arquivo em disco com o conteúdo da pilha de memória
+de um processo</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>pid - o PID do processo em questão</p>
+<p>outifle - o arquivo onde será escrito o dump</p>
+<hr>
+<h4>Saída</h4>
+<p>Não escreve nada na tela, mas cria o arquivo outfile</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ dumpstack 15125 pilha.dump<br />
 </div>
 
 <div id="box">
