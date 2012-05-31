@@ -42,6 +42,7 @@ hack-functions
  md5sum
  cut
  gdb
+ rev
 
 
 3. Instalação
@@ -61,7 +62,11 @@ hack-functions
  O Guia de Referência encontra-se no arquivo hf-referencia.html
 
 
-5. ChangeLo
+5. ChangeLog
+
+ hack-functions 1.5 - ?
+  + função nova: str2hexr() - converte string para bytes hexa invertidos.
+  + função nova: dumpstack() - dump o conteúdo da stack de um processo.
 
  hack-functions 1.4 - 27/2/2012
   + função nova: charcalc() - faz cálculo com caracteres.

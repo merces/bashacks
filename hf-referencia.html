@@ -32,7 +32,7 @@ h1, h2, h3, h4 {
 <body>
 
 <div align="center">
-<h2>hack-functions 1.4 - Guia de Referência de Funções</h2>
+<h2>hack-functions 1.5 - Guia de Referência de Funções</h2>
 <p style="font-size: 10px;">por Fernando Mercês &lt;fernando (a) mentebinaria.com.br&gt;</p>
 </div>
 
@@ -52,6 +52,7 @@ h1, h2, h3, h4 {
 		<li><a href="#dec2asc">dec2asc</a> - converte um número em decimal para seu caractere equivalente na tabela ASCII</li>
 		<li><a href="#asc2dec">asc2dec</a> - converte um caractere para seu valor equivalente na tabela ASCII, em decimal</li>
 		<li><a href="#str2hex">str2hex</a> - converte uma string para bytes hexa equivalentes a cada caractere (string hexa)</li>
+		<li><a href="#str2hexr">str2hexr</a> - como a str2hex, mas inverte os bytes na saída</li>
 		<li><a href="#hex2str">hex2str</a> - converte um ou mais bytes hexa em uma string</li>
 		<li><a href="#charcalc">charcalc</a> - converte um ou mais bytes hexa em uma string</li>
 		<li><a href="#asciitable">asciitable</a> - imprime a table ASCII</li>
@@ -281,6 +282,38 @@ a cada caractere (string hexa).</p>
 0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f</p>
 <p>$ str2hex -c "Fernando"<br />
 {0x46, 0x65, 0x72, 0x6e, 0x61, 0x6e, 0x64, 0x6f}</p>
+</div>
+
+<div id="box">
+<a name="str2hexr">
+<h3 style="color: blue;">str2hexr()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">str2hexr &lt;prefixo&gt; &lt;string&gt;</p>
+<p>Converte uma string para bytes hexa equivalentes
+a cada caractere (string hexa) e reverte os bytes de saída.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>prefixo (opcional)<br />
+ -x&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixados com '\x'.<br />
+ -0x&nbsp;: bytes de saída espaçados e prefixados com '0x'.<br />
+ -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C. 
+</p>
+<p>string - a string a ser convertida</p>
+<hr>
+<h4>Saída</h4>
+<p>Os bytes em hexadecimal correspondentes, de forma reversa</p>
+<hr>
+<h4>Exemplos</h4>
+<p>$ str2hexr "Fernando"<br />
+6f 64 6e 61 6e 72 65 46<br /></p>
+<p>$ str2hex -x "Fernando"<br />
+\x6f\x64\x6e\x61\x6e\x72\x65\x46</p>
+<p>$ str2hex -0x "Fernando"<br />
+0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46</p>
+<p>$ str2hex -c "Fernando"<br />
+{0x6f, 0x64, 0x6e, 0x61, 0x6e, 0x72, 0x65, 0x46}
+</p>
 </div>
 
 <div id="box">

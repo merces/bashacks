@@ -71,6 +71,19 @@ str2hex()
 	esac
 }
 
+# str2hexr - str2hex com bytes revertidos na saída
+str2hexr()
+{
+	case "$1" in
+		"-x" | "-0x" | "-c")
+			str2hex $1 "$(echo "$2" | rev)"
+			;;
+		*)
+			str2hex "$(echo "$1" | rev)"
+			;;
+	esac
+}
+
 # hex2str - converte bytes em hexadecimal para string
 hex2str()
 {
