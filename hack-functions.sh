@@ -224,16 +224,17 @@ strxor()
 # asmgrep - busca instruções assembly em binários executáveis
 asmgrep() { objdump -d "$2" | grep --color -C 4 -E "$1"; }
 
-# dumpstack(pid, outfile) - dumpa a pilha de memória do processo
-dumpstack()
+dumpmem()
 {
-	local stack_addr=$(grep '\[stack\]' /proc/$1/maps |
-								cut -d' ' -f1 | sed 's/^/0x/; s/-/ 0x/')
-	
+	local stack_addr=$(grep -m 1 "$1" /proc/$2/maps |
+	 cut -d' ' -f1 | sed 's/^/0x/; s/-/ 0x/')
+
 	test -n "$stack_addr" && \
-	echo "dump memory "$2" $stack_addr" | gdb --pid $1 &> /dev/null
+	echo "dump memory "$3" $stack_addr" | gdb --pid $2 &> /dev/null
 }
 
+alias dumpstack='dumpmem stack'
+alias dumpheap='dumpmem heap'
 
 ########################### Cálculo ##################################
 
