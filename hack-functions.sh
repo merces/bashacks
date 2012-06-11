@@ -236,6 +236,14 @@ dumpmem()
 alias dumpstack='dumpmem stack'
 alias dumpheap='dumpmem heap'
 
+# asminfo - busca informações sobre a instrução em assembly desejada
+asminfo()
+{
+	wget -q faydoc.tripod.com/cpu/$(echo $1 | tr [A-Z] [a-z]).htm -O - |
+	 sed '/<table border=1 cellpadding=5 cellspacing=0>/,/<\/table>/!d' |
+	 html2text | tr _ ' '
+}
+
 ########################### Cálculo ##################################
 
 # xor - efetua xor (ou exclusivo) bit a bit entre dois números
