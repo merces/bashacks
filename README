@@ -44,6 +44,7 @@ hack-functions
  gdb
  rev
  html2text
+ tee
 
 
 3. Instalação
@@ -66,8 +67,11 @@ hack-functions
 5. ChangeLog
 
  hack-functions 1.5 - ?
+  + função nova: asminfo() - busca informações sobre uma instrução Assembly x86 (Intel).
+  + uso de cache em $HOME/.hf/cache para agilizar comandos repetidos.
+  + função nova: dumpheap() - dump o conteúdo da heap de um processo para um arquivo.
+  + função nova: dumpstack() - extrai o conteúdo da stack de um processo para um arquivo.
   + função nova: str2hexr() - converte string para bytes hexa invertidos.
-  + função nova: dumpstack() - dump o conteúdo da stack de um processo.
 
  hack-functions 1.4 - 27/2/2012
   + função nova: charcalc() - faz cálculo com caracteres.
