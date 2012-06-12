@@ -255,6 +255,8 @@ asminfo()
 		 sed -n '/^===.*/,$p' |
 		 sed 's/^===.*/'${ins^^}'/' | tee -a $hf_cache/${ins,,}.txt
 	fi
+
+	test -s $hf_cache/${ins,,}.txt || rm -f $hf_cache/${ins,,}.txt
 }
 
 ########################### Cálculo ##################################
