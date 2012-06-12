@@ -43,6 +43,7 @@ hack-functions
  cut
  gdb
  rev
+ html2text
 
 
 3. Instalação

@@ -17,6 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+hf_user_path=$HOME/.hf
+hf_cache=$hf_user_path/cache/asm
+
+checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
 ########################### Conversão de base ###########################
 
@@ -239,9 +243,18 @@ alias dumpheap='dumpmem heap'
 # asminfo - busca informações sobre a instrução em assembly desejada
 asminfo()
 {
-	wget -q faydoc.tripod.com/cpu/$(echo $1 | tr [A-Z] [a-z]).htm -O - |
-	 sed '/<table border=1 cellpadding=5 cellspacing=0>/,/<\/table>/!d' |
-	 html2text | tr _ ' '
+	local ins=${1,,}
+
+	checkdir
+
+	if test -s $hf_cache/$ins.txt; then
+		cat $hf_cache/$ins.txt
+	else
+		wget -q faydoc.tripod.com/cpu/$ins.htm -O - |
+		 html2text |
+		 sed -n '/^===.*/,$p' |
+		 sed 's/^===.*/'${ins^^}'/' | tee -a $hf_cache/${ins,,}.txt
+	fi
 }
 
 ########################### Cálculo ##################################
