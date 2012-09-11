@@ -260,6 +260,37 @@ asminfo()
 	test -s $hf_cache/$ins.txt || rm -f $hf_cache/$ins.txt
 }
 
+sc2asm()
+{
+	local mode=32
+	local in="$1"
+
+	[ $1 = '-m' ] && mode=$2 in="$3"
+
+	sc=$(echo "$in" | sed 's/\\x/ /g')
+	echo "$sc" | udcli -$mode -x -noff -nohex | sed 's/^ //'
+}
+
+asm2sc()
+{
+	local obj=$(mktemp)
+	local fmt=elf32
+	local in="$1"
+
+	[ $1 = "-f" ] && fmt=$2 in="$3"
+
+	nasm -f $fmt -o $obj $in 
+
+	objdump -M intel -D $obj |
+	 tr -d \\t |
+	 sed -nr 's/^.*:(([0-9a-f]{2} )*).*$/\1/p' | 
+	 tr -d \\n |
+	 sed 's/\(..\) /\\x\1/g'
+
+	echo
+	rm -f $obj
+}
+
 ########################### Cálculo ##################################
 
 # xor - efetua xor (ou exclusivo) bit a bit entre dois números

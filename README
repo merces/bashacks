@@ -45,6 +45,8 @@ hack-functions
  rev
  html2text
  tee
+ udcli e udis86 (sc2asm)
+ nasm (asm2sc)
 
 
 3. Instalação
@@ -58,10 +60,23 @@ hack-functions
 
  A partir deste momento, todas as funções devem estar disponíveis para uso.
 
+ Adicionalmente, você deve instalar a libudis86 para usar a função sc2asm, para
+ isso faça download da última versão da biblioteca em
+ http://udis86.sourceforge.net e comande:
+
+ $ tar xf udis86-*.tar.gz
+ $ cd udis86-*
+ $ ./configure
+ $ make
+ # make install
+ $ cd udcli
+ $ make
+ # make install
 
 4. Documentação
 
- O Guia de Referência encontra-se no arquivo hf-referencia.html
+ O Guia de Referência encontra-se online em
+ http://www.mentebinaria.com.br/files/hf-referencia.html
 
 
 5. ChangeLog
@@ -72,6 +87,8 @@ hack-functions
   + função nova: dumpheap() - dump o conteúdo da heap de um processo para um arquivo.
   + função nova: dumpstack() - extrai o conteúdo da stack de um processo para um arquivo.
   + função nova: str2hexr() - converte string para bytes hexa invertidos.
+  + função nova: asm2sc() - cria um payload/shellcode a partir de instruções Assembly.
+  + função nova: sc2asm() - remonta um payload/shellcode para o código em Assembly original.
 
  hack-functions 1.4 - 27/2/2012
   + função nova: charcalc() - faz cálculo com caracteres.
