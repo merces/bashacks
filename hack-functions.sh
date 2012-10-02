@@ -36,14 +36,18 @@ dec2bin() { echo "obase=2;$1" | bc; }
 # bin2dec - converte binário para decimal
 bin2dec() { echo $((2#$1)); }
 
+hex2bin()
+{
+	local bin
+
+	for i in $*; do
+		bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
+		echo -n "$bin "
+	done
+	echo
+}
 
 ################# Conversão de caracteres e strings #####################
-
-# hex2asc - converte um número em hexa para seu equivalente em ASCII
-hex2asc() { echo -e "\x${1#0x}"; }
-
-# asc2hex - converte um caractere ASCII em hexadecimal
-asc2hex() { printf "%x\n" "'$1"; }
 
 # dec2asc - converte um número decimal para seu caractere equivalente em ASCII
 dec2asc() { echo -e $(printf "\\\x%x" $1); }
@@ -56,26 +60,26 @@ str2hex()
 {
 	case "$1" in
 		"-x")
-			echo -n "$2" | hexdump -v -e '/1 "%02x"' | sed 's/../\\x&/g'
+			echo -n "$2" | hexdump -ve '/1 "%02x"' | sed 's/../\\x&/g'
 			echo
 			;;
 		"-0x")
-			echo -n "$2" | hexdump -v -e '/1 "0x%02x "' | sed 's/\(.*\) /\1/'
+			echo -n "$2" | hexdump -ve '/1 "0x%02x "' | sed 's/\(.*\) /\1/'
 			echo
 			;;
 		"-c")
 			echo -n '{'
-			echo -n "$2" | hexdump -v -e '/1 "0x%02x, "' | sed 's/\(.*\), /\1/'
+			echo -n "$2" | hexdump -ve '/1 "0x%02x, "' | sed 's/\(.*\), /\1/'
 			echo '}'
 			;;
 		*)
-			echo -n "$1" | hexdump -v -e '/1 "%02x "' | sed 's/\(.*\) /\1/'
+			echo -n "$1" | hexdump -ve '/1 "%02x "' | sed 's/\(.*\) /\1/'
 			echo
 			;;
 	esac
 }
 
-# str2hexr - str2hex com bytes revertidos na saída
+# str2hexr - str2hex com bytes em ordem reversa na saída
 str2hexr()
 {
 	case "$1" in
