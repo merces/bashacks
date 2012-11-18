@@ -244,6 +244,14 @@ strxor()
 	hex2str "$xored"
 }
 
+ip2bin()
+{
+	local r
+	r=$(echo $1 | tr . \;)
+
+	(for i in $(echo "obase=2;$r" | bc); do printf '%.8d.' $i; done) | sed 's/.$//'
+	echo
+}
 
 ####################### Engenharia Reversa ###########################
 
