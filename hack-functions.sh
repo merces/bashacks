@@ -253,6 +253,14 @@ ip2bin()
 	echo
 }
 
+####################### Geo Coordenadas de um determinado IP ##########
+geoip()
+{
+        wget -q --timeout=30 "http://xml.utrace.de/?query=$1" -O - | sed '4d' | sed "s/<[^>]*>//g; s/\t//g; /^$/d" | tr '\n' ',' ; echo "\n"
+       
+}
+
+
 ####################### Engenharia Reversa ###########################
 
 # asmgrep - busca instruções assembly em binários executáveis
