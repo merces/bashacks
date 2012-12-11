@@ -192,11 +192,20 @@ md5()
 # unmd5 - tenta descobrir a string que gerou o hash md5
 unmd5()
 {
-	site="http://md5crack.com/crackmd5.php"
+	local r=""
+        local s1="http://md5crack.com/crackmd5.php"
+        local s2="http://www.tobtu.com/md5.php?h=$1"
 
-	wget -q --timeout=30 --post-data="term=$1" "$site" -O - |
-	 grep 'Found:'  |
-	 sed 's/.*md5("\(.*\)").*<\/div>/\1/'
+	# adicionado site tobtu.com, md5crack consta fora do ar - 11-12-12
+        r="$( wget -q --timeout=30 "${s2}" -O - |
+         grep -E "([a-zA-Z0-9]){32}" |
+         cut -d':' -f3  )"
+
+        [ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s1}" -O - |
+         grep 'Found:'  |
+         sed 's/.*md5("\(.*\)").*<\/div>/\1/' )"
+
+        echo "${r}"
 }
 
 # rot - cifra a string com a Cifra de César
@@ -259,7 +268,6 @@ geoip()
         wget -q --timeout=30 "http://xml.utrace.de/?query=$1" -O - | sed '4d' | sed "s/<[^>]*>//g; s/\t//g; /^$/d" | tr '\n' ',' ; echo "\n"
        
 }
-
 
 ####################### Engenharia Reversa ###########################
 
