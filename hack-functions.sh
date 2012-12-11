@@ -198,7 +198,7 @@ unmd5()
 
 	# adicionado site tobtu.com, md5crack consta fora do ar - 11-12-12
         r="$( wget -q --timeout=30 "${s2}" -O - |
-         grep -E "([a-zA-Z0-9]){32}" |
+         grep -E "([a-f0-9]){32}" |
          cut -d':' -f3  )"
 
         [ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s1}" -O - |
