@@ -192,11 +192,20 @@ md5()
 # unmd5 - tenta descobrir a string que gerou o hash md5
 unmd5()
 {
-	site="http://md5crack.com/crackmd5.php"
+	local r=""
+        local s1="http://md5crack.com/crackmd5.php"
+        local s2="http://www.tobtu.com/md5.php?h=$1"
 
-	wget -q --timeout=30 --post-data="term=$1" "$site" -O - |
-	 grep 'Found:'  |
-	 sed 's/.*md5("\(.*\)").*<\/div>/\1/'
+	# adicionado site tobtu.com, md5crack consta fora do ar - 11-12-12
+        r="$( wget -q --timeout=30 "${s2}" -O - |
+         grep -E "([a-f0-9]){32}" |
+         cut -d':' -f3  )"
+
+        [ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s1}" -O - |
+         grep 'Found:'  |
+         sed 's/.*md5("\(.*\)").*<\/div>/\1/' )"
+
+        echo "${r}"
 }
 
 # rot - cifra a string com a Cifra de César
@@ -260,6 +269,38 @@ geoip()
        
 }
 
+####################### Imprime o IP externo da conexao ##############
+meuip()
+{
+	wget -q --timeout=30 "http://meuip.datahouse.com.br/" -O - | 
+	grep "Meu IP\?" | 
+	grep -Ewo "([0-9]){1,3}(\.([0-9]){1,3}){3}"
+
+}
+
+####################### Scan de Redes Sem Fio ########################
+wscan() 
+{
+	[ $# -ne 1 ] && echo "Informe uma interface EX: ./wscan wlan0 "
+
+        iface=$1
+        LISTA=""
+
+	echo -e "BSS\t\t\t  dBm\t ESSID\t\t\t C?  \t WPS?"
+
+	LISTA=($(iw dev ${iface} scan | 
+              grep -Ewo "BSS (([a-f|0-9][a-f|0-9]\:){5}([:a-f|0-9]+)|channel ([0-9]){1,2})|SSID: ([0-9a-zA-Z]){1,}|([0-9]+)\.00 dBm|WPA.*|WEP|WPS.*" |
+                tr '\n' ' ' | 
+                sed 's/SSID: //g; s/channel //g; s/dBm/\t\n/g;  s/BSS/|/g; s/Version://g; s/\*//g;' 2>/dev/null ) )
+
+	echo -e "${LISTA[@]}" | tr '|' '\n' | sed 's/: //g' |
+                awk '{  n=""
+                        for ( i=length($3) ; i<22 ; i++ ) n=n" "                
+                          print $1,"\t",$2,"\t",$3,n,$4,"   "$5 
+                        }'
+	echo " "
+
+}
 
 ####################### Engenharia Reversa ###########################
 
