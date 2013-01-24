@@ -59,6 +59,10 @@ asc2dec() { printf "%d\n" "'$1"; }
 str2hex()
 {
 	case "$1" in
+		"-s") 
+			echo -n "$2" | hexdump -ve '/1 "%02x"' | sed 's/^/0x/' 
+			echo
+			;;
 		"-x")
 			echo -n "$2" | hexdump -ve '/1 "%02x"' | sed 's/../\\x&/g'
 			echo
@@ -83,7 +87,7 @@ str2hex()
 str2hexr()
 {
 	case "$1" in
-		"-x" | "-0x" | "-c")
+		"-x" | "-0x" | "-c" | "-s")
 			str2hex $1 "$(echo "$2" | rev)"
 			;;
 		*)

@@ -266,7 +266,8 @@ a cada caractere (string hexa).</p>
 <p>prefixo (opcional)<br />
  -x&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixados com '\x'.<br />
  -0x&nbsp;: bytes de saída espaçados e prefixados com '0x'.<br />
- -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C. 
+ -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C.<br />
+ -s&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixo inicial '0x'.  
 </p>
 <p>string - a string a ser convertida</p>
 <hr>
@@ -282,6 +283,8 @@ a cada caractere (string hexa).</p>
 0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f</p>
 <p>$ str2hex -c "Fernando"<br />
 {0x46, 0x65, 0x72, 0x6e, 0x61, 0x6e, 0x64, 0x6f}</p>
+<p>$ str2hex -s "/etc/passwd"<br />
+0x2f6574632f706173737764</p>
 </div>
 
 <div id="box">
@@ -297,7 +300,8 @@ a cada caractere (string hexa) e reverte os bytes de saída.</p>
 <p>prefixo (opcional)<br />
  -x&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixados com '\x'.<br />
  -0x&nbsp;: bytes de saída espaçados e prefixados com '0x'.<br />
- -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C. 
+ -c&nbsp;&nbsp;&nbsp;: array de bytes no estilo da linguagem C. <br />
+ -s&nbsp;&nbsp;&nbsp;: bytes de saída não espaçados e prefixo inicial '0x'.
 </p>
 <p>string - a string a ser convertida</p>
 <hr>
@@ -307,12 +311,14 @@ a cada caractere (string hexa) e reverte os bytes de saída.</p>
 <h4>Exemplos</h4>
 <p>$ str2hexr "Fernando"<br />
 6f 64 6e 61 6e 72 65 46<br /></p>
-<p>$ str2hex -x "Fernando"<br />
+<p>$ str2hexr -x "Fernando"<br />
 \x6f\x64\x6e\x61\x6e\x72\x65\x46</p>
-<p>$ str2hex -0x "Fernando"<br />
+<p>$ str2hexr -0x "Fernando"<br />
 0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46</p>
-<p>$ str2hex -c "Fernando"<br />
-{0x6f, 0x64, 0x6e, 0x61, 0x6e, 0x72, 0x65, 0x46}
+<p>$ str2hexr -c "Fernando"<br />
+{0x6f, 0x64, 0x6e, 0x61, 0x6e, 0x72, 0x65, 0x46} </p>
+<p>$ str2hexr -s "/etc/passwd"<br />
+0x6477737361702f6374652f
 </p>
 </div>
 
@@ -342,6 +348,9 @@ rock</p>
 rock</p>
 <p>$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'<br />
 rock</p>
+<p>$ hex2str 0x2f6574632f706173737764 <br />
+/etc/passwd
+</p>
 </div>
 
 <div id="box">
