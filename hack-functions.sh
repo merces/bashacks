@@ -378,10 +378,9 @@ bfht()
 }
 
 ####################### Engenharia Social  ###########################
-
 emailsearch() 
 {
-	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; sleep 3 ; } 
+	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; sleep 5 ; } 
 	local PGTOTAL
         local TMP="$(mktemp)"
         local DOMAIN="$( echo $1 | sed 's/\./\\./g')"
