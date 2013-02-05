@@ -320,59 +320,90 @@ bfhtpass()
 
 bfht()
 {
-	local CONTADOR=0
-	local u
-	local USER
-	local HOST
-	local PASS
-	local p	
-	local FLAGH
-	local T=5
-	local TMP=$(mktemp)
-	local VERBOSE=0
+        local CONTADOR=0
+        local u
+        local USER
+        local HOST
+        local PASS
+        local p
+        local FLAGH
+        local T=5
+        local TMP=$(mktemp)
+        local VERBOSE=0
 
-	while (($#)) 
-	do
-        	case $1 in
-        	"-u"|"-U")
-                	[ $1 == "-U" ] && { shift ; USER="$1" ; }
-			[ $1 == "-u" ] && { USER=$(mktemp) ; shift ; echo $1 > ${USER} ; }
-        	;;
-        	"-p"|"-P")
-                	[ $1 == "-P" ] && { shift ; PASS="$1" ; }
-                 	[ $1 == "-p" ] && { PASS=$(mktemp) ; shift ; echo $1 > ${PASS} ; }
-         	;;
-        	"-h")
-               		shift
-                	HOST="$1"
-       		;;
-        	"-t")
-                	shift
-                	[ ! -z $1 ] && T=$1 || T=5
-        	;;
-		"-v")
-			VERBOSE=1
-		;;
-        	esac
-        	shift
-	done
+        while (($#))
+        do
+                case $1 in
+                "-u"|"-U")
+                        [ $1 == "-U" ] && { shift ; USER="$1" ; }
+                        [ $1 == "-u" ] && { USER=$(mktemp) ; shift ; echo $1 > ${USER} ; }
+                ;;
+                "-p"|"-P")
+                        [ $1 == "-P" ] && { shift ; PASS="$1" ; }
+                        [ $1 == "-p" ] && { PASS=$(mktemp) ; shift ; echo $1 > ${PASS} ; }
+                ;;
+                "-h")
+                        shift
+                        HOST="$1"
+                ;;
+                "-t")
+                        shift
+                        [ ! -z $1 ] && T=$1 || T=5
+                ;;
+                "-v")
+                        VERBOSE=1
+                ;;
+                esac
+                shift
+        done
 
-       	while read u 
-       	do
-		[ $( wc -l < ${TMP}  ) -ne 0 ] &&  {  break ; } 
-               	while read p 
-               	do		
+        while read u
+        do
+                test $( wc -l < ${TMP} ) -ne 0 && break
+                while read p
+                do
+			test $( wc -l < ${TMP} ) -ne 0 && break
 			[ ${VERBOSE} -eq 1 ] && echo -e "[ ${HOST} ] Usuario: ${u} \t Senha: ${p} "
-			( bfhtpass "${u}" "${p}" "${HOST}" "${TMP}" >&2 /dev/null  & ) 
-                       	let CONTADOR++
-                       	if [ ${CONTADOR} -eq ${T} ]
-                       	then
-                               	wait
-                               	CONTADOR=0	
-                       	fi
-               	done < ${PASS}
-       	done < ${USER}
+			( bfhtpass "${u}" "${p}" "${HOST}" "${TMP}" >&2 /dev/null & )
+			let CONTADOR++
+			if [ ${CONTADOR} -eq ${T} ]
+			then
+				wait
+				CONTADOR=0
+				sleep 2
+			fi
+                done < ${PASS}
+        done < ${USER}
 
+}
+
+####################### Engenharia Social  ###########################
+
+emailsearch() 
+{
+	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; sleep 3 ; } 
+	local PGTOTAL
+        local TMP="$(mktemp)"
+        local DOMAIN="$( echo $1 | sed 's/\./\\./g')"
+        local AGENT="Mozilla/5.0"
+	
+	# DOMAIN = dominio ex: mentebinaria.com.br 
+	# recebe como parametro as paginas que deseja percorrer
+	# lembrando que a paginacao do google eh numerado de 10 em 10 
+        [ -z $2  ] && PGTOTAL=50 || PGTOTAL=$2
+
+        echo "$1"
+
+        for (( i=0 ; i<=${PGTOTAL} ; i+=10 ))
+        do
+                echo "[+] ${i}"
+                wget -q --timeout=30 --user-agent="${AGENT}" -O - "http://www.google.com.br/search?q=%22@${DOMAIN}%22&btnG=&start=${i}" &>> ${TMP}
+        done
+
+        echo 
+        echo "============================================="
+        cat ${TMP} |  sed -e "s/<[^>]*>//g" | grep -Ewo "([a-z0-9_\.]){1,}\@${DOMAIN}"
+        rm -f ${TMP}
 }
 
 ####################### Engenharia Reversa ###########################
