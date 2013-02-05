@@ -380,16 +380,16 @@ bfht()
 ####################### Engenharia Social  ###########################
 emailsearch() 
 {
-	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; sleep 5 ; } 
 	local PGTOTAL
         local TMP="$(mktemp)"
         local DOMAIN="$( echo $1 | sed 's/\./\\./g')"
         local AGENT="Mozilla/5.0"
-	
+
 	# DOMAIN = dominio ex: mentebinaria.com.br 
 	# recebe como parametro as paginas que deseja percorrer
 	# lembrando que a paginacao do google eh numerado de 10 em 10 
         [ -z $2  ] && PGTOTAL=50 || PGTOTAL=$2
+	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
 
         echo "$1"
 
