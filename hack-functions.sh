@@ -22,6 +22,8 @@ hf_cache=$hf_user_path/cache/asm
 
 checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
+isnumber() { [ -z "$( echo $1 | grep -Ewv '[0-9]' )" ] && echo "TRUE" || echo "FALSE" ; } 
+
 ########################### Conversão de base ###########################
 
 # dec2hex - converte decimal para hexadecimal
@@ -378,30 +380,52 @@ bfht()
 }
 
 ####################### Engenharia Social  ###########################
-emailsearch() 
+websearch() 
 {
 	local PGTOTAL
         local TMP="$(mktemp)"
-        local DOMAIN="$( echo $1 | sed 's/\./\\./g')"
+        local DOMAIN="$( echo $2 | sed 's/\./\\./g')"
         local AGENT="Mozilla/5.0"
+	local PESQUISA
+	local EXT 
+	local LOCALIZAR
+
+	case $1 in
+	
+		"mail") 
+			PESQUISA="%22@${DOMAIN}%22" 
+			[ "$( isnumber $3 )" == "TRUE" ] && 
+			[ $3 -gt 0 ] &&  PGTOTAL=$3 ||
+					 PGTOTAL=50
+			LOCALIZAR="grep -Ewo ([a-z0-9_\.\-]){1,}\@${DOMAIN} "
+
+		;;
+		"file")
+			EXT=$3
+			PESQUISA="site:${DOMAIN}%20filetype:${EXT}"
+			[ "$( isnumber $4 )" == "TRUE" ] && 
+			[ $4 -gt 0 ] &&  PGTOTAL=$4 ||
+					 PGTOTAL=50
+			LOCALIZAR="grep -Eo ([a-zA-Z0-9\-\_]){1,}\.${EXT} "
+		;;
+	esac
 
 	# DOMAIN = dominio ex: mentebinaria.com.br 
 	# recebe como parametro as paginas que deseja percorrer
 	# lembrando que a paginacao do google eh numerado de 10 em 10 
-        [ -z $2  ] && PGTOTAL=50 || PGTOTAL=$2
-	[ $# -lt 1 ] && { echo -e "Modo de Usar: \nemailsearch <dominio.com.br> [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
 
-        echo "$1"
+	[ $# -le 1 ] && { echo -e "Modo de Usar: \nwebsearch [mail|file] <dominio.com.br> [sql|txt|...] [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
+
+        echo "$1 $2"
 
         for (( i=0 ; i<=${PGTOTAL} ; i+=10 ))
         do
                 echo "[+] ${i}"
-                wget -q --timeout=30 --user-agent="${AGENT}" -O - "http://www.google.com.br/search?q=%22@${DOMAIN}%22&btnG=&start=${i}" &>> ${TMP}
+                wget -q --timeout=30 --user-agent="${AGENT}" -O ${TMP} "http://www.google.com.br/search?q=${PESQUISA}&btnG=&start=${i}" 
         done
 
-        echo 
         echo "============================================="
-        cat ${TMP} |  sed -e "s/<[^>]*>//g" | grep -Ewo "([a-z0-9_\.]){1,}\@${DOMAIN}"
+        cat ${TMP} |  sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
         rm -f ${TMP}
 }
 
@@ -515,3 +539,4 @@ intel()
 		unalias gdb
 	fi
 }
+
