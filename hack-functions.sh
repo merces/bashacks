@@ -406,7 +406,7 @@ websearch()
 			[ "$( isnumber $4 )" == "TRUE" ] && 
 			[ $4 -gt 0 ] &&  PGTOTAL=$4 ||
 					 PGTOTAL=50
-			LOCALIZAR="grep -Eo ([a-zA-Z0-9\-\_]){1,}\.${EXT} "
+			LOCALIZAR="grep -Ewo ([a-zA-Z0-9\-\_]){1,}\.${EXT} "
 		;;
 	esac
 
@@ -426,7 +426,7 @@ websearch()
 
         echo "============================================="
         cat ${TMP} |  sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
-        rm -f ${TMP}
+        echo ${TMP}
 }
 
 ####################### Engenharia Reversa ###########################

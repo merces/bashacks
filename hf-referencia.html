@@ -768,18 +768,27 @@ Nenhuma.
 <h3 style="color: blue;">websearch()</h3>
 <hr>
 <h4>Descrição</h4>
-<p style="color: blue;">emailsearch [file|mail] &lt;dominio.com.br&gt; [50] </p>
-<p>Realiza pesquisa na base do google por emails de dominio indexado.</p>
+<p style="color: blue;">websearch [file|mail] &lt;dominio.com.br&gt; filetype [50] </p>
+<p>Realiza pesquisa na base do google por emails|arquivos de dominio indexado.</p>
 <hr>
 <h4>Parâmetros</h4>
-<p>dominio.com.br</p>
+<p>Mail</p>
+<p>mail DomainName [PAGINAÇÃO 50 default] </p>
+<p>File</p>
+<p>file DomainName filetype [PAGINAÇÃO 50 default] </p>
 <hr>
 <h4>Saída</h4>
+<p> Mail </p>
 maria@dominio.com.br<br/>
-joao@dominio.com.br<br/>
+joao@dominio.com.br<br/><br />
+<p>File</p>
+vmsql.sql<br />
+script.sql<br />
+who_has_role.sql<br />
 <hr>
 <h4>Exemplos</h4>
-<p>$ emailsearch dominio.com.br</p>
+<p>$ websearch mail dominio.com.br</p>
+<p>$ websearch file dominio.com.br sql 200 </p>
 </div>
 
 <div id="box">
@@ -812,12 +821,53 @@ joao@dominio.com.br<br/>
 <p>Ip Adress | DomainName</p>
 <hr>
 <h4>Saída</h4>
-00001010.00000000.00000000.00000001<br/>
+ISP, Organização, Região, País, Latitude, Longitude, Quantidade de requisições já feitas, \n<br />
+Level 3 Communications,Google Incorporated,Mountain View,US,37.419200897217,-122.05740356445,1,\n<br/>
 <hr>
 <h4>Exemplos</h4>
-<p>$ ip2bin 10.0.0.1</p>
+<p>$ geoip  </p>
 </div>
 
+<div id="box">
+<a name="meuip">
+<h3 style="color: blue;">meuip()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">meuip</p>
+<p>Exibe Ip externo</p>
+<hr>
+<h4>Parâmetros</h4>
+<p> </p>
+<hr>
+<h4>Saída</h4>
+Endereço externo 
+<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ meuip </p>
+<p> 187.25.55.110 </p>
+</div>
+
+<div id="box">
+<a name="wscan">
+<h3 style="color: blue;">wscan()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">wscan wlan0 </p>
+<p>Exibe redes sem fio próxima</p>
+<hr>
+<h4>Parâmetros</h4>
+<p> interface wifi (wlan0) </p>
+<hr>
+<h4>Saída</h4>
+<p>BSS                       dBm    ESSID                   C?      WPS?</p>
+
+<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ wscan wlan0 </p>
+<p>  </p>
+</div>
 
 </body>
 </html>
