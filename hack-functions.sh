@@ -22,7 +22,7 @@ hf_cache=$hf_user_path/cache/asm
 
 checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
-isnumber() { [ -z "$( echo $1 | grep -Ewv '[0-9]' )" ] && echo "TRUE" || echo "FALSE" ; } 
+isnumber() { [ ! -z  $1 ] && [ -z "$( echo $1 | grep -Ewv '([0-9]){1,}' )" ] && echo "TRUE" || echo "FALSE" ; } 
 
 ########################### Conversão de base ###########################
 
@@ -382,9 +382,12 @@ bfht()
 ####################### Engenharia Social  ###########################
 websearch() 
 {
+	[ $# -le 1 ] && { echo -e "Modo de Usar: \nwebsearch [mail|file] <dominio.com.br> [sql|txt|...] [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
+
 	local PGTOTAL
         local TMP="$(mktemp)"
-        local DOMAIN="$( echo $2 | sed 's/\./\\./g')"
+        #local DOMAIN="$( echo $2 | sed 's/\./\\./g')"
+	local DOMAIN="$2"
         local AGENT="Mozilla/5.0"
 	local PESQUISA
 	local EXT 
@@ -406,7 +409,6 @@ websearch()
 			[ "$( isnumber $4 )" == "TRUE" ] && 
 			[ $4 -gt 0 ] &&  PGTOTAL=$4 ||
 					 PGTOTAL=50
-			LOCALIZAR="grep -Ewo ([a-zA-Z0-9\-\_]){1,}\.${EXT} "
 		;;
 	esac
 
@@ -414,18 +416,25 @@ websearch()
 	# recebe como parametro as paginas que deseja percorrer
 	# lembrando que a paginacao do google eh numerado de 10 em 10 
 
-	[ $# -le 1 ] && { echo -e "Modo de Usar: \nwebsearch [mail|file] <dominio.com.br> [sql|txt|...] [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
-
         echo "$1 $2"
 
         for (( i=0 ; i<=${PGTOTAL} ; i+=10 ))
         do
                 echo "[+] ${i}"
-                wget -q --timeout=30 --user-agent="${AGENT}" -O ${TMP} "http://www.google.com.br/search?q=${PESQUISA}&btnG=&start=${i}" 
+                wget -q --timeout=30 --user-agent="${AGENT}" -O -  "http://www.google.com.br/search?q=${PESQUISA}&btnG=&start=${i}" &>> ${TMP}
+		cat ${TMP}
         done
 
         echo "============================================="
-        cat ${TMP} |  sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
+
+	#if [ $1 == "mail" ] 
+	#then 
+		 cat ${TMP} | sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
+	#elif [ $1 == "file" ] 
+	#then
+	#	 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Eo "\/.*.${EXT} " | tr ' ' '\n'  | grep "${DOMAIN}"
+	#fi
+
         echo ${TMP}
 }
 
