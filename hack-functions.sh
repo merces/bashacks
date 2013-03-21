@@ -422,20 +422,19 @@ websearch()
         do
                 echo "[+] ${i}"
                 wget -q --timeout=30 --user-agent="${AGENT}" -O -  "http://www.google.com.br/search?q=${PESQUISA}&btnG=&start=${i}" &>> ${TMP}
-		cat ${TMP}
         done
 
         echo "============================================="
 
-	#if [ $1 == "mail" ] 
-	#then 
+	if [ $1 == "mail" ] 
+	then 
 		 cat ${TMP} | sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
-	#elif [ $1 == "file" ] 
-	#then
-	#	 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Eo "\/.*.${EXT} " | tr ' ' '\n'  | grep "${DOMAIN}"
-	#fi
+	elif [ $1 == "file" ] 
+	then
+		 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Ewo "${DOMAIN}\/.*.${EXT} " | tr ' ' '\n' | grep "${EXT}$"
+	fi
 
-        echo ${TMP}
+        rm -rf ${TMP}
 }
 
 ####################### Engenharia Reversa ###########################
