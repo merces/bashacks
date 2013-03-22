@@ -431,7 +431,7 @@ websearch()
 		 cat ${TMP} | sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
 	elif [ $1 == "file" ] 
 	then
-		 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Ewo "${DOMAIN}\/.*.${EXT} " | tr ' ' '\n' | grep "${EXT}$"
+		 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Ewo "${DOMAIN}\/.*.${EXT} " | tr ' ' '\n' | grep "${EXT}$" | sort -u
 	fi
 
         rm -rf ${TMP}
