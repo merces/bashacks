@@ -86,7 +86,21 @@ h1, h2, h3, h4 {
 	<ul>
 		<li><a href="#intel">intel</a> - configura o ambiente para disassemblar na sintaxe Intel</li>
 	</ul>
+	
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Engenharia Social</p></li>
+	<ul>
+			<li><a href="#websearch">websearch</a> - realiza pesquisa no google por email de dominio</li>
+	</ul>	
 
+	<li><p style="margin-bottom: 4px; font-weight: bold;">Rede Diversos</p></li>
+	<ul>
+		<li><a href="#ip2bin">ip2bin</a> - converte endereço ip em equivalente binário</li>
+		<li><a href="#geoip">geoip</a> - determina aproximadamente localização geografica de um host/ip</li>
+		<li><a href="#meuip">meuip</a> - exibe ip externo da conexão</li>
+		<li><a href="#wscan">wscan</a> - exibe informações a respeito de redes sem fio próxima tais como chiper e wps com suas respectivas versões</li>
+		<li><a href="#bfht">bfht</a> - Brute force de htaccess</li>
+	</ul>
+	
 </ol>
 
 <div id="box">
@@ -749,6 +763,182 @@ Nenhuma.
 <h4>Exemplos</h4>
 <p>$ intel on</p>
 </div>
+
+<div id="box">
+<a name="websearch">
+<h3 style="color: blue;">websearch()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">websearch [file|mail] &lt;dominio.com.br&gt; filetype [50] </p>
+<p>Realiza pesquisa na base do google por emails|arquivos de dominio indexado.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Mail</p>
+<p>mail DomainName [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ]  </p>
+<p>File</p>
+<p>file DomainName filetype [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ] </p>
+<hr>
+<h4>Saída</h4>
+<p> Mail </p>
+maria@dominio.com.br<br/>
+joao@dominio.com.br<br/><br />
+<p>File</p>
+vmsql.sql<br />
+script.sql<br />
+who_has_role.sql<br />
+<hr>
+<h4>Exemplos</h4>
+<p>$ websearch mail dominio.com.br</p>
+maria@dominio.com.br<br/>
+joao@dominio.com.br<br/><br />
+<p>$ websearch file dominio.com.br sql 200 </p>
+dominio.com.br/vmsql.sql<br />
+dominio.com.br/../script.sql<br />
+dominio.com.br/af/1/../who_has_role.sql<br />
+</div>
+
+<div id="box">
+<a name="ip2bin">
+<h3 style="color: blue;">ip2bin()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">ip2bin &lt;IP Address&gt;</p>
+<p>Converte endereço ip em equivalente binário.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Ip Address</p>
+<hr>
+<h4>Saída</h4>
+00001010.00000000.00000000.00000001<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ ip2bin 10.0.0.1</p> 
+<p>0001010.00000000.00000000.00000001 </p> 
+</div>
+
+<div id="box">
+<a name="geoip">
+<h3 style="color: blue;">geoip()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">geoip &lt;IpAddress|DomainName&gt;</p>
+<p>Determina aproximadamente localização geografica de um host/ip.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Ip Adress | DomainName</p>
+<hr>
+<h4>Saída</h4>
+ISP, Organização, Região, País, Latitude, Longitude, Quantidade de requisições já feitas, \n<br />
+Level 3 Communications,Google Incorporated,Mountain View,US,37.419200897217,-122.05740356445,1,\n<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ geoip  </p>
+<p> Level 3 Communications,Google Incorporated, Mountain View, US, 37.419200897217, -122.05740356445,1,\n</p>
+</div>
+
+<div id="box">
+<a name="meuip">
+<h3 style="color: blue;">meuip()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">meuip</p>
+<p>Exibe Ip externo</p>
+<hr>
+<h4>Parâmetros</h4>
+<p> </p>
+<hr>
+<h4>Saída</h4>
+Endereço externo 
+<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ meuip </p>
+<p> 187.25.55.110 </p>
+</div>
+
+<div id="box">
+<a name="wscan">
+<h3 style="color: blue;">wscan()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">wscan wlan0 </p>
+<p>Exibe redes sem fio próxima</p>
+<hr>
+<h4>Parâmetros</h4>
+<p> interface wifi (wlan0) </p>
+<hr>
+<h4>Saída</h4>
+
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>                   
+
+<br/>
+<hr>
+<h4>Exemplos</h4>
+<p>$ wscan wlan0 </p>
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>                   
+</div>
+
+<div id="box">
+<a name="bfht">
+<h3 style="color: blue;">bfht()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">bfht</p>
+<p>Brute force de htaccess </p>
+<hr>
+<h4>Parâmetros</h4>
+<p>-u Usuário </p>
+<p>-U Arquivo com nome de usuários </p>
+<p>-p Senha</p>
+<p>-P Arquivo com senhas </p>
+<p>-t Quantidade de requisições simultaneas ( default 5 ) </p>
+<p>-v modo verbose </p>
+<p>-h Host </p>
+<hr>
+<h4>Saída</h4>
+<br/>
+Sucesso!<br />
+Usuario: admin - Senha: 1234<br />
+
+<hr>
+<h4>Exemplos</h4>
+<p>$ bfht -U usuarios.txt -P senha.txt -v -h http://www.dominio.com </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1111 </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: jsjsjs </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: asdas </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1asw22 </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: lsdlksd</p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: çakldsa</p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1234</p>
+
+Sucesso!<br />
+Usuario: admin - Senha: 1234<br />
+<br />
+<p>  </p>
+</div>
+
+
+
 
 </body>
 </html>
