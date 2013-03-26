@@ -308,7 +308,7 @@ wscan()
 
 }
 
-####################### Brute force  apache ##########################
+####################### Brute force htaccess ##########################
 bfhtpass() 
 {
 	wget --http-user=$1 --http-password=$2 -O - "$3" 2>/dev/null

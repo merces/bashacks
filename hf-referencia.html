@@ -97,7 +97,8 @@ h1, h2, h3, h4 {
 		<li><a href="#ip2bin">ip2bin</a> - converte endereço ip em equivalente binário</li>
 		<li><a href="#geoip">geoip</a> - determina aproximadamente localização geografica de um host/ip</li>
 		<li><a href="#meuip">meuip</a> - exibe ip externo da conexão</li>
-		<li><a href="#wscan">wscan</a> - exibe informações a respeito de redes sem fio próxima tais como chiper e wps com suas respectivas versões</li>				
+		<li><a href="#wscan">wscan</a> - exibe informações a respeito de redes sem fio próxima tais como chiper e wps com suas respectivas versões</li>
+		<li><a href="#bfht">bfht</a> - Brute force de htaccess</li>
 	</ul>
 	
 </ol>
@@ -773,9 +774,9 @@ Nenhuma.
 <hr>
 <h4>Parâmetros</h4>
 <p>Mail</p>
-<p>mail DomainName [PAGINAÇÃO 50 default] </p>
+<p>mail DomainName [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ]  </p>
 <p>File</p>
-<p>file DomainName filetype [PAGINAÇÃO 50 default] </p>
+<p>file DomainName filetype [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ] </p>
 <hr>
 <h4>Saída</h4>
 <p> Mail </p>
@@ -820,7 +821,7 @@ dominio.com.br/af/1/../who_has_role.sql<br />
 <h3 style="color: blue;">geoip()</h3>
 <hr>
 <h4>Descrição</h4>
-<p style="color: blue;">geoip &lt;Hostname|DomainName&gt;</p>
+<p style="color: blue;">geoip &lt;IpAddress|DomainName&gt;</p>
 <p>Determina aproximadamente localização geografica de um host/ip.</p>
 <hr>
 <h4>Parâmetros</h4>
@@ -867,14 +868,77 @@ Endereço externo
 <p> interface wifi (wlan0) </p>
 <hr>
 <h4>Saída</h4>
-<p>BSS                       dBm    ESSID                   C?      WPS?</p>
+
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>                   
 
 <br/>
 <hr>
 <h4>Exemplos</h4>
 <p>$ wscan wlan0 </p>
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>                   
+</div>
+
+<div id="box">
+<a name="bfht">
+<h3 style="color: blue;">bfht()</h3>
+<hr>
+<h4>Descrição</h4>
+<p style="color: blue;">bfht</p>
+<p>Brute force de htaccess </p>
+<hr>
+<h4>Parâmetros</h4>
+<p>-u Usuário </p>
+<p>-U Arquivo com nome de usuários </p>
+<p>-p Senha</p>
+<p>-P Arquivo com senhas </p>
+<p>-t Quantidade de requisições simultaneas ( default 5 ) </p>
+<p>-v modo verbose </p>
+<p>-h Host </p>
+<hr>
+<h4>Saída</h4>
+<br/>
+Sucesso!<br />
+Usuario: admin - Senha: 1234<br />
+
+<hr>
+<h4>Exemplos</h4>
+<p>$ bfht -U usuarios.txt -P senha.txt -v -h http://www.dominio.com </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1111 </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: jsjsjs </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: asdas </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1asw22 </p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: lsdlksd</p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: çakldsa</p>
+<p>[ http://www.dominio.com ] Usuario: admin     Senha: 1234</p>
+
+Sucesso!<br />
+Usuario: admin - Senha: 1234<br />
+<br />
 <p>  </p>
 </div>
+
+
+
 
 </body>
 </html>
