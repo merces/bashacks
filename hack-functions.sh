@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# hack-functions 1.4 - bash functions to do little hacks
+# hack-functions 1.5 - bash functions to do little hacks
 #
-# Copyright (C) 2012 Fernando Mercês
+# Copyright (C) 2012 - 2013 hack-functions authors
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,30 +17,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-hf_user_path=$HOME/.hf
-hf_cache=$hf_user_path/cache/asm
+hf_user_path="$HOME/.config/hack-functions"
+hf_cache="$hf_user_path/cache/asm"
+
+## internal functions
 
 checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
-
 isnumber() { [ ! -z  $1 ] && [ -z "$( echo $1 | grep -Ewv '([0-9]){1,}' )" ] && echo "TRUE" || echo "FALSE" ; } 
 
-########################### Conversão de base ###########################
+## base conversion
 
-# dec2hex - converte decimal para hexadecimal
 dec2hex() { printf "%x\n" "$1"; }
-
-# hex2dec - converte hexadecimal para decimal
 hex2dec() { echo $((0x${1#0x})); }
-
-# dec2bin - converte decimal para binário
 dec2bin() { echo "obase=2;$1" | bc; }
-
-# bin2dec - converte binário para decimal
 bin2dec() { echo $((2#$1)); }
 
 hex2bin()
 {
 	local bin
+	local i
 
 	for i in $*; do
 		bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
@@ -49,15 +44,25 @@ hex2bin()
 	echo
 }
 
-################# Conversão de caracteres e strings #####################
+## char and strings
 
-# dec2asc - converte um número decimal para seu caractere equivalente em ASCII
+isalnum() { echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'; }
+#isalpha() {}
+#isascii() {}
+#isblank() {}
+#iscntrl() {}
+isdigit() { echo "$1" | grep -Eqw '^[0-9]+$'; }
+#isgraph() {}
+#islower() {}
+#isprint() {}
+#ispunct() {}
+#isspace() {}
+#isupper() {}
+#isxdigit() {}
+
 dec2asc() { echo -e $(printf "\\\x%x" $1); }
-
-# asc2dec - converte um caractere ASCII em decimal
 asc2dec() { printf "%d\n" "'$1"; }
 
-# str2hex - converte uma string para bytes em hexadecimal
 str2hex()
 {
 	case "$1" in
@@ -85,7 +90,6 @@ str2hex()
 	esac
 }
 
-# str2hexr - str2hex com bytes em ordem reversa na saída
 str2hexr()
 {
 	case "$1" in
@@ -98,19 +102,18 @@ str2hexr()
 	esac
 }
 
-# hex2str - converte bytes em hexadecimal para string
 hex2str()
 {
 	local hex
 	local str
+	local i
 
-	# remove todos os '0x', '\x', espaços, vírgulas e chaves
 	hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
 
-	# insere um espaço a cada dois caracteres
+	# insert a space each two chars
 	hex=$(echo $hex | sed 's/../& /g')
 
-	# prefixa os bytes hexa com '\x' (necessário para o echo)
+	# prefix with \x, needed by echo
 	for i in $hex; do
 		str="$str\\x$i"
 	done
@@ -118,11 +121,11 @@ hex2str()
 	echo -e $str
 }
 
-# charcalc - efetua cálculos com caracteres
 charcalc()
 {
 	local char
 	local res
+	local i
 
 	case $2 in
 		+|-)
@@ -131,7 +134,7 @@ charcalc()
 			dec2asc $res
 		;;
 		'*')
-			for (( i=0; i<$3; i++ )); do
+			for i in {1..3}; do
 				res="$res$1"
 			done
 			echo $res
@@ -139,7 +142,6 @@ charcalc()
 	esac
 }
 
-# asciitable - imprime a tabela ASCII
 asciitable()
 {
 	echo -en \
@@ -162,7 +164,6 @@ asciitable()
  15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL\n"
 }
 
-# imprime a tabelta unicode utf-8 latin
 utf8table()
 {
 	echo -en \
@@ -181,12 +182,10 @@ c2 aa ª  c2 b6 ¶  c3 82 Â  c3 8e Î  c3 9a Ú  c3 a6 æ  c3 b2 ò  c3 be þ\n
 c2 ab «  c2 b7 ·  c3 83 Ã  c3 8f Ï  c3 9b Û  c3 a7 ç  c3 b3 ó  c3 bf ÿ\n"
 }
 
-############################# Criptografia ###########################
+## crypto
 
-# unbase64 - decodifica base64 numa string
 unbase64() { echo $1 | base64 -d; }
 
-# md5 - calcula o hash MD5 de uma string ou arquivo
 md5()
 {
 	test -e $1 && \
@@ -195,7 +194,6 @@ md5()
 		echo -n "$1" | md5sum | cut -d' ' -f1
 }
 
-# unmd5 - tenta descobrir a string que gerou o hash md5
 unmd5()
 {
 	local r=""
@@ -214,7 +212,6 @@ unmd5()
         echo "${r}"
 }
 
-# rot - cifra a string com a Cifra de César
 rot()
 {
 	local n
@@ -230,26 +227,27 @@ rot()
 
 rotall()
 {
+	local i
+
 	test -n "$1" || return 1
 
-	for ((i=1; i<=25; i++ )); do
+	for i in {1..25}; do
 		echo "ROT$i $(rot $i "$1")"
 	done
 }
 
-# aliases para funções mais comuns de ROT
 alias rot5='rot 5'
 alias rot13='rot 13'
 alias rot18='rot 18'
 alias rot47='rot 47'
 
-# strxor - faz o xor de uma string com uma chave
 strxor()
 {
 	local str
 	local xored
+	local i
 
-	# $2 é a string e $1 é a chave
+	# $2 is the string and $1 is the xor key
 	str=$(str2hex "$2")
 
 	for i in $str; do
@@ -259,131 +257,35 @@ strxor()
 	hex2str "$xored"
 }
 
+## networking
+
 ip2bin()
 {
 	local r
+	local i
 	r=$(echo $1 | tr . \;)
 
 	(for i in $(echo "obase=2;$r" | bc); do printf '%.8d.' $i; done) | sed 's/.$//'
 	echo
 }
 
-####################### Geo Coordenadas de um determinado IP ##########
-geoip()
+ip2geo()
 {
-        wget -q --timeout=30 "http://xml.utrace.de/?query=$1" -O - | sed '4d' | sed "s/<[^>]*>//g; s/\t//g; /^$/d" | tr '\n' ',' ; echo "\n"
-       
+	wget -q -T 30 "http://xml.utrace.de/?query=$1" -O - |
+	 sed -e '4d; s/<[^>]*>//g; s/\t//g; /^$/d' |
+	 tr \\n ' '
+	 echo
 }
 
-####################### Imprime o IP externo da conexao ##############
-meuip()
-{
-	wget -q --timeout=30 "http://meuip.datahouse.com.br/" -O - | 
-	grep "Meu IP\?" | 
-	grep -Ewo "([0-9]){1,3}(\.([0-9]){1,3}){3}"
+myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
 
-}
+## social engineering
 
-####################### Scan de Redes Sem Fio ########################
-wscan() 
-{
-	[ $# -ne 1 ] && echo "Informe uma interface EX: ./wscan wlan0 "
-
-        iface=$1
-        LISTA=""
-
-	echo -e "BSS\t\t\t  dBm\t ESSID\t\t\t C?  \t WPS?"
-
-	LISTA=($(iw dev ${iface} scan | 
-              grep -Ewo "BSS (([a-f|0-9][a-f|0-9]\:){5}([:a-f|0-9]+)|channel ([0-9]){1,2})|SSID: ([0-9a-zA-Z]){1,}|([0-9]+)\.00 dBm|WPA.*|WEP|WPS.*" |
-                tr '\n' ' ' | 
-                sed 's/SSID: //g; s/channel //g; s/dBm/\t\n/g;  s/BSS/|/g; s/Version://g; s/\*//g;' 2>/dev/null ) )
-
-	echo -e "${LISTA[@]}" | tr '|' '\n' | sed 's/: //g' |
-                awk '{  n=""
-                        for ( i=length($3) ; i<22 ; i++ ) n=n" "                
-                          print $1,"\t",$2,"\t",$3,n,$4,"   "$5 
-                        }'
-	echo " "
-
-}
-
-####################### Brute force htaccess ##########################
-bfhtpass() 
-{
-	wget --http-user=$1 --http-password=$2 -O - "$3" 2>/dev/null
-        if [ $? -eq 0 ]
-        then
-                echo -e "\n\nSucesso!\n Usuario: $1 - Senha: $2\n" 
-		[ -f $4 ] && echo -e "\n\nSucesso!\n Usuario: $1 - Senha: $2\n" > $4
-		break 
-        fi
-}
-
-bfht()
-{
-        local CONTADOR=0
-        local u
-        local USER
-        local HOST
-        local PASS
-        local p
-        local FLAGH
-        local T=5
-        local TMP=$(mktemp)
-        local VERBOSE=0
-
-        while (($#))
-        do
-                case $1 in
-                "-u"|"-U")
-                        [ $1 == "-U" ] && { shift ; USER="$1" ; }
-                        [ $1 == "-u" ] && { USER=$(mktemp) ; shift ; echo $1 > ${USER} ; }
-                ;;
-                "-p"|"-P")
-                        [ $1 == "-P" ] && { shift ; PASS="$1" ; }
-                        [ $1 == "-p" ] && { PASS=$(mktemp) ; shift ; echo $1 > ${PASS} ; }
-                ;;
-                "-h")
-                        shift
-                        HOST="$1"
-                ;;
-                "-t")
-                        shift
-                        [ ! -z $1 ] && T=$1 || T=5
-                ;;
-                "-v")
-                        VERBOSE=1
-                ;;
-                esac
-                shift
-        done
-
-        while read u
-        do
-                test $( wc -l < ${TMP} ) -ne 0 && break
-                while read p
-                do
-			test $( wc -l < ${TMP} ) -ne 0 && break
-			[ ${VERBOSE} -eq 1 ] && echo -e "[ ${HOST} ] Usuario: ${u} \t Senha: ${p} "
-			( bfhtpass "${u}" "${p}" "${HOST}" "${TMP}" >&2 /dev/null & )
-			let CONTADOR++
-			if [ ${CONTADOR} -eq ${T} ]
-			then
-				wait
-				CONTADOR=0
-				sleep 2
-			fi
-                done < ${PASS}
-        done < ${USER}
-
-}
-
-####################### Engenharia Social  ###########################
 websearch() 
 {
 	[ $# -le 1 ] && { echo -e "Modo de Usar: \nwebsearch [mail|file] <dominio.com.br> [sql|txt|...] [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
 
+	local i
 	local PGTOTAL
         local TMP="$(mktemp)"
         #local DOMAIN="$( echo $2 | sed 's/\./\\./g')"
@@ -437,10 +339,7 @@ websearch()
         rm -rf ${TMP}
 }
 
-####################### Engenharia Reversa ###########################
-
-# asmgrep - busca instruções assembly em binários executáveis
-asmgrep() { objdump -d "$2" | grep --color -C 4 -E "$1"; }
+## reverse engineering
 
 dumpmem()
 {
@@ -454,7 +353,8 @@ dumpmem()
 alias dumpstack='dumpmem stack'
 alias dumpheap='dumpmem heap'
 
-# asminfo - busca informações sobre a instrução em assembly desejada
+asmgrep() { objdump -d "$2" | grep --color -C 4 -E "$1"; }
+
 asminfo()
 {
 	local ins=${1,,}
@@ -505,21 +405,13 @@ asm2sc()
 	rm -f $obj
 }
 
-########################### Cálculo ##################################
+## calc
 
-# xor - efetua xor (ou exclusivo) bit a bit entre dois números
 xor() { echo $(($1^$2)); }
-
-# shl - efetua deslocamento de bits à esquerda em um número
 shl() { echo $(($1<<$2)); }
-
-# shr - efetua deslocamento de bits à direita em um número
 shr() { echo $(($1>>$2)); }
-
-# pow - eleva um número à uma potência
 pow() { echo $(($1**$2)); }
 
-# hexcalc - faz operaçãos entre dois números hexa
 hexcalc()
 {
 	test $# -eq 3 || return 1
@@ -528,10 +420,8 @@ hexcalc()
 	dec2hex $((0x${1#0x} $2 0x${3#0x}))
 }
 
+## config
 
-#################### Configurações úteis ##############################
-
-# habilita/desabilita sintaxe Intel automática no gdb e objdump
 intel()
 {
 	local	GDBINIT="$HOME/.gdbinit"
@@ -547,4 +437,3 @@ intel()
 		unalias gdb
 	fi
 }
-
