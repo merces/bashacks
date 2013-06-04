@@ -47,18 +47,27 @@ hex2bin()
 ## char and strings
 
 isalnum() { echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'; }
-#isalpha() {}
+isalpha() { echo "$1" | grep -Eqw '^[A-Za-z]+$'; }
 #isascii() {}
 #isblank() {}
 #iscntrl() {}
 isdigit() { echo "$1" | grep -Eqw '^[0-9]+$'; }
 #isgraph() {}
-#islower() {}
-#isprint() {}
+islower() { echo "$1" | grep -Eqw '^[a-z]+$'; }
+isprint()
+{
+	# nao ta rolando
+	local i
+
+	for i in $(str2hex -0x "$1" | sed 's/\(....\)/\1 /g'); do
+		[ $(($i)) -ge 32 -a $(($i)) -le 127 ] || return 1
+	done
+	return 0
+}
 #ispunct() {}
 #isspace() {}
-#isupper() {}
-#isxdigit() {}
+isupper() { echo "$1" | grep -Eqw '^[A-Z]+$'; }
+isxdigit() { echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'; }
 
 dec2asc() { echo -e $(printf "\\\x%x" $1); }
 asc2dec() { printf "%d\n" "'$1"; }
@@ -261,12 +270,18 @@ strxor()
 
 ip2bin()
 {
-	local r
 	local i
-	r=$(echo $1 | tr . \;)
+	for i in $(echo "$1" | tr . ' '); do
+		printf "%.8d." $(dec2bin $i)
+	done | sed "s/.$/\\n/"
+}
 
-	(for i in $(echo "obase=2;$r" | bc); do printf '%.8d.' $i; done) | sed 's/.$//'
-	echo
+bin2ip()
+{
+	local i
+	for i in $(echo "$1" | tr . ' '); do
+		printf "%d." $(bin2dec $i)
+	done | sed "s/.$/\\n/"
 }
 
 ip2geo()
@@ -292,7 +307,7 @@ websearch()
 	local DOMAIN="$2"
         local AGENT="Mozilla/5.0"
 	local PESQUISA
-	local EXT 
+	local EXT //
 	local LOCALIZAR
 
 	case $1 in
