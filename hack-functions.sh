@@ -133,17 +133,21 @@ hex2str()
 charcalc()
 {
 	local char
+	local chars
 	local res
 	local i
 
 	case $2 in
 		+|-)
-			char=$(asc2dec $1)
-			res=$(($char $2 $3))
-			dec2asc $res
+			for i in $(echo "$1" | sed 's/./& /g'); do
+				char=$(asc2dec $i)
+				res=$(($char $2 $3))
+				echo -n $(dec2asc $res)
+			done
+			echo
 		;;
 		'*')
-			for i in {1..3}; do
+			for (( i=0; i<$3; i++ )); do
 				res="$res$1"
 			done
 			echo $res
