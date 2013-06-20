@@ -301,7 +301,7 @@ myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
 
 websearch() 
 {
-	USAGE="USAGE:\nwebsearch <OPTIONS>
+    USAGE="USAGE:\nwebsearch <OPTIONS>
     -t|--type\t\t mail,file,phone one type is required
     -p|--to-page\t Number of pages OPTIONAL
     -d|--domain\t\t Domain Name or IpAddress is required
@@ -321,13 +321,13 @@ websearch()
 
     local i                     # count for() pagination
     local TYPE                  # type {mail,file,phone...}
-	local DOMAIN                # domainame
+    local DOMAIN                # domainame
     local TOPAGE=50             # set default pagination 
-	local TMP="$(mktemp)"       # tmp file, store search
-	local AGENT="Mozilla/5.0"   # user agent browser
+    local TMP="$(mktemp)"       # tmp file, store search
+    local AGENT="Mozilla/5.0"   # user agent browser
     local SEARCH                # variable to store rearch and submit google page
-	local EXTENSION             # variable to store filetype as to search for file
-	local EXTRACT               # variable with regular expression to extract data/information
+    local EXTENSION             # variable to store filetype as to search for file
+    local EXTRACT               # variable with regular expression to extract data/information
 
     # run param
     while (( $# )) 
