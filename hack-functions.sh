@@ -283,60 +283,102 @@ myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
 
 websearch() 
 {
-	[ $# -le 1 ] && { echo -e "Modo de Usar: \nwebsearch [mail|file] <dominio.com.br> [sql|txt|...] [PAGINACAO Ex: 100 | default 50] " ; PGTOTAL=0 ; } 
+	USAGE="USAGE:\nwebsearch <OPTIONS>
+    -t|--type\t\t mail,file,phone one type is required
+    -p|--to-page\t Number of pages OPTIONAL
+    -d|--domain\t\t Domain Name or IpAddress is required
+    -e|--file-ext\t Extension for query
+    -s|--string\t\t String for query \n
 
-	local i
-	local PGTOTAL
-        local TMP="$(mktemp)"
-        #local DOMAIN="$( echo $2 | sed 's/\./\\./g')"
-	local DOMAIN="$2"
-        local AGENT="Mozilla/5.0"
-	local PESQUISA
-	local EXT 
-	local LOCALIZAR
+    Mode:
+    websearch -t file -e txt -d mentebinaria.com.br -p 2
+    [ file ] IN mentebinaria.com.br txt
+    [+] 0
+    [+] 10
+    [+] 20
+    =============================================
+    mentebinaria.com.br/artigos/0x0a/gamevista.txt
+    mentebinaria.com.br/artigos/0x0b/virtlinux.txt
+    mentebinaria.com.br/artigos/0x0d/altexe.txt\n\n"
 
-	case $1 in
-	
-		"mail") 
-			PESQUISA="%22@${DOMAIN}%22" 
-			[ "$( isnumber $3 )" == "TRUE" ] && 
-			[ $3 -gt 0 ] &&  PGTOTAL=$3 ||
-					 PGTOTAL=50
-			LOCALIZAR="grep -Ewo ([a-z0-9_\.\-]){1,}\@${DOMAIN} "
+    local i                     # count for() pagination
+    local TYPE                  # type {mail,file,phone...}
+	local DOMAIN                # domainame
+    local TOPAGE=50             # set default pagination 
+	local TMP="$(mktemp)"       # tmp file, store search
+	local AGENT="Mozilla/5.0"   # user agent browser
+    local SEARCH                # variable to store rearch and submit google page
+	local EXTENSION             # variable to store filetype as to search for file
+	local EXTRACT               # variable with regular expression to extract data/information
 
-		;;
-		"file")
-			EXT=$3
-			PESQUISA="site:${DOMAIN}%20filetype:${EXT}"
-			[ "$( isnumber $4 )" == "TRUE" ] && 
-			[ $4 -gt 0 ] &&  PGTOTAL=$4 ||
-					 PGTOTAL=50
-		;;
-	esac
+    # run param
+    while (( $# )) 
+    do
+        case $1 in
+            -t|--type)
+                shift
+                TYPE="$1"
+            ;;
+            -p|--to-page)
+                shift
+                isdigit $1
+                test $? -eq 0 && TOPAGE=$(echo 10*$1 | bc ) || GOPAGE=50
+            ;;
+            -d|--domain)
+                shift 
+                DOMAIN="$1"
+            ;;
+            -s|--string)
+                shift 
+                [ -z "$1" ] && STRING="" || STRING="intext:$1"
+            ;;
+            -e|--file-ext)
+                shift
+                EXTENSION="$1"
+            ;;
+        esac
+        shift
+    done
 
-	# DOMAIN = dominio ex: mentebinaria.com.br 
-	# recebe como parametro as paginas que deseja percorrer
-	# lembrando que a paginacao do google eh numerado de 10 em 10 
+    [ ! -z ${DOMAIN} ] && {
+        ### types of research methodologies 
+        [ "${TYPE}" == "mail" ] && {
+                SEARCH="%22@${DOMAIN}%22"
+		    	EXTRACT="sed -e 's/<[^>]*>//g' | 
+                         grep -Ewo '([A-Za-z0-9_\.\-]){1,}\@${DOMAIN}' "
+            } 
 
-        echo "$1 $2"
+	    [ "${TYPE}" == "file" -a ! -z "${EXTENSION}" ] && {
+		    	SEARCH="site:${DOMAIN}%20filetype:${EXTENSION}%20${STRING}" 
+		    	EXTRACT="sed -e 's/<[^>]*>/ /g' | 
+                        grep -Ewo ${DOMAIN}\/.*.${EXTENSION} | 
+                        tr ' ' '\n' | 
+                        grep ${EXTENSION}$ "
+            }
 
-        for (( i=0 ; i<=${PGTOTAL} ; i+=10 ))
-        do
-                echo "[+] ${i}"
-                wget -q --timeout=30 --user-agent="${AGENT}" -O -  "http://www.google.com.br/search?q=${PESQUISA}&btnG=&start=${i}" &>> ${TMP}
-        done
+	    [ "${TYPE}" == "phone" ] && {
+		    	SEARCH="site:${DOMAIN}%20(contato|faleconosco|telefone|telephone|phone|contact)"
+		    	EXTRACT="grep -Ewo '(\(([0xx|0-9]){2,3}\)|([0-9]){2,3}).([0-9]){3,4}.([0-9]){4,5}' "
+            }
+        
+        #### 
 
-        echo "============================================="
+        echo "[ ${TYPE} ] IN ${DOMAIN} ${EXTENSION}"
+    
+	    for (( i=0 ; i<=${TOPAGE} ; i+=10 ))
+	    do
+		    echo "[+] ${i}"
+		    wget -q -T 30 -U "${AGENT}" -O - \
+                "http://www.google.com.br/search?q=${SEARCH}&btnG=&start=${i}" &>> ${TMP}
+	    done
 
-	if [ $1 == "mail" ] 
-	then 
-		 cat ${TMP} | sed -e "s/<[^>]*>//g" | ${LOCALIZAR} 
-	elif [ $1 == "file" ] 
-	then
-		 cat ${TMP} | sed -e "s/<[^>]*>/ /g" | grep -Ewo "${DOMAIN}\/.*.${EXT} " | tr ' ' '\n' | grep "${EXT}$" | sort -u
-	fi
+	    echo "============================================="
 
+	    cat ${TMP} | eval ${EXTRACT} | sort -u
         rm -rf ${TMP}
+
+    } || printf "${USAGE}"
+
 }
 
 ## reverse engineering

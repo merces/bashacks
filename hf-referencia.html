@@ -97,8 +97,6 @@ h1, h2, h3, h4 {
 		<li><a href="#ip2bin">ip2bin</a> - converte endereço ip em equivalente binário</li>
 		<li><a href="#geoip">geoip</a> - determina aproximadamente localização geografica de um host/ip</li>
 		<li><a href="#meuip">meuip</a> - exibe ip externo da conexão</li>
-		<li><a href="#wscan">wscan</a> - exibe informações a respeito de redes sem fio próxima tais como chiper e wps com suas respectivas versões</li>
-		<li><a href="#bfht">bfht</a> - Brute force de htaccess</li>
 	</ul>
 	
 </ol>
@@ -769,33 +767,43 @@ Nenhuma.
 <h3 style="color: blue;">websearch()</h3>
 <hr>
 <h4>Descrição</h4>
-<p style="color: blue;">websearch [file|mail] &lt;dominio.com.br&gt; filetype [50] </p>
-<p>Realiza pesquisa na base do google por emails|arquivos de dominio indexado.</p>
+<p style="color: blue;">websearch </p>
+<p>Realiza pesquisa na base do google por emails|telefones|arquivos de dominio indexado.
+</p>
 <hr>
 <h4>Parâmetros</h4>
-<p>Mail</p>
-<p>mail DomainName [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ]  </p>
-<p>File</p>
-<p>file DomainName filetype [PAGINAÇÃO 50 default ( 5 páginas, google pagina de 10 em 10 ) ] </p>
+<p>-t|--type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; mail,file,phone one type is required </p>
+<p>-p|--to-page&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; Number of pages OPTIONAL </p>
+<p>-d|--domain&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; Domain Name or IpAddress is required  </p>
+<p>-e|--file-ext&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; Extension for query </p>
+<p>-s|--string&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; String for query in file </p>
 <hr>
 <h4>Saída</h4>
-<p> Mail </p>
+<p> mail </p>
 maria@dominio.com.br<br/>
 joao@dominio.com.br<br/><br />
-<p>File</p>
-vmsql.sql<br />
-script.sql<br />
-who_has_role.sql<br />
+<p>file</p>
+mentebinaria.com.br/artigos/0x0a/gamevista.txt<br />
+mentebinaria.com.br/artigos/0x0b/virtlinux.txt<br />
+mentebinaria.com.br/artigos/0x0d/altexe.txt<br /> <br />
+<p>phone</p>
+(0xx) XXXX-XXXX <br />
+(XX) XXXX XXXX<br />
+XX XXXX-XXXX<br />
 <hr>
 <h4>Exemplos</h4>
-<p>$ websearch mail dominio.com.br</p>
-maria@dominio.com.br<br/>
-joao@dominio.com.br<br/><br />
-<p>$ websearch file dominio.com.br sql 200 </p>
-dominio.com.br/vmsql.sql<br />
-dominio.com.br/../script.sql<br />
-dominio.com.br/af/1/../who_has_role.sql<br />
+<p>$ websearch -t file -e txt -d mentebinaria.com.br -p 2 </p>
+[ file ] IN mentebinaria.com.br txt <br />
+[+] 0<br />
+[+] 10<br />
+[+] 20<br />
+=============================================<br />
+mentebinaria.com.br/artigos/0x0a/gamevista.txt<br />
+mentebinaria.com.br/artigos/0x0b/virtlinux.txt<br />
+mentebinaria.com.br/artigos/0x0d/altexe.txt<br />
+<br />
 </div>
+
 
 <div id="box">
 <a name="ip2bin">
