@@ -341,7 +341,7 @@ websearch()
             -p|--to-page)
                 shift
                 isdigit $1
-                test $? -eq 0 && TOPAGE=$(echo 10*$1 | bc ) || GOPAGE=50
+                test $? -eq 0 && TOPAGE=$(echo 10*$1 | bc ) || TOPAGE=50
             ;;
             -d|--domain)
                 shift 
