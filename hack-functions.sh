@@ -23,7 +23,6 @@ hf_cache="$hf_user_path/cache/asm"
 ## internal functions
 
 checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
-isnumber() { [ ! -z  $1 ] && [ -z "$( echo $1 | grep -Ewv '([0-9]){1,}' )" ] && echo "TRUE" || echo "FALSE" ; } 
 
 ## base conversion
 
