@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 #
 # hack-functions 1.5 - bash functions to do little hacks
 #
@@ -302,11 +302,11 @@ myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
 websearch() 
 {
     USAGE="USAGE:\nwebsearch <OPTIONS>
-    -t|--type\t\t mail,file,phone one type is required
+    -t|--type\t\t mail,file,phone,free one type is required
     -p|--to-page\t Number of pages OPTIONAL
     -d|--domain\t\t Domain Name or IpAddress is required
     -e|--file-ext\t Extension for query
-    -s|--string\t\t String for query \n
+    -s|--string\t\t parameter needed to free type and optional for others \n
 
     Mode:
     websearch -t file -e txt -d mentebinaria.com.br -p 2
@@ -328,6 +328,7 @@ websearch()
     local SEARCH                # variable to store rearch and submit google page
     local EXTENSION             # variable to store filetype as to search for file
     local EXTRACT               # variable with regular expression to extract data/information
+    local STRING=""             # 
 
     # run param
     while (( $# )) 
@@ -358,27 +359,40 @@ websearch()
         shift
     done
 
-    [ ! -z ${DOMAIN} ] && {
-        ### types of research methodologies 
-        [ "${TYPE}" == "mail" ] && {
+    [ ! -z "${TYPE}" -a ! -z "${DOMAIN}" -o ! -z "${STRING}" ] && {
+
+            [ "${TYPE}" == "mail" ] && {
                 SEARCH="%22@${DOMAIN}%22"
-		    	EXTRACT="sed -e 's/<[^>]*>//g' | 
-                         grep -Ewo '([A-Za-z0-9_\.\-]){1,}\@${DOMAIN}' "
-            } 
+    		    EXTRACT="sed -e 's/<[^>]*>//g' | 
+                        grep -Ewo '([A-Za-z0-9_\.\-]){1,}\@${DOMAIN}' "
+                } 
 
-	    [ "${TYPE}" == "file" -a ! -z "${EXTENSION}" ] && {
-		    	SEARCH="site:${DOMAIN}%20filetype:${EXTENSION}%20${STRING}" 
-		    	EXTRACT="sed -e 's/<[^>]*>/ /g' | 
-                        grep -Ewo ${DOMAIN}\/.*.${EXTENSION} | 
-                        tr ' ' '\n' | 
-                        grep ${EXTENSION}$ "
-            }
+            [ "${TYPE}" == "file" -a ! -z "${EXTENSION}" ] && {
+                SEARCH="site:${DOMAIN}%20filetype:${EXTENSION}%20${STRING}" 
+                EXTRACT="tr '<' '\n' | 
+                        grep -Ewo 'a href=\".*' | 
+                        grep -Ev \"(google|search)\" | 
+                        sed 's/a href=\"//g;s/&amp;sa//g' | 
+                        grep '/url' | 
+                        cut -d'=' -f2"
+                }
 
-	    [ "${TYPE}" == "phone" ] && {
-		    	SEARCH="site:${DOMAIN}%20(contato|faleconosco|telefone|telephone|phone|contact)"
-		    	EXTRACT="grep -Ewo '(\(([0xx|0-9]){2,3}\)|([0-9]){2,3}).([0-9]){3,4}.([0-9]){4,5}' "
-            }
-        
+            [ "${TYPE}" == "phone" ] && {
+                SEARCH="site:${DOMAIN}%20(contato|faleconosco|telefone|telephone|phone|contact)"
+                EXTRACT="grep -Ewo '(\(([0xx|0-9]){2,3}\)|([0-9]){2,3}).([0-9]){3,4}.([0-9]){4,5}' "
+                }
+
+            # free     
+            [ "${TYPE}" == "free" -a ! -z "${STRING}" ] && {
+                SEARCH="$(echo "${STRING}"|sed 's/^intext://')"
+                EXTRACT="tr '<' '\n' | 
+                        grep -Ewo 'a href=\".*' | 
+                        grep -Ev \"(google|search)\" | 
+                        sed 's/a href=\"//g;s/&amp;sa//g' | 
+                        grep '/url' | 
+                        cut -d'=' -f2"
+                } 
+
         #### 
 
         echo "[ ${TYPE} ] IN ${DOMAIN} ${EXTENSION}"
@@ -394,7 +408,6 @@ websearch()
 
 	    cat ${TMP} | eval ${EXTRACT} | sort -u
         rm -rf ${TMP}
-
     } || printf "${USAGE}"
 
 }
