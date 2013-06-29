@@ -324,16 +324,20 @@ websearch()
     local DOMAIN                # domainame
     local TOPAGE=50             # set default pagination 
     local TMP="$(mktemp)"       # tmp file, store search
-    local AGENT="Mozilla/5.0"   # user agent browser
+    local AGENT="Mozilla/5.0"   # user agent browser default
     local SEARCH                # variable to store rearch and submit google page
     local EXTENSION             # variable to store filetype as to search for file
     local EXTRACT               # variable with regular expression to extract data/information
     local STRING=""             # 
+    local DOWNLOAD=0            # set donwload all file - default no
 
     # run param
     while (( $# )) 
     do
         case $1 in
+            --download)
+                DOWNLOAD=1
+            ;;
             -t|--type)
                 shift
                 TYPE="$1"
@@ -396,17 +400,33 @@ websearch()
         #### 
 
         echo "[ ${TYPE} ] IN ${DOMAIN} ${EXTENSION}"
-    
+        
 	    for (( i=0 ; i<=${TOPAGE} ; i+=10 ))
 	    do
 		    echo "[+] ${i}"
 		    wget -q -T 30 -U "${AGENT}" -O - \
                 "http://www.google.com.br/search?q=${SEARCH}&btnG=&start=${i}" &>> ${TMP}
 	    done
-
+        
 	    echo "============================================="
 
-	    cat ${TMP} | eval ${EXTRACT} | sort -u
+        [ ${DOWNLOAD} -eq 1 -a ${TYPE} == 'file' ] && {
+            # tmp file store list
+            LISTTMP=$(mktemp)
+            # directory does not exist create it
+            [ ! -d "${DOMAIN}" ] && mkdir "${DOMAIN}"
+            # 
+            cat ${TMP} | eval ${EXTRACT} | sort -u > ${LISTTMP}
+            echo "Iniciando Download de $( cat ${LISTTMP} | wc -l ) Arquivos"
+            # if elements exist - download
+            [ $( wc -l ${LISTTMP} | cut -d" " -f1 ) -gt 0 ] && wget -P "${DOMAIN}" -i ${LISTTMP} &>>/dev/null
+            [ $? -eq 0 ] && echo "Download feito em ${DOMAIN}"
+            rm -rf ${LISTTMP}
+        } || {
+            # just list on then screen
+            cat ${TMP} | eval ${EXTRACT} | sort -u
+        }
+        
         rm -rf ${TMP}
     } || printf "${USAGE}"
 
