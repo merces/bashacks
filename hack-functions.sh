@@ -269,6 +269,12 @@ strxor()
 	hex2str "$xored"
 }
 
+keycheck()
+{
+	diff <(ssh-keygen -y -f "$1") <(cut -d' ' -f1,2 "$2") >/dev/null && echo \
+	'keys match!' || echo 'keys does not match! :('
+}
+
 ## networking
 
 ip2bin()
@@ -530,3 +536,25 @@ intel()
 		unalias gdb
 	fi
 }
+
+# other
+raffle()
+{
+	local i
+	local interval=3
+	test -n "$3" && interval=$3
+	for i in $(seq $1 $2 | sort -R); do
+		echo $i
+		sleep $interval;
+	done
+}
+
+matrix()
+{
+	echo -e "\e[32m";
+	while :; do
+		printf '%*c' $(($RANDOM % 30)) $(($RANDOM % 2));
+	done
+}
+
+bkp() { cp "$1"{,.$(date +%Y%m%d)}; }
