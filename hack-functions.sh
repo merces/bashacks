@@ -26,8 +26,41 @@ checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
 ## base conversion
 
-dec2hex() { printf "%x\n" "$1"; }
-hex2dec() { echo $((0x${1#0x})); }
+dec2hex()
+{
+    local USAGE="convert decimal to hex equivalent
+
+    Param:
+        number - integer to be converted
+
+    Output:
+        \$ dec2hex 10
+        a"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            printf "%x\n" "$1"
+}
+
+hex2dec()
+{
+    local USAGE="convert hex to decimal  equivalent
+
+    Param:
+        hex - hex to be converted
+
+    Output:
+        \$ hex2dec a
+        10
+
+        \$ hex2dec 0x0a
+        10"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo $((0x${1#0x}))
+}
+
 dec2bin() { echo "obase=2;$1" | bc; }
 bin2dec() { echo $((2#$1)); }
 
