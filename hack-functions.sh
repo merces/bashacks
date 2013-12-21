@@ -45,7 +45,20 @@ hex2bin()
 
 ## char and strings
 
-isalnum() { echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'; }
+isalnum() 
+{
+   local USAGE="determines whether string or char is alphanumeric.
+    Param:
+        string or char - return true or false.
+    
+    Output:
+        \$ isalnum a
+        \$ echo \$? 
+        0
+    "
+    [ $# -eq 0 ] && echo -e "${USAGE}" || 
+    echo "$1" | grep -Eqw '^[0-9A-Za-z]+$' 
+}
 isalpha() { echo "$1" | grep -Eqw '^[A-Za-z]+$'; }
 #isascii() {}
 #isblank() {}
@@ -73,6 +86,31 @@ asc2dec() { printf "%d\n" "'$1"; }
 
 str2hex()
 {
+    local USAGE="Converts a string to hex bytes equivalent to each character (hex string).
+        Param:
+            -x  :    Output bytes spaced and not prefixed with '\x'.
+            -0x :    Output bytes spaced and prefixed with '0x'.
+            -c  :    Bytes array in C language style.
+            -s  :    Output bytes not spaced and inital prefixed '0x'.
+            
+            string - converting string
+            
+        Output:
+        \$ str2hex 'Fernando'
+        46 65 72 6e 61 6e 64 6f
+
+        \$ str2hex -x 'Fernando'
+        \\\x46\\\x65\\\x72\\\x6e\\\x61\\\x6e\\\x64\\\x6f
+
+        \$ str2hex -0x 'Fernado'
+        0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
+
+        \$ str2hex -s 'Fernando'
+        0x4665726e616e646f\n"
+    [ $# -eq 0 ] && { 
+        echo -e "${USAGE}"
+    }
+
 	case "$1" in
 		"-s") 
 			echo -n "$2" | hexdump -ve '/1 "%02x"' | sed 's/^/0x/' 
@@ -129,7 +167,42 @@ hex2str()
 	echo -e $str
 }
 
-charcalc()
+urlencode() {
+
+    local USAGE="USAGE:
+    hexencode 'string'
+    Based on the ascii table will encode characters such as
+    <> {} among others converting to 3e%% 3c%% ....
+
+    $ hexencode '<script> alert(1);</script>'
+    %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
+    $ hexencode '\${var}'
+    %%24(document)\n"
+    # acredite nunca havia visto este post
+    # http://stackoverflow.com/questions/296536/urlencode-from-a-bash-script
+    # 
+    local STRING="$@"
+    local NSTRING=""
+    local CHARLIST="\"\'\$\%\&\,\\\;\/:<>^\`\{\}\|"
+
+    [ ! -z "${STRING}" ] && {
+        for POS in $( seq 0 $((${#STRING}-1)) )
+        do
+            CHAR="${STRING:${POS}:1}"
+            case "${CHAR}" in 
+                [${CHARLIST}])
+                    NSTRING="${NSTRING}%$(str2hex "${CHAR}")"
+                ;;
+                *)
+                    NSTRING="${NSTRING}${STRING:${POS}:1}"
+                ;;
+            esac
+        done
+    } || printf "${USAGE}"
+    echo ${NSTRING} | sed 's/ /%20/g'
+}
+
+charcal()
 {
 	local char
 	local chars
@@ -307,7 +380,7 @@ myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
 
 websearch() 
 {
-    USAGE="USAGE:\nwebsearch <OPTIONS>
+    local USAGE="USAGE:\nwebsearch <OPTIONS>
     -t|--type\t\t mail,file,phone,free one type is required
     -p|--to-page\t Number of pages OPTIONAL
     -d|--domain\t\t Domain Name or IpAddress is required
