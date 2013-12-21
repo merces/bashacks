@@ -29,8 +29,10 @@ checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 dec2hex()
 {
     local USAGE="convert decimal to hex equivalent
+    
+    Category  : Base Conversion
 
-    Param:
+    Parameters:
         number - integer to be converted
 
     Output:
@@ -46,7 +48,9 @@ hex2dec()
 {
     local USAGE="convert hex to decimal  equivalent
 
-    Param:
+    Category  : Base Conversion
+
+    Parameters:
         hex - hex to be converted
 
     Output:
@@ -61,19 +65,72 @@ hex2dec()
             echo $((0x${1#0x}))
 }
 
-dec2bin() { echo "obase=2;$1" | bc; }
-bin2dec() { echo $((2#$1)); }
+dec2bin()
+{
+    local USAGE="convert decimal to binary equivalent
+
+    Category  : Base Conversion
+
+    Parameters:
+        decimal - decimal to be converted
+
+    Output:
+        \$ dec2bin 10
+        1010
+
+        \$ dec2bin 255
+        11111111"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo "obase=2;$1" | bc
+}
+
+bin2dec()
+{
+     local USAGE="convert binary to decimal equivalent
+
+    Category  : Base Conversion
+
+    Parameters:
+        binary - binary to be converted
+
+    Output:
+        \$ bin2dec 1010
+        10
+
+        \$ dec2bin 11111111
+        255"
+
+    [ $# -eq 0 ] && 
+        echo "${USAGE}" ||
+            echo $((2#$1))
+}
 
 hex2bin()
 {
-	local bin
-	local i
+    local USAGE="convert hex to binary equivalent
 
-	for i in $*; do
-		bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
-		echo -n "$bin "
-	done
-	echo
+    Category  : Base Conversion
+
+    Parameters:
+        hex - hex to be converted
+
+    Output:
+        \$ hex2bin a
+        1010"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" || {
+	        local bin
+	        local i
+
+	        for i in $*; do
+		        bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
+		        echo -n "$bin "
+            done
+	        echo
+        }
 }
 
 ## char and strings
@@ -81,7 +138,7 @@ hex2bin()
 isalnum() 
 {
    local USAGE="determines whether string or char is alphanumeric.
-    Param:
+    Parameters:
         string or char - return true or false.
     
     Output:
@@ -120,7 +177,7 @@ asc2dec() { printf "%d\n" "'$1"; }
 str2hex()
 {
     local USAGE="Converts a string to hex bytes equivalent to each character (hex string).
-        Param:
+        Parameters:
             -x  :    Output bytes spaced and not prefixed with '\x'.
             -0x :    Output bytes spaced and prefixed with '0x'.
             -c  :    Bytes array in C language style.
