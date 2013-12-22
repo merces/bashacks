@@ -137,25 +137,98 @@ hex2bin()
 
 isalnum() 
 {
-   local USAGE="determines whether string or char is alphanumeric.
-    Parameters:
+   local USAGE="Determines whether string or char is alphanumeric.
+
+   Category  : Char and String
+
+   Parameters:
         string or char - return true or false.
-    
+     
     Output:
-        \$ isalnum a
+        \$ isalnum a1
         \$ echo \$? 
         0
-    "
+
+        \$ isalnum a-a
+        \$ echo \$? 
+        1"
+
     [ $# -eq 0 ] && echo -e "${USAGE}" || 
     echo "$1" | grep -Eqw '^[0-9A-Za-z]+$' 
 }
-isalpha() { echo "$1" | grep -Eqw '^[A-Za-z]+$'; }
+
+isalpha()
+{
+   local USAGE="Determines whether string or char is alpha.
+
+   Category  : Char and String
+
+   Parameters:
+        string or char - return true or false.
+
+    Output:
+        \$ isalpha Hf
+        \$ echo \$? 
+        0
+
+        \$ isalpha Hf-1
+        \$ echo \$? 
+        1"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[A-Za-z]+$'
+}
+
 #isascii() {}
 #isblank() {}
 #iscntrl() {}
-isdigit() { echo "$1" | grep -Eqw '^[0-9]+$'; }
+isdigit()
+{
+    local USAGE="Determines whether string or char is digit.
+
+   Category  : Char and String
+
+   Parameters:
+        string or char - return true or false.
+
+    Output:
+        \$ isdigit 22
+        \$ echo \$? 
+        0
+
+        \$ isdigit 2a
+        \$ echo \$? 
+        1"
+
+    [ $# -eq 0 ] && 
+        echo "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[0-9]+$'
+}
 #isgraph() {}
-islower() { echo "$1" | grep -Eqw '^[a-z]+$'; }
+islower()
+{
+    local USAGE="determines whether a char or string is in lowercase.
+
+   Category  : Char and String
+
+   Parameters:
+        string or char - return true or false.
+
+    Output:
+        \$ islower hackfunctions
+        \$ echo \$? 
+        0
+
+        \$ islower Hackfunctions
+        \$ echo \$? 
+        1"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[a-z]+$'
+}
+
 isprint()
 {
 	# nao ta rolando
@@ -168,8 +241,51 @@ isprint()
 }
 #ispunct() {}
 #isspace() {}
-isupper() { echo "$1" | grep -Eqw '^[A-Z]+$'; }
-isxdigit() { echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'; }
+isupper()
+{
+    local USAGE="determines whether a char or string is in uppercase.
+
+   Category  : Char and String
+
+   Parameters:
+        string or char - return true or false.
+
+    Output:
+        \$ isupper HACKFUNCTIONS
+        \$ echo \$?
+        0
+
+        \$ islower Hackfunctions
+        \$ echo \$?
+        1"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[A-Z]+$'
+}
+
+isxdigit()
+{
+     local USAGE="determines whether a string is a char or hex.
+
+   Category  : Char and String
+
+   Parameters:
+        string or char - return true or false.
+
+    Output:
+        \$ isxdigit 2f 
+        \$ echo \$?
+        0
+
+        \$ islower HA
+        \$ echo \$?
+        1"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'
+}
 
 dec2asc() { echo -e $(printf "\\\x%x" $1); }
 asc2dec() { printf "%d\n" "'$1"; }
@@ -177,6 +293,9 @@ asc2dec() { printf "%d\n" "'$1"; }
 str2hex()
 {
     local USAGE="Converts a string to hex bytes equivalent to each character (hex string).
+        
+        Category  : Char and String
+
         Parameters:
             -x  :    Output bytes spaced and not prefixed with '\x'.
             -0x :    Output bytes spaced and prefixed with '0x'.
