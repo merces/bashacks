@@ -39,7 +39,7 @@ dec2hex()
         \$ dec2hex 10
         a"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             printf "%x\n" "$1"
 }
@@ -60,7 +60,7 @@ hex2dec()
         \$ hex2dec 0x0a
         10"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo $((0x${1#0x}))
 }
@@ -81,7 +81,7 @@ dec2bin()
         \$ dec2bin 255
         11111111"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "obase=2;$1" | bc
 }
@@ -102,7 +102,7 @@ bin2dec()
         \$ dec2bin 11111111
         255"
 
-    [ $# -eq 0 ] && 
+    [ $# -eq 0 -o "$1" == '-h' ] && 
         echo "${USAGE}" ||
             echo $((2#$1))
 }
@@ -120,7 +120,7 @@ hex2bin()
         \$ hex2bin a
         1010"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" || {
 	        local bin
 	        local i
@@ -153,8 +153,9 @@ isalnum()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 ] && echo -e "${USAGE}" || 
-    echo "$1" | grep -Eqw '^[0-9A-Za-z]+$' 
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo -e "${USAGE}" ||
+            echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'
 }
 
 isalpha()
@@ -175,7 +176,7 @@ isalpha()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "$1" | grep -Eqw '^[A-Za-z]+$'
 }
@@ -201,7 +202,7 @@ isdigit()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 ] && 
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "$1" | grep -Eqw '^[0-9]+$'
 }
@@ -224,7 +225,7 @@ islower()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "$1" | grep -Eqw '^[a-z]+$'
 }
@@ -259,7 +260,7 @@ isupper()
         \$ echo \$?
         1"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "$1" | grep -Eqw '^[A-Z]+$'
 }
@@ -282,13 +283,46 @@ isxdigit()
         \$ echo \$?
         1"
 
-    [ $# -eq 0 ] &&
+    [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
             echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'
 }
 
-dec2asc() { echo -e $(printf "\\\x%x" $1); }
-asc2dec() { printf "%d\n" "'$1"; }
+dec2asc()
+{
+     local USAGE="Converts a decimal to ascii bytes equivalent.
+
+   Category  : Char and String
+
+   Parameters:
+        decimal - decimal number to be coverted.
+
+    Output:
+        \$ dec2asc 65
+        A"
+
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo "${USAGE}" ||
+            echo -e $(printf "\\\x%x" $1)
+}
+
+asc2dec()
+{
+     local USAGE="Converts a ascii bytes in decimal equivalent.
+
+   Category  : Char and String
+
+   Parameters:
+        ascii - ascii char to be converted.
+
+    Output:
+        \$ asc2dec A
+        65"
+
+    [ $# -eq 0 -o "$1" == '-h' ] && 
+        echo "${USAGE}" ||
+            printf "%d\n" "'$1"
+}
 
 str2hex()
 {
@@ -301,7 +335,8 @@ str2hex()
             -0x :    Output bytes spaced and prefixed with '0x'.
             -c  :    Bytes array in C language style.
             -s  :    Output bytes not spaced and inital prefixed '0x'.
-            
+            -h  :    Help.
+
             string - converting string
             
         Output:
@@ -315,10 +350,10 @@ str2hex()
         0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
 
         \$ str2hex -s 'Fernando'
-        0x4665726e616e646f\n"
-    [ $# -eq 0 ] && { 
+        0x4665726e616e646f"
+
+    [ $# -eq 0 ] &&
         echo -e "${USAGE}"
-    }
 
 	case "$1" in
 		"-s") 
@@ -338,7 +373,10 @@ str2hex()
 			echo -n "$2" | hexdump -ve '/1 "0x%02x, "' | sed 's/\(.*\), /\1/'
 			echo '}'
 			;;
-		*)
+        "-h")
+            echo "${USAGE}"
+            ;;
+        *)
 			echo -n "$1" | hexdump -ve '/1 "%02x "' | sed 's/\(.*\) /\1/'
 			echo
 			;;
@@ -347,49 +385,110 @@ str2hex()
 
 str2hexr()
 {
-	case "$1" in
-		"-x" | "-0x" | "-c" | "-s")
-			str2hex $1 "$(echo "$2" | rev)"
-			;;
-		*)
-			str2hex "$(echo "$1" | rev)"
-			;;
+    local USAGE="Converts a string to hex bytes equivalent to each character (hex string) and inverted output.
+        
+        Category  : Char and String
+
+        Parameters:
+            -x  :    Output bytes spaced and not prefixed with '\x'.
+            -0x :    Output bytes spaced and prefixed with '0x'.
+            -c  :    Bytes array in C language style.
+            -s  :    Output bytes not spaced and inital prefixed '0x'.
+            -h  :    Help.
+
+            string - the string to be converted.
+            
+        Output:
+        \$ str2hexr 'Fernando'
+        6f 64 6e 61 6e 72 65 46
+
+        \$ str2hexr -x 'Fernando'
+        \x6f\\x64\\x6e\\x61\\x6e\\x72\\x65\\x46
+
+        \$ str2hexr -0x 'Fernado'
+        0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46
+
+        \$ str2hexr -s 'Fernando'
+        0x6f646e616e726546"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" 
+
+    case "$1" in
+	    "-x" | "-0x" | "-c" | "-s")
+	        str2hex $1 "$(echo "$2" | rev)"
+		;;
+        "-h")
+            echo "${USAGE}"
+        ;;
+        *)
+		    str2hex "$(echo "$1" | rev)"
+	    ;;
 	esac
 }
 
 hex2str()
 {
-	local hex
-	local str
-	local i
+    local USAGE="Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.
+        
+        Category  : Char and String
 
-	hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
+        Parameters:
+            -h  :    Help.
 
-	# insert a space each two chars
-	hex=$(echo $hex | sed 's/../& /g')
+            hex - hex to be converted.
+            
+        Output:
+        $ hex2str '72 6f 63 6b'
+        rock
 
-	# prefix with \x, needed by echo
-	for i in $hex; do
-		str="$str\\x$i"
-	done
+        \$ hex2str '\x72\x6f\x63\x6b'
+        rock
 
-	echo -e $str
+        \$ hex2str '0x72 0x6f 0x63 0x6b'
+        rock
+
+        \$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'
+        rock"
+
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo "${USAGE}" || {
+
+            local hex
+    	    local str
+    	    local i
+
+    	    hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
+
+    	    # insert a space each two chars
+    	    hex=$(echo $hex | sed 's/../& /g')
+
+    	    # prefix with \x, needed by echo
+    	    for i in $hex; do
+    		    str="$str\\x$i"
+            done
+
+    	    echo -e $str
+        }
 }
 
 urlencode() {
 
-    local USAGE="USAGE:
-    hexencode 'string'
-    Based on the ascii table will encode characters such as
-    <> {} among others converting to 3e%% 3c%% ....
+    local USAGE="
 
+    Parameters:
+        string - string to be encode.
+
+    Output:
     $ hexencode '<script> alert(1);</script>'
     %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
-    $ hexencode '\${var}'
-    %%24(document)\n"
+
+    $ hexencode '\$(document)'
+    %%24(document)"
+
     # acredite nunca havia visto este post
     # http://stackoverflow.com/questions/296536/urlencode-from-a-bash-script
-    # 
+    #
     local STRING="$@"
     local NSTRING=""
     local CHARLIST="\"\'\$\%\&\,\\\;\/:<>^\`\{\}\|"
@@ -413,27 +512,52 @@ urlencode() {
 
 charcal()
 {
-	local char
-	local chars
-	local res
-	local i
+   local USAGE="Carries out calculations between special characters and numbers.
 
-	case $2 in
-		+|-)
-			for i in $(echo "$1" | sed 's/./& /g'); do
-				char=$(asc2dec $i)
-				res=$(($char $2 $3))
-				echo -n $(dec2asc $res)
-			done
-			echo
-		;;
-		'*')
-			for (( i=0; i<$3; i++ )); do
-				res="$res$1"
-			done
-			echo $res
-		;;
-	esac
+   charcalc <char> <operator> <number>
+
+   Category  : Char and String.
+
+   Parameters:
+        Char      - any one character or a string when multiplication operation.
+        Operators - +,- or *
+        Number    - one number.
+
+    Output:
+        \$ charcalc f + 2
+        h
+        \$ charcalc B - 1
+        A
+        \$ charcalc A \\* 16
+        AAAAAAAAAAAAAAAA
+        \$ charcalc isso \\* 3
+        issoissoisso"
+
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo "${USAGE}" || {
+
+        	local char
+        	local chars
+        	local res
+        	local i
+
+        	case $2 in
+        		+|-)
+        			for i in $(echo "$1" | sed 's/./& /g'); do
+        				char=$(asc2dec $i)
+        				res=$(($char $2 $3))
+        				echo -n $(dec2asc $res)
+        			done
+        			echo
+        		;;
+        		'*')
+        			for (( i=0; i<$3; i++ )); do
+        				res="$res$1"
+        			done
+        			echo $res
+        		;;
+        	esac
+            }
 }
 
 asciitable()
@@ -478,45 +602,127 @@ c2 ab «  c2 b7 ·  c3 83 Ã  c3 8f Ï  c3 9b Û  c3 a7 ç  c3 b3 ó  c3 bf ÿ\n
 
 ## crypto
 
-unbase64() { echo $1 | base64 -d; }
+unbase64()
+{
+   local USAGE="Decodes a BASE64 string.
+
+   unbase64 <string base64>
+
+   Category  : Crypto.
+
+   Parameters:
+        string - base64 encoded string.
+
+    Output:
+    \$ unbase64 b3p6eSBvc2JvdXJuZQ==
+    ozzy osbourne"
+
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo "${USAGE}" ||
+            echo $1 | base64 -d
+    echo
+}
 
 md5()
 {
-	test -e $1 && \
-		md5sum < "$1" | cut -d' ' -f1 \
-	|| \
-		echo -n "$1" | md5sum | cut -d' ' -f1
+    local USAGE="Calculates the MD5 hash of a string (without considering the caracetere newline) or a file if it exists
+
+   md5 <string|file>
+
+   Category  : Crypto.
+
+   Parameters:
+        string or file the cauculates hash..
+
+    Output:
+    \$ md5 '123456'
+    e10adc3949ba59abbe56e057f20f883e
+    \$ md5 /etc/passwd
+    18186ca65c92ba40cfe8ed4089496c42"
+
+    [ $# -eq 0 -o "$1" == '-h' ] && 
+        echo "${USAGE}" ||
+	    test -e $1 && \
+		    md5sum < "$1" | cut -d' ' -f1 \
+	        || \
+		        echo -n "$1" | md5sum | cut -d' ' -f1
 }
 
 unmd5()
 {
-	local r=""
-        local s1="http://md5crack.com/crackmd5.php"
-        local s2="http://www.tobtu.com/md5.php?h=$1"
+    local USAGE="Attempts to discover the string that generated the MD5 hash entered using the internet (requires you to be logged).
+
+   unmd5 <hash>
+
+   Category  : Crypto.
+
+   Parameters:
+        md5 hash to be broken.
+
+    Output:
+    \$ unmd5 e10adc3949ba59abbe56e057f20f883e
+    123456"
+
+    local r=""
+    local s1="http://md5crack.com/crackmd5.php"
+    local s2="http://www.tobtu.com/md5.php?h=$1"
 
 	# adicionado site tobtu.com, md5crack consta fora do ar - 11-12-12
-        r="$( wget -q --timeout=30 "${s2}" -O - |
-         grep -E "([a-f0-9]){32}" |
-         cut -d':' -f3  )"
+    r="$( wget -q --timeout=30 "${s2}" -O - |
+        grep -E "([a-f0-9]){32}" |
+        cut -d':' -f3  )"
 
-        [ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s1}" -O - |
-         grep 'Found:'  |
-         sed 's/.*md5("\(.*\)").*<\/div>/\1/' )"
+    [ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s1}" -O - |
+        grep 'Found:'  |
+        sed 's/.*md5("\(.*\)").*<\/div>/\1/' )"
 
-        echo "${r}"
+    echo "${r}"
 }
 
 rot()
 {
-	local n
+     local USAGE="Encrypts/Decrypts a string with the Cesar Cipher using n shifts to the right.
 
-	test $# -eq 2 || return 1
+   rot <displacement> <string>
 
-	# n recebe o caractere do alfabeto correspondente
-	n=$(echo -e \\x$(dec2hex $(echo -e $((97+$1)))))
+   Category  : Crypto.
 
-	# rot com o tr
-	echo $2 | tr a-z $n-za-z | tr A-Z ${n^^}-ZA-Z
+   Parameters:
+        displacement - the number of shifts to be applied to the string.
+        string - the string that will undergo the ROT.
+
+    Output:
+    \$ rot 1 'iron maiden'
+    jspo nbjefo 
+
+    # simulando rotall()
+    \$ for i in {1..8}; do echo -n \"rot\$i: \"; rot $i 'ewlsd'; done
+    rot1: fxmte
+    rot2: gynuf
+    rot3: hzovg
+    rot4: iapwh
+    rot5: jbqxi
+    rot6: kcryj
+    rot7: ldszk
+    rot8: metal
+
+    Note:
+    This function has the aliases rot5 () rot13 () rot18 () and ROT47 (), where the 
+    number of displacements need not be entered because it is already in the function name."
+    
+    [ $# -eq 0 ] && 
+        echo "${USAGE}" || { 
+
+        	local n
+
+        	test $# -eq 2 || return 1
+
+        	# n recebe o caractere do alfabeto correspondente
+        	n=$(echo -e \\x$(dec2hex $(echo -e $((97+$1)))))
+
+        	# rot com o tr
+        	echo $2 | tr a-z $n-za-z | tr A-Z ${n^^}-ZA-Z
+        }
 }
 
 rotall()
@@ -537,18 +743,39 @@ alias rot47='rot 47'
 
 strxor()
 {
-	local str
-	local xored
-	local i
+    local USAGE="Calculates the exclusive OR of each character in a string with a key.
 
-	# $2 is the string and $1 is the xor key
-	str=$(str2hex "$2")
+   strxor <key> <string>
 
-	for i in $str; do
-		xored="$xored $(dec2hex $((0x$i^$1)))"
-	done
+   Category  : Crypto.
 
-	hex2str "$xored"
+   Parameters:
+        key - the value in decimal or hexadecimal (prefixed with '0x') to perform
+              the XOR with the characters of the string. .
+        string - the string to go through the 'xor'.
+
+    Output:
+    \$ strxor 4 'ieikjew\$ewwewwmjew'
+    mamonas assassinas
+    \$ strxor 0xa 'pink floyd'
+    zcda*lfesn"
+
+    [ $# -eq 0 -o "$1" == '-h' ] &&
+        echo "${USAGE}" || {
+
+            local str
+        	local xored
+        	local i
+
+        	# $2 is the string and $1 is the xor key
+        	str=$(str2hex "$2")
+
+        	for i in $str; do
+         		xored="$xored $(dec2hex $((0x$i^$1)))"
+        	done
+
+        	hex2str "$xored"
+        }
 }
 
 keycheck()
@@ -561,43 +788,129 @@ keycheck()
 
 ip2bin()
 {
-	local i
-	for i in $(echo "$1" | tr . ' '); do
-		printf "%.8d." $(dec2bin $i)
-	done | sed "s/.$/\\n/"
+    local USAGE="Convert an ip address into its equivalent binary.
+
+   ip2bin <ipaddress>
+
+   Category  : Networking.
+
+   Parameters:
+        string - ipaddress to be converted.
+
+    Output:
+    \$ ip2bin 10.0.0.1
+    00001010.00000000.00000000.00000001
+    \$ ip2bin 172.16.1.0
+    10101100.00010000.00000001.00000000"
+
+    local sIp="$(echo $1 |
+                grep -Eo '^(([0-9]){1,3}\.){3}([0-9]){1,3}$')"
+
+    [ $# -eq 0 -o -z "${sIp}" ] &&
+        echo "${USAGE}" || {
+                local i
+	            for i in $(echo "${sIp}" | tr . ' '); do
+		            printf "%.8d." $(dec2bin $i)
+                done | sed "s/.$/\\n/"
+            }
 }
 
 bin2ip()
 {
-	local i
-	for i in $(echo "$1" | tr . ' '); do
-		printf "%d." $(bin2dec $i)
-	done | sed "s/.$/\\n/"
+    local USAGE="Convert an binary into its equivalent decimal.
+
+   bin2ip <binary ipaddress>
+
+   Category  : Networking.
+
+   Parameters:
+        string - binary address is converted to.
+
+    Output:
+    \$ bin2ip 00001010.00000000.00000000.00000001
+    10.0.0.1
+    \$ bin2ip 10101100.00010000.00000001.00000000
+    172.16.1.0"
+
+    local sBin="$(echo $1 |
+                grep -Ewo '^(([0-1]){8}\.){3}([0-1]){8}$')"
+    [ $# -eq 0 -o -z "${sBin}" ] &&
+        echo "${USAGE}" || {
+
+	        local i
+	        for i in $(echo "${sBin}" | tr . ' '); do
+		        printf "%d." $(bin2dec $i)
+            done | sed "s/.$/\\n/"
+        }
 }
 
 ip2geo()
 {
-	wget -q -T 30 "http://xml.utrace.de/?query=$1" -O - |
-	 sed -e '4d; s/<[^>]*>//g; s/\t//g; /^$/d' |
-	 tr \\n ' '
-	 echo
+    local USAGE="Approximately determines geographical location of an ip address or domain name.
+
+   ip2geo <ip address>
+
+   Category  : Networking.
+
+   Parameters:
+        string - ip adrress.
+
+    Output:
+    \$ ip2geo www.mentebinaria.com
+    www.mentebinaria.com.br New Dream Network, LLC New Dream Network, LLC Brea US 33.926898956299 -117.86119842529 1"
+
+    [ $# -eq 0 ] &&
+        echo "${USAGE}" || {
+        	wget -q -T 30 "http://xml.utrace.de/?query=$1" -O - |
+	        sed -e '4d; s/<[^>]*>//g; s/\t//g; /^$/d' |
+	        tr \\n ' '
+            echo
+        }
 }
 
-myip() {	wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -; echo; }
+myip()
+{
+    local USAGE="Displays the real ip address of your connection.
+
+   myip
+
+   Category  : Networking.
+
+   Parameters:
+        No parameters
+
+    Output:
+    \$ myip 
+    1.2.3.4"
+
+    [ "$1" == '-h' ] &&
+        echo "${USAGE}" || {
+                wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -
+                echo
+            }
+}
 
 ## social engineering
 
 websearch() 
 {
-    local USAGE="USAGE:\nwebsearch <OPTIONS>
-    -t|--type\t\t mail,file,phone,free one type is required
-    -p|--to-page\t Number of pages OPTIONAL
-    -d|--domain\t\t Domain Name or IpAddress is required
-    -e|--file-ext\t Extension for query
-    -s|--string\t\t parameter needed to free type and optional for others \n
+    local USAGE="Displays the real ip address of your connection.
 
-    Mode:
-    websearch -t file -e txt -d mentebinaria.com.br -p 2
+   websearch -t <mail|file|phone|free> -p <num pages optional> -d <domain> -e <file Extension> -s <string> -g <1>
+
+   Category  : Social Engineering.
+
+   Parameters:
+    -t              mail,file,phone,free one type is required
+    -p              Number of pages OPTIONAL
+    -d              Domain Name or IpAddress is required
+    -e              Extension for query
+    -s              Parameter needed to free type and optional for others
+    -g              Performs the download of all files of the query (set 1) 
+    -h              this help.
+
+    Output:
+    \$ websearch -t file -e txt -d mentebinaria.com.br -p 2
     [ file ] IN mentebinaria.com.br txt
     [+] 0
     [+] 10
@@ -605,7 +918,7 @@ websearch()
     =============================================
     mentebinaria.com.br/artigos/0x0a/gamevista.txt
     mentebinaria.com.br/artigos/0x0b/virtlinux.txt
-    mentebinaria.com.br/artigos/0x0d/altexe.txt\n\n"
+    mentebinaria.com.br/artigos/0x0d/altexe.txt\n"
 
     local i                     # count for() pagination
     local TYPE                  # type {mail,file,phone...}
@@ -618,40 +931,31 @@ websearch()
     local EXTRACT               # variable with regular expression to extract data/information
     local STRING=""             # 
     local DOWNLOAD=0            # set donwload all file - default no
+    OPTIND=0                    # getopts no crazy
 
     # run param
-    while (( $# )) 
+    while getopts ":g:t:s:d:e:p:h:" o
     do
-        case $1 in
-            --download)
-                DOWNLOAD=1
+        case "${o}" in
+            g) DOWNLOAD=1
             ;;
-            -t|--type)
-                shift
-                TYPE="$1"
+            t) TYPE=${OPTARG}
             ;;
-            -p|--to-page)
-                shift
-                isdigit $1
-                test $? -eq 0 && TOPAGE=$(echo 10*$1 | bc ) || TOPAGE=50
+            p) isdigit ${OPTARG}
+               test $? -eq 0 && TOPAGE=$(echo 10*${OPTARG} | bc ) || TOPAGE=50
             ;;
-            -d|--domain)
-                shift 
-                DOMAIN="$1"
+            d) DOMAIN=${OPTARG}
             ;;
-            -s|--string)
-                shift 
-                [ -z "$1" ] && STRING="" || STRING="intext:$1"
+            s) [ -z "$1" ] && STRING="" || STRING="intext:${OPTARG}"
             ;;
-            -e|--file-ext)
-                shift
-                EXTENSION="$1"
+            e) EXTENSION=${OPTARG}
+            ;;
+            h) echo "${USAGE}" 
             ;;
         esac
-        shift
     done
 
-    [ ! -z "${TYPE}" -a ! -z "${DOMAIN}" -o ! -z "${STRING}" ] && {
+    [ ! -z "${TYPE}" -a ! -z "${DOMAIN}" ] && {
 
             [ "${TYPE}" == "mail" ] && {
                 SEARCH="%22@${DOMAIN}%22"
@@ -688,7 +992,7 @@ websearch()
         #### 
 
         echo "[ ${TYPE} ] IN ${DOMAIN} ${EXTENSION}"
-        
+
 	    for (( i=0 ; i<=${TOPAGE} ; i+=10 ))
 	    do
 		    echo "[+] ${i}"
@@ -702,21 +1006,26 @@ websearch()
             # tmp file store list
             LISTTMP=$(mktemp)
             # directory does not exist create it
-            [ ! -d "${DOMAIN}" ] && mkdir "${DOMAIN}"
-            # 
+            [ ! -d "${DOMAIN}" ] &&
+                mkdir "${DOMAIN}"
+
+            #
             cat ${TMP} | eval ${EXTRACT} | sort -u > ${LISTTMP}
             echo "Iniciando Download de $( cat ${LISTTMP} | wc -l ) Arquivos"
             # if elements exist - download
-            [ $( wc -l ${LISTTMP} | cut -d" " -f1 ) -gt 0 ] && wget -P "${DOMAIN}" -i ${LISTTMP} &>>/dev/null
-            [ $? -eq 0 ] && echo "Download feito em ${DOMAIN}"
-            rm -rf ${LISTTMP}
+            [ $( wc -l ${LISTTMP} | cut -d" " -f1 ) -gt 0 ] &&
+                    wget -P "${DOMAIN}" -i ${LISTTMP} &>>/dev/null
+            [ $? -eq 0 ] &&
+                echo "Download feito em ${DOMAIN}"
+
+            rm -f ${LISTTMP}
         } || {
             # just list on then screen
             cat ${TMP} | eval ${EXTRACT} | sort -u
         }
-        
+
         rm -rf ${TMP}
-    } || printf "${USAGE}"
+    } || echo "${USAGE}"
 
 }
 
@@ -840,3 +1149,29 @@ matrix()
 }
 
 bkp() { cp "$1"{,.$(date +%Y%m%d)}; }
+
+xulosscreen() 
+{
+    local FRASE="$@"
+    local TIME=0.1
+    local nCOL=$(tput cols)
+    local nROW=$(tput lines)
+    local COR=0
+
+    [ -z "${FRASE}" ] && FRASE="#! hack functions"
+    clear
+    while [ 1 ]
+    do
+        COL=$(echo $((RANDOM%nCOL)) )
+        ROW=$(echo $((RANDOM%nROW)) )
+        tput setaf ${COR}
+        tput cup ${ROW} ${COL}
+        for i in $(seq 0 $((${#FRASE}-1)) )
+        do
+            sleep ${TIME}
+            echo -n "${FRASE:$i:1}" 
+        done
+        [ ${COR} -eq 7 ] && COR=0 || COR=$((COR+1))
+        sleep ${TIME}
+    done
+}
