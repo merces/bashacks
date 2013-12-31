@@ -101,7 +101,7 @@ dec2bin()
 
 bin2dec()
 {
-     local USAGE="convert binary to decimal equivalent
+     local USAGE="Convert binary to decimal equivalent
 
     bin2dec <binary>
 
@@ -1136,8 +1136,8 @@ dumpmem()
         root is required
 
    Output:
-    root # dumpstack 15125 pilha.dump
-    root # dumpheap 15125 heap.dump"
+   root # dumpstack 15125 pilha.dump
+   root # dumpheap 15125 heap.dump"
 
     [ $# -le 1 -o "$1" == '-h' -o "${EUID}" -ne 0 ] && {
         echo "${USAGE}"
