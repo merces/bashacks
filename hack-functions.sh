@@ -39,9 +39,12 @@ dec2hex()
         \$ dec2hex 10
         a"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            printf "%x\n" "$1"
+    [ $# -eq 0 -o "$1" == '-h' ] && {
+        echo "${USAGE}" 
+        return 1
+    }
+
+    printf "%x\n" "$1"
 }
 
 hex2dec()
@@ -60,9 +63,12 @@ hex2dec()
         \$ hex2dec 0x0a
         10"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo $((0x${1#0x}))
+    [ $# -eq 0 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo $((0x${1#0x}))
 }
 
 dec2bin()
@@ -81,9 +87,12 @@ dec2bin()
         \$ dec2bin 255
         11111111"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo "obase=2;$1" | bc
+    [ $# -eq 0 -o "$1" == '-h' ] && {
+        echo "${USAGE}" 
+        return 1
+    }
+
+    echo "obase=2;$1" | bc
 }
 
 bin2dec()
@@ -102,9 +111,12 @@ bin2dec()
         \$ dec2bin 11111111
         255"
 
-    [ $# -eq 0 -o "$1" == '-h' ] && 
-        echo "${USAGE}" ||
-            echo $((2#$1))
+    [ $# -eq 0 -o "$1" == '-h' ] && {
+        echo "${USAGE}" 
+        return 1
+    }
+
+    echo $((2#$1))
 }
 
 hex2bin()
@@ -114,23 +126,26 @@ hex2bin()
     Category  : Base Conversion
 
     Parameters:
+        -h  : Help.
         hex - hex to be converted
 
     Output:
         \$ hex2bin a
         1010"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" || {
-	        local bin
-	        local i
+    [ $# -eq 0 -o "$1" == '-h' ] && { 
+        echo "${USAGE}"
+        return 1
+    }
 
-	        for i in $*; do
-		        bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
-		        echo -n "$bin "
-            done
-	        echo
-        }
+	local bin
+	local i
+
+	for i in $*; do
+		bin=$(echo "obase=2;ibase=16;$(echo $i | tr a-f A-F)" | bc)
+		echo -n "$bin "
+    done
+	echo
 }
 
 ## char and strings
@@ -153,9 +168,12 @@ isalnum()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo -e "${USAGE}" ||
-            echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo -e "${USAGE}" 
+        return 1
+    }
+
+    echo "$1" | grep -Eqw '^[0-9A-Za-z]+$'
 }
 
 isalpha()
@@ -176,9 +194,12 @@ isalpha()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo "$1" | grep -Eqw '^[A-Za-z]+$'
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo "$1" | grep -Eqw '^[A-Za-z]+$'
 }
 
 #isascii() {}
@@ -202,9 +223,12 @@ isdigit()
         \$ echo \$? 
         1"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo "$1" | grep -Eqw '^[0-9]+$'
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo "$1" | grep -Eqw '^[0-9]+$'
 }
 #isgraph() {}
 islower()
@@ -260,14 +284,17 @@ isupper()
         \$ echo \$?
         1"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo "$1" | grep -Eqw '^[A-Z]+$'
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}" 
+        return 1
+    }
+ 
+    echo "$1" | grep -Eqw '^[A-Z]+$'
 }
 
 isxdigit()
 {
-     local USAGE="determines whether a string is a char or hex.
+     local USAGE="Determines whether a string is a char or hex.
 
    Category  : Char and String
 
@@ -283,9 +310,12 @@ isxdigit()
         \$ echo \$?
         1"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo "$1" | grep -Eqw '^[0-9A-Fa-f]+$'
 }
 
 dec2asc()
@@ -301,9 +331,12 @@ dec2asc()
         \$ dec2asc 65
         A"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo -e $(printf "\\\x%x" $1)
+    [ $# -ne 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo -e $(printf "\\\x%x" $1)
 }
 
 asc2dec()
@@ -316,12 +349,15 @@ asc2dec()
         ascii - ascii char to be converted.
 
     Output:
-        \$ asc2dec A
-        65"
+    \$ asc2dec A
+    65"
 
-    [ $# -eq 0 -o "$1" == '-h' ] && 
-        echo "${USAGE}" ||
-            printf "%d\n" "'$1"
+    [ $# -ne 1 -o "$1" == '-h' ] && { 
+        echo "${USAGE}" 
+        return 1
+    }
+
+    printf "%d\n" "'$1"
 }
 
 str2hex()
@@ -352,8 +388,10 @@ str2hex()
         \$ str2hex -s 'Fernando'
         0x4665726e616e646f"
 
-    [ $# -eq 0 ] &&
+    [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
+        return 1
+    }
 
 	case "$1" in
 		"-s") 
@@ -411,8 +449,10 @@ str2hexr()
         \$ str2hexr -s 'Fernando'
         0x6f646e616e726546"
 
-    [ $# -eq 0 ] &&
-        echo "${USAGE}" 
+    [ $# -ne 1 -o "$1" == '-h' ] && { 
+        echo "${USAGE}"
+        return 1
+    }
 
     case "$1" in
 	    "-x" | "-0x" | "-c" | "-s")
@@ -435,7 +475,6 @@ hex2str()
 
         Parameters:
             -h  :    Help.
-
             hex - hex to be converted.
             
         Output:
@@ -451,25 +490,26 @@ hex2str()
         \$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'
         rock"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" || {
+    [ $# -ne 1 -o "$1" == '-h' ] && { 
+        echo "${USAGE}" 
+        return 1
+    }
 
-            local hex
-    	    local str
-    	    local i
+    local hex
+    local str
+    local i
 
-    	    hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
+    hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
 
-    	    # insert a space each two chars
-    	    hex=$(echo $hex | sed 's/../& /g')
+    # insert a space each two chars
+    hex=$(echo $hex | sed 's/../& /g')
 
-    	    # prefix with \x, needed by echo
-    	    for i in $hex; do
-    		    str="$str\\x$i"
-            done
+    # prefix with \x, needed by echo
+    for i in $hex; do
+    	str="$str\\x$i"
+    done
 
-    	    echo -e $str
-        }
+    echo -e $str
 }
 
 urlencode() {
@@ -477,13 +517,14 @@ urlencode() {
     local USAGE="
 
     Parameters:
+        -h     : Help.
         string - string to be encode.
 
     Output:
-    $ hexencode '<script> alert(1);</script>'
+    $ urlencode '<script> alert(1);</script>'
     %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
 
-    $ hexencode '\$(document)'
+    $ urlencode '\$(document)'
     %%24(document)"
 
     # acredite nunca havia visto este post
@@ -519,45 +560,48 @@ charcal()
    Category  : Char and String.
 
    Parameters:
-        Char      - any one character or a string when multiplication operation.
-        Operators - +,- or *
-        Number    - one number.
+        -h        : Help
+        Char      : Any one character or a string when multiplication operation.
+        Operators : +,- or *
+        Number    : One number.
 
     Output:
-        \$ charcalc f + 2
-        h
-        \$ charcalc B - 1
-        A
-        \$ charcalc A \\* 16
-        AAAAAAAAAAAAAAAA
-        \$ charcalc isso \\* 3
-        issoissoisso"
+    \$ charcalc f + 2
+     h
+    \$ charcalc B - 1
+     A
+    \$ charcalc A \\* 16
+     AAAAAAAAAAAAAAAA
+    \$ charcalc isso \\* 3
+     issoissoisso"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" || {
+    [ $# -ne 3 -o "$1" == '-h' ] && {
+        echo "${USAGE}" 
+        return 1
+    }
 
-        	local char
-        	local chars
-        	local res
-        	local i
+    local char
+    local chars
+    local res
+    local i
 
-        	case $2 in
-        		+|-)
-        			for i in $(echo "$1" | sed 's/./& /g'); do
-        				char=$(asc2dec $i)
-        				res=$(($char $2 $3))
-        				echo -n $(dec2asc $res)
-        			done
-        			echo
-        		;;
-        		'*')
-        			for (( i=0; i<$3; i++ )); do
-        				res="$res$1"
-        			done
-        			echo $res
-        		;;
-        	esac
-            }
+    case $2 in
+        +|-)
+            for i in $(echo "$1" | sed 's/./& /g'); do
+        		char=$(asc2dec $i)
+        		res=$(($char $2 $3))
+            		echo -n $(dec2asc $res)
+		done
+		echo
+   		;;
+   		'*')
+ 		    for (( i=0; i<$3; i++ )); do
+        	    res="$res$1"
+        	done
+            echo $res
+    	;;
+    esac
+
 }
 
 asciitable()
@@ -611,15 +655,19 @@ unbase64()
    Category  : Crypto.
 
    Parameters:
-        string - base64 encoded string.
+        -h     : Help.
+        string : Base64 encoded string.
 
     Output:
     \$ unbase64 b3p6eSBvc2JvdXJuZQ==
     ozzy osbourne"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" ||
-            echo $1 | base64 -d
+    [ $# -eq 0 -o "$1" == '-h' ] && { 
+        echo "${USAGE}"
+        return 1
+    }
+    
+    echo $1 | base64 -d
     echo
 }
 
@@ -632,6 +680,7 @@ md5()
    Category  : Crypto.
 
    Parameters:
+        -h     : Help.
         string or file the cauculates hash..
 
     Output:
@@ -640,12 +689,15 @@ md5()
     \$ md5 /etc/passwd
     18186ca65c92ba40cfe8ed4089496c42"
 
-    [ $# -eq 0 -o "$1" == '-h' ] && 
-        echo "${USAGE}" ||
-	    test -e $1 && \
-		    md5sum < "$1" | cut -d' ' -f1 \
-	        || \
-		        echo -n "$1" | md5sum | cut -d' ' -f1
+    [ $# -eq 0 -o "$1" == '-h' ] && { 
+        echo "${USAGE}"
+        return 1
+    }
+
+	test -e $1 && \
+	    md5sum < "$1" | cut -d' ' -f1 \
+	       || \
+	        echo -n "$1" | md5sum | cut -d' ' -f1
 }
 
 unmd5()
@@ -657,11 +709,17 @@ unmd5()
    Category  : Crypto.
 
    Parameters:
+        -h   : Help.
         md5 hash to be broken.
 
     Output:
     \$ unmd5 e10adc3949ba59abbe56e057f20f883e
     123456"
+    
+    [ $# -eq 0 -o "$1" == '-h' ] && { 
+        echo "${USAGE}" 
+        return 1
+    }
 
     local r=""
     local s1="http://md5crack.com/crackmd5.php"
@@ -688,8 +746,9 @@ rot()
    Category  : Crypto.
 
    Parameters:
-        displacement - the number of shifts to be applied to the string.
-        string - the string that will undergo the ROT.
+        -h           : Help.
+        displacement : The number of shifts to be applied to the string.
+        string       : The string that will undergo the ROT.
 
     Output:
     \$ rot 1 'iron maiden'
@@ -710,19 +769,15 @@ rot()
     This function has the aliases rot5 () rot13 () rot18 () and ROT47 (), where the 
     number of displacements need not be entered because it is already in the function name."
     
-    [ $# -eq 0 ] && 
-        echo "${USAGE}" || { 
+    local n
 
-        	local n
+    test $# -eq 2 || { echo "${USAGE}" ; return 1; }
 
-        	test $# -eq 2 || return 1
+    # n recebe o caractere do alfabeto correspondente
+    n=$(echo -e \\x$(dec2hex $(echo -e $((97+$1)))))
 
-        	# n recebe o caractere do alfabeto correspondente
-        	n=$(echo -e \\x$(dec2hex $(echo -e $((97+$1)))))
-
-        	# rot com o tr
-        	echo $2 | tr a-z $n-za-z | tr A-Z ${n^^}-ZA-Z
-        }
+    # rot com o tr
+    echo $2 | tr a-z $n-za-z | tr A-Z ${n^^}-ZA-Z
 }
 
 rotall()
@@ -750,9 +805,10 @@ strxor()
    Category  : Crypto.
 
    Parameters:
-        key - the value in decimal or hexadecimal (prefixed with '0x') to perform
-              the XOR with the characters of the string. .
-        string - the string to go through the 'xor'.
+        -h     : Help.
+        key    : The value in decimal or hexadecimal (prefixed with '0x') to perform
+                 the XOR with the characters of the string.
+        string : The string to go through the 'xor'.
 
     Output:
     \$ strxor 4 'ieikjew\$ewwewwmjew'
@@ -760,22 +816,23 @@ strxor()
     \$ strxor 0xa 'pink floyd'
     zcda*lfesn"
 
-    [ $# -eq 0 -o "$1" == '-h' ] &&
-        echo "${USAGE}" || {
+    [ $# -lt 2 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
 
-            local str
-        	local xored
-        	local i
+    local str
+    local xored
+    local i
 
-        	# $2 is the string and $1 is the xor key
-        	str=$(str2hex "$2")
+    # $2 is the string and $1 is the xor key
+    str=$(str2hex "$2")
 
-        	for i in $str; do
-         		xored="$xored $(dec2hex $((0x$i^$1)))"
-        	done
+    for i in $str; do
+       		xored="$xored $(dec2hex $((0x$i^$1)))"
+   	done
 
-        	hex2str "$xored"
-        }
+   	hex2str "$xored"
 }
 
 keycheck()
@@ -795,7 +852,8 @@ ip2bin()
    Category  : Networking.
 
    Parameters:
-        string - ipaddress to be converted.
+        -h     : Help.
+        string : Ipaddress to be converted.
 
     Output:
     \$ ip2bin 10.0.0.1
@@ -806,13 +864,16 @@ ip2bin()
     local sIp="$(echo $1 |
                 grep -Eo '^(([0-9]){1,3}\.){3}([0-9]){1,3}$')"
 
-    [ $# -eq 0 -o -z "${sIp}" ] &&
-        echo "${USAGE}" || {
-                local i
-	            for i in $(echo "${sIp}" | tr . ' '); do
-		            printf "%.8d." $(dec2bin $i)
-                done | sed "s/.$/\\n/"
-            }
+    [ $# -eq 0 -o -z "${sIp}" -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    local i
+	for i in $(echo "${sIp}" | tr . ' '); do
+	    printf "%.8d." $(dec2bin $i)
+    done | sed "s/.$/\\n/"
+
 }
 
 bin2ip()
@@ -824,7 +885,8 @@ bin2ip()
    Category  : Networking.
 
    Parameters:
-        string - binary address is converted to.
+        -h     : Help.
+        binary ipaddress : Binary address is converted to.
 
     Output:
     \$ bin2ip 00001010.00000000.00000000.00000001
@@ -834,14 +896,16 @@ bin2ip()
 
     local sBin="$(echo $1 |
                 grep -Ewo '^(([0-1]){8}\.){3}([0-1]){8}$')"
-    [ $# -eq 0 -o -z "${sBin}" ] &&
-        echo "${USAGE}" || {
 
-	        local i
-	        for i in $(echo "${sBin}" | tr . ' '); do
-		        printf "%d." $(bin2dec $i)
-            done | sed "s/.$/\\n/"
-        }
+    [ $# -eq 0 -o -z "${sBin}" -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+	local i
+	for i in $(echo "${sBin}" | tr . ' '); do
+	    printf "%d." $(bin2dec $i)
+    done | sed "s/.$/\\n/"
 }
 
 ip2geo()
@@ -853,19 +917,22 @@ ip2geo()
    Category  : Networking.
 
    Parameters:
-        string - ip adrress.
+        -h        : Help.
+        Ip adrress: Ip to determine location.
 
     Output:
     \$ ip2geo www.mentebinaria.com
     www.mentebinaria.com.br New Dream Network, LLC New Dream Network, LLC Brea US 33.926898956299 -117.86119842529 1"
 
-    [ $# -eq 0 ] &&
-        echo "${USAGE}" || {
-        	wget -q -T 30 "http://xml.utrace.de/?query=$1" -O - |
+    [ $# -eq 0 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    wget -q -T 30 "http://xml.utrace.de/?query=$1" -O - |
 	        sed -e '4d; s/<[^>]*>//g; s/\t//g; /^$/d' |
 	        tr \\n ' '
             echo
-        }
 }
 
 myip()
@@ -877,24 +944,27 @@ myip()
    Category  : Networking.
 
    Parameters:
-        No parameters
+        -h  : Help
 
     Output:
-    \$ myip 
+    \$ myip
     1.2.3.4"
 
-    [ "$1" == '-h' ] &&
-        echo "${USAGE}" || {
-                wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -
-                echo
-            }
+    [ "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -
+    echo
 }
 
 ## social engineering
 
 websearch() 
 {
-    local USAGE="Displays the real ip address of your connection.
+    local USAGE="Uses google base to extract information such as sql files, txt or anything else that can serve 
+to extrarir information, other functionality are finding email phones.
 
    websearch -t <mail|file|phone|free> -p <num pages optional> -d <domain> -e <file Extension> -s <string> -g <1>
 
@@ -907,7 +977,7 @@ websearch()
     -e              Extension for query
     -s              Parameter needed to free type and optional for others
     -g              Performs the download of all files of the query (set 1) 
-    -h              this help.
+    -h              Help.
 
     Output:
     \$ websearch -t file -e txt -d mentebinaria.com.br -p 2
@@ -1033,35 +1103,112 @@ websearch()
 
 dumpmem()
 {
-	local stack_addr=$(grep -m 1 "$1" /proc/$2/maps |
-	 cut -d' ' -f1 | sed 's/^/0x/; s/-/ 0x/')
+    local USAGE="Creates a file on disk with memory contents of a process.
+
+   dumpstack <pid> <outfile>
+   dumpheap <pid> <outfile>
+
+   Category  : Reverse Engineering.
+
+   Parameters:
+        -h      : Help.
+        pid     : The PID of the process.
+        outfile : Output file.
+
+        root is required
+
+   Output:
+    root # dumpstack 15125 pilha.dump
+    root # dumpheap 15125 heap.dump"
+
+    [ $# -le 1 -o "$1" == '-h' -o "${EUID}" -ne 0 ] && {
+        echo "${USAGE}"
+        return 1
+    }
+ 
+    local stack_addr=$(grep -m 1 "$1" /proc/$2/maps |
+	            cut -d' ' -f1 | sed 's/^/0x/; s/-/ 0x/')
 
 	test -n "$stack_addr" && \
-	echo "dump memory "$3" $stack_addr" | gdb --pid $2 &> /dev/null
+	        echo "dump memory "$3" $stack_addr" | gdb --pid $2 &> /dev/null
 }
 
 alias dumpstack='dumpmem stack'
 alias dumpheap='dumpmem heap'
 
-asmgrep() { objdump -d "$2" | grep --color -C 4 -E "$1"; }
+asmgrep()
+{
+    local USAGE="Search assembly instructions into executable binaries and 
+prints 4 instructions 'round'. You must be attentive to the syntax 
+(Intel or AT&T) utilized in your environment..
+
+   asmgrep <regex> <file>
+
+   Category  : Reverse Engineering.
+
+   Parameters:
+        -h      : Help.
+        regex   : Regular expression
+        file    : File to store data.
+
+   Output:
+    \$ asmgrep 'push.*rbp$' /bin/ls
+    411400:  41 57                          push r15
+    411402:  41 56                          push r14
+    411404:  41 55                          push r13
+    411406:  41 54                          push r12
+    411408:  55                             push rbp
+    411409:  53                             push rbx
+    41140a:  48 83 ec 68                    sub rsp,0x68
+    41140e:  85 ff                          test edi,edi
+    411410:  48 8b 9c 24 a0 00 00           mov rbx,QWORD PTR [rsp+0xa0]" 
+
+    [ $# -lt 2 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    objdump -d "$2" | grep --color -C 4 -E "$1"
+
+}
 
 asminfo()
 {
-	local ins=${1,,}
+    local USAGE="Prints on the screen of an info instruction asm.
 
-	checkdir
+   asminfo <string>
 
-	if test -s $hf_cache/$ins.txt; then
-		cat $hf_cache/$ins.txt
+   Category  : Reverse Engineering.
+
+   Parameters:
+        -h     :  Help.
+        string : instruction to obtain information
+
+    Output:
+    \$ asminfo cmp
+    ..."
+
+    [ $# -lt 1 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    local ins=${1,,}
+
+    checkdir
+
+    if test -s $hf_cache/$ins.txt; then
+        cat $hf_cache/$ins.txt
 	else
-		wget -q faydoc.tripod.com/cpu/$ins.htm -O - |
-		 html2text |
-		 sed -n '/^===.*/,$p' |
-		 sed 's/^===.*/'${ins^^}'/' | tr _ ' ' |
-		 tee -a $hf_cache/$ins.txt
-	fi
+        wget -q faydoc.tripod.com/cpu/$ins.htm -O - |
+        		 html2text |
+        		 sed -n '/^===.*/,$p' |
+        		 sed 's/^===.*/'${ins^^}'/' | tr _ ' ' |
+        		 tee -a $hf_cache/$ins.txt
+     fi
 
-	test -s $hf_cache/$ins.txt || rm -f $hf_cache/$ins.txt
+    test -s $hf_cache/$ins.txt || rm -f $hf_cache/$ins.txt
+
 }
 
 sc2asm()
@@ -1097,14 +1244,133 @@ asm2sc()
 
 ## calc
 
-xor() { echo $(($1^$2)); }
-shl() { echo $(($1<<$2)); }
-shr() { echo $(($1>>$2)); }
-pow() { echo $(($1**$2)); }
+xor()
+{
+    local USAGE="Calculates the exclusive OR between two numbers.
+
+    xor <number> <number>
+
+   Category  : Calc.
+
+   Parameters:
+        -h       :  Help.
+        number   :  decimal  or hex number (prefixed with '0x' ).
+
+    Output:
+    \$ xor 0xdead 0xdead
+    0
+    \$ xor 45 20
+    57"
+
+   [ $# -lt 2  -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo $(($1^$2))
+}
+
+shl()
+{
+    local USAGE="Push bits to the left by a number.
+
+    shl <number> <bits>
+
+   Category  : Calc.
+
+   Parameters:
+        -h       :  Help.
+        bits     :  The number of bits to be pushed.
+        number   :  Decimal or hex number (prefixed with '0x' ).
+
+    Output:
+    \$ shl 4 1
+    8
+    \$ shl 0x4 1
+    8"
+
+    [ $# -lt 2 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo $(($1<<$2))
+}
+
+shr()
+{
+    local USAGE="Push bits to the right by a number.
+
+    shr <number> <bits>
+
+   Category  : Calc.
+
+   Parameters:
+        -h       :  Help.
+        bits     :  The number of bits to be pushed.
+        number   :  Decimal or hex number (prefixed with '0x').
+
+    Output:
+    \$ shr 4 1
+    2
+    \$ shr 0x4 1
+    2"
+
+    [ $# -lt 2 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo $(($1>>$2))
+}
+
+pow()
+{
+    local USAGE="Raises a number to a power.
+
+    pow <number> <pow>
+
+   Category  : Calc.
+
+   Parameters:
+        -h       :  Help.
+        pow      :  the desired power.
+        number   :  Decimal number or hex number (prefixed with '0x').
+
+    Output:
+    \$ pow 8 2
+    64
+    \$ pow 0xa 3
+    1000"
+
+    [ $# -lt 2 -o "$1" == '-h' ] && {
+        echo "${USAGE}"
+        return 1
+    }
+
+    echo $(($1**$2))
+}
 
 hexcalc()
 {
-	test $# -eq 3 || return 1
+    local USAGE="Raises a number to a power.
+
+    hexcalc <hex_number> <operator> <hex_number>
+
+   Category  : Calc.
+
+   Parameters:
+        -h         :  Help.
+        operator   :  +, -, * or /
+        hex_number :  Decimal number or hex number (prefixed with '0x').
+
+    Output:
+    \$ hexcalc 5f \* 2
+    oxbee
+    \$ hexcalc 0xdead / 0xdead
+    0x1"
+
+	test $# -eq 3 || { echo "${USAGE}"; return 1; }
 
 	echo -n 0x
 	dec2hex $((0x${1#0x} $2 0x${3#0x}))
@@ -1150,28 +1416,3 @@ matrix()
 
 bkp() { cp "$1"{,.$(date +%Y%m%d)}; }
 
-xulosscreen() 
-{
-    local FRASE="$@"
-    local TIME=0.1
-    local nCOL=$(tput cols)
-    local nROW=$(tput lines)
-    local COR=0
-
-    [ -z "${FRASE}" ] && FRASE="#! hack functions"
-    clear
-    while [ 1 ]
-    do
-        COL=$(echo $((RANDOM%nCOL)) )
-        ROW=$(echo $((RANDOM%nROW)) )
-        tput setaf ${COR}
-        tput cup ${ROW} ${COL}
-        for i in $(seq 0 $((${#FRASE}-1)) )
-        do
-            sleep ${TIME}
-            echo -n "${FRASE:$i:1}" 
-        done
-        [ ${COR} -eq 7 ] && COR=0 || COR=$((COR+1))
-        sleep ${TIME}
-    done
-}
