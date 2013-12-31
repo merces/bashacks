@@ -307,7 +307,7 @@ isupper()
 
 isxdigit()
 {
-     local USAGE="Determines whether a string is a char or hex.
+     local USAGE="Determines whether a string or char is a hex digit.
 
    isxdigit <string|char>
 
@@ -380,7 +380,7 @@ asc2dec()
 
 str2hex()
 {
-    local USAGE="Converts a string to hex bytes equivalent to each character (hex string).
+    local USAGE="Converts a string to hex bytes equivalent to each char (hex string).
 
         str2hex <Parameter> <string>
 
@@ -440,7 +440,7 @@ str2hex()
 
 str2hexr()
 {
-    local USAGE="Converts a string to hex bytes equivalent to each character (hex string) and inverted output.
+    local USAGE="Converts a string to hex bytes equivalent to each char (hex string) and inverted output.
         
         str2hexr <Parameter> <string>
 
@@ -720,7 +720,7 @@ md5()
 
 unmd5()
 {
-    local USAGE="Attempts to discover the string that generated the MD5 hash entered using the internet (requires you to be logged).
+   local USAGE="Attempts to discover the string that generated the MD5 hash using the internet (requires you to be logged).
 
    unmd5 <hash>
 
@@ -1192,7 +1192,7 @@ prints 4 instructions 'round'. You must be attentive to the syntax
 
 asminfo()
 {
-    local USAGE="Prints on the screen of an info instruction asm.
+    local USAGE="Prints on the screen the information assembly syntax
 
    asminfo <string>
 
@@ -1371,7 +1371,7 @@ pow()
 
 hexcalc()
 {
-    local USAGE="Raises a number to a power.
+    local USAGE="Makes calculation of numbers in hexadecimal and gives the result in hexadecimal.
 
    hexcalc <hex_number> <operator> <hex_number>
 
