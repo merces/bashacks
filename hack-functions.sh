@@ -28,16 +28,18 @@ checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
 dec2hex()
 {
-    local USAGE="convert decimal to hex equivalent
+    local USAGE="Convert decimal to hex equivalent
     
+    dec2hex <decimal>
+
     Category  : Base Conversion
 
     Parameters:
-        number - integer to be converted
+        decimal  :  integer to be converted
 
     Output:
-        \$ dec2hex 10
-        a"
+    \$ dec2hex 10
+    a"
 
     [ $# -eq 0 -o "$1" == '-h' ] && {
         echo "${USAGE}" 
@@ -49,7 +51,9 @@ dec2hex()
 
 hex2dec()
 {
-    local USAGE="convert hex to decimal  equivalent
+    local USAGE="Convert hex to decimal  equivalent
+
+    hex2dec <hex>
 
     Category  : Base Conversion
 
@@ -57,11 +61,10 @@ hex2dec()
         hex - hex to be converted
 
     Output:
-        \$ hex2dec a
-        10
-
-        \$ hex2dec 0x0a
-        10"
+    \$ hex2dec a
+    10
+    \$ hex2dec 0x0a
+    10"
 
     [ $# -eq 0 -o "$1" == '-h' ] && {
         echo "${USAGE}"
@@ -73,7 +76,9 @@ hex2dec()
 
 dec2bin()
 {
-    local USAGE="convert decimal to binary equivalent
+    local USAGE="Convert decimal to binary equivalent
+
+    dec2bin <decimal>
 
     Category  : Base Conversion
 
@@ -81,11 +86,10 @@ dec2bin()
         decimal - decimal to be converted
 
     Output:
-        \$ dec2bin 10
-        1010
-
-        \$ dec2bin 255
-        11111111"
+    \$ dec2bin 10
+    1010
+    \$ dec2bin 255
+    11111111"
 
     [ $# -eq 0 -o "$1" == '-h' ] && {
         echo "${USAGE}" 
@@ -99,17 +103,18 @@ bin2dec()
 {
      local USAGE="convert binary to decimal equivalent
 
+    bin2dec <binary>
+
     Category  : Base Conversion
 
     Parameters:
         binary - binary to be converted
 
     Output:
-        \$ bin2dec 1010
-        10
-
-        \$ dec2bin 11111111
-        255"
+    \$ bin2dec 1010
+    10
+    \$ dec2bin 11111111
+    255"
 
     [ $# -eq 0 -o "$1" == '-h' ] && {
         echo "${USAGE}" 
@@ -121,7 +126,9 @@ bin2dec()
 
 hex2bin()
 {
-    local USAGE="convert hex to binary equivalent
+    local USAGE="Convert hex to binary equivalent.
+    
+    hex2bin <hex>
 
     Category  : Base Conversion
 
@@ -130,8 +137,8 @@ hex2bin()
         hex - hex to be converted
 
     Output:
-        \$ hex2bin a
-        1010"
+    \$ hex2bin a
+    1010"
 
     [ $# -eq 0 -o "$1" == '-h' ] && { 
         echo "${USAGE}"
@@ -154,19 +161,20 @@ isalnum()
 {
    local USAGE="Determines whether string or char is alphanumeric.
 
+   isalnum <string|char>
+
    Category  : Char and String
 
    Parameters:
         string or char - return true or false.
      
     Output:
-        \$ isalnum a1
-        \$ echo \$? 
-        0
-
-        \$ isalnum a-a
-        \$ echo \$? 
-        1"
+    \$ isalnum a1
+    \$ echo \$? 
+    0
+    \$ isalnum a-a
+    \$ echo \$? 
+    1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}" 
@@ -180,19 +188,21 @@ isalpha()
 {
    local USAGE="Determines whether string or char is alpha.
 
+   isalpha <string|char>
+   
    Category  : Char and String
 
    Parameters:
         string or char - return true or false.
 
     Output:
-        \$ isalpha Hf
-        \$ echo \$? 
-        0
+    \$ isalpha Hf
+    \$ echo \$? 
+    0
 
-        \$ isalpha Hf-1
-        \$ echo \$? 
-        1"
+    \$ isalpha Hf-1
+    \$ echo \$? 
+    1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo "${USAGE}"
@@ -209,19 +219,20 @@ isdigit()
 {
     local USAGE="Determines whether string or char is digit.
 
+   isdigit <digit>
+
    Category  : Char and String
 
    Parameters:
-        string or char - return true or false.
+        digit : return true or false.
 
     Output:
-        \$ isdigit 22
-        \$ echo \$? 
-        0
-
-        \$ isdigit 2a
-        \$ echo \$? 
-        1"
+    \$ isdigit 22
+    \$ echo \$? 
+    0
+    \$ isdigit 2a
+    \$ echo \$? 
+    1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo "${USAGE}"
@@ -233,7 +244,9 @@ isdigit()
 #isgraph() {}
 islower()
 {
-    local USAGE="determines whether a char or string is in lowercase.
+    local USAGE="Determines whether a char or string is in lowercase.
+
+   islower <string|char>
 
    Category  : Char and String
 
@@ -241,13 +254,12 @@ islower()
         string or char - return true or false.
 
     Output:
-        \$ islower hackfunctions
-        \$ echo \$? 
-        0
-
-        \$ islower Hackfunctions
-        \$ echo \$? 
-        1"
+    \$ islower hackfunctions
+    \$ echo \$? 
+    0
+    \$ islower Hackfunctions
+    \$ echo \$? 
+    1"
 
     [ $# -eq 0 -o "$1" == '-h' ] &&
         echo "${USAGE}" ||
@@ -268,7 +280,9 @@ isprint()
 #isspace() {}
 isupper()
 {
-    local USAGE="determines whether a char or string is in uppercase.
+    local USAGE="Determines whether a char or string is in uppercase.
+
+   isupper <string>
 
    Category  : Char and String
 
@@ -276,13 +290,12 @@ isupper()
         string or char - return true or false.
 
     Output:
-        \$ isupper HACKFUNCTIONS
-        \$ echo \$?
-        0
-
-        \$ islower Hackfunctions
-        \$ echo \$?
-        1"
+    \$ isupper HACKFUNCTIONS
+    \$ echo \$?
+    0
+    \$ islower Hackfunctions
+    \$ echo \$?
+    1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo "${USAGE}" 
@@ -296,19 +309,20 @@ isxdigit()
 {
      local USAGE="Determines whether a string is a char or hex.
 
+   isxdigit <string|char>
+
    Category  : Char and String
 
    Parameters:
         string or char - return true or false.
 
     Output:
-        \$ isxdigit 2f 
-        \$ echo \$?
-        0
-
-        \$ islower HA
-        \$ echo \$?
-        1"
+    \$ isxdigit 2f 
+    \$ echo \$?
+    0
+    \$ islower HA
+    \$ echo \$?
+    1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo "${USAGE}"
@@ -322,14 +336,16 @@ dec2asc()
 {
      local USAGE="Converts a decimal to ascii bytes equivalent.
 
+   dec2asc <decimal>
+
    Category  : Char and String
 
    Parameters:
         decimal - decimal number to be coverted.
 
     Output:
-        \$ dec2asc 65
-        A"
+    \$ dec2asc 65
+    A"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo "${USAGE}"
@@ -343,10 +359,12 @@ asc2dec()
 {
      local USAGE="Converts a ascii bytes in decimal equivalent.
 
+   asc2dec <ascii char>
+
    Category  : Char and String
 
    Parameters:
-        ascii - ascii char to be converted.
+        ascii char : ascii char to be converted.
 
     Output:
     \$ asc2dec A
@@ -363,7 +381,9 @@ asc2dec()
 str2hex()
 {
     local USAGE="Converts a string to hex bytes equivalent to each character (hex string).
-        
+
+        str2hex <Parameter> <string>
+
         Category  : Char and String
 
         Parameters:
@@ -378,13 +398,10 @@ str2hex()
         Output:
         \$ str2hex 'Fernando'
         46 65 72 6e 61 6e 64 6f
-
         \$ str2hex -x 'Fernando'
         \\\x46\\\x65\\\x72\\\x6e\\\x61\\\x6e\\\x64\\\x6f
-
         \$ str2hex -0x 'Fernado'
         0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
-
         \$ str2hex -s 'Fernando'
         0x4665726e616e646f"
 
@@ -425,6 +442,8 @@ str2hexr()
 {
     local USAGE="Converts a string to hex bytes equivalent to each character (hex string) and inverted output.
         
+        str2hexr <Parameter> <string>
+
         Category  : Char and String
 
         Parameters:
@@ -439,13 +458,10 @@ str2hexr()
         Output:
         \$ str2hexr 'Fernando'
         6f 64 6e 61 6e 72 65 46
-
         \$ str2hexr -x 'Fernando'
         \x6f\\x64\\x6e\\x61\\x6e\\x72\\x65\\x46
-
         \$ str2hexr -0x 'Fernado'
         0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46
-
         \$ str2hexr -s 'Fernando'
         0x6f646e616e726546"
 
@@ -471,6 +487,8 @@ hex2str()
 {
     local USAGE="Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.
         
+        hex2str <hex>
+
         Category  : Char and String
 
         Parameters:
@@ -480,13 +498,10 @@ hex2str()
         Output:
         $ hex2str '72 6f 63 6b'
         rock
-
         \$ hex2str '\x72\x6f\x63\x6b'
         rock
-
         \$ hex2str '0x72 0x6f 0x63 0x6b'
         rock
-
         \$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'
         rock"
 
@@ -514,7 +529,11 @@ hex2str()
 
 urlencode() {
 
-    local USAGE="
+    local USAGE="Converts the characters in possible format to be transmitted on the Internet.
+
+    urlencode <string>
+
+    Category   : Char and String
 
     Parameters:
         -h     : Help.
@@ -523,7 +542,6 @@ urlencode() {
     Output:
     $ urlencode '<script> alert(1);</script>'
     %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
-
     $ urlencode '\$(document)'
     %%24(document)"
 
@@ -555,24 +573,24 @@ charcal()
 {
    local USAGE="Carries out calculations between special characters and numbers.
 
-   charcalc <char> <operator> <number>
+   charcal <char> <operator> <number>
 
    Category  : Char and String.
 
    Parameters:
         -h        : Help
-        Char      : Any one character or a string when multiplication operation.
-        Operators : +,- or *
-        Number    : One number.
+        char      : Any one character or a string when multiplication operation.
+        operator  : +,- or *
+        number    : One number.
 
     Output:
-    \$ charcalc f + 2
+    \$ charcal f + 2
      h
-    \$ charcalc B - 1
+    \$ charcal B - 1
      A
-    \$ charcalc A \\* 16
+    \$ charcal A \\* 16
      AAAAAAAAAAAAAAAA
-    \$ charcalc isso \\* 3
+    \$ charcal isso \\* 3
      issoissoisso"
 
     [ $# -ne 3 -o "$1" == '-h' ] && {
@@ -766,8 +784,8 @@ rot()
     rot8: metal
 
     Note:
-    This function has the aliases rot5 () rot13 () rot18 () and ROT47 (), where the 
-    number of displacements need not be entered because it is already in the function name."
+    This function has the aliases rot5() rot13() rot18() and ROT47(), where the number 
+    of displacements need not be entered because it is already in the function name."
     
     local n
 
@@ -886,7 +904,7 @@ bin2ip()
 
    Parameters:
         -h     : Help.
-        binary ipaddress : Binary address is converted to.
+        binary ipaddress : Binary address to be converted to decimal.
 
     Output:
     \$ bin2ip 00001010.00000000.00000000.00000001
@@ -1274,7 +1292,7 @@ shl()
 {
     local USAGE="Push bits to the left by a number.
 
-    shl <number> <bits>
+   shl <number> <bits>
 
    Category  : Calc.
 
@@ -1301,7 +1319,7 @@ shr()
 {
     local USAGE="Push bits to the right by a number.
 
-    shr <number> <bits>
+   shr <number> <bits>
 
    Category  : Calc.
 
@@ -1328,7 +1346,7 @@ pow()
 {
     local USAGE="Raises a number to a power.
 
-    pow <number> <pow>
+   pow <number> <pow>
 
    Category  : Calc.
 
@@ -1355,7 +1373,7 @@ hexcalc()
 {
     local USAGE="Raises a number to a power.
 
-    hexcalc <hex_number> <operator> <hex_number>
+   hexcalc <hex_number> <operator> <hex_number>
 
    Category  : Calc.
 
