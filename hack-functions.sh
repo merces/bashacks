@@ -28,7 +28,7 @@ checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
 dec2hex()
 {
-    local USAGE="Convert decimal to hex equivalent\n
+    local USAGE="Convert decimal to hex equivalent.\n
     dec2hex <decimal>\n
     Category  : Base Conversion\n
     Parameters:
@@ -68,7 +68,7 @@ hex2dec()
 
 dec2bin()
 {
-    local USAGE="Convert decimal to binary equivalent\n
+    local USAGE="Convert decimal to binary equivalent.\n
     dec2bin <decimal>\n
     Category  : Base Conversion\n
     Parameters:
@@ -89,7 +89,7 @@ dec2bin()
 
 bin2dec()
 {
-     local USAGE="Convert binary to decimal equivalent\n
+     local USAGE="Convert binary to decimal equivalent.\n
     bin2dec <binary>\n
     Category  : Base Conversion\n
     Parameters:
