@@ -253,7 +253,7 @@ isupper()
     \$ isupper HACKFUNCTIONS
     \$ echo \$?
     0
-    \$ islower Hackfunctions
+    \$ isupper Hackfunctions
     \$ echo \$?
     1"
 
@@ -276,7 +276,7 @@ isxdigit()
     \$ isxdigit 2f 
     \$ echo \$?
     0
-    \$ islower HA
+    \$ isxdigit HA
     \$ echo \$?
     1"
 
