@@ -874,13 +874,13 @@ to extrarir information, other functionality are finding email phones.\n
    websearch -t <mail|file|phone|free> -p <num pages optional> -d <domain> -e <file Extension> -s <string> -g <1>\n
    Category  : Social Engineering.\n
    Parameters:
-    -t              mail,file,phone,free one type is required
-    -p              Number of pages OPTIONAL
-    -d              Domain Name or IpAddress is required
-    -e              Extension for query
-    -s              Parameter needed to free type and optional for others
-    -g              Performs the download of all files of the query (set 1) 
-    -h              Help.
+        -t   :   mail,file,phone,free one type is required
+        -p   :   Number of pages OPTIONAL
+        -d   :   Domain Name or IpAddress is required
+        -e   :   Extension for query
+        -s   :   Parameter needed to free type and optional for others
+        -g   :   Performs the download of all files of the query (set 1) 
+        -h   :   Help.
 
     Output:
     \$ websearch -t file -e txt -d mentebinaria.com.br -p 2
