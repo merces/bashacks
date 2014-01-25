@@ -44,7 +44,7 @@ hf_list_functions()
                 grep '^-' | grep 'USAGE' |
                 sed 's/\\n//' |
                 head -1 |
-                cut -d'"' -f2)"
+                cut -d\" -f2)"
         printf '%12s\t%3s\n' "${func}" "${resume}..."
         charcal - \* $(tput cols) 
     done
@@ -451,13 +451,13 @@ str2hexr()
 hex2str()
 {
     local USAGE="Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.\n
-        hex2str <hex>\b
+        hex2str <hex>\n
         Category  : Char and String\n
         Parameters:
             -h  :    Help.
             hex : hex to be converted.\n
         Output:
-        $ hex2str '72 6f 63 6b'
+        \$ hex2str '72 6f 63 6b'
         rock
         \$ hex2str '\x72\x6f\x63\x6b'
         rock
@@ -498,9 +498,9 @@ urlencode()
         -h     : Help.
         string : string to be encode.\n
     Output:
-    $ urlencode '<script> alert(1);</script>'
+    \$ urlencode '<script> alert(1);</script>'
     %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
-    $ urlencode '\$(document)'
+    \$ urlencode '\$(document)'
     %%24(document)"
 
     # acredite nunca havia visto este post
