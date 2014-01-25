@@ -22,6 +22,34 @@ hf_cache="$hf_user_path/cache/asm"
 
 ## internal functions
 
+hf_list_functions()
+{
+    local USAGE="Lists all functions with small summary\n
+    hf_functions_list\n
+    Category  : Internal Functions\n
+    Parameters:
+        No Parameters\n
+    Output:
+    small summary here"
+
+    local func
+    local resume
+
+    for func in $( cat ${BASH_SOURCE} |
+        grep '()$' |
+        grep -Ev '^#|\ ')
+    do
+        resume="$( cat ${BASH_SOURCE} |
+                sed "/^${func}/,/^}/ s/^/-/" |
+                grep '^-' | grep 'USAGE' |
+                sed 's/\\n//' |
+                head -1 |
+                cut -d'"' -f2)"
+        printf '%12s\t%3s\n' "${func}" "${resume}..."
+        charcal - \* $(tput cols) 
+    done
+}
+
 checkdir() { test -d $hf_cache || mkdir -p $hf_cache; }
 
 ## base conversion
@@ -47,11 +75,11 @@ dec2hex()
 
 hex2dec()
 {
-    local USAGE="Convert hex to decimal  equivalent\n
+    local USAGE="Convert hex to decimal equivalent\n
     hex2dec <hex>\n
     Category  : Base Conversion\n
     Parameters:
-        hex - hex to be converted\n
+        hex : hex to be converted\n
     Output:
     \$ hex2dec a
     10
@@ -72,7 +100,7 @@ dec2bin()
     dec2bin <decimal>\n
     Category  : Base Conversion\n
     Parameters:
-        decimal - decimal to be converted\n
+        decimal : decimal to be converted\n
     Output:
     \$ dec2bin 10
     1010
@@ -93,7 +121,7 @@ bin2dec()
     bin2dec <binary>\n
     Category  : Base Conversion\n
     Parameters:
-        binary - binary to be converted\n
+        binary : binary to be converted\n
     Output:
     \$ bin2dec 1010
     10
@@ -115,7 +143,7 @@ hex2bin()
     Category  : Base Conversion\n
     Parameters:
         -h  : Help.
-        hex - hex to be converted\n
+        hex : hex to be converted\n
     Output:
     \$ hex2bin a
     1010"
@@ -137,13 +165,13 @@ hex2bin()
 
 ## char and strings
 
-isalnum() 
+isalnum()
 {
    local USAGE="Determines whether string or char is alphanumeric.\n
    isalnum <string|char>\n
    Category  : Char and String\n
    Parameters:
-        string or char - return true or false.\n
+        string or char : return true or false.\n
     Output:
     \$ isalnum a1
     \$ echo \$? 
@@ -166,14 +194,14 @@ isalpha()
    isalpha <string|char>\n
    Category  : Char and String\n
    Parameters:
-        string or char - return true or false.\n
-    Output:
-    \$ isalpha Hf
-    \$ echo \$? 
-    0
-    \$ isalpha Hf-1
-    \$ echo \$? 
-    1"
+        string or char : return true or false.\n
+   Output:
+   \$ isalpha Hf
+   \$ echo \$? 
+   0
+   \$ isalpha Hf-1
+   \$ echo \$? 
+   1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -211,18 +239,18 @@ isdigit()
 #isgraph() {}
 islower()
 {
-    local USAGE="Determines whether a char or string is in lowercase.\n
+    local USAGE="Determines whether char or string is lowercase.\n
    islower <string|char>\n
    Category  : Char and String\n
    Parameters:
-        string or char - return true or false.\n
-    Output:
-    \$ islower hackfunctions
-    \$ echo \$? 
-    0
-    \$ islower Hackfunctions
-    \$ echo \$? 
-    1"
+        string or char : return true or false.\n
+   Output:
+   \$ islower hackfunctions
+   \$ echo \$? 
+   0
+   \$ islower Hackfunctions
+   \$ echo \$? 
+   1"
 
     [ $# -eq 0 -o "$1" == '-h' ] &&
         echo -e "${USAGE}" ||
@@ -243,18 +271,18 @@ isprint()
 #isspace() {}
 isupper()
 {
-    local USAGE="Determines whether a char or string is in uppercase.\n
+    local USAGE="Determines whether char or string is uppercase.\n
    isupper <string>\n
    Category  : Char and String\n
    Parameters:
-        string or char - return true or false.\n
-    Output:
-    \$ isupper HACKFUNCTIONS
-    \$ echo \$?
-    0
-    \$ isupper Hackfunctions
-    \$ echo \$?
-    1"
+        string or char : return true or false.\n
+   Output:
+   \$ isupper HACKFUNCTIONS
+   \$ echo \$?
+   0
+   \$ isupper Hackfunctions
+   \$ echo \$?
+   1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}" 
@@ -266,18 +294,18 @@ isupper()
 
 isxdigit()
 {
-     local USAGE="Determines whether a string or char is a hex digit.\n
+     local USAGE="Determines whether string or char is hex digit.\n
    isxdigit <string|char>\n
    Category  : Char and String\n
    Parameters:
-        string or char - return true or false.\n
-    Output:
-    \$ isxdigit 2f 
-    \$ echo \$?
-    0
-    \$ isxdigit HA
-    \$ echo \$?
-    1"
+        string or char : return true or false.\n
+   Output:
+   \$ isxdigit 2f 
+   \$ echo \$?
+   0
+   \$ isxdigit HA
+   \$ echo \$?
+   1"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -289,14 +317,14 @@ isxdigit()
 
 dec2asc()
 {
-     local USAGE="Converts a decimal to ascii bytes equivalent.\n
+     local USAGE="Converts decimal to ascii bytes equivalent.\n
    dec2asc <decimal>\n
    Category  : Char and String\n
    Parameters:
-        decimal - decimal number to be coverted.\n
-    Output:
-    \$ dec2asc 65
-    A"
+        decimal : decimal number to be coverted.\n
+   Output:
+   \$ dec2asc 65
+   A"
 
     [ $# -ne 1 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -308,7 +336,7 @@ dec2asc()
 
 asc2dec()
 {
-     local USAGE="Converts a ascii bytes in decimal equivalent.\n
+     local USAGE="Converts ascii bytes in decimal equivalent.\n
    asc2dec <ascii char>\n
    Category  : Char and String\n
    Parameters:
@@ -327,7 +355,7 @@ asc2dec()
 
 str2hex()
 {
-    local USAGE="Converts a string to hex bytes equivalent to each char (hex string).\n
+    local USAGE="Converts string in hex byte equivalent to each char (hex string).\n
         str2hex <Parameter> <string>\n
         Category  : Char and String\n
         Parameters:
@@ -336,7 +364,7 @@ str2hex()
             -c  :    Bytes array in C language style.
             -s  :    Output bytes not spaced and inital prefixed '0x'.
             -h  :    Help.\n
-            string - converting string\n
+            string : converting string\n
         Output:
         \$ str2hex 'Fernando'
         46 65 72 6e 61 6e 64 6f
@@ -382,7 +410,7 @@ str2hex()
 
 str2hexr()
 {
-    local USAGE="Converts a string to hex bytes equivalent to each char (hex string) and inverted output.\n
+    local USAGE="Converts string in byte hex equivalent to each char (hex string) and inverted output.\n
         str2hexr <Parameter> <string>\n
         Category  : Char and String\n
         Parameters:
@@ -391,7 +419,7 @@ str2hexr()
             -c  :    Bytes array in C language style.
             -s  :    Output bytes not spaced and inital prefixed '0x'.
             -h  :    Help.\n
-            string - the string to be converted.\n
+            string : the string to be converted.\n
         Output:
         \$ str2hexr 'Fernando'
         6f 64 6e 61 6e 72 65 46
@@ -427,7 +455,7 @@ hex2str()
         Category  : Char and String\n
         Parameters:
             -h  :    Help.
-            hex - hex to be converted.\n
+            hex : hex to be converted.\n
         Output:
         $ hex2str '72 6f 63 6b'
         rock
@@ -460,14 +488,15 @@ hex2str()
     echo -e $str
 }
 
-urlencode() {
+urlencode()
+{
 
     local USAGE="Converts the characters in possible format to be transmitted on the Internet.\n
     urlencode <string>\n
     Category   : Char and String\n
     Parameters:
         -h     : Help.
-        string - string to be encode.\n
+        string : string to be encode.\n
     Output:
     $ urlencode '<script> alert(1);</script>'
     %%3cscript%%3e%%20alert(1)%%3b%%7b%%7d%%3c%%2fscript%%3e
@@ -508,15 +537,15 @@ charcal()
         char      : Any one character or a string when multiplication operation.
         operator  : +,- or *
         number    : One number.\n
-    Output:
-    \$ charcal f + 2
-     h
-    \$ charcal B - 1
-     A
-    \$ charcal A \\* 16
-     AAAAAAAAAAAAAAAA
-    \$ charcal isso \\* 3
-     issoissoisso"
+   Output:
+   \$ charcal f + 2
+    h
+   \$ charcal B - 1
+    A
+   \$ charcal A \\* 16
+    AAAAAAAAAAAAAAAA
+   \$ charcal isso \\* 3
+    issoissoisso"
 
     [ $# -ne 3 -o "$1" == '-h' ] && {
         echo -e "${USAGE}" 
@@ -597,9 +626,9 @@ unbase64()
    Parameters:
         -h     : Help.
         string : Base64 encoded string.\n
-    Output:
-    \$ unbase64 b3p6eSBvc2JvdXJuZQ==
-    ozzy osbourne"
+   Output:
+   \$ unbase64 b3p6eSBvc2JvdXJuZQ==
+   ozzy osbourne"
 
     [ $# -eq 0 -o "$1" == '-h' ] && { 
         echo -e "${USAGE}"
@@ -637,7 +666,7 @@ md5()
 
 unmd5()
 {
-   local USAGE="Attempts to discover the string that generated the MD5 hash using the internet (requires you to be logged).\n
+   local USAGE="Attempts to discover the string that generated the MD5 hash using the internet (requires you to be connected).\n
    unmd5 <hash>\n
    Category  : Crypto.\n
    Parameters:
@@ -671,7 +700,7 @@ unmd5()
 
 rot()
 {
-     local USAGE="Encrypts/Decrypts a string with the Cesar Cipher using n shifts to the right.\n
+     local USAGE="Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.\n
    rot <displacement> <string>\n
    Category  : Crypto.\n
    Parameters:
@@ -724,7 +753,7 @@ alias rot47='rot 47'
 
 strxor()
 {
-    local USAGE="Calculates the exclusive OR of each character in a string with a key.\n
+    local USAGE="Calculates exclusive OR of each character in a string with a key.\n
    strxor <key> <string>\n
    Category  : Crypto.\n
    Parameters:
@@ -867,10 +896,10 @@ myip()
 
 ## social engineering
 
-websearch() 
+websearch()
 {
     local USAGE="Uses google base to extract information such as sql files, txt or anything else that can serve 
-to extrarir information, other functionality are finding email phones.\n
+to extract information, other functionality are finding email phones.\n
    websearch -t <mail|file|phone|free> -p <num pages optional> -d <domain> -e <file Extension> -s <string> -g <1>\n
    Category  : Social Engineering.\n
    Parameters:
@@ -882,16 +911,16 @@ to extrarir information, other functionality are finding email phones.\n
         -g   :   Performs the download of all files of the query (set 1) 
         -h   :   Help.
 
-    Output:
-    \$ websearch -t file -e txt -d mentebinaria.com.br -p 2
-    [ file ] IN mentebinaria.com.br txt
-    [+] 0
-    [+] 10
-    [+] 20
-    =============================================
-    mentebinaria.com.br/artigos/0x0a/gamevista.txt
-    mentebinaria.com.br/artigos/0x0b/virtlinux.txt
-    mentebinaria.com.br/artigos/0x0d/altexe.txt\n"
+   Output:
+   \$ websearch -t file -e txt -d mentebinaria.com.br -p 2
+   [ file ] IN mentebinaria.com.br txt
+   [+] 0
+   [+] 10
+   [+] 20
+   =============================================
+   mentebinaria.com.br/artigos/0x0a/gamevista.txt
+   mentebinaria.com.br/artigos/0x0b/virtlinux.txt
+   mentebinaria.com.br/artigos/0x0d/altexe.txt\n"
 
     local i                     # count for() pagination
     local TYPE                  # type {mail,file,phone...}
@@ -1006,7 +1035,7 @@ to extrarir information, other functionality are finding email phones.\n
 
 dumpmem()
 {
-    local USAGE="Creates a file on disk with memory contents of a process.\n
+    local USAGE="Creates file on disk with memory contents of a process.\n
    dumpstack <pid> <outfile>
    dumpheap <pid> <outfile>\n
    Category  : Reverse Engineering.\n
@@ -1046,16 +1075,16 @@ prints 4 instructions 'round'. You must be attentive to the syntax
         regex   : Regular expression
         file    : File to store data.\n
    Output:
-    \$ asmgrep 'push.*rbp$' /bin/ls
-    411400:  41 57                          push r15
-    411402:  41 56                          push r14
-    411404:  41 55                          push r13
-    411406:  41 54                          push r12
-    411408:  55                             push rbp
-    411409:  53                             push rbx
-    41140a:  48 83 ec 68                    sub rsp,0x68
-    41140e:  85 ff                          test edi,edi
-    411410:  48 8b 9c 24 a0 00 00           mov rbx,QWORD PTR [rsp+0xa0]" 
+   \$ asmgrep 'push.*rbp$' /bin/ls
+   411400:  41 57                          push r15
+   411402:  41 56                          push r14
+   411404:  41 55                          push r13
+   411406:  41 54                          push r12
+   411408:  55                             push rbp
+   411409:  53                             push rbx
+   41140a:  48 83 ec 68                    sub rsp,0x68
+   41140e:  85 ff                          test edi,edi
+   411410:  48 8b 9c 24 a0 00 00           mov rbx,QWORD PTR [rsp+0xa0]" 
 
     [ $# -lt 2 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -1074,8 +1103,8 @@ asminfo()
    Parameters:
         -h     :  Help.
         string : instruction to obtain information\n
-    Output:
-    \$ asminfo cmp
+   Output:
+   \$ asminfo cmp
     ..."
 
     [ $# -lt 1 -o "$1" == '-h' ] && {
@@ -1142,11 +1171,11 @@ xor()
    Parameters:
         -h       :  Help.
         number   :  decimal  or hex number (prefixed with '0x' ).\n
-    Output:
-    \$ xor 0xdead 0xdead
-    0
-    \$ xor 45 20
-    57"
+   Output:
+   \$ xor 0xdead 0xdead
+   0
+   \$ xor 45 20
+   57"
 
    [ $# -lt 2  -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -1165,11 +1194,11 @@ shl()
         -h       :  Help.
         bits     :  The number of bits to be pushed.
         number   :  Decimal or hex number (prefixed with '0x' ).\n
-    Output:
-    \$ shl 4 1
-    8
-    \$ shl 0x4 1
-    8"
+   Output:
+   \$ shl 4 1
+   8
+   \$ shl 0x4 1
+   8"
 
     [ $# -lt 2 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -1188,11 +1217,11 @@ shr()
         -h       :  Help.
         bits     :  The number of bits to be pushed.
         number   :  Decimal or hex number (prefixed with '0x').\n
-    Output:
-    \$ shr 4 1
-    2
-    \$ shr 0x4 1
-    2"
+   Output:
+   \$ shr 4 1
+   2
+   \$ shr 0x4 1
+   2"
 
     [ $# -lt 2 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -1211,11 +1240,11 @@ pow()
         -h       :  Help.
         pow      :  the desired power.
         number   :  Decimal number or hex number (prefixed with '0x').\n
-    Output:
-    \$ pow 8 2
-    64
-    \$ pow 0xa 3
-    1000"
+   Output:
+   \$ pow 8 2
+   64
+   \$ pow 0xa 3
+   1000"
 
     [ $# -lt 2 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -1234,11 +1263,11 @@ hexcalc()
         -h         :  Help.
         operator   :  +, -, * or /
         hex_number :  Decimal number or hex number (prefixed with '0x').\n
-    Output:
-    \$ hexcalc 5f \* 2
-    oxbee
-    \$ hexcalc 0xdead / 0xdead
-    0x1"
+   Output:
+   \$ hexcalc 5f \* 2
+   oxbee
+   \$ hexcalc 0xdead / 0xdead
+   0x1"
 
 	test $# -eq 3 || { echo -e "${USAGE}"; return 1; }
 
