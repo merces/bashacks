@@ -171,7 +171,6 @@ isalpha()
     \$ isalpha Hf
     \$ echo \$? 
     0
-
     \$ isalpha Hf-1
     \$ echo \$? 
     1"
@@ -314,9 +313,9 @@ asc2dec()
    Category  : Char and String\n
    Parameters:
         ascii char : ascii char to be converted.\n
-    Output:
-    \$ asc2dec A
-    65"
+   Output:
+   \$ asc2dec A
+   65"
 
     [ $# -ne 1 -o "$1" == '-h' ] && { 
         echo -e "${USAGE}" 
@@ -774,11 +773,11 @@ ip2bin()
    Parameters:
         -h     : Help.
         string : Ipaddress to be converted.\n
-    Output:
-    \$ ip2bin 10.0.0.1
-    00001010.00000000.00000000.00000001
-    \$ ip2bin 172.16.1.0
-    10101100.00010000.00000001.00000000"
+   Output:
+   \$ ip2bin 10.0.0.1
+   00001010.00000000.00000000.00000001
+   \$ ip2bin 172.16.1.0
+   10101100.00010000.00000001.00000000"
 
     local sIp="$(echo $1 |
                 grep -Eo '^(([0-9]){1,3}\.){3}([0-9]){1,3}$')"
@@ -803,11 +802,11 @@ bin2ip()
    Parameters:
         -h     : Help.
         binary ipaddress : Binary address to be converted to decimal.\n
-    Output:
-    \$ bin2ip 00001010.00000000.00000000.00000001
-    10.0.0.1
-    \$ bin2ip 10101100.00010000.00000001.00000000
-    172.16.1.0"
+   Output:
+   \$ bin2ip 00001010.00000000.00000000.00000001
+   10.0.0.1
+   \$ bin2ip 10101100.00010000.00000001.00000000
+   172.16.1.0"
 
     local sBin="$(echo $1 |
                 grep -Ewo '^(([0-1]){8}\.){3}([0-1]){8}$')"
@@ -831,9 +830,9 @@ ip2geo()
    Parameters:
         -h        : Help.
         Ip adrress: Ip to determine location.\n
-    Output:
-    \$ ip2geo www.mentebinaria.com
-    www.mentebinaria.com.br New Dream Network, LLC New Dream Network, LLC Brea US 33.926898956299 -117.86119842529 1"
+   Output:
+   \$ ip2geo www.mentebinaria.com
+   www.mentebinaria.com.br New Dream Network, LLC New Dream Network, LLC Brea US 33.926898956299 -117.86119842529 1"
 
     [ $# -eq 0 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
@@ -853,9 +852,9 @@ myip()
    Category  : Networking.\n
    Parameters:
         -h  : Help\n
-    Output:
-    \$ myip
-    1.2.3.4"
+   Output:
+   \$ myip
+   1.2.3.4"
 
     [ "$1" == '-h' ] && {
         echo -e "${USAGE}"
