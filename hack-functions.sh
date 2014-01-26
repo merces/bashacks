@@ -28,10 +28,12 @@ hf_list_functions()
     hf_functions_list\n
     Category  : Internal Functions\n
     Parameters:
+        -h  : Help.
         No Parameters\n
     Output:
     small summary here"
 
+    [ $1 == '-h' ] && { echo -e "${USAGE}" ; return 1; }
     local func
     local resume
 
