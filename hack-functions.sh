@@ -33,7 +33,7 @@ hf_list_functions()
     Output:
     small summary here"
 
-    [ $1 == '-h' ] && { echo -e "${USAGE}" ; return 1; }
+    [ "$1" == "-h" ] && { echo -e "${USAGE}" ; return 1; }
     local func
     local resume
 
@@ -893,6 +893,42 @@ myip()
     }
 
     wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -
+    echo
+}
+
+wscan()
+{
+    local USAGE="Displays the list of wireless networks with bss, signal, ssid and channel\n
+   wscan\n
+   Category  : Networking.\n
+   Parameters:
+        -i  : dev wifi
+        -h  : Help
+        root is required\n
+   Output:
+   # wscan
+    64:70:02:54:52:c8      : -88.00        : Hunter                 : 1
+    00:02:6f:9c:e5:9e      : -87.00        : FOCUS
+   "
+
+    [ "$1" == "-i" ] && iFace=$2 || {
+        local iFace="$(iw dev |
+        grep 'Interface' |
+        cut -d' ' -f2)"
+    }
+
+    [ ${EUID} -ne 0 -o \
+        "$1" == '-h' -o \
+        -z "${iFace}" ] && {
+        echo -e "${USAGE}"
+        return 1
+    }
+
+    iw ${iFace} scan |
+        grep -E '^BSS|signal|SSID|channel:' |
+        sed -r 's/dBm|signal|SSID|\* primary channel|\-\- associated//g' |
+        tr \\n ' ' | sed 's/BSS/\n/g' |
+        sed "s/(on ${iFace})//"
     echo
 }
 
