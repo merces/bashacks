@@ -44,6 +44,7 @@ hack-functions
  udcli e udis86 - for sc2asm() only
  nasm - for asm2sc() only
  awk
+ iw
 
 3. Installation
  

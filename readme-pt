@@ -48,6 +48,7 @@ hack-functions
  udcli e udis86 (sc2asm)
  nasm (asm2sc)
  awk
+ iw
 
 3. Instalação
  
