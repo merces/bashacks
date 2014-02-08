@@ -911,7 +911,7 @@ wscan()
    Parameters:
         -i  : dev wifi
         -oui: oui 00:e0:4c return vendor, required connected
-        -mac: mac address 9c:97:26:67:f0:4b, return company, required connected
+        -mac: mac address 9c:97:26:67:f0:4b, return product company, required connected
         -h  : Help
         root is required\n
    Output:
@@ -926,12 +926,15 @@ wscan()
                                 1F, NO. 11, INDUSTRY E. RD. IX
                                 SCIENCE-BASED INDUSTRIAL PARK
                                 HSINCHU 300
-                                 TAIWAN, PROVINCE OF CHINA\n"
+                                TAIWAN, PROVINCE OF CHINA
+   # wscan -mac f8:1a:67:c2:be:0a
+   TP-LINK TECHNOLOGIES CO., LTD.\n"
 
     local iFace
-    local OUI 
+    local OUI
     local MAC
-    local MacData 
+    local MACTMP
+    local MACPROD
 
     [ "$1" == "-i" ] && iFace=$2 || {
         local iFace="$(iw dev |
@@ -965,12 +968,18 @@ wscan()
         ;;
         -mac)
             [ ! -z "$(echo $2 | grep -Ewo '(([0-9a-fA-F]){2}:){5}([0-9a-fA-F]){2}' )" ] && {
+                MACTMP=$(mktemp)
                 MAC="$(urlencode $2)"
-                wget "http://www.macvendorlookup.com/ouisearch?mac=${MAC}" -O - &> /tmp/file
-                cat /tmp/file | tr \: \\n |
+                wget "http://www.macvendorlookup.com/ouisearch?mac=${MAC}" -O - &> ${MACTMP}
+                MACPROD="$(cat ${MACTMP} | tr \: \\n |
                 grep -A 1 -i 'company' |
                 tail -1 |
-                cut -d\" -f2
+                cut -d\" -f2)"
+
+                [ -z "${MACPROD}" ] && echo "No Vendor Exists" ||
+                    echo "${MACPROD}"
+
+                rm ${MACTMP}
             }
         ;;
         *)
