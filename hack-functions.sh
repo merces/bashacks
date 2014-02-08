@@ -905,7 +905,7 @@ myip()
 
 wscan()
 {
-    local USAGE="Displays the list of wireless networks with chanell, bss, signal, ssid\n
+    local USAGE="Displays the list of wireless networks with chanell, bss, signal, ssid and others\n
    wscan\n
    Category  : Networking.\n
    Parameters:
@@ -917,8 +917,8 @@ wscan()
    Output:
    # wscan
     6	f8:1a:67:c2:be:0a	: -55.00	: Hunter
-    10	9c:97:26:67:f0:4b	: -87.00	: Oi WiFi Fon
-    11	00:1a:3f:83:01:df	: -86.00	: DUDICA\n
+    10	9c:97:26:67:f0:4b	: -87.00	: WiFi Fon
+    11	00:1a:3f:83:01:df	: -86.00	: ZUDICA\n
    # wscan -oui 00:e0:4c 
     ===============================================================================
         00-E0-4C   (hex)        REALTEK SEMICONDUCTOR CORP.
