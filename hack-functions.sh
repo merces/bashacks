@@ -905,18 +905,33 @@ myip()
 
 wscan()
 {
-    local USAGE="Displays the list of wireless networks with bss, signal, ssid and channel\n
+    local USAGE="Displays the list of wireless networks with chanell, bss, signal, ssid\n
    wscan\n
    Category  : Networking.\n
    Parameters:
         -i  : dev wifi
+        -oui: oui 00:e0:4c return vendor, required connected
+        -mac: mac address 9c:97:26:67:f0:4b, return company, required connected
         -h  : Help
         root is required\n
    Output:
    # wscan
-    64:70:02:54:52:c8      : -88.00        : Hunter                 : 1
-    00:02:6f:9c:e5:9e      : -87.00        : FOCUS
-   "
+    6	f8:1a:67:c2:be:0a	: -55.00	: Hunter
+    10	9c:97:26:67:f0:4b	: -87.00	: Oi WiFi Fon
+    11	00:1a:3f:83:01:df	: -86.00	: DUDICA\n
+   # wscan -oui 00:e0:4c 
+    ===============================================================================
+        00-E0-4C   (hex)        REALTEK SEMICONDUCTOR CORP.
+        00E04C     (base 16)    REALTEK SEMICONDUCTOR CORP.
+                                1F, NO. 11, INDUSTRY E. RD. IX
+                                SCIENCE-BASED INDUSTRIAL PARK
+                                HSINCHU 300
+                                 TAIWAN, PROVINCE OF CHINA\n"
+
+    local iFace
+    local OUI 
+    local MAC
+    local MacData 
 
     [ "$1" == "-i" ] && iFace=$2 || {
         local iFace="$(iw dev |
@@ -931,12 +946,44 @@ wscan()
         return 1
     }
 
-    iw ${iFace} scan |
-        grep -E '^BSS|signal|SSID|channel:' |
-        sed -r 's/dBm|signal|SSID|\* primary channel|\-\- associated//g' |
-        tr \\n ' ' | sed 's/BSS/\n/g' |
-        sed "s/(on ${iFace})//"
-    echo
+
+    case "$1" in
+        -oui)
+            [ ! -z "$(echo $2 | grep -Ewo '(([0-9a-f]){2}:){2}([0-9a-f]){2}' )" ] && {
+
+                OUI=$( echo $2 | tr ':' '-' )
+                wget 'http://standards.ieee.org/cgi-bin/ouisearch' \
+                    --post-data="x=${OUI}&submit2=search%21" --no-verbose -O - |
+                sed '/<pre>/,/<\/pre>/ s/^/--/g' | 
+                grep '^--' |
+                sed 's/^--//g' |
+                html2text
+            } || {
+                iw ${iFace} scan -u | 
+                grep -E '^BSS|SSID|OUI' 
+            }
+        ;;
+        -mac)
+            [ ! -z "$(echo $2 | grep -Ewo '(([0-9a-fA-F]){2}:){5}([0-9a-fA-F]){2}' )" ] && {
+                MAC="$(urlencode $2)"
+                wget "http://www.macvendorlookup.com/ouisearch?mac=${MAC}" -O - &> /tmp/file
+                cat /tmp/file | tr \: \\n |
+                grep -A 1 -i 'company' |
+                tail -1 |
+                cut -d\" -f2
+            }
+        ;;
+        *)
+            iw ${iFace} scan |
+            grep -E '^BSS|signal|SSID|: channel ([0-9]){1,2}' |
+            sed -r 's/dBm|signal|SSID|\-\- associated|DS Parameter set|channel//g' |
+            tr \\n ' ' | sed 's/BSS/\n/g' |
+            sed "s/(on ${iFace})//" |
+            awk '{print $NF,'\t',$0 }' |
+            sed -r 's/:  ([0-9]){1,2}//g; s/([\ |\t]){2,}/_/g; s/_/\t/g'
+            echo
+        ;;
+    esac
 }
 
 ## social engineering
