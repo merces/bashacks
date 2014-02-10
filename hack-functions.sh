@@ -439,7 +439,7 @@ str2hexr()
         \$ str2hexr -s 'Fernando'
         0x6f646e616e726546"
 
-    [ $# -ne 1 -o "$1" == '-h' ] && { 
+    [ $# -eq 0 -o "$1" == '-h' ] && { 
         echo -e "${USAGE}"
         return 1
     }
