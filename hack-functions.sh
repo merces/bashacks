@@ -384,7 +384,7 @@ str2hex()
         \$ str2hex -s 'Fernando'
         0x4665726e616e646f"
 
-    [ $# -ne 1 -o "$1" == '-h' ] && {
+    [ $# -eq 0 -o "$1" == '-h' ] && {
         echo -e "${USAGE}"
         return 1
     }
