@@ -963,7 +963,7 @@ wscan()
                 html2text
             } || {
                 iw ${iFace} scan -u | 
-                grep -E '^BSS|SSID|OUI' 
+                grep -E '^BSS|SSID|OUI|Model:' 
             }
         ;;
         -mac)
