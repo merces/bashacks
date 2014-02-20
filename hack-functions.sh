@@ -883,6 +883,35 @@ ip2geo()
             echo
 }
 
+hostcalc()
+{
+    local USAGE="Returns the total number of hosts based on subnet mask informed.\n
+   hostcalc <number>\n
+   Category  : Networking.\n
+   Parameters:
+        number : bit mask network.
+        -h     : Help\n
+   Output:
+   \$ hostcalc 24
+   256"
+
+    local iCidr
+    local iTotalHost
+
+    isdigit $1
+
+    [ $? -eq 0 \
+        -a $1 -le 30 \
+        -a $1 -ge 2 ] || {
+        echo -e "${USAGE}"
+        return 1;
+    }
+
+    iCidr=$1
+    iTotalHost=$(pow 2 $((32-iCidr)))
+    echo ${iTotalHost} - 2 | bc
+}
+
 myip()
 {
     local USAGE="Displays the real ip address of your connection.\n
@@ -1250,13 +1279,30 @@ sc2asm()
 
 asm2sc()
 {
+    local USAGE="Generates shellcode based on asm file.\n
+   asm2sc -f elf32 asmfile\n
+   Category  : Reverse Engineering.\n
+   Parameters:
+        -f     : followed by architecture and asm file [-f elf32 hello.s]
+        -h     : Help.
+   Output:
+   \$ asm2sc fork.s
+   \\\x31\\\xc0\\\x40\\\x40\\\xcd\\\x80\\\xeb\\\xf8
+    "
+
 	local obj=$(mktemp)
 	local fmt=elf32
 	local in="$1"
 
-	[ $1 = "-f" ] && fmt=$2 in="$3"
+    [ $#  -eq 0 -o \
+        "$1" = '-h' ] && {
+        echo -e "${USAGE}"
+        return 1
+    }
 
-	nasm -f $fmt -o $obj $in 
+    [ $1 = "-f" ] && fmt=$2 in="$3"
+
+	nasm -f $fmt -o $obj $in
 
 	objdump -M intel -D $obj |
 	 tr -d \\t |
@@ -1264,7 +1310,7 @@ asm2sc()
 	 tr -d \\n |
 	 sed 's/\(..\) /\\x\1/g'
 
-	echo
+    echo
 	rm -f $obj
 }
 
