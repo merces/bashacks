@@ -1,8 +1,8 @@
 #!/bin/bash 
 #
-# hack-functions 1.5 - bash functions to do little hacks
+# hack-functions - useful bash functions for bash hackers
 #
-# Copyright (C) 2012 - 2013 hack-functions authors
+# Copyright (C) 2012 - 2014 hack-functions authors
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -1487,4 +1487,3 @@ matrix()
 }
 
 bkp() { cp "$1"{,.$(date +%Y%m%d)}; }
-
