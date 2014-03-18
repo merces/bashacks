@@ -1,8 +1,8 @@
 #!/bin/bash 
 #
-# hack-functions - useful bash functions for bash hackers
+# bashacks - useful bash functions for bash hackers
 #
-# Copyright (C) 2012 - 2014 hack-functions authors
+# Copyright (C) 2014 bashacks authors
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-hf_user_path="$HOME/.config/hack-functions"
+hf_user_path="$HOME/.config/bashacks"
 hf_cache="$hf_user_path/cache/asm"
 
 ## internal functions

@@ -1,4 +1,4 @@
-hack-functions
+bashacks
 
 1. What is it?
 2. Requirements
@@ -10,18 +10,18 @@ hack-functions
 
 1. What is it?
 
- hack-functions is an open source (GPL) set of bash functions 
+ bashacks is an open source (GPL) set of bash functions 
  probably useful for programmers, security analysts and general
  users that need to do some low level type of operation.
 
- In fact, there is nothing really new in hack-functions since
+ In fact, there is nothing really new in bashacks since
  all funcitons are written using exiting software in GNU/Linux
  distributions. But you still can have advantage in use short
  commands to run tasks that commonly will require a lot of lines
  to be done.
 
  !!! IMPORTANT !!!
- There is no error handling in hack-functions. That's a job
+ There is no error handling in bashacks. That's a job
  for bash, called programs and your responsability. :)
 
 
@@ -48,12 +48,12 @@ hack-functions
 
 3. Installation
  
- Put hack-functions.sh in some directory and 'source' it to your
+ Put bashacks.sh in some directory and 'source' it to your
  shell using .bashrc for example:
 
- $ sudo mv hack-functions.sh /opt
- $ echo "source /opt/hack-functions.sh" >> $HOME/.bashrc
- $ source /opt/hack-functions.sh
+ $ sudo mv bashacks.sh /opt
+ $ echo "source /opt/bashacks.sh" >> $HOME/.bashrc
+ $ source /opt/bashacks.sh
 
  And that's all. You can now call the available functions from bash.
 
@@ -76,7 +76,8 @@ hack-functions
 
 5. ChangeLog
 
- hack-functions 1.5 - ?
+ bashacks 1.5 - ?
+  * new name: bashacks
   + new function: asminfo() - details an Assembly x86 (Intel) instruction.
   + new function: dumpheap() - dump the process heap content.
   + new function: dumpstack() - dump a process stack content,
@@ -109,4 +110,4 @@ hack-functions
 6. Bugs
 
  If you think you find a bug, please fill it through
- https://github.com/merces/hack-functions/issues
+ https://github.com/merces/bashacks/issues
