@@ -1,80 +1,83 @@
-bashacks
+# bashacks
 
-1. What is it?
-2. Requirements
-3. Installation
-4. Documentation
-5. ChangeLog
-6. Bugs
+ 1. What is it?
+ 2. Requirements
+ 3. Installation
+ 4. Documentation
+ 5. ChangeLog
+ 6. Bugs
 
 
-1. What is it?
+## 1. What is it?
 
- bashacks is an open source (GPL) set of bash functions 
+ bashacks is an open source (GPL) set of bash functions
  probably useful for programmers, security analysts and general
  users that need to do some low level type of operation.
 
  In fact, there is nothing really new in bashacks since
- all funcitons are written using exiting software in GNU/Linux
+ all functions are written using exiting software in GNU/Linux
  distributions. But you still can have advantage in use short
  commands to run tasks that commonly will require a lot of lines
  to be done.
 
  !!! IMPORTANT !!!
+
  There is no error handling in bashacks. That's a job
- for bash, called programs and your responsability. :)
+ for bash, called programs and your responsibility. :)
 
 
-2. Requirements
+## 2. Requirements
 
- linux
- bash >= 4
- bc
- wget - and internet access
- hexdump
- grep
- objdump
- base64
- md5sum
- cut
- gdb
- rev
- html2text
- tee
- udcli e udis86 - for sc2asm() only
- nasm - for asm2sc() only
- awk
- iw
+ * linux
+ * bash >= 4
+ * bc
+ * wget - and internet access
+ * hexdump
+ * grep
+ * objdump
+ * base64
+ * md5sum
+ * cut
+ * gdb
+ * rev
+ * html2text
+ * tee
+ * udcli e udis86 - for sc2asm() only
+ * nasm - for asm2sc() only
+ * awk
+ * iw
 
-3. Installation
- 
+
+## 3. Installation
+
  Put bashacks.sh in some directory and 'source' it to your
  shell using .bashrc for example:
 
- $ sudo mv bashacks.sh /opt
- $ echo "source /opt/bashacks.sh" >> $HOME/.bashrc
- $ source /opt/bashacks.sh
+    $ sudo mv bashacks.sh /opt
+    $ echo "source /opt/bashacks.sh" >> $HOME/.bashrc
+    $ source /opt/bashacks.sh
 
  And that's all. You can now call the available functions from bash.
 
  Additionally you need to install libudis86 to use sc2asm function. Go
  to http://udis86.sourceforge.net, download the latest version and run:
 
- $ tar xf udis86-*.tar.gz
- $ cd udis86-*
- $ ./configure
- $ make
- # make install
- $ cd udcli
- $ make
- # make install
+    $ tar xf udis86-*.tar.gz
+    $ cd udis86-*
+    $ ./configure
+    $ make
+    # make install
+    $ cd udcli
+    $ make
+    # make install
 
-4. Documentation
+
+## 4. Documentation
 
  See hf-referencia.html file (only in Portuguese, sorry).
 
 
-5. ChangeLog
+## 5. ChangeLog
 
  bashacks 1.5 - ?
   * new name: bashacks
@@ -107,7 +110,7 @@ bashacks
   - first public release with 20 functions.
 
 
-6. Bugs
+## 6. Bugs
 
  If you think you find a bug, please fill it through
  https://github.com/merces/bashacks/issues
