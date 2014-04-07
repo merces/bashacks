@@ -74,12 +74,12 @@
 
 ## 4. Documentation
 
- See hf-referencia.html file (only in Portuguese, sorry).
+ See bh-referencia.html file (only in Portuguese, sorry).
 
 
 ## 5. ChangeLog
 
- bashacks 1.5 - ?
+ * bashacks 1.5 - ?
   * new name: bashacks
   + new function: asminfo() - details an Assembly x86 (Intel) instruction.
   + new function: dumpheap() - dump the process heap content.
@@ -89,7 +89,7 @@
   + new function: sc2asm() - disassembles a payload.
   + caching in $HOME/.hf/cache to speed up things!
 
- hack-functions 1.4 - Feb, 27 2012
+ * hack-functions 1.4 - Feb, 27 2012
   + new function: charcalc() - do character calculation.
   + new function: intel() - set Intel syntax for disassembling.
   + new function: rotall() - simultaneous ROT for strings
@@ -100,13 +100,13 @@
   * str2hex() and hex2str() now support the prefixes '0x', '\x', with or
     without spaces and C-array notation.
 
- hack-functions 1.2 - Feb, 24 2012
+ * hack-functions 1.2 - Feb, 24 2012
   + new functions: bin2dec() and asc2hex().
   + added Intel syntax by default for gdb and objdump.
   * curl gets replaced by wget in unmd5().
   * code optimization in many functions.
 
- hack-functions 1.0 - Feb, 24 2012
+ * hack-functions 1.0 - Feb, 24 2012
   - first public release with 20 functions.
 
 

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>bashacks - guia referência de funções</title>
+	<style>
+		body {
+			font-family: "Verdana";
+			font-size: 12px;
+		}
+
+		h1, h2, h3, h4 {
+			margin: 4px 0 4px 0;
+		}
+
+		li {
+			margin: 5px 0 5px 0;
+		}
+
+		code {
+			font-size: 13px;
+		}
+
+		.box {
+			background-color: #eef;
+			width: 750px;
+			border: 1px dotted #ccc;
+			margin: 30px 30px 30px 30px;
+			padding: 2px 10px 2px 10px;
+		}
+
+		.text-blue {
+			color: #00f;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		.list-title {
+			margin-bottom: 4px;
+			font-weight: bold;
+		}
+
+		.text-ten {
+			font-size: 10px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="center">
+	<h2>bashacks 1.5 - Guia de Referência de Funções</h2>
+	<p class="text-ten">por Fernando Mercês &lt;fernando (a) mentebinaria.com.br&gt;</p>
+</div>
+
+<ol>
+	<li>
+		<p class="list-title">Conversão de base</p>
+		<ul>
+		<li><a href="#dec2hex">dec2hex</a> - converte um número inteiro em decimal para hexadecimal</li>
+		<li><a href="#hex2dec">hex2dec</a> - converte um número em hexadecimal para decimal</li>
+		<li><a href="#dec2bin">dec2bin</a> - converte um número decimal em binário</li>
+		<li><a href="#bin2dec">bin2dec</a> - converte um número binário em decimal</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Conversão de caracteres e strings</p>
+		<ul>
+			<li><a href="#hex2asc">hex2asc</a> - converte um número em hexadecimal para seu caractere equivalente na tabela ASCII</li>
+			<li><a href="#asc2hex">asc2hex</a> - converte um caractere para seu valor equivalente na tabela ASCII, em hexadecimal</li>
+			<li><a href="#dec2asc">dec2asc</a> - converte um número em decimal para seu caractere equivalente na tabela ASCII</li>
+			<li><a href="#asc2dec">asc2dec</a> - converte um caractere para seu valor equivalente na tabela ASCII, em decimal</li>
+			<li><a href="#str2hex">str2hex</a> - converte uma string para bytes hexa equivalentes a cada caractere (string hexa)</li>
+			<li><a href="#str2hexr">str2hexr</a> - como a str2hex, mas inverte os bytes na saída</li>
+			<li><a href="#hex2str">hex2str</a> - converte um ou mais bytes hexa em uma string</li>
+			<li><a href="#charcalc">charcalc</a> - converte um ou mais bytes hexa em uma string</li>
+			<li><a href="#asciitable">asciitable</a> - imprime a table ASCII</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Criptografia</p>
+		<ul>
+			<li><a href="#unbase64">unbase64</a> - decodifica BASE64 de uma string</li>
+			<li><a href="#md5">md5</a> - calcula o hash MD5 de uma string ou arquivo</li>
+			<li><a href="#unmd5">unmd5</a> - tenta descobrir a string que gerou o hash MD5 informado</li>
+			<li><a href="#rot">rot</a> - encripta/desencripta uma string com a Cifra de César</li>
+			<li><a href="#rotall">rotall</a> - aplica vários ROTs numa string</li>
+			<li><a href="#strxor">strxor</a> - faz XOR de uma string com uma chave</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Engenharia Reversa</p>
+		<ul>
+			<li><a href="#asmgrep">asmgrep</a> - busca instruções assembly em binários executáveis</li>
+			<li><a href="#dumpstack">dumpstack</a> - cria um arquivo em disco com o conteúdo da pilha de memória de um processo</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Cáculo numérico</p>
+		<ul>
+			<li><a href="#xor">xor</a> - calcula o ou exclusivo entre dois números</li>
+			<li><a href="#shl">shl</a> - empurra bits para a esquerda de um número</li>
+			<li><a href="#shr">shr</a> - empurra bits para a direita de um número</li>
+			<li><a href="#pow">pow</a> - eleva um número a uma potência</li>
+			<li><a href="#hexcalc">hexcalc</a> - faz cálculo entre números em hexadecimal</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Configurações úteis</p>
+		<ul>
+			<li><a href="#intel">intel</a> - configura o ambiente para disassemblar na sintaxe Intel</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Engenharia Social</p>
+		<ul>
+				<li><a href="#websearch">websearch</a> - realiza pesquisa no google por email de dominio</li>
+		</ul>
+	</li>
+
+	<li>
+		<p class="list-title">Rede Diversos</p>
+		<ul>
+			<li><a href="#ip2bin">ip2bin</a> - converte endereço ip em equivalente binário</li>
+			<li><a href="#geoip">geoip</a> - determina aproximadamente localização geografica de um host/ip</li>
+			<li><a href="#meuip">meuip</a> - exibe ip externo da conexão</li>
+			<li><a href="#wscan">wscan</a> - Exibe redes sem fio próxima</li>
+			<li><a href="#bfht">bfht</a> - Brute force de htaccess</li>
+		</ul>
+	</li>
+</ol>
+
+<div class="box" id="dec2hex">
+<h3 class="text-blue">dec2hex()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">dec2hex &lt;número&gt;</p>
+<p>Converte um número inteiro em decimal para hexadecimal</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em hexadecimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ dec2hex 10
+a</code></pre>
+</div>
+
+<div class="box" id="hex2dec">
+<h3 class="text-blue">hex2dec()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">hex2dec &lt;número_hexa&gt;</p>
+<p>Converte um número em hexadecimal para decimal. Aceita entrada
+prefixada com '0x' ou não.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em hexadecimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ hex2dec a
+10</code></pre>
+<pre><code>$ hex2dec 0x0a
+10</code></pre>
+</div>
+
+<div class="box" id="dec2bin">
+<h3 class="text-blue">dec2bin()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">dec2bin &lt;número&gt;</p>
+<p>Converte um número decimal em binário.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em binário</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ dec2bin 255
+11111111</code></pre>
+</div>
+
+<div class="box" id="bin2dec">
+<h3 class="text-blue">bin2dec()</h3>
+<p>(hack-functions >= 1.2)</p>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">bin2dec &lt;número_binário&gt;</p>
+<p>Converte um número binário em decimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em binário a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O número em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ bin2dec 111
+7</code></pre>
+</div>
+
+<div class="box" id="hex2asc">
+<h3 class="text-blue">hex2asc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">hex2asc &lt;número_hexa&gt;</p>
+<p>Converte um número em hexadecimal para seu caractere
+equivalente na tabela ASCII. Aceita entradas com ou sem
+o prefixo '0x'.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em hexadecimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O caractere correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ hex2asc 41
+A</code></pre>
+<pre><code>$ hex2asc 0x41
+A</code></pre>
+</div>
+
+<div class="box" id="asc2hex">
+<h3 class="text-blue">asc2hex()</h3>
+<p>(hack-functions >= 1.2)</p>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">asc2hex &lt;caractere&gt;</p>
+<p>Converte um caractere para seu valor equivalente
+na tabela ASCII, em hexadecimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o caractere a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O valor em hexadecimal correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ asc2hex M
+4d</code></pre>
+</div>
+
+<div class="box" id="dec2asc">
+<h3 class="text-blue">dec2asc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">dec2asc &lt;número&gt;</p>
+<p>Converte um número em decimal para seu caractere
+equivalente na tabela ASCII.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o número em decimal a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O caractere correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ dec2asc 78
+N</code></pre>
+</div>
+
+<div class="box" id="asc2dec">
+<h3 class="text-blue">asc2dec()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">asc2dec &lt;caractere&gt;</p>
+<p>Converte um caractere para seu valor equivalente
+na tabela ASCII, em decimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - o caractere a ser convertido</p>
+<hr>
+<h4>Saída</h4>
+<p>O valor em decimal correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ asc2dec M
+77</code></pre>
+</div>
+
+<div class="box" id="str2hex">
+<h3 class="text-blue">str2hex()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">str2hex &lt;prefixo&gt; &lt;string&gt;</p>
+<p>Converte uma string para bytes hexa equivalentes
+a cada caractere (string hexa).</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>prefixo (opcional)<br>
+-x   : bytes de saída não espaçados e prefixados com '\x'.<br>
+-0x : bytes de saída espaçados e prefixados com '0x'.<br>
+-c   : array de bytes no estilo da linguagem C.<br>
+-s   : bytes de saída não espaçados e prefixo inicial '0x'.
+</p>
+<p>string - a string a ser convertida</p>
+<hr>
+<h4>Saída</h4>
+<p>Os bytes em hexadecimal correspondentes</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ str2hex "Fernando"
+46 65 72 6e 61 6e 64 6f</code></pre>
+<pre><code>$ str2hex -x "Fernando"
+\x46\x65\x72\x6e\x61\x6e\x64\x6f</code></pre>
+<pre><code>$ str2hex -0x "Fernando"
+0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f</code></pre>
+<pre><code>$ str2hex -c "Fernando"
+{0x46, 0x65, 0x72, 0x6e, 0x61, 0x6e, 0x64, 0x6f}</code></pre>
+<pre><code>$ str2hex -s "/etc/passwd"
+0x2f6574632f706173737764</code></pre>
+</div>
+
+<div class="box" id="str2hexr">
+<h3 class="text-blue">str2hexr()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">str2hexr &lt;prefixo&gt; &lt;string&gt;</p>
+<p>Converte uma string para bytes hexa equivalentes
+a cada caractere (string hexa) e reverte os bytes de saída.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>prefixo (opcional)<br>
+-x   : bytes de saída não espaçados e prefixados com '\x'.<br>
+-0x : bytes de saída espaçados e prefixados com '0x'.<br>
+-c   : array de bytes no estilo da linguagem C. <br>
+-s   : bytes de saída não espaçados e prefixo inicial '0x'.
+</p>
+<p>string - a string a ser convertida</p>
+<hr>
+<h4>Saída</h4>
+<p>Os bytes em hexadecimal correspondentes, de forma reversa</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ str2hexr "Fernando"
+6f 64 6e 61 6e 72 65 46</code></pre>
+<pre><code>$ str2hexr -x "Fernando"
+\x6f\x64\x6e\x61\x6e\x72\x65\x46</code></pre>
+<pre><code>$ str2hexr -0x "Fernando"
+0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46</code></pre>
+<pre><code>$ str2hexr -c "Fernando"
+{0x6f, 0x64, 0x6e, 0x61, 0x6e, 0x72, 0x65, 0x46}</code></pre>
+<pre><code>$ str2hexr -s "/etc/passwd"
+0x6477737361702f6374652f</code></pre>
+</div>
+
+<div class="box" id="hex2str">
+<h3 class="text-blue">hex2str()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">hex2str &lt;bytes_hexa&gt;</p>
+<p>Converte um ou mais bytes hexa em uma string. Aceita
+como entrada todos os formatos de saída da função
+<a href="#str2hex">str2hex</a>.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>bytes_hexa - os bytes a serem convertidos</p>
+<hr>
+<h4>Saída</h4>
+<p>A string convertida</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ hex2str '72 6f 63 6b'
+rock</code></pre>
+<pre><code>$ hex2str '\x72\x6f\x63\x6b'
+rock</code></pre>
+<pre><code>$ hex2str '0x72 0x6f 0x63 0x6b'
+rock</code></pre>
+<pre><code>$ hex2str '{0x72, 0x6f, 0x63, 0x6b}'
+rock</code></pre>
+<pre><code>$ hex2str 0x2f6574632f706173737764
+/etc/passwd</code></pre>
+</div>
+
+<div class="box" id="charcalc">
+<h3 class="text-blue">charcalc()</h3>
+<p>(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">charcalc &lt;caractere&gt;
+&lt;operador&gt; &lt;número&gt;</p>
+<p>Efetua cálculos especiais entre caracteres e números.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>caractere - um caractere qualquer ou uma string quando a operação for multiplicação.</p>
+<p>operador - +, - ou *</p>
+<p>número - um número.</p>
+<hr>
+<h4>Saída</h4>
+<p>O(s) caractere(s) correspondente(s)</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ charcalc f + 2
+h</code></pre>
+<pre><code>$ charcalc B - 1
+A</code></pre>
+<pre><code>$ charcalc A \* 16
+AAAAAAAAAAAAAAAA</code></pre>
+<pre><code>$ charcalc isso \* 3
+issoissoisso</code></pre>
+</div>
+
+<div class="box" id="asciitable">
+<h3 class="text-blue">asciitable()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">asciitable</p>
+<p>Imprime a tabela ASCII.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Nenhum.</p>
+<hr>
+<h4>Saída</h4>
+<p>A tabela ASCII, em 80 colunas.</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ asciitable</code></pre>
+</div>
+
+<div class="box" id="unbase64">
+<h3 class="text-blue">unbase64()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">unbase64 &lt;string&gt;</p>
+<p>Decodifica BASE64 de uma string.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string - a string codificada com BASE64</p>
+<hr>
+<h4>Saída</h4>
+<p>A string decodificada</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ unbase64 b3p6eSBvc2JvdXJuZQ==
+ozzy osbourne</code></pre>
+</div>
+
+<div class="box" id="md5">
+<h3 class="text-blue">md5()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">md5 &lt;string|arquivo&gt;</p>
+<p>Calcula o hash MD5 de uma string
+(sem considerar o caracetere de nova linha)
+ou de um arquivo, caso este exista</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string ou arquivo a ter o hash calculado</p>
+<hr>
+<h4>Saída</h4>
+<p>O hash MD5 correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ md5 "123456"
+e10adc3949ba59abbe56e057f20f883e</code></pre>
+<pre><code>$ md5 /etc/passwd
+18186ca65c92ba40cfe8ed4089496c42</code></pre>
+</div>
+
+<div class="box" id="unmd5">
+<h3 class="text-blue">unmd5()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">unmd5 &lt;hash&gt;</p>
+<p>Tenta descobrir a string que gerou o hash
+MD5 informado usando a internet (exige que
+esteja conectado).</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>hash - o hash MD5 a ser quebrado</p>
+<hr>
+<h4>Saída</h4>
+<p>A string correspondente</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ unmd5 e10adc3949ba59abbe56e057f20f883e
+123456</code></pre>
+</div>
+
+<div class="box" id="rot">
+<h3 class="text-blue">rot()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">rot &lt;deslocamento&gt; &lt;string&gt;</p>
+<p>Encripta/desencripta uma string com a Cifra
+de César usando n deslocamentos para a direita.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>deslocamento - o número de deslocamentos a ser aplicado na string</p>
+<p>string - a string que sofrerá o ROT</p>
+<hr>
+<h4>Saída</h4>
+<p>A string depois do ROT</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ rot 1 'iron maiden'
+jspo nbjefo</code></pre>
+<pre><code># simulando rotall()
+$ for i in {1..8}; do echo -n "rot$i: "; rot $i 'ewlsd'; done
+rot1: fxmte
+rot2: gynuf
+rot3: hzovg
+rot4: iapwh
+rot5: jbqxi
+rot6: kcryj
+rot7: ldszk
+rot8: metal</code></pre>
+<h4>Nota</h4>
+Essa função possui os aliases rot5(), rot13(), rot18() e rot47(), onde
+o número de deslocamentos não precisa ser informado, pois já
+está no nome da função.
+</div>
+
+<div class="box" id="rotall">
+<h3 class="text-blue">rotall()</h3>
+<p>(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">rotall &lt;string&gt;</p>
+<p>Encripta/desencripta uma string com a Cifra
+de César usando deslocamentos de 1 a 25.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>string - a string que sofrerá todos os ROT</p>
+<hr>
+<h4>Saída</h4>
+<p>Cada string com ROT</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ rotall ewlsd
+ROT1 fxmte
+ROT2 gynuf
+ROT3 hzovg
+&lt;...&gt;
+ROT25 dvkrc</code></pre>
+</div>
+
+<div class="box" id="strxor">
+<h3 class="text-blue">strxor()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">strxor &lt;chave&gt; &lt;string&gt;</p>
+<p>Calcula o ou exclusivo de cada caractere
+de uma string com uma chave.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>chave - o valor, em decimal ou hexadecimal (prefixado com '0x')
+para efetuar o XOR com os caracteres da string.</p>
+<p>string - a string que será 'XOReada'</p>
+<hr>
+<h4>Saída</h4>
+<p>A string após o XOR com a chave</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ strxor 4 'ieikjew$ewwewwmjew'
+mamonas assassinas</code></pre>
+<pre><code>$ strxor 0xa 'pink floyd'
+zcda*lfesn</code></pre>
+</div>
+
+<div class="box" id="asmgrep">
+<h3 class="text-blue">asmgrep()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">asmgrep &lt;regex&gt; &lt;arquivo&gt;</p>
+<p>Busca instruções assembly em binários executáveis e imprime
+4 instruções 'em volta'. Você deve atentar-se à sintaxe (Intel ou
+AT&amp;T) utilizada em seu ambiente.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>regex - a expressão regular (ERE).</p>
+<p>arquivo - um binário executável.'</p>
+<hr>
+<h4>Saída</h4>
+<p>Caso a expressão regular case, 9 instruções são impressas, sendo
+4 anteriores à instrução buscadas e 4 posteriores, além dela mesma.</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ asmgrep 'push *rbp$' /bin/ls
+411400:  41 57                          push   r15
+411402:  41 56                          push   r14
+411404:  41 55                          push   r13
+411406:  41 54                          push   r12
+411408:  55                               push   rbp
+411409:  53                               push   rbx
+41140a:  48 83 ec 68                 sub    rsp,0x68
+41140e:  85 ff                            test   edi,edi
+411410:  48 8b 9c 24 a0 00 00  mov rbx,QWORD PTR [rsp+0xa0]</code></pre>
+</div>
+
+<div class="box" id="dumpstack">
+<h3 class="text-blue">dumpstack()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">dumpstack &lt;pid&gt; &lt;outfile&gt;</p>
+<p>Cria um arquivo em disco com o conteúdo da pilha de memória
+de um processo</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>pid - o PID do processo em questão</p>
+<p>outifle - o arquivo onde será escrito o dump</p>
+<hr>
+<h4>Saída</h4>
+<p>Não escreve nada na tela, mas cria o arquivo outfile</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ dumpstack 15125 pilha.dump</code></pre>
+</div>
+
+<div class="box" id="xor">
+<h3 class="text-blue">xor()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">xor &lt;número1&gt; &lt;número2&gt;</p>
+<p>Calcula o ou exclusivo entre dois números.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número1 - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>número2 - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ xor 0xdead 0xdead
+0</code></pre>
+<pre><code>$ xor 45 20
+57</code></pre>
+</div>
+
+<div class="box" id="shl">
+<h3 class="text-blue">shl()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">shl &lt;número&gt; &lt;bits&gt;</p>
+<p>Empurra bits para a esquerda de um número.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>bits - o número de bits para serem empurrados.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ shl 4 1
+8</code></pre>
+<pre><code>$ shl 0x4 1
+8</code></pre>
+</div>
+
+<div class="box" id="shr">
+<h3 class="text-blue">shr()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">shr &lt;número&gt; &lt;bits&gt;</p>
+<p>Empurra bits para a direita de um número.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>bits - o número de bits para serem empurrados.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ shr 4 1
+2</code></pre>
+<pre><code>$ shr 0x4 1
+2</code></pre>
+</div>
+
+<div class="box" id="pow">
+<h3 class="text-blue">pow()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">pow &lt;número&gt; &lt;potência&gt;</p>
+<p>Eleva um número a uma potência.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número - número em decimal ou hexadecimal (prefixado com '0x')</p>
+<p>potência - a potência desejada.</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em decimal</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ pow 8 2
+64</code></pre>
+<pre><code>$ pow 0xa 3
+1000</code></pre>
+</div>
+
+<div class="box" id="hexcalc">
+<h3 class="text-blue">hexcalc()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">hexcalc &lt;número_hexa1&gt;
+&lt;operador&gt; &lt;número_hexa2&gt;</p>
+<p>Faz cálculo entre números em hexadecimal e dá o resultado
+também em hexadecimal.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>número_hexa1 - número em hexadecimal (com ou sem o prefixo '0x')</p>
+<p>operador - +, -, * ou /.</p>
+<p>número_hexa2 - número em hexadecimal (com ou sem o prefixo '0x')</p>
+<hr>
+<h4>Saída</h4>
+<p>Resultado da operação em hexadecimal (prefixado com '0x')</p>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ hexcalc 5f7 \* 2
+0xbee</code></pre>
+<pre><code>$ hexcalc 0xdead / dead
+0x1</code></pre>
+</div>
+
+<div class="box" id="intel">
+<h3 class="text-blue">intel()</h3>
+<p>(hack-functions >= 1.4)</p>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">intel &lt;on|off&gt;</p>
+<p>Configura o ambiente (gdb e objdump) para disassemblar
+na sintaxe Intel.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>on - ativa a sintaxe Intel.</p>
+<p>off - ativa a sintaxe AT&amp;T (desativa a Intel).</p>
+<hr>
+<h4>Saída</h4>
+Nenhuma.
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ intel on</code></pre>
+</div>
+
+<div class="box" id="websearch">
+<h3 class="text-blue">websearch()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">websearch</p>
+<p>Realiza pesquisa na base do google por emails|telefones|arquivos de dominio indexado.
+</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>-t|--type        :   mail,file,phone one type is required</p>
+<p>-p|--to-page   :   Number of pages OPTIONAL</p>
+<p>-d|--domain   :   Domain Name or IpAddress is required </p>
+<p>-e|--file-ext    :   Extension for query</p>
+<p>-s|--string     :   String for query in file</p>
+<hr>
+<h4>Saída</h4>
+<p> mail</p>
+maria@dominio.com.br<br>
+joao@dominio.com.br<br><br>
+<p>file</p>
+mentebinaria.com.br/artigos/0x0a/gamevista.txt<br>
+mentebinaria.com.br/artigos/0x0b/virtlinux.txt<br>
+mentebinaria.com.br/artigos/0x0d/altexe.txt<br> <br>
+<p>phone</p>
+(0xx) XXXX-XXXX <br>
+(XX) XXXX XXXX<br>
+XX XXXX-XXXX<br>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ websearch -t file -e txt -d mentebinaria.com.br -p 2
+[ file ] IN mentebinaria.com.br txt
+[+] 0
+[+] 10
+[+] 20
+=============================================
+mentebinaria.com.br/artigos/0x0a/gamevista.txt
+mentebinaria.com.br/artigos/0x0b/virtlinux.txt
+mentebinaria.com.br/artigos/0x0d/altexe.txt</code></pre>
+</div>
+
+
+<div class="box" id="ip2bin">
+<h3 class="text-blue">ip2bin()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">ip2bin &lt;IP Address&gt;</p>
+<p>Converte endereço ip em equivalente binário.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Ip Address</p>
+<hr>
+<h4>Saída</h4>
+00001010.00000000.00000000.00000001<br>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ ip2bin 10.0.0.1
+0001010.00000000.00000000.00000001</code></pre>
+</div>
+
+<div class="box" id="geoip">
+<h3 class="text-blue">geoip()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">geoip &lt;IpAddress|DomainName&gt;</p>
+<p>Determina aproximadamente localização geografica de um host/ip.</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>Ip Adress | DomainName</p>
+<hr>
+<h4>Saída</h4>
+ISP, Organização, Região, País, Latitude, Longitude, Quantidade de requisições já feitas, \n<br>
+Level 3 Communications,Google Incorporated,Mountain View,US,37.419200897217,-122.05740356445,1,\n<br>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ geoip
+Level 3 Communications,Google Incorporated, Mountain View, US, 37.419200897217, -122.05740356445,1,\n</code></pre>
+</div>
+
+<div class="box" id="meuip">
+<h3 class="text-blue">meuip()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">meuip</p>
+<p>Exibe Ip externo</p>
+<hr>
+<h4>Parâmetros</h4>
+<p></p>
+<hr>
+<h4>Saída</h4>
+Endereço externo
+<br>
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ meuip
+187.25.55.110</code></pre>
+</div>
+
+<div class="box" id="wscan">
+<h3 class="text-blue">wscan()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">wscan wlan0</p>
+<p>Exibe redes sem fio próxima</p>
+<hr>
+<h4>Parâmetros</h4>
+<p> interface wifi (wlan0)</p>
+<hr>
+<h4>Saída</h4>
+
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>
+
+<br>
+<hr>
+<h4>Exemplos</h4>
+<p>$ wscan wlan0</p>
+<table>
+<tr>
+	<th>BSS</th><th>dBm</th><th>ESSID</th><th>C?</th><th>WPS?</th>
+</tr>
+<tr>
+<td>00:02:6f:9c:e0:5e</td><td>76.00</td><td>DYNAMIC</td><td>WPA2</td><td>WPS1.0</td>
+</tr>
+<tr>
+<td>01:ff:6f:9d:e1:5e</td><td>50.00</td><td>SYMBOL</td><td></td><td></td>
+</tr>
+</table>
+</div>
+
+<div class="box" id="bfht">
+<h3 class="text-blue">bfht()</h3>
+<hr>
+<h4>Descrição</h4>
+<p class="text-blue">bfht</p>
+<p>Brute force de htaccess</p>
+<hr>
+<h4>Parâmetros</h4>
+<p>-u Usuário</p>
+<p>-U Arquivo com nome de usuários</p>
+<p>-p Senha</p>
+<p>-P Arquivo com senhas</p>
+<p>-t Quantidade de requisições simultaneas ( default 5 )</p>
+<p>-v modo verbose</p>
+<p>-h Host</p>
+<hr>
+<h4>Saída</h4>
+<br>
+Sucesso!<br>
+Usuario: admin - Senha: 1234<br>
+
+<hr>
+<h4>Exemplos</h4>
+<pre><code>$ bfht -U usuarios.txt -P senha.txt -v -h http://www.dominio.com
+[ http://www.dominio.com ] Usuario: admin     Senha: 1111
+[ http://www.dominio.com ] Usuario: admin     Senha: jsjsjs
+[ http://www.dominio.com ] Usuario: admin     Senha: asdas
+[ http://www.dominio.com ] Usuario: admin     Senha: 1asw22
+[ http://www.dominio.com ] Usuario: admin     Senha: lsdlks
+[ http://www.dominio.com ] Usuario: admin     Senha: çaklds
+[ http://www.dominio.com ] Usuario: admin     Senha: 123
+
+Sucesso!
+Usuario: admin - Senha: 1234</code></pre>
+</div>
+
+</body>
+</html>
