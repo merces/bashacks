@@ -50,14 +50,16 @@
 
 ## 3. Installation
 
- Put bashacks.sh in some directory and 'source' it to your
+ After generate bashacks.sh using Makefile provided,
+ put in some directory and 'source' it to your
  shell using .bashrc for example:
 
+    $ make
     $ sudo mv bashacks.sh /opt
     $ echo "source /opt/bashacks.sh" >> $HOME/.bashrc
     $ source /opt/bashacks.sh
 
- And that's all. You can now call the available functions from bash.
+ And that's all. You can now call the available functions from command line.
 
  Additionally you need to install libudis86 to use sc2asm function. Go
  to http://udis86.sourceforge.net, download the latest version and run:
@@ -74,20 +76,21 @@
 
 ## 4. Documentation
 
- See bh-referencia.html file (only in Portuguese, sorry).
+ See bh-referencia.html. It will be improved in the future.
 
 
 ## 5. ChangeLog
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: skel_c() - creates a blank C source file.
   + new function: asminfo() - details an Assembly x86 (Intel) instruction.
   + new function: dumpheap() - dump the process heap content.
   + new function: dumpstack() - dump a process stack content,
   + new function: str2hexr() - converts string to reversed hexa bytes.
   + new function: asm2sc() - creates a payload from assembly instructions.
   + new function: sc2asm() - disassembles a payload.
-  + caching in $HOME/.hf/cache to speed up things!
+  + caching in $HOME/.bashacks/cache to speed up things!
 
  * hack-functions 1.4 - Feb, 27 2012
   + new function: charcalc() - do character calculation.
