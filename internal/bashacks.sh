@@ -13,6 +13,7 @@ bashacks()
     local func
     local resume
     local category
+    local count
 
     for func in $( cat ${BASH_SOURCE} |
         grep '()$' |
@@ -22,7 +23,7 @@ bashacks()
                 sed "/^${func}/,/^}/ s/^/-/" |
                 grep '^-' |
                 grep -E 'USAGE|Category' |
-                cut -d\" -f2 |
+                cut -d \" -f2 |
                 sed 's/\\n//g;s/-/:/' |
                 tr \\n ' ' )"
 
@@ -32,5 +33,7 @@ bashacks()
 
         printf '%12s\t%20s\t%3s\n' "${func}" "${category}" "$( echo ${resume} | awk -F\: '{print $1}')..."
         charcal - \* $(tput cols)
+        count=$((count+1))
     done
+    echo "${count} Functions "
 }
