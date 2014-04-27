@@ -73,6 +73,11 @@
     $ make
     # make install
 
+ or
+
+    $ su
+    # source /opt/bashacks.sh
+    # bashacks_depinstall 
 
 ## 4. Documentation
 
