@@ -7,27 +7,28 @@ unmd5()
         -h   : Help.
         md5 hash to be broken.\n
     Output:
-    \$ unmd5 827ccb0eea8a706c4c34a16891f84e7b 202cb962ac59075b964b07152d234b70
-    827ccb0eea8a706c4c34a16891f84e7b: 12345
-    202cb962ac59075b964b07152d234b70: 123"
+    \$ unmd5 827ccb0eea8a706c4c34a16891f84e7b 
+    827ccb0eea8a706c4c34a16891f84e7b: 1234"
 
     [ $# -eq 0 -o "$1" == '-h' ] && { 
         echo -e "${USAGE}" 
         return 1
     }
 
-    local r=""
-    local s1="http://www.md5crack.com"
-    #local s2="http://www.tobtu.com/md5.php?h=$1" maintenance
+    local sHash="$1"
+    local sSite="http://www.md5online.org/"
 
-	# md5crack.com new website 2014-01-24 
-    r="$( wget -q --timeout=30 "${s1}" --post-data "list=$(echo $@ | sed 's/ /%0D%0A/g')&crack=Crack+Hashes" -O - |
-        grep -E "([a-f0-9]){32}.+>" | html2text )"
+    sA=$(wget -T 30 -q -O - "${sSite}" \
+    --user-agent='Mozilla/5.0' |
+    grep -Ewo 'hidden" name="a" value="[0-9]+' |
+    grep -Ewo '[0-9]+')
 
-    # MAINTENANCE
-    #[ -z "${r}" ] && r="$( wget -q --timeout=30 --post-data="term=$1" "${s2}" -O - |
-    #    grep 'Found:'  |
-    #    sed 's/.*md5("\(.*\)").*<\/div>/\1/' )"
-
-    echo "${r}"
+    [ ! -z ${sA} ] && { 
+        wget -q -T 30 -O - "${sSite}" \
+        --user-agent='Mozilla/5.0' \
+        --post-data="md5=${sHash}&search=0&action=decrypt&a=${sA}" |
+        grep -Ewo 'Found : <b>.+</b>' |
+        cut -d ':' -f2 |
+        sed -r 's/<b>|<\/b>|^ //g'
+    } || echo "variable 'a' not found"
 }
