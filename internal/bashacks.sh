@@ -32,7 +32,7 @@ bashacks()
                 sed -r 's/\$\{USAGE\}|\$1//g')"
 
         printf '%12s\t%20s\t%3s\n' "${func}" "${category}" "$( echo ${resume} | awk -F\: '{print $1}')..."
-        charcal - \* $(tput cols)
+        charcalc - \* $(tput cols)
         count=$((count+1))
     done
     echo "${count} Functions "
