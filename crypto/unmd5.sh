@@ -8,7 +8,7 @@ unmd5()
         md5 hash to be broken.\n
     Output:
     \$ unmd5 827ccb0eea8a706c4c34a16891f84e7b 
-    1234"
+    12345"
 
     [ $# -eq 0 -o "$1" == '-h' ] && { 
         echo -e "${USAGE}" 
