@@ -88,6 +88,18 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: isalpha() - determines whether string or char is alpha.
+  + new function: isalnum() - determines whether string or char is alphanumeric.
+  + new function: isupper() - determines whether char or string is uppercase.
+  + new function: islower() - determines whether char or string is lowercase.
+  + new function: isxdigit() - determines whether string or char is hex digit
+  + new function: isdigit() - determines whether string or char is digit.
+  + new function: bashacks_depinstall() - install all dependencies bashacks.
+  + new function: ip2geo() - approximately determines geographical location of address.
+  + new function: hostcalc() - returns the total number of hosts.
+  + new function: wscan() - displays the list of wireless networks.
+  + new function: websearch() - uses google base to extract information.
+  + new function: skel_python() - creates a blank Python source file.
   + new function: skel_c() - creates a blank C source file.
   + new function: asminfo() - details an Assembly x86 (Intel) instruction.
   + new function: dumpheap() - dump the process heap content.
