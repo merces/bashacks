@@ -88,6 +88,7 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: isgraph() - determines whether char is graph.
   + new function: isalpha() - determines whether string or char is alpha.
   + new function: isalnum() - determines whether string or char is alphanumeric.
   + new function: isupper() - determines whether char or string is uppercase.
