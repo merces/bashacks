@@ -88,6 +88,9 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: bh_sitedl() - download an entire website with random request timeouts and custom User-Agent.
+  + new function: bh_find() - find files by true MIME type.
+  + new function: bh_zipmal() - ZIP a malware file with 'virus' password.
   + new function: isgraph() - determines whether char is graph.
   + new function: isalpha() - determines whether string or char is alpha.
   + new function: isalnum() - determines whether string or char is alphanumeric.
