@@ -88,46 +88,47 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: bh_ispunct() - determines whether char is punctuatio.
   + new function: bh_sitedl() - download an entire website with random request timeouts and custom User-Agent.
   + new function: bh_find() - find files by true MIME type.
   + new function: bh_zipmal() - ZIP a malware file with 'virus' password.
-  + new function: isgraph() - determines whether char is graph.
-  + new function: isalpha() - determines whether string or char is alpha.
-  + new function: isalnum() - determines whether string or char is alphanumeric.
-  + new function: isupper() - determines whether char or string is uppercase.
-  + new function: islower() - determines whether char or string is lowercase.
-  + new function: isxdigit() - determines whether string or char is hex digit
-  + new function: isdigit() - determines whether string or char is digit.
+  + new function: bh_isgraph() - determines whether char is graph.
+  + new function: bh_isalpha() - determines whether string or char is alpha.
+  + new function: bh_isalnum() - determines whether string or char is alphanumeric.
+  + new function: bh_isupper() - determines whether char or string is uppercase.
+  + new function: bh_islower() - determines whether char or string is lowercase.
+  + new function: bh_isxdigit() - determines whether string or char is hex digit
+  + new function: bh_isdigit() - determines whether string or char is digit.
   + new function: bashacks_depinstall() - install all dependencies bashacks.
-  + new function: ip2geo() - approximately determines geographical location of address.
-  + new function: hostcalc() - returns the total number of hosts.
-  + new function: wscan() - displays the list of wireless networks.
-  + new function: websearch() - uses google base to extract information.
-  + new function: skel_python() - creates a blank Python source file.
-  + new function: skel_c() - creates a blank C source file.
-  + new function: asminfo() - details an Assembly x86 (Intel) instruction.
-  + new function: dumpheap() - dump the process heap content.
-  + new function: dumpstack() - dump a process stack content,
-  + new function: str2hexr() - converts string to reversed hexa bytes.
-  + new function: asm2sc() - creates a payload from assembly instructions.
-  + new function: sc2asm() - disassembles a payload.
+  + new function: bh_ip2geo() - approximately determines geographical location of address.
+  + new function: bh_hostcalc() - returns the total number of hosts.
+  + new function: bh_wscan() - displays the list of wireless networks.
+  + new function: bh_websearch() - uses google base to extract information.
+  + new function: bh_skel_python() - creates a blank Python source file.
+  + new function: bh_skel_c() - creates a blank C source file.
+  + new function: bh_asminfo() - details an Assembly x86 (Intel) instruction.
+  + new function: bh_dumpheap() - dump the process heap content.
+  + new function: bh_dumpstack() - dump a process stack content,
+  + new function: bh_str2hexr() - converts string to reversed hexa bytes.
+  + new function: bh_asm2sc() - creates a payload from assembly instructions.
+  + new function: bh_sc2asm() - disassembles a payload.
   + caching in $HOME/.bashacks/cache to speed up things!
 
  * hack-functions 1.4 - Feb, 27 2012
-  + new function: charcalc() - do character calculation.
-  + new function: intel() - set Intel syntax for disassembling.
-  + new function: rotall() - simultaneous ROT for strings
+  + new function: bh_charcalc() - do character calculation.
+  + new function: bh_intel() - set Intel syntax for disassembling.
+  + new function: bh_rotall() - simultaneous ROT for strings
     (thanks to @laerciomasalla for suggesting it).
   + created reference guide in Portuguese.
-  * hexcalc() now supports the four basic math operations and the result is
+  * bh_hexcalc() now supports the four basic math operations and the result is
     prefixed with '0x'.
-  * str2hex() and hex2str() now support the prefixes '0x', '\x', with or
+  * bh_str2hex() and hex2str() now support the prefixes '0x', '\x', with or
     without spaces and C-array notation.
 
  * hack-functions 1.2 - Feb, 24 2012
-  + new functions: bin2dec() and asc2hex().
+  + new functions: bh_bin2dec() and bh_asc2hex().
   + added Intel syntax by default for gdb and objdump.
-  * curl gets replaced by wget in unmd5().
+  * curl gets replaced by wget in bh_unmd5().
   * code optimization in many functions.
 
  * hack-functions 1.0 - Feb, 24 2012

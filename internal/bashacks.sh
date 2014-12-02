@@ -1,7 +1,7 @@
 bashacks()
 {
     local USAGE="Lists all functions with small summary\n
-    hf_functions_list\n
+    bashacks\n
     Category  : Internal Functions\n
     Parameters:
         -h  : Help.
@@ -32,7 +32,7 @@ bashacks()
                 sed -r 's/\$\{USAGE\}|\$1//g')"
 
         printf '%12s\t%20s\t%3s\n' "${func}" "${category}" "$( echo ${resume} | awk -F\: '{print $1}')..."
-        charcalc - \* $(tput cols)
+        bh_charcalc - \* $(tput cols)
         count=$((count+1))
     done
     echo "${count} Functions "
