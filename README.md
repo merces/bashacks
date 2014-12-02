@@ -88,6 +88,7 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: bh_isascii() - determines whether char is ascii.
   + new function: bh_ispunct() - determines whether char is punctuatio.
   + new function: bh_sitedl() - download an entire website with random request timeouts and custom User-Agent.
   + new function: bh_find() - find files by true MIME type.
