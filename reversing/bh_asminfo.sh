@@ -17,7 +17,7 @@ bh_asminfo()
 
     local ins=${1,,}
 
-    checkdir
+    bh_checkdir
 
     if test -s $bh_cache/$ins.txt; then
         cat $bh_cache/$ins.txt
