@@ -1,0 +1,296 @@
+.TH BASHACKS 1
+.SH NAME
+bashacks - functions to hack with bash
+
+.SH SYNOPSIS
+.B bh_asc2dec [char]
+.TP
+.B bh_asciitable
+.TP
+.B bh_asm2sc [-f arch] [filename.s]
+.TP
+.B bh_asmgrep [regex] [filename]
+.TP
+.B bh_asminfo [instruction]
+.TP
+.B bh_bin2dec [binary]
+.TP
+.B bh_bin2ip [binary ipaddress]
+.TP
+.B bh_bkp [filename]
+.TP
+.B bh_charcalc [char] [operator] [number]
+.TP
+.B bh_dec2asc [decimal]
+.TP
+.B bh_dec2bin [decimal]
+.TP
+.B bh_dec2hex [decimal]
+.TP
+.B bh_dumpmem [pid] [output filename]
+.TP
+.B bh_find [mime-type] [directory]
+.TP 
+.B bh_hashes [filename or files]
+.TP
+.B bh_hex2bin [hexadecimal]
+.TP
+.B bh_hex2dec [hexadecimal]
+.TP
+.B bh_hex2str [hexadecimal]
+.TP
+.B bh_hexcalc [hexadecimal] [operator] [hexadecimal]
+.TP
+.B bh_hostcalc [bit mask]
+.TP
+.B bh_intel [on|off]
+.TP
+.B bh_ip2bin [ipaddress]
+.TP
+.B bh_ip2geo [ipaddress ou domainname]
+.TP
+.B bh_isalnum [string]
+.TP
+.B bh_isalpha [string]
+.TP
+.B bh_isascii [char]
+.TP
+.B bh_isdigit [string]
+.TP
+.B bh_isgraph [string]
+.TP
+.B bh_islower [string]
+.TP
+.B bh_ispunct [char]
+.TP
+.B bh_isupper [string]
+.TP
+.B bh_isxdigit [string]
+.TP
+.B bh_matrix
+.TP
+.B bh_md5 [string] 
+.TP
+.B bh_myip 
+.TP
+.B bh_pow [pow] [decimal]
+.TP
+.B bh_rotall [string]
+.TP
+.B bh_rot [displacement] [string]
+.TP
+.B bh_sc2asm [-m arch] [string]
+.TP
+.B bh_shl [number] [bit]
+.TP
+.B bh_shr [number] [bit]
+.TP
+.B bh_sitedl [url]
+.TP
+.B bh_skel_c
+.TP
+.B bh_skel_python
+.TP
+.B bh_str2hexr [-x] [-0x] [-c] [-s] [string]
+.TP
+.B bh_str2hex [-x] [-0x] [-c] [-s] [string]
+.TP
+.B bh_strxor [key] [string]
+.TP
+.B bh_unbase64 [string]
+.TP
+.B bh_unmd5 [md5 string]
+.TP
+.B bh_utf8table 
+.TP
+.B bh_websearch [-t mail|file|phone|free] [-p number] [-d domainname] [-e file ext] [-s string]
+.TP
+.B bh_wscan [-i iface] [-oui] [-mac] 
+.TP
+.B bh_xor [number]
+.TP
+.B bh_zipmal [filename]
+
+.SH FUNCTIONS
+.TP
+.BR bh_asc2dec
+Converts ascii bytes in decimal equivalent.
+.TP
+.BR bh_asciitable
+Show ascii table.
+.TP
+.BR bh_asm2sc
+Generates shellcode based on asm file.
+.TP
+.BR bh_asmgrep
+Search assembly instructions into executable binaries and prints 4 instructions 'round'. You must be attentive to the syntax (Intel or AT&T) utilized in your environment..
+.TP
+.BR bh_asminfo
+Prints on the screen the information assembly syntax.
+.TP
+.BR bh_bin2dec
+Convert binary to decimal equivalent.
+.TP
+.BR bh_bin2ip
+Convert an binary into its equivalent decimal.
+.TP
+.BR bh_bkp
+Do a quick backup of a file
+.TP
+.BR bh_charcalc
+Carries out calculations between special characters and numbers.
+.TP
+.BR bh_dec2asc
+Converts decimal to ascii bytes equivalent.
+.TP
+.BR bh_dec2bin
+Convert decimal to binary equivalent.
+.TP
+.BR bh_dec2hex
+Convert decimal to hex equivalent.
+.TP
+.BR bh_dumpmem
+Creates file on disk with memory contents of a process.
+.TP
+.BR bh_find
+Find file by mime type exe, msi, txt, zip.
+.TP
+.BR bh_hashes
+Generates hash all informed files.
+.TP 
+.BR bh_hex2bin
+Convert hex to binary equivalent.
+.TP
+.BR bh_hex2dec
+Convert hex to decimal equivalent.
+.TP
+.BR bh_hex2str
+Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.
+.TP
+.BR bh_hexcalc
+Makes calculation of numbers in hexadecimal and gives the result in hexadecimal.
+.TP
+.BR bh_hostcalc
+Returns the total number of hosts based on subnet mask informed.
+.TP
+.BR bh_intel
+Enable or Disable instructions intel.
+.TP
+.BR bh_ip2bin
+Convert an ip address into its equivalent binary.
+.TP
+.BR bh_ip2geo
+Approximately determines geographical location of an ip address or domain name.
+.TP
+.BR bh_isalnum
+Determines whether string or char is alphanumeric.
+.TP
+.BR bh_isalpha
+Determines whether string or char is alpha.
+.TP
+.BR bh_isascii
+Deterimines wheter char is ascii char.
+.TP
+.BR bh_isdigit
+Determines whether string or char is digit.
+.TP
+.BR bh_isgraph
+Determines whether char is graph.
+.TP
+.BR bh_islower
+Determines whether char or string is lowercase.
+.TP
+.BR bh_ispunct
+Determines whther char is punctuation.
+.TP
+.BR bh_isupper
+Determines whether char or string is uppercase.
+.TP
+.BR bh_isxdigit
+Determines whether string or char is hex digit.
+.TP
+.BR bh_matrix
+Matrix because is fun.
+.TP
+.BR bh_md5
+Calculates the MD5 hash of a string (without considering the caracetere newline) or a file if it exists.
+.TP
+.BR bh_myip
+Show external ipaddress.
+.TP
+.BR bh_pow
+ Raises a number to a power.
+.TP
+.BR bh_rotall
+Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+.TP
+.BR bh_rotall
+Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+.TP
+.BR bh_sc2asm
+Asm code generated through a shellcode. 
+.TP
+.BR bh_shl
+ Push bits to the left by a number.
+.TP
+.BR bh_shr
+ Push bits to the right by a number.
+.TP
+.BR bh_sitedl
+Download all site.
+.TP
+.BR bh_skel_c
+Shows the basic structure of a code C.
+.TP
+.BR bh_skel_python
+Show the basic structure of a code Python.
+.TP
+.BR bh_str2hexr
+Converts string in hex byte equivalent to each char (hex string).
+.TP
+.BR bh_str2hex 
+Converts string in hex byte equivalent to each char (hex string).
+.TP
+.BR bh_strxor
+Calculates exclusive OR of each character in a string with a key.
+.TP
+.BR bh_unbase64
+Decodes a BASE64 string.
+.TP
+.BR bh_unmd5
+Attempts to discover the string that generated the MD5 hash using the internet (requires you to be connected).
+.TP
+.BR bh_utf8table
+Show ascii table.
+.TP 
+.BR bh_websearch
+Uses google base to extract information such as sql files, txt or anything else that can server to extract information, other functionality are finding email phones.
+.TP
+.BR bh_wscan
+Displays the list of wireless networks with chanell, bss, signal, ssid and others
+.TP
+.BR bh_xor
+ Calculates the exclusive OR between two numbers.
+.TP
+.BR bh_zipmal
+Compress file in zip format with password protecting.
+
+.SH EXAMPLES
+para fazer isso
+.IP
+bh_fazisso
+
+.PP
+Pra fazer aquilo
+.IP
+bh_fazaquilo
+
+.SH AUTHORS
+Written by Fernando Mercês and Wesley Henrique
+
+.SH REPORTING BUGS
+Please, check the latest development code and report at https://github.com/merces/bashacks/issues
+
+.SH COPYRIGHT
+Copyright © 2014 bashack authors. Licensed GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it. There is NO WARRANTY, to the extent permitted by law.
