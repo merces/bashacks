@@ -1,7 +1,7 @@
 bh_ispunct() {
-   if $(isgraph "$1") 
+   if $(bh_isgraph "$1") 
    then 
-      if ! $(isalnum "$1")
+      if ! $(bh_isalnum "$1")
       then
          return 0
       fi
