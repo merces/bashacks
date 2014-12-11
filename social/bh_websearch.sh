@@ -1,29 +1,5 @@
 bh_websearch()
 {
-    local USAGE="Uses google base to extract information such as sql files, txt or anything else that can serve 
-to extract information, other functionality are finding email phones.\n
-   bh_websearch -t <mail|file|phone|free> -p <num pages optional> -d <domain> -e <file Extension> -s <string> -g <1>\n
-   Category  : Social Engineering.\n
-   Parameters:
-        -t   :   mail,file,phone,free one type is required
-        -p   :   Number of pages OPTIONAL
-        -d   :   Domain Name or IpAddress is required
-        -e   :   Extension for query
-        -s   :   Parameter needed to free type and optional for others
-        -g   :   Performs the download of all files of the query (set 1) 
-        -h   :   Help.
-
-   Output:
-   \$ bh_websearch -t file -e txt -d mentebinaria.com.br -p 2
-   [ file ] IN mentebinaria.com.br txt
-   [+] 0
-   [+] 10
-   [+] 20
-   =============================================
-   mentebinaria.com.br/artigos/0x0a/gamevista.txt
-   mentebinaria.com.br/artigos/0x0b/virtlinux.txt
-   mentebinaria.com.br/artigos/0x0d/altexe.txt\n"
-
     local i                     # count for() pagination
     local TYPE                  # type {mail,file,phone...}
     local DOMAIN                # domainame
@@ -38,14 +14,14 @@ to extract information, other functionality are finding email phones.\n
     OPTIND=0                    # getopts no crazy
 
     # run param
-    while getopts ":g:t:s:d:e:p:h:" o
+    while getopts ":g:t:s:d:e:p:" o
     do
         case "${o}" in
             g) DOWNLOAD=1
             ;;
             t) TYPE=${OPTARG}
             ;;
-            p) isdigit ${OPTARG}
+            p) bh_isdigit ${OPTARG}
                test $? -eq 0 && TOPAGE=$(echo 10*${OPTARG} | bc ) || TOPAGE=50
             ;;
             d) DOMAIN=${OPTARG}
@@ -53,8 +29,6 @@ to extract information, other functionality are finding email phones.\n
             s) [ -z "$1" ] && STRING="" || STRING="intext:${OPTARG}"
             ;;
             e) EXTENSION=${OPTARG}
-            ;;
-            h) echo -e "${USAGE}" 
             ;;
         esac
     done

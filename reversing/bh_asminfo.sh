@@ -1,19 +1,6 @@
 bh_asminfo()
 {
-    local USAGE="Prints on the screen the information assembly syntax\n
-   bh_asminfo <string>\n
-   Category  : Reverse Engineering.\n
-   Parameters:
-        -h     :  Help.
-        string : instruction to obtain information\n
-   Output:
-   \$ bh_asminfo cmp
-    ..."
-
-    [ $# -lt 1 -o "$1" == '-h' ] && {
-        echo -e "${USAGE}"
-        return 1
-    }
+    [ $# -lt 1 ] && return 1 
 
     local ins=${1,,}
 

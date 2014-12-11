@@ -1,23 +1,6 @@
 bh_strxor()
 {
-    local USAGE="Calculates exclusive OR of each character in a string with a key.\n
-   bh_strxor <key> <string>\n
-   Category  : Crypto.\n
-   Parameters:
-        -h     : Help.
-        key    : The value in decimal or hexadecimal (prefixed with '0x') to perform
-                 the XOR with the characters of the string.
-        string : The string to go through the 'xor'.\n
-    Output:
-    \$ bh_strxor 4 'ieikjew\$ewwewwmjew'
-    mamonas assassinas
-    \$ bh_strxor 0xa 'pink floyd'
-    zcda*lfesn"
-
-    [ $# -lt 2 -o "$1" == '-h' ] && {
-        echo -e "${USAGE}"
-        return 1
-    }
+    [ $# -lt 2 ] && return 1
 
     local str
     local xored

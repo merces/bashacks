@@ -1,15 +1,5 @@
 bashacks_depinstall()
 {
-    local USAGE="Install all dependencies bashacks\n
-    bashacks_depinstall\n
-    Category  : Internal Functions\n
-    Parameters:
-        -h  : Help.
-        No Parameters\n
-        Root is required
-    Output:
-    install...\n"
-    
     [ ${EUID} -eq 0 ] && {
         local sPktManager
         local sPkt='gcc make html2text iw nasm gdb wget'

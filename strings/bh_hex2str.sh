@@ -1,25 +1,6 @@
 bh_hex2str()
 {
-    local USAGE="Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.\n
-        bh_hex2str <hex>\n
-        Category  : Char and String\n
-        Parameters:
-            -h  :    Help.
-            hex : hex to be converted.\n
-        Output:
-        \$ bh_hex2str '72 6f 63 6b'
-        rock
-        \$ bh_hex2str '\x72\x6f\x63\x6b'
-        rock
-        \$ bh_hex2str '0x72 0x6f 0x63 0x6b'
-        rock
-        \$ bh_hex2str '{0x72, 0x6f, 0x63, 0x6b}'
-        rock"
-
-    [ $# -ne 1 -o "$1" == '-h' ] && { 
-        echo -e "${USAGE}" 
-        return 1
-    }
+    [ $# -ne 1 ] && return 1 
 
     local hex
     local str
