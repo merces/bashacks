@@ -13,9 +13,16 @@ bh_wscan()
     }
 
     [ ${EUID} -ne 0 -o \
-        -z "${iFace}" ] && return 1
+        -z "${iFace}" ] && { echo 'root is required' ; return 1; }
 
     case "$1" in
+        -model)
+            iw ${iFace} scan -u | 
+            grep -E '^BSS|Model:' |
+            sed -r 's/(\(.*\)|-- associated)//g' |
+            tr \\n ' ' |
+            sed 's/BSS/\n/g'
+        ;;
         -oui)
             [ ! -z "$(echo $2 | grep -Ewo '(([0-9a-f]){2}:){2}([0-9a-f]){2}' )" ] && {
 
@@ -46,6 +53,15 @@ bh_wscan()
 
                 rm ${MACTMP}
             }
+        ;;
+        -wps)
+            iw ${iFace} scan | 
+            grep -E '^BSS|WPS|: channel ([0-9]){1,2}' |
+            sed -e 's/: chanell//' |
+            tr \\n ' ' |
+            sed -re "s/BSS/\n/g; s/(\(on ${iFace}\)|DS Parameter set: channel|\* Version: |-- associated|:\t)//g" |
+            grep 'WPS' 
+            
         ;;
         *)
             iw ${iFace} scan |

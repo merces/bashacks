@@ -105,7 +105,7 @@ bashacks - functions to hack with bash
 .TP
 .B bh_websearch [-t mail|file|phone|free] [-p number] [-d domainname] [-e file ext] [-s string]
 .TP
-.B bh_wscan [-i iface] [-oui] [-mac] 
+.B bh_wscan [-i iface] [-oui] [-mac] [-wps] 
 .TP
 .B bh_xor [number]
 .TP
@@ -831,6 +831,9 @@ root is required for wifi scan, to scan scan functions below.
                                 5480 Great America Parkway
                                 Santa Clara CA 95054
                                 UNITED STATES
+# bh_wscan -wps 
+ 80:3f:5d:e4:b9:b9  	 11 	WPS 1.0 
+
 .RE 
 .BR
 Calculates the exclusive OR between two numbers, you can uses hex.
