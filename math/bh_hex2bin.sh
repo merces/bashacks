@@ -1,19 +1,6 @@
 bh_hex2bin()
 {
-    local USAGE="Convert hex to binary equivalent.\n
-    bh_hex2bin <hex>\n
-    Category  : Base Conversion\n
-    Parameters:
-        -h  : Help.
-        hex : hex to be converted\n
-    Output:
-    \$ bh_hex2bin a
-    1010"
-
-    [ $# -eq 0 -o "$1" == '-h' ] && { 
-        echo -e "${USAGE}"
-        return 1
-    }
+    [ $# -eq 0 ] && return 1
 
 	local bin
 	local i

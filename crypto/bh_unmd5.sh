@@ -1,19 +1,6 @@
 bh_unmd5()
 {
-   local USAGE="Attempts to discover the string that generated the MD5 hash using the internet (requires you to be connected).\n
-   bh_unmd5 <hash>\n
-   Category  : Crypto.\n
-   Parameters:
-        -h   : Help.
-        md5 hash to be broken.\n
-    Output:
-    \$ bh_unmd5 827ccb0eea8a706c4c34a16891f84e7b 
-    12345"
-
-    [ $# -eq 0 -o "$1" == '-h' ] && { 
-        echo -e "${USAGE}" 
-        return 1
-    }
+    [ $# -eq 0 ] && return 1
 
     local sHash="$1"
     local sSite="http://www.md5online.org/"

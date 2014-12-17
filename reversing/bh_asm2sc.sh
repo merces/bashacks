@@ -1,25 +1,10 @@
 bh_asm2sc()
 {
-    local USAGE="Generates shellcode based on asm file.\n
-   bh_asm2sc -f elf32 asmfile\n
-   Category  : Reverse Engineering.\n
-   Parameters:
-        -f     : followed by architecture and asm file [-f elf32 hello.s]
-        -h     : Help.
-   Output:
-   \$ bh_asm2sc fork.s
-   \\\x31\\\xc0\\\x40\\\x40\\\xcd\\\x80\\\xeb\\\xf8
-    "
-
 	local obj=$(mktemp)
 	local fmt=elf32
 	local in="$1"
 
-    [ $#  -eq 0 -o \
-        "$1" = '-h' ] && {
-        echo -e "${USAGE}"
-        return 1
-    }
+    [ $#  -eq 0 ] && return 1
 
     [ $1 = "-f" ] && fmt=$2 in="$3"
 

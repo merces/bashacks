@@ -1,0 +1,871 @@
+.TH BASHACKS 1
+.SH NAME
+bashacks - functions to hack with bash
+
+.SH SYNOPSIS
+.B bh_asc2dec [char]
+.TP
+.B bh_asciitable
+.TP
+.B bh_utf8table 
+.TP
+.B bh_asm2sc [-f arch] [filename.s]
+.TP
+.B bh_asmgrep [regex] [filename]
+.TP
+.B bh_asminfo [instruction]
+.TP
+.B bh_bin2dec [binary]
+.TP
+.B bh_bin2ip [binary ipaddress]
+.TP
+.B bh_bkp [filename]
+.TP
+.B bh_charcalc [char] [operator] [number]
+.TP
+.B bh_dec2asc [decimal]
+.TP
+.B bh_dec2bin [decimal]
+.TP
+.B bh_dec2hex [decimal]
+.TP
+.B bh_dumpmem [pid] [output filename]
+.TP
+.B bh_find [mime-type] [directory]
+.TP 
+.B bh_hashes [filename or files]
+.TP
+.B bh_hex2bin [hexadecimal]
+.TP
+.B bh_hex2dec [hexadecimal]
+.TP
+.B bh_hex2str [hexadecimal]
+.TP
+.B bh_hexcalc [hexadecimal] [operator] [hexadecimal]
+.TP
+.B bh_hostcalc [bit mask]
+.TP
+.B bh_intel [on|off]
+.TP
+.B bh_ip2bin [ip address]
+.TP
+.B bh_ip2geo [ip address or domainname]
+.TP
+.B bh_isalnum [string]
+.TP
+.B bh_isalpha [string]
+.TP
+.B bh_isascii [char]
+.TP
+.B bh_isdigit [string]
+.TP
+.B bh_isgraph [string]
+.TP
+.B bh_islower [string]
+.TP
+.B bh_ispunct [char]
+.TP
+.B bh_isupper [string]
+.TP
+.B bh_isxdigit [string]
+.TP
+.B bh_matrix
+.TP
+.B bh_md5 [string] 
+.TP
+.B bh_myip 
+.TP
+.B bh_pow [pow] [decimal]
+.TP
+.B bh_rotall [string]
+.TP
+.B bh_rot [displacement] [string]
+.TP
+.B bh_sc2asm [-m arch] [string]
+.TP
+.B bh_shl [number] [bit]
+.TP
+.B bh_shr [number] [bit]
+.TP
+.B bh_sitedl [url]
+.TP
+.B bh_skel_c
+.TP
+.B bh_skel_python
+.TP
+.B bh_str2hexr [-x] [-0x] [-c] [-s] [string]
+.TP
+.B bh_str2hex [-x] [-0x] [-c] [-s] [string]
+.TP
+.B bh_strxor [key] [string]
+.TP
+.B bh_unbase64 [string]
+.TP
+.B bh_unmd5 [md5 string]
+.TP
+.B bh_websearch [-t mail|file|phone|free] [-p number] [-d domainname] [-e file ext] [-s string]
+.TP
+.B bh_wscan [-i iface] [-oui] [-mac] [-wps] 
+.TP
+.B bh_xor [number]
+.TP
+.B bh_zipmal [filename]
+
+.SH FUNCTIONS
+.TP
+.BR bh_asc2dec
+Converts ascii bytes in decimal equivalent.
+.TP
+.BR bh_asciitable
+Show ascii table.
+.TP
+.BR bh_asm2sc
+Generates shellcode based on asm file.
+.TP
+.BR bh_asmgrep
+Search assembly instructions into executable binaries and prints 4 instructions 'round'. You must be attentive to the syntax (Intel or AT&T) utilized in your environment..
+.TP
+.BR bh_asminfo
+Prints on the screen the information assembly syntax.
+.TP
+.BR bh_bin2dec
+Convert binary to decimal equivalent.
+.TP
+.BR bh_bin2ip
+Convert an binary into its equivalent decimal.
+.TP
+.BR bh_bkp
+ Do a quick backup of a file
+.TP
+.BR bh_charcalc
+Carries out calculations between special characters and numbers.
+.TP
+.BR bh_dec2asc
+Converts decimal to ascii bytes equivalent.
+.TP
+.BR bh_dec2bin
+Convert decimal to binary equivalent.
+.TP
+.BR bh_dec2hex
+Convert decimal to hex equivalent.
+.TP
+.BR bh_dumpmem
+Creates file on disk with memory contents of a process.
+.TP
+.BR bh_find
+Find file by mime type exe, msi, txt, zip.
+.TP
+.BR bh_hashes
+Generates hash all informed files.
+.TP 
+.BR bh_hex2bin
+Convert hex to binary equivalent.
+.TP
+.BR bh_hex2dec
+Convert hex to decimal equivalent.
+.TP
+.BR bh_hex2str
+Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.
+.TP
+.BR bh_hexcalc
+Makes calculation of numbers in hexadecimal and gives the result in hexadecimal.
+.TP
+.BR bh_hostcalc
+Returns the total number of hosts based on subnet mask informed.
+.TP
+.BR bh_intel
+Enable or Disable instructions intel.
+.TP
+.BR bh_ip2bin
+Convert an ip address into its equivalent binary.
+.TP
+.BR bh_ip2geo
+Approximately determines geographical location of an ip address or domain name.
+.TP
+.BR bh_isalnum
+Determines whether string or char is alphanumeric.
+.TP
+.BR bh_isalpha
+Determines whether string or char is alpha.
+.TP
+.BR bh_isascii
+Deterimines wheter char is ascii char.
+.TP
+.BR bh_isdigit
+Determines whether string or char is digit.
+.TP
+.BR bh_isgraph
+Determines whether char is graph.
+.TP
+.BR bh_islower
+Determines whether char or string is lowercase.
+.TP
+.BR bh_ispunct
+Determines whther char is punctuation.
+.TP
+.BR bh_isupper
+Determines whether char or string is uppercase.
+.TP
+.BR bh_isxdigit
+Determines whether string or char is hex digit.
+.TP
+.BR bh_matrix
+Matrix because is fun.
+.TP
+.BR bh_md5
+ Calculates the MD5 hash of a string (without considering the caracetere newline) or a file if it exists.
+.TP
+.BR bh_myip
+Show external ipaddress.
+.TP
+.BR bh_pow
+ Raises a number to a power.
+.TP
+.BR bh_rotall
+Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+.TP
+.BR bh_rot
+ Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+.TP
+.BR bh_sc2asm
+Asm code generated through a shellcode. 
+.TP
+.BR bh_shl
+ Push bits to the left by a number.
+.TP
+.BR bh_shr
+ Push bits to the right by a number.
+.TP
+.BR bh_sitedl
+Download all site.
+.TP
+.BR bh_skel_c
+Shows the basic structure of a code C.
+.TP
+.BR bh_skel_python
+Show the basic structure of a code Python.
+.TP
+.BR bh_str2hexr
+Converts string in hex byte equivalent to each char (hex string).
+.TP
+.BR bh_str2hex 
+Converts string in hex byte equivalent to each char (hex string).
+.TP
+.BR bh_strxor
+Calculates exclusive OR of each character in a string with a key.
+.TP
+.BR bh_unbase64
+Decodes a BASE64 string.
+.TP
+.BR bh_unmd5
+Attempts to discover the string that generated the MD5 hash using the internet (requires you to be connected).
+.TP
+.BR bh_utf8table
+Show ascii table.
+.TP 
+.BR bh_websearch
+Uses google base to extract information such as sql files, txt or anything else that can server to extract information, other functionality are finding email phones.
+.TP
+.BR bh_wscan
+Displays the list of wireless networks with chanell, bss, signal, ssid and others
+.TP
+.BR bh_xor
+ Calculates the exclusive OR between two numbers.
+.TP
+.BR bh_zipmal
+Compress file in zip format with password protecting.
+
+.SH EXAMPLES
+To convert a ascii char in decimal code
+.IP
+.RS 4
+.nf
+$ bh_asc2dec a
+97
+$
+.RE
+.BR 
+Show the ascii or utf8 table
+.IP
+.RS 4 
+.nf
+$ bh_asciitable
+Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex
+  0 00 NUL  16 10 DLE  32 20    48 30 0  64 40 @  80 50 P   96 60 `  112 70 p
+  1 01 SOH  17 11 DC1  33 21 !  49 31 1  65 41 A  81 51 Q   97 61 a  113 71 q
+  2 02 STX  18 12 DC2  34 22 "  50 32 2  66 42 B  82 52 R   98 62 b  114 72 r
+  3 03 ETX  19 13 DC3  35 23 #  51 33 3  67 43 C  83 53 S   99 63 c  115 73 s
+  4 04 EOT  20 14 DC4  36 24 $  52 34 4  68 44 D  84 54 T  100 64 d  116 74 t
+  5 05 ENQ  21 15 NAK  37 25 %  53 35 5  69 45 E  85 55 U  101 65 e  117 75 u
+  6 06 ACK  22 16 SYN  38 26 &  54 36 6  70 46 F  86 56 V  102 66 f  118 76 v
+  7 07 BEL  23 17 ETB  39 27 '  55 37 7  71 47 G  87 57 W  103 67 g  119 77 w
+  8 08 BS   24 18 CAN  40 28 (  56 38 8  72 48 H  88 58 X  104 68 h  120 78 x
+  9 09 HT   25 19 EM   41 29 )  57 39 9  73 49 I  89 59 Y  105 69 i  121 79 y
+ 10 0A LF   26 1A SUB  42 2A *  58 3A :  74 4A J  90 5A Z  106 6A j  122 7A z
+ 11 0B VT   27 1B ESC  43 2B +  59 3B ;  75 4B K  91 5B [  107 6B k  123 7B {
+ 12 0C FF   28 1C FS   44 2C ,  60 3C <  76 4C L  92 5C \  108 6C l  124 7C |
+ 13 0D CR   29 1D GS   45 2D -  61 3D =  77 4D M  93 5D ]  109 6D m  125 7D }
+ 14 0E SO   30 1E RS   46 2E .  62 3E >  78 4E N  94 5E ^  110 6E n  126 7E ~
+ 15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL
+
+$ bh_utf8table 
+Hex      Hex      Hex      Hex      Hex      Hex      Hex      Hex
+c2 a0    c2 ac ¬  c2 b8 ¸  c3 84 Ä  c3 90 Ð  c3 9c Ü  c3 a8 è  c3 b4 ô
+c2 a1 ¡  c2 ad ­  c2 b9 ¹  c3 85 Å  c3 91 Ñ  c3 9d Ý  c3 a9 é  c3 b5 õ
+c2 a2 ¢  c2 ae ®  c2 ba º  c3 86 Æ  c3 92 Ò  c3 9e Þ  c3 aa ê  c3 b6 ö
+c2 a3 £  c2 af ¯  c2 bb »  c3 87 Ç  c3 93 Ó  c3 9f ß  c3 ab ë  c3 b7 ÷
+c2 a4 ¤  c2 b0 °  c2 bc ¼  c3 88 È  c3 94 Ô  c3 a0 à  c3 ac ì  c3 b8 ø
+c2 a5 ¥  c2 b1 ±  c2 bd ½  c3 89 É  c3 95 Õ  c3 a1 á  c3 ad í  c3 b9 ù
+c2 a6 ¦  c2 b2 ²  c2 be ¾  c3 8a Ê  c3 96 Ö  c3 a2 â  c3 ae î  c3 ba ú
+c2 a7 §  c2 b3 ³  c2 bf ¿  c3 8b Ë  c3 97 ×  c3 a3 ã  c3 af ï  c3 bb û
+c2 a8 ¨  c2 b4 ´  c3 80 À  c3 8c Ì  c3 98 Ø  c3 a4 ä  c3 b0 ð  c3 bc ü
+c2 a9 ©  c2 b5 µ  c3 81 Á  c3 8d Í  c3 99 Ù  c3 a5 å  c3 b1 ñ  c3 bd ý
+c2 aa ª  c2 b6 ¶  c3 82 Â  c3 8e Î  c3 9a Ú  c3 a6 æ  c3 b2 ò  c3 be þ
+c2 ab «  c2 b7 ·  c3 83 Ã  c3 8f Ï  c3 9b Û  c3 a7 ç  c3 b3 ó  c3 bf ÿ
+
+
+.RE
+.BR 
+Uses to generate a shell code of asm source file, nasm is required.
+.IP
+.RS 4
+.nf
+$ bh_asm2sc fork.s
+   \\x31\\xc0\\x40\\x40\\xcd\\x80\\xeb\\xf8
+$
+.RE
+.BR
+To search instruction into binary with bh_asmgrep enjoy and look what exists around.
+.IP
+.RS 4
+.nf
+$ bh_asmgrep 'push.*rbp$' /bin/ls
+   411400:  41 57                          push r15
+   411402:  41 56                          push r14
+   411404:  41 55                          push r13
+   411406:  41 54                          push r12
+   411408:  55                             push rbp
+   411409:  53                             push rbx
+   41140a:  48 83 ec 68                    sub rsp,0x68
+   41140e:  85 ff                          test edi,edi
+   411410:  48 8b 9c 24 a0 00 00           mov rbx,QWORD PTR [rsp+0xa0]
+
+.RE
+Internet connection is required for search assembly instruction, it has a caching mechanism to facilitate faster subsequent queries making. 
+.RS 4
+.nf
+.BR 
+$ bh_asminfo add
+ADD
+                                                          
+|Code    |Mnemonic        |Description                    |
+|04 ib   |ADD AL, imm8    |Add imm8 to AL                 |
+|05 iw   |ADD AX, imm16   |Add imm16 to AX                |
+|05 id   |ADD EAX, imm32  |Add imm32 to EAX               |
+|80 /0 ib|ADD r/m8, imm8  |Add imm8 to r/m8               |
+|81 /0 iw|ADD r/m16, imm16|Add imm16 to r/m16             |
+|81 /0 id|ADD r/m32, imm32|Add imm32 to r/m32             |
+|83 /0 ib|ADD r/m16, imm8 |Add sign-extended imm8 to r/m16|
+|83 /0 ib|ADD r/m32, imm8 |Add sign-extended imm8 to r/m32|
+|00 / r  |ADD r/m8, r8    |Add r8 to r/m8                 |
+|01 / r  |ADD r/m16, r16  |Add r16 to r/m16               |
+|01 / r  |ADD r/m32, r32  |Add r32 to r/m32               |
+|02 / r  |ADD r8, r/m8    |Add r/m8 to r8                 |
+|03 / r  |ADD r16, r/m16  |Add r/m16 to r16               |
+|03 / r  |ADD r32, r/m32  |Add r/m32 to r32               |
+
+Description
+Adds the first operand (destination operand) and the second operand (source
+operand) and stores the result in the destination operand. The destination
+operand can be a register or a memory location; the source operand can be an
+immediate, a register, or a memory location. (However, two memory operands
+cannot be used in one instruction.) When an immediate value is used as an
+operand, it is sign-extended to the length of the destination operand format.
+
+The ADD instruction does not distinguish between signed or unsigned operands.
+Instead, the processor evaluates the result for both data types and sets the OF
+and CF flags to indicate a carry in the signed or unsigned result,
+respectively. The SF flag indicates the sign of the signed result.
+                                                                              
+|Operands|Bytes                |Clocks                                        |
+|reg, reg|2                    |1|UV                                          |
+|mem, reg|2 + d(0, 2)          |3|UV                                          |
+|reg, mem|2 + d(0, 2)          |2|UV                                          |
+|reg, imm|2 + i(1, 2)          |1|UV                                          |
+|mem, imm|2 + d(0, 2) + i(1, 2)|3|UV ( not pairable if there is a displacement|
+|        |                     | |and immediate)                              |
+|acc, imm|1 + i(1, 2)          |1|UV                                          |
+
+Flags
+                                                                    
+|ID  |unaffected                   |DF|unaffected                   |
+|VIP |unaffected                   |IF|unaffected                   |
+|VIF |unaffected                   |TF|unaffected                   |
+|AC  |unaffected                   |SF|sets according to the result.|
+|VM  |unaffected                   |ZF|sets according to the result.|
+|RF  |unaffected                   |AF|sets according to the result.|
+|NT  |unaffected                   |PF|sets according to the result.|
+|IOPL|unaffected                   |CF|sets according to the result.|
+|OF  |sets according to the result.|
+.RE
+.BR
+Convert binary to decimal is very easy.
+.IP
+.RS 4
+$ bh_bin2dec 11111111
+255
+$
+.RE
+Convert binary ip address to decimal.
+.IP
+.RS 4
+$ bh_bin2ip 00001010.00000000.00000000.11001000
+10.0.0.200
+$
+.RE
+.BR 
+creates backup of file with 'filename.date +%Y%m%d'
+.IP
+.RS 4
+$ bh_bkp bashacks.sh
+$ ls bashacks.sh*
+bashacks.sh  bashacks.sh.20141209
+$
+.RE
+.BR
+Calculator strings, char and digits.
+.IP
+.RS 4
+$ bh_charcalc f + 2
+h
+$ bh_charcalc B - 1
+A
+$ bh_charcalc A \* 16
+AAAAAAAAAAAAAAAA
+$ bh_charcalc isso \* 3
+issoissoisso
+.RE
+.BR
+Once having decimal char codes is possible convert to it's equivalent in ascii.
+.IP
+.RS 4
+$ bh_dec2asc 65
+A
+$
+.RE
+.BR
+Converting decimal to binary.
+.IP
+.RS 4 
+$ bh_dec2bin 10
+1010
+$ bh_dec2bin 255
+11111111
+.RE 
+.BR 
+Converting decimal to hexadecimal.
+.IP
+.RS 4
+$ bh_dec2hex 10
+a
+.RE 
+.BR
+root is required to extract content of memory area.
+.IP
+.RS 4
+# bh_dumpstack 15125 pilha.dump
+# bh_dumpheap 15125 heap.dump"
+.RE
+.BR
+Search mime type of file (txt, zip, exe and msi)
+.IP
+.RS 4
+$ bh_find -txt
+bashacks.sh
+bh-referencia.html
+Makefile
+README.md
+
+$ bh_find -exe ~/Downloads 
+/home/bashacks/Downloads//putty.exe
+.RE 
+.BR 
+Generates hash of file or list of file informed.
+.IP
+.RS 4
+$ bh_hashes bashacks.sh README.md
+1fca0b44a77773ca1ec4976081cc60f1  bashacks.sh
+72e90888fc6b221729e3388582726dcb00522790  bashacks.sh
+0fcedfc1590f34182a08a006ed46f12fb30d3fb8e0399a2cab91e78783497af7  bashacks.sh
+89bbf9c8c9af65e5d91c9702c2e1663c  README.md
+0adb9ba49680dd35c2d9d5a6ecf5bd86dc547f18  README.md
+54b9d1d4a0278871e727c009687f0889b53ba2c280b49af82b97b4e6064b0c80  README.md
+$
+.RE 
+.BR
+Convert hex to binary
+.IP
+.RS 4
+$ bh_hex2bin a 
+1010
+.RE
+.BR
+Convert hexadecimal to decimal
+.IP
+.RS 4
+$ bh_hex2dec a
+10
+$ bh_hex2dec 0x0a
+10
+.RE 
+.BR
+Converting hexadecimal to string
+.IP
+.RS 4
+$ bh_hex2str '72 6f 63 6b'
+rock
+$ bh_hex2str 'rock'
+rock
+$ bh_hex2str '0x72 0x6f 0x63 0x6b'
+rock
+$ bh_hex2str '{0x72, 0x6f, 0x63, 0x6b}'
+rock
+.RE
+.BR
+Hex Calculator
+.IP
+.RS 4
+$ bh_hexcalc 5f \* 2
+oxbee
+$ bh_hexcalc 0xdead / 0xdead
+0x1
+.RE 
+.BR
+Calculating amount of host on a network
+.IP
+.RS 4
+$ bh_hostcalc 24
+254
+.RE 
+.BR 
+Enables or disables intel interpreter for assembly instructions.
+.IP
+.RS 4
+$ bh_intel on 
+$ bh_intel off
+.RE 
+.BR
+Convert ip address in binary
+.IP
+.RS 4
+$ bh_ip2bin 10.0.0.1
+00001010.00000000.00000000.00000001
+.RE 
+.BR
+Bashacks makes it easy to validate that string or char is alpha.
+.IP
+.RS 4 
+$ bh_isalnum a1
+$ echo $? 
+0
+$ bh_isalnum a-a
+$ echo $? 
+1
+$ if $(bh_isalnum a) ; then echo 'OK' ; else echo 'NO' ; fi
+OK
+
+other functions that do not exist by default and follows the same structure are.
+
+.B bh_isalpha bh_isascii bh_isdigit bh_isgraph bh_ispunct bh_isxdigit bh_islower bh_isupper 
+.RE
+.BR
+FUNNY Matrix
+.IP
+.RS 4
+$ bh_matrix
+.RE
+.BR
+Generates md5 without line break.
+.BR
+.IP
+.RS 4
+$ bh_md5 '123456'
+e10adc3949ba59abbe56e057f20f883e
+$ bh_md5 /etc/passwd
+18186ca65c92ba40cfe8ed4089496c42
+.RE
+.BR
+Show externa ip address, internet connection is required.
+.IP
+.RS 4
+$ bh_myip
+189.107.50.133
+.RE
+.BR
+Ever wondered how to make power of calculation in bash, it's actually quite simple, but we simplify more.
+.IP
+.RS 4
+$ bh_pow 8 2
+64
+$ bh_pow 0xa 3
+1000
+.RE
+.BR
+rotall is an implementation that accesses rot generating 1..25 results to rot. 
+.IP
+.RS 4
+$ bh_rotall urfn
+ROT1 vsgo
+ROT2 wthp
+ROT3 xuiq
+ROT4 yvjr
+ROT5 zwks
+ROT6 axlt
+ROT7 bymu
+ROT8 cznv
+ROT9 daow
+ROT10 ebpx
+ROT11 fcqy
+ROT12 gdrz
+ROT13 hesa
+ROT14 iftb
+ROT15 jguc
+ROT16 khvd
+ROT17 liwe
+ROT18 mjxf
+ROT19 nkyg
+ROT20 olzh
+ROT21 pmai
+ROT22 qnbj
+ROT23 rock
+ROT24 spdl
+ROT25 tqem
+
+$ bh_rot 3 terra 
+whuud
+
+$ bh_rot13 terra 
+green
+
+# also
+.B bh_rot13   bh_rot18   bh_rot47   bh_rot5
+.RE 
+.BR
+Asm code generated through a shellcode, yes it is wonderful.
+.IP
+.RS 4
+$ bh_sc2asm '\\x31\\xc0\\x40\\x40\\xcd\\x80\\xeb\\xf8'
+xor eax, eax            
+inc eax                 
+inc eax                 
+int 0x80                
+jmp 0x0
+.RE 
+.BR 
+move bit.
+.IP
+.RS 4
+# left
+$ bh_shl 4 1
+8
+$ bh_shl 0x4 1
+8
+
+# right
+$ bh_shr 4 1
+2
+$ bh_shr 0x4 1
+2
+.RE 
+.BR
+Make url to download all content of web site and download all content.
+.IP
+.RS 4
+$ bh_sitedl www.google.com.br 
+wget -crw 1 --user-agent Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0 www.google.com.br 
+
+$ bh_dlsite www.google.com.br 
+
+ GET all content of site with intervall randomized
+.RE 
+.BR
+Uses to generate the code base.
+.IP
+.RS 4
+# C BASE SOURCE CODE
+$ bh_skel_c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+
+
+	return 0;
+}
+
+# OR PYTHON 
+$ bh_skel_python
+#!/usr/bin/env python
+# *-* coding: utf-8 *-*
+
+if __name__ == __main__:
+.RE
+.BR 
+Convert String to Hex.
+.IP
+.RS 4
+$ bh_str2hex 'Fernando'
+46 65 72 6e 61 6e 64 6f
+$ bh_str2hex -x 'Fernando'
+\\x46\\x65\\x72\\x6e\\x61\\x6e\\x64\\x6f
+$ bh_str2hex -0x 'Fernado'
+0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
+$ bh_str2hex -s 'Fernando'
+0x4665726e616e646f
+
+# and the many cycles ago was created inversion
+
+$ bh_str2hexr 'Fernando'
+6f 64 6e 61 6e 72 65 46
+$ bh_str2hexr -x 'Fernando'
+\\x6f\\x64\\x6e\\x61\\x6e\\x72\\x65\\x46
+$ bh_str2hexr -0x 'Fernado'
+0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46
+$ bh_str2hexr -s 'Fernando'
+0x6f646e616e726546
+.RE
+.BR 
+Calculates exclusive OR of each char, uses int ou hex for key.
+.IP
+.RS 4
+$ bh_strxor 4 'ieikjew$ewwewwmjew'
+mamonas assassinas
+.RE 
+.BR 
+Decode a base64 string
+.IP
+.RS 4
+$ bh_unbase64 b3p6eSBvc2JvdXJuZQ==
+ozzy osbourne
+.RE 
+.BR 
+Attempt to identify string that generated hash, internet connection is required.
+.IP
+.RS 4
+$ bh_unmd5 827ccb0eea8a706c4c34a16891f84e7b 
+12345
+.RE 
+.BR 
+Still give more rules ;) internet connection is required, google acesses to search.
+.IP
+.RS 4 
+$ bh_websearch -t file -e txt -d mentebinaria.com.br -p 2
+[ file ] IN mentebinaria.com.br txt
+[+] 0
+[+] 10
+[+] 20
+=============================================
+mentebinaria.com.br/artigos/0x0a/gamevista.txt
+mentebinaria.com.br/artigos/0x0b/virtlinux.txt
+mentebinaria.com.br/artigos/0x0d/altexe.txt
+
+$ bh_websearch -t phone -d XXX.com.br -p 2
+[ phone ] IN XXX.com.br
+[+] 0
+[+] 10
+[+] 20
+=============================================
+(021) 55522635
+(021) 55554601
+(11) 5555-8402
+(11) 5555-8927
+(21) 5555-4511
+(21) 5555-4632
+(21) 55559400
+
+$ bh_websearch -t mail -d XXX.com.br -p 2
+[ mail ] IN XXX.com.br
+[+] 0
+[+] 10
+[+] 20
+=============================================
+XSX@XXX.com.br
+XXxxXXXXXXXXXXXXX@XXX.com.br
+Xad@XXX.com.br
+cXXXXtXXXXXXXX@XXX.com.br
+Xxx@XXX.com.br
+XXXXXXXXXantana@XXX.com.br
+eXc@XXX.com.br
+XXX@XXX.com.br
+XXX@XXX.com.br
+XeX@XXX.com.br
+XXX@XXX.com.br
+joXXXXXXXXXX@XXX.com.br
+
+.RE 
+.BR
+root is required for wifi scan, to scan scan functions below. 
+.IP
+.RS 4
+# bh_wscan
+
+6	f8:1a:67:c2:be:0a	: -55.00	: Hunter
+10	9c:97:26:67:f0:4b	: -87.00	: WiFi Fon
+11	00:1a:3f:83:01:df	: -86.00	: ZUDICA
+
+# bh_wscan -mac f8:1a:67:c2:be:0a
+   TP-LINK TECHNOLOGIES CO., LTD.
+
+# bh_wscan -oui 
+  BSS 00:1e:58:c4:e9:63 (on wlan0)
+	  SSID: Barack
+	  Vendor specific: OUI 00:03:7f, data: 01 01 00 20 ff 7f
+		  * Model: DIR-300
+  BSS 14:d6:4d:72:66:d4 (on wlan0)
+	  SSID: 
+	  Vendor specific: OUI 00:0c:43, data: 00 00 00 00
+
+# bh_wscan -oui 00:03:7f
+    ===============================================================================
+    00-03-7F   (hex)		Atheros Communications, Inc.
+    00037F     (base 16)	Atheros Communications, Inc.
+                                5480 Great America Parkway
+                                Santa Clara CA 95054
+                                UNITED STATES
+# bh_wscan -wps 
+ 80:3f:5d:e4:b9:b9  	 11 	WPS 1.0 
+
+.RE 
+.BR
+Calculates the exclusive OR between two numbers, you can uses hex.
+.IP
+.RS 4
+$ bh_xor 0xdead 0xdead
+0
+$ bh_xor 45 20
+57
+.RE
+.BR 
+To compress a file with password protecting (virus) use function below.
+.IP
+.RS 4
+$ bh_zipmal bashacks.sh 
+  adding: bashacks.sh (deflated 69%)
+-rw-r--r-- 1 wesley users 13K Dez 10 20:57 bashacks.zip
+
+# to decompress the file
+$ unzip bashacks.zip
+Archive:  bashacks.zip
+[bashacks.zip] bashacks.sh password: ****
+  inflating: bashacks.sh
+$
+.RE
+
+.SH AUTHORS
+Written by Fernando Mercês and Wesley Henrique
+
+.SH REPORTING BUGS
+Please, check the latest development code and report at https://github.com/merces/bashacks/issues
+
+.SH COPYRIGHT
+Copyright © 2014 bashack authors. Licensed GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it. There is NO WARRANTY, to the extent permitted by law.
