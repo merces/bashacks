@@ -8,7 +8,7 @@ all:
 		cat $$file >> $(OUTFILE); \
 		echo -e '\n' >> $(OUTFILE); \
 	done
-	if [ "$(STLANGUAGE)" = "pt_BR" ] ; then \
+	if [ $(STLANGUAGE) == "pt_BR" ] ; then \
 		install man/pt_BR/bashacks.1 /usr/share/man/man1; \
 	else \
 		install man/en/bashacks.1 /usr/share/man/man1; \
@@ -16,3 +16,4 @@ all:
 	
 clean:
 	rm -f bashacks.sh
+	rm -f /usr/share/man/man1/bashacks.1
