@@ -1,6 +1,6 @@
 .TH BASHACKS 1
 .SH NAME
-bashacks - functions to hack with bash
+bashacks - funções para hack com bash
 
 .SH SYNOPSIS
 .B bh_asc2dec [char]
@@ -114,169 +114,169 @@ bashacks - functions to hack with bash
 .SH FUNCTIONS
 .TP
 .BR bh_asc2dec
-Converts ascii bytes in decimal equivalent.
+Converte byte ascii em seu equivalente decimal.
 .TP
 .BR bh_asciitable
-Show ascii table.
+Exibe tabela ascii.
 .TP
 .BR bh_asm2sc
-Generates shellcode based on asm file.
+Gera shellcode baseando-se me arquivo assembly contendo source.
 .TP
 .BR bh_asmgrep
-Search assembly instructions into executable binaries and prints 4 instructions 'round'. You must be attentive to the syntax (Intel or AT&T) utilized in your environment..
+Procura por instruções assembly em binário e imprime instruções ao redor, Fique atento as instruções utilizadas em seu ambiente (Intel or AT&T).
 .TP
 .BR bh_asminfo
-Prints on the screen the information assembly syntax.
+Imprime na tela informações da sintax assembly informada.
 .TP
 .BR bh_bin2dec
-Convert binary to decimal equivalent.
+Converte binário em seu equivalente decimal.
 .TP
 .BR bh_bin2ip
-Convert an binary into its equivalent decimal.
+Converte um endereço ip binário para seu equivalente em decimal.
 .TP
 .BR bh_bkp
- Do a quick backup of a file
+Faz um backup rápido de um arquivo.
 .TP
 .BR bh_charcalc
-Carries out calculations between special characters and numbers.
+Faz calculo entre números e caracteres especiais.
 .TP
 .BR bh_dec2asc
-Converts decimal to ascii bytes equivalent.
+Converte decimal em byte ascii equivalente.
 .TP
 .BR bh_dec2bin
-Convert decimal to binary equivalent.
+Converte decimal em binário equivalente.
 .TP
 .BR bh_dec2hex
-Convert decimal to hex equivalent.
+Converte decimal em hexa equivalente.
 .TP
 .BR bh_dumpmem
-Creates file on disk with memory contents of a process.
+Cria um arquivo em disco com conteúdo de dump de memória do processo.
 .TP
 .BR bh_find
-Find file by mime type exe, msi, txt, zip.
+Procura por arquivo baseando-se em seu mime type. exe, msi, txt, zip.
 .TP
 .BR bh_hashes
-Generates hash all informed files.
+Gera hash de todos arquivos informados.
 .TP 
 .BR bh_hex2bin
-Convert hex to binary equivalent.
+Converte hexa em sem equivalente em binário.
 .TP
 .BR bh_hex2dec
-Convert hex to decimal equivalent.
+Converte hexa em seu equivalente em decimal.
 .TP
 .BR bh_hex2str
-Converts one or more bytes into a hex string. Accepts as input all output formats str2hex function.
+Converte um ou mais bytes hexa em string, aceita todos os outputs gerados pela função bh_str2hex.
 .TP
 .BR bh_hexcalc
-Makes calculation of numbers in hexadecimal and gives the result in hexadecimal.
+Faz calculos em hexa e retona seu resultado em hexa.
 .TP
 .BR bh_hostcalc
-Returns the total number of hosts based on subnet mask informed.
+Retorna total de endereços que podem ser distribuidos em uma rede quando informado mascara de subrede.
 .TP
 .BR bh_intel
-Enable or Disable instructions intel.
+Habilita ou Desabilita instruções intel.
 .TP
 .BR bh_ip2bin
-Convert an ip address into its equivalent binary.
+Converte um endereço ip em seu equivalente em binário.
 .TP
 .BR bh_ip2geo
-Approximately determines geographical location of an ip address or domain name.
+Determina aproximadamente localiação geografica de endereço ip ou dominio informado, conexão com a internet é requirida.
 .TP
 .BR bh_isalnum
-Determines whether string or char is alphanumeric.
+Determina se string ou char é alphanumeric.
 .TP
 .BR bh_isalpha
-Determines whether string or char is alpha.
+Determina se string ou char é alpha.
 .TP
 .BR bh_isascii
-Deterimines wheter char is ascii char.
+Determina se char é ascii char.
 .TP
 .BR bh_isdigit
-Determines whether string or char is digit.
+Determina se string ou char é um digito.
 .TP
 .BR bh_isgraph
-Determines whether char is graph.
+Determina se char é grafico.
 .TP
 .BR bh_islower
-Determines whether char or string is lowercase.
+Determina se char ou string econtra-se em caixa baixa.
 .TP
 .BR bh_ispunct
-Determines whther char is punctuation.
+Determina se char é uma pontuação.
 .TP
 .BR bh_isupper
-Determines whether char or string is uppercase.
+Determina se char ou string encontra-se em caixa alta.
 .TP
 .BR bh_isxdigit
-Determines whether string or char is hex digit.
+Determina se string ou cahr é um digito hexadecimal.
 .TP
 .BR bh_matrix
-Matrix because is fun.
+Matrix pois é divertido.
 .TP
 .BR bh_md5
- Calculates the MD5 hash of a string (without considering the caracetere newline) or a file if it exists.
+Calcula o hash MD5 de uma string (retirando o caracter de newline) ou arquivo caso exista.
 .TP
 .BR bh_myip
-Show external ipaddress.
+Exibe ip externo de conexão.
 .TP
 .BR bh_pow
- Raises a number to a power.
+Eleva número a potência.
 .TP
 .BR bh_rotall
-Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+Codifica e Decodifica string com variações da cifra de Cesar deslocando 'n' para a direita.
 .TP
 .BR bh_rot
- Encrypts/Decrypts string with the Cesar Cipher using n shifts to the right.
+ Codifica e Decodifica como bh_rotall mas 'n' deve ser informado como entrada.
 .TP
 .BR bh_sc2asm
-Asm code generated through a shellcode. 
+Gera codigo ASM de shellcode.
 .TP
 .BR bh_shl
- Push bits to the left by a number.
+ Desloca bits para a esquerda.
 .TP
 .BR bh_shr
- Push bits to the right by a number.
+ Desloca bits para direita..
 .TP
 .BR bh_sitedl
-Download all site.
+Download de todo conteúdo de um site.
 .TP
 .BR bh_skel_c
-Shows the basic structure of a code C.
+Exibe estrutura base de um código em C.
 .TP
 .BR bh_skel_python
-Show the basic structure of a code Python.
+Exibe estrutura base de um código em python.
 .TP
 .BR bh_str2hexr
-Converts string in hex byte equivalent to each char (hex string).
+Converte string em hexa esquivalente de modo invertido.
 .TP
 .BR bh_str2hex 
-Converts string in hex byte equivalent to each char (hex string).
+Converte string em hexa equivalente.
 .TP
 .BR bh_strxor
-Calculates exclusive OR of each character in a string with a key.
+Calcula OU exclusivo para cada char em uma string com uma chave.
 .TP
 .BR bh_unbase64
-Decodes a BASE64 string.
+Decodifica uma string codificada em base64.
 .TP
 .BR bh_unmd5
-Attempts to discover the string that generated the MD5 hash using the internet (requires you to be connected).
+Tenta idenficar qual string gerou o hash, utiliza a internet para tal.
 .TP
 .BR bh_utf8table
-Show UTF8 table.
+Exibe tabela UTF8.
 .TP 
 .BR bh_websearch
-Uses google base to extract information such as sql files, txt or anything else that can server to extract information, other functionality are finding email phones.
+Utiliza a base do google para extrair informações de arquivo sql, txt ou qualquer outro que possa servir, outras funcionlidades são encontrar email e telefones.
 .TP
 .BR bh_wscan
-Displays the list of wireless networks with chanell, bss, signal, ssid and others
+Exibe lista de redes wifi disponiveis, modelo do dispositivo, WPS. SSID e outras.
 .TP
 .BR bh_xor
- Calculates the exclusive OR between two numbers.
+ Calcula OU exclusivo entre dois números.
 .TP
 .BR bh_zipmal
-Compress file in zip format with password protecting.
+Comprime um arquivo em formato zip protegendo com senha.
 
 .SH EXAMPLES
-To convert a ascii char in decimal code
+Para converter ascii em decimal.
 .IP
 .RS 4
 .nf
@@ -285,7 +285,7 @@ $ bh_asc2dec a
 $
 .RE
 .BR 
-Show the ascii or utf8 table
+Exibir a tabela ascii  ou utf8.
 .IP
 .RS 4 
 .nf
@@ -325,8 +325,8 @@ c2 ab «  c2 b7 ·  c3 83 Ã  c3 8f Ï  c3 9b Û  c3 a7 ç  c3 b3 ó  c3 bf ÿ
 
 
 .RE
-.BR 
-Uses to generate a shell code of asm source file, nasm is required.
+.BR
+Use para gerar um shellcode do codigo fonte de um ASM, nasm é necessário.
 .IP
 .RS 4
 .nf
@@ -335,7 +335,7 @@ $ bh_asm2sc fork.s
 $
 .RE
 .BR
-To search instruction into binary with bh_asmgrep enjoy and look what exists around.
+Para localizar instruções em um binário com bh_asmgrep aproveitar e olhar ao redor.
 .IP
 .RS 4
 .nf
@@ -351,7 +351,7 @@ $ bh_asmgrep 'push.*rbp$' /bin/ls
    411410:  48 8b 9c 24 a0 00 00           mov rbx,QWORD PTR [rsp+0xa0]
 
 .RE
-Internet connection is required for search assembly instruction, it has a caching mechanism to facilitate faster subsequent queries making. 
+Conexão com a internet é necessária para localizar instruções assembly, existe um mecanismo de cache que acelera o processo para outras consultas do mesmo tipo. 
 .RS 4
 .nf
 .BR 
@@ -409,14 +409,14 @@ Flags
 |OF  |sets according to the result.|
 .RE
 .BR
-Convert binary to decimal is very easy.
+Converte binário em decimal é muito fácil.
 .IP
 .RS 4
 $ bh_bin2dec 11111111
 255
 $
 .RE
-Convert binary ip address to decimal.
+Converter endereço ip binário para decimal.
 .IP
 .RS 4
 $ bh_bin2ip 00001010.00000000.00000000.11001000
@@ -424,7 +424,7 @@ $ bh_bin2ip 00001010.00000000.00000000.11001000
 $
 .RE
 .BR 
-creates backup of file with 'filename.date +%Y%m%d'
+Criar um arquivo de backup rapidamente.
 .IP
 .RS 4
 $ bh_bkp bashacks.sh
@@ -433,7 +433,7 @@ bashacks.sh  bashacks.sh.20141209
 $
 .RE
 .BR
-Calculator strings, char and digits.
+Calculadora string, char and digitos.
 .IP
 .RS 4
 $ bh_charcalc f + 2
@@ -446,7 +446,7 @@ $ bh_charcalc isso \* 3
 issoissoisso
 .RE
 .BR
-Once having decimal char codes is possible convert to it's equivalent in ascii.
+Uma vez tendo o código decimal de um char é possivel converter para seu equivalente em ascii.
 .IP
 .RS 4
 $ bh_dec2asc 65
@@ -454,7 +454,7 @@ A
 $
 .RE
 .BR
-Converting decimal to binary.
+Convertendo decimal para binário.
 .IP
 .RS 4 
 $ bh_dec2bin 10
@@ -463,21 +463,21 @@ $ bh_dec2bin 255
 11111111
 .RE 
 .BR 
-Converting decimal to hexadecimal.
+Convertendo decimal para hexadecimal.
 .IP
 .RS 4
 $ bh_dec2hex 10
 a
 .RE 
 .BR
-root is required to extract content of memory area.
+root é necessário para extrair conteúdo da área de memória.
 .IP
 .RS 4
 # bh_dumpstack 15125 pilha.dump
 # bh_dumpheap 15125 heap.dump"
 .RE
 .BR
-Search mime type of file (txt, zip, exe and msi)
+Localiza pelo mime type alguns formatos de arquivos (txt, zip, exe e msi)
 .IP
 .RS 4
 $ bh_find -txt
@@ -490,7 +490,7 @@ $ bh_find -exe ~/Downloads
 /home/bashacks/Downloads//putty.exe
 .RE 
 .BR 
-Generates hash of file or list of file informed.
+Gera hash de arquivo ou lista de arquivos.
 .IP
 .RS 4
 $ bh_hashes bashacks.sh README.md
@@ -503,14 +503,14 @@ $ bh_hashes bashacks.sh README.md
 $
 .RE 
 .BR
-Convert hex to binary
+Converte hexa para binário.
 .IP
 .RS 4
 $ bh_hex2bin a 
 1010
 .RE
 .BR
-Convert hexadecimal to decimal
+Converte hexa para decimal.
 .IP
 .RS 4
 $ bh_hex2dec a
@@ -519,7 +519,7 @@ $ bh_hex2dec 0x0a
 10
 .RE 
 .BR
-Converting hexadecimal to string
+Convertendo hexadecimal para string.
 .IP
 .RS 4
 $ bh_hex2str '72 6f 63 6b'
@@ -532,7 +532,7 @@ $ bh_hex2str '{0x72, 0x6f, 0x63, 0x6b}'
 rock
 .RE
 .BR
-Hex Calculator
+Calculadora Hexa.
 .IP
 .RS 4
 $ bh_hexcalc 5f \* 2
@@ -541,28 +541,28 @@ $ bh_hexcalc 0xdead / 0xdead
 0x1
 .RE 
 .BR
-Calculating amount of host on a network
+Calculando total de hosts em uma rede com mascara de 24 bits.
 .IP
 .RS 4
 $ bh_hostcalc 24
 254
 .RE 
 .BR 
-Enables or disables intel interpreter for assembly instructions.
+Habilita ou desabilita interpretador intel para instruções assembly.
 .IP
 .RS 4
 $ bh_intel on 
 $ bh_intel off
 .RE 
 .BR
-Convert ip address in binary
+Converte endereço ip em binário.
 .IP
 .RS 4
 $ bh_ip2bin 10.0.0.1
 00001010.00000000.00000000.00000001
 .RE 
 .BR
-Bashacks makes it easy to validate that string or char is alpha.
+Bashacks facilita para validar se string ou char é alpha.
 .IP
 .RS 4 
 $ bh_isalnum a1
@@ -574,18 +574,18 @@ $ echo $?
 $ if $(bh_isalnum a) ; then echo 'OK' ; else echo 'NO' ; fi
 OK
 
-other functions that do not exist by default and follows the same structure are.
+outras funções que não existem por padrão e formos criando são listadas abaixo e seguem o mesmo padrão.
 
 .B bh_isalpha bh_isascii bh_isdigit bh_isgraph bh_ispunct bh_isxdigit bh_islower bh_isupper 
 .RE
 .BR
-FUNNY Matrix
+É divertido Matrix
 .IP
 .RS 4
 $ bh_matrix
 .RE
 .BR
-Generates md5 without line break.
+Gera md5 sem o char de quebra de linha.
 .BR
 .IP
 .RS 4
@@ -595,14 +595,14 @@ $ bh_md5 /etc/passwd
 18186ca65c92ba40cfe8ed4089496c42
 .RE
 .BR
-Show externa ip address, internet connection is required.
+Exibe endereço ip externo, conexão com a internet é necessário.
 .IP
 .RS 4
 $ bh_myip
 189.107.50.133
 .RE
 .BR
-Ever wondered how to make power of calculation in bash, it's actually quite simple, but we simplify more.
+Certamente já se perguntou como fazer calculo de potência em bash, isto é muito simples, mas simplificamos um pouco.
 .IP
 .RS 4
 $ bh_pow 8 2
@@ -611,7 +611,7 @@ $ bh_pow 0xa 3
 1000
 .RE
 .BR
-rotall is an implementation that accesses rot generating 1..25 results to rot. 
+rotall é uma implementação que acessa bh_rot 'n' gerando de 1..25 resultados para bh_rot.
 .IP
 .RS 4
 $ bh_rotall urfn
@@ -647,11 +647,11 @@ whuud
 $ bh_rot13 terra 
 green
 
-# also
+# veja também. 
 .B bh_rot13   bh_rot18   bh_rot47   bh_rot5
 .RE 
 .BR
-Asm code generated through a shellcode, yes it is wonderful.
+Gerar codigo ASM de um shellcode, sim, isto é lindo.
 .IP
 .RS 4
 $ bh_sc2asm '\\x31\\xc0\\x40\\x40\\xcd\\x80\\xeb\\xf8'
@@ -662,23 +662,23 @@ int 0x80
 jmp 0x0
 .RE 
 .BR 
-move bit.
+movendo bit para direita e esquerda.
 .IP
 .RS 4
-# left
+# esquerda
 $ bh_shl 4 1
 8
 $ bh_shl 0x4 1
 8
 
-# right
+# direita
 $ bh_shr 4 1
 2
 $ bh_shr 0x4 1
 2
 .RE 
 .BR
-Make url to download all content of web site and download all content.
+Monta url para download de todo conteúdo do site e como fazer o download também.
 .IP
 .RS 4
 $ bh_sitedl www.google.com.br 
@@ -686,13 +686,13 @@ wget -crw 1 --user-agent Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/2010
 
 $ bh_dlsite www.google.com.br 
 
- GET all content of site with intervall randomized
+ baixa todo o conteúdo do site com intervalo randomizado.
 .RE 
 .BR
-Uses to generate the code base.
+Use para gerar codigo base de algumas linguagens.
 .IP
 .RS 4
-# C BASE SOURCE CODE
+# Código base de linguagem C
 $ bh_skel_c
 #include <stdio.h>
 
@@ -702,7 +702,7 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-# OR PYTHON 
+# OU Python
 $ bh_skel_python
 #!/usr/bin/env python
 # *-* coding: utf-8 *-*
@@ -710,7 +710,7 @@ $ bh_skel_python
 if __name__ == __main__:
 .RE
 .BR 
-Convert String to Hex.
+Converte string para hexa.
 .IP
 .RS 4
 $ bh_str2hex 'Fernando'
@@ -722,7 +722,7 @@ $ bh_str2hex -0x 'Fernado'
 $ bh_str2hex -s 'Fernando'
 0x4665726e616e646f
 
-# and the many cycles ago was created inversion
+# e a muitos ciclos já foi implementando o modo inverso. ;)
 
 $ bh_str2hexr 'Fernando'
 6f 64 6e 61 6e 72 65 46
@@ -734,28 +734,28 @@ $ bh_str2hexr -s 'Fernando'
 0x6f646e616e726546
 .RE
 .BR 
-Calculates exclusive OR of each char, uses int ou hex for key.
+Calcula OU Exclusiva de cada char, use inteiro ou hexa como chave.
 .IP
 .RS 4
 $ bh_strxor 4 'ieikjew$ewwewwmjew'
 mamonas assassinas
 .RE 
 .BR 
-Decode a base64 string
+Decodifica string codificada em base64.
 .IP
 .RS 4
 $ bh_unbase64 b3p6eSBvc2JvdXJuZQ==
 ozzy osbourne
 .RE 
 .BR 
-Attempt to identify string that generated hash, internet connection is required.
+Tenta identificar string que gerou o hash, conexão com a internet é necessária.
 .IP
 .RS 4
 $ bh_unmd5 827ccb0eea8a706c4c34a16891f84e7b 
 12345
 .RE 
 .BR 
-Still give more rules ;) internet connection is required, google acesses to search.
+Conexão com a internet é necessária, acessa o google para localizar informações.
 .IP
 .RS 4 
 $ bh_websearch -t file -e txt -d mentebinaria.com.br -p 2
@@ -803,7 +803,7 @@ joXXXXXXXXXX@XXX.com.br
 
 .RE 
 .BR
-root is required for wifi scan, to scan scan functions below. 
+root é necessário para ver redes wifi disponiveis. 
 .IP
 .RS 4
 # bh_wscan
@@ -834,9 +834,12 @@ root is required for wifi scan, to scan scan functions below.
 # bh_wscan -wps 
  80:3f:5d:e4:b9:b9  	 11 	WPS 1.0 
 
+# bh_wscan -model 
+ 00:1e:58:c4:e9:63      * DIR-300
+ 
 .RE 
 .BR
-Calculates the exclusive OR between two numbers, you can uses hex.
+Calule OU exclusivo entre dois números, você pode usar hexa.
 .IP
 .RS 4
 $ bh_xor 0xdead 0xdead
@@ -845,14 +848,14 @@ $ bh_xor 45 20
 57
 .RE
 .BR 
-To compress a file with password protecting (virus) use function below.
+Para comprimir um arquivo protegido com senha (virus) use a função abaixo.
 .IP
 .RS 4
 $ bh_zipmal bashacks.sh 
   adding: bashacks.sh (deflated 69%)
 -rw-r--r-- 1 wesley users 13K Dez 10 20:57 bashacks.zip
 
-# to decompress the file
+# para extrair o arquivo.
 $ unzip bashacks.zip
 Archive:  bashacks.zip
 [bashacks.zip] bashacks.sh password: ****
@@ -861,10 +864,10 @@ $
 .RE
 
 .SH AUTHORS
-Written by Fernando Mercês and Wesley Henrique
+Escrito por Fernando Mercês e Wesley Henrique
 
 .SH REPORTING BUGS
-Please, check the latest development code and report at https://github.com/merces/bashacks/issues
+Por favor, verifique o código mais recente em desenvolvimento e os reports no https://github.com/merces/bashacks/issues
 
 .SH COPYRIGHT
 Copyright © 2014 bashack authors. Licensed GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.

@@ -21,7 +21,8 @@ bh_wscan()
             grep -E '^BSS|Model:' |
             sed -r 's/(\(.*\)|-- associated)//g' |
             tr \\n ' ' |
-            sed 's/BSS/\n/g'
+            sed 's/BSS/\n/g' | grep 'Model' |
+            sed 's/Model: //g' 
         ;;
         -oui)
             [ ! -z "$(echo $2 | grep -Ewo '(([0-9a-f]){2}:){2}([0-9a-f]){2}' )" ] && {
