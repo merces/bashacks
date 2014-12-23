@@ -110,6 +110,10 @@ bashacks - funções para hack com bash
 .B bh_xor [number]
 .TP
 .B bh_zipmal [filename]
+.TP
+.B bh_md5rename [filename]
+.TP
+.B bh_iscntrl [char]
 
 .SH FUNCTIONS
 .TP
@@ -274,6 +278,12 @@ Exibe lista de redes wifi disponiveis, modelo do dispositivo, WPS. SSID e outras
 .TP
 .BR bh_zipmal
 Comprime um arquivo em formato zip protegendo com senha.
+.TP
+.BR bh_md5rename
+Gera mensagem hash md5 de arquivo e o renomeia com o resultado.
+.TP
+.BR bh_iscntrl
+Checa se é um caracter de controle.
 
 .SH EXAMPLES
 Para converter ascii em decimal.
@@ -860,6 +870,40 @@ $ unzip bashacks.zip
 Archive:  bashacks.zip
 [bashacks.zip] bashacks.sh password: ****
   inflating: bashacks.sh
+$
+.RE
+.BR
+Para renomear um ou mais arquivos com o md5 hash gerado por eles utilize a função abaixo.
+.IP
+.RS 4
+$ bh_md5 bashacks.sh
+b99a81de3a206738f1339a091b81194c
+$ bh_md5 README.md 
+6e4d6dd3ce60df996606f5b3145692f7
+$ bh_md5rename bashacks.sh README.md 
+$ ls -1
+6e4d6dd3ce60df996606f5b3145692f7
+b99a81de3a206738f1339a091b81194c
+$
+.RE 
+.BR
+Para validar se em um arquivo existe um caracter de controle levando em consideração que é um por linha, como exemplo abaixo.
+.IP
+.RS 4
+$ cat file.txt
+-> INI
+
+	
+BASHACKS
+ 
+<- END
+$ while read line ; do if $(bh_iscntrl "$line" ) ; then echo "OK"; else echo "NO" ; fi ; done < file.txt
+NO
+OK
+OK
+NO
+OK
+NO
 $
 .RE
 

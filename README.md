@@ -84,6 +84,7 @@
  See bh-referencia.html. It will be improved in the future.
 
  or
+
     $ man bashacks
 
  Available in 'pt_BR' and 'en'. 
@@ -91,9 +92,11 @@
 ## 5. ChangeLog
 
  * bashacks 1.5 - ?
-  * new name: bashacks 
+  * new name: bashacks
+  + new function: bh_iscntrl() - validate char is controler char.
+  + new function: bh_md5rename() - rename file with md5 message digest.
   + new file: man/en/bashacks.1  - page english language.
-  + new file: mam/pt_BR/bashacks.1 - page Portuguese language.
+  + new file: man/pt_BR/bashacks.1 - page Portuguese language.
   + new function: bh_isascii() - determines whether char is ascii.
   + new function: bh_ispunct() - determines whether char is punctuatio.
   + new function: bh_sitedl() - download an entire website with random request timeouts and custom User-Agent.
