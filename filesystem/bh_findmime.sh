@@ -1,4 +1,4 @@
-bh_find()
+bh_findmime()
 {
 	local dir=.
 	local filetype
