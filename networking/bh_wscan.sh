@@ -5,17 +5,22 @@ bh_wscan()
     local MAC
     local MACTMP
     local MACPROD
+    local PARAM
 
-    [ "$1" == "-i" ] && iFace=$2 || {
+    [ "$1" == "-i" ] && { 
+        iFace="$2" 
+        PARAM="$3"
+    } || {
         local iFace="$(iw dev |
         grep 'Interface' |
         cut -d' ' -f2)"
+        PARAM="$1"
     }
 
     [ ${EUID} -ne 0 -o \
         -z "${iFace}" ] && { echo 'root is required' ; return 1; }
 
-    case "$1" in
+    case "$PARAM" in
         -model)
             iw ${iFace} scan -u | 
             grep -E '^BSS|Model:' |
