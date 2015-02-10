@@ -114,6 +114,8 @@ bashacks - functions to hack with bash
 .B bh_md5rename [filename]
 .TP
 .B bh_iscntrl [char]
+.TP
+.B bh_isspace [char]
 
 .SH FUNCTIONS
 .TP
@@ -284,6 +286,9 @@ Generates md5 message digest to one or more files and rename it with result.
 .TP
 .BR bh_iscntrl
 Determines whether char is control char..
+.TP
+.BR bh_isspace
+Determines whether char is space.
 
 .SH EXAMPLES
 To convert a ascii char in decimal code
@@ -903,7 +908,23 @@ OK
 NO
 $
 .RE
+.BR
+To validate whether char is space char.
+.IP
+.RS 4
+To traverse a string or file is located char type: 
+DEC HEX   
+ 9  09 HT   
+ 10 0A LF   
+ 11 0B VT   
+ 12 0C FF   
+ 13 0D CR
+ 32 20 SPACE
 
+ $ bh_issapce ' '
+
+met condition is true.
+.RE
 
 .SH AUTHORS
 Written by Fernando Mercês and Wesley Henrique
