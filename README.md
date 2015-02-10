@@ -93,6 +93,7 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: bh_isspace() - validate whether char is space.
   + new function: bh_iscntrl() - validate char is controler char.
   + new function: bh_md5rename() - rename file with md5 message digest.
   + new file: man/en/bashacks.1  - page english language.
