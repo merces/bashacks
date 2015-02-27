@@ -116,6 +116,10 @@ bashacks - functions to hack with bash
 .B bh_iscntrl [char]
 .TP
 .B bh_isspace [char]
+.TP
+.B bh_wgetr [url]
+.TP
+.B bh_get [absolute url]
 
 .SH FUNCTIONS
 .TP
@@ -289,6 +293,12 @@ Determines whether char is control char..
 .TP
 .BR bh_isspace
 Determines whether char is space.
+.TP
+.BR bh_wgetr 
+Informed the url page, gets the same recursive and continuous mode, interval between each page is randomly setted.
+.TP
+.BR bh_get
+ Informed the absolute url, gets the same in continuous mode, only one page.
 
 .SH EXAMPLES
 To convert a ascii char in decimal code
@@ -427,6 +437,7 @@ Flags
 Convert binary to decimal is very easy.
 .IP
 .RS 4
+.nf
 $ bh_bin2dec 11111111
 255
 $
@@ -434,6 +445,7 @@ $
 Convert binary ip address to decimal.
 .IP
 .RS 4
+.nf
 $ bh_bin2ip 00001010.00000000.00000000.11001000
 10.0.0.200
 $
@@ -442,6 +454,7 @@ $
 creates backup of file with 'filename.date +%Y%m%d'
 .IP
 .RS 4
+.nf
 $ bh_bkp bashacks.sh
 $ ls bashacks.sh*
 bashacks.sh  bashacks.sh.20141209
@@ -451,6 +464,7 @@ $
 Calculator strings, char and digits.
 .IP
 .RS 4
+.nf
 $ bh_charcalc f + 2
 h
 $ bh_charcalc B - 1
@@ -464,6 +478,7 @@ issoissoisso
 Once having decimal char codes is possible convert to it's equivalent in ascii.
 .IP
 .RS 4
+.nf
 $ bh_dec2asc 65
 A
 $
@@ -471,7 +486,8 @@ $
 .BR
 Converting decimal to binary.
 .IP
-.RS 4 
+.RS 4
+.nf
 $ bh_dec2bin 10
 1010
 $ bh_dec2bin 255
@@ -481,6 +497,7 @@ $ bh_dec2bin 255
 Converting decimal to hexadecimal.
 .IP
 .RS 4
+.nf
 $ bh_dec2hex 10
 a
 .RE 
@@ -488,6 +505,7 @@ a
 root is required to extract content of memory area.
 .IP
 .RS 4
+.nf
 # bh_dumpstack 15125 pilha.dump
 # bh_dumpheap 15125 heap.dump"
 .RE
@@ -495,6 +513,7 @@ root is required to extract content of memory area.
 Search mime type of file (txt, zip, exe and msi)
 .IP
 .RS 4
+.nf
 $ bh_find -txt
 bashacks.sh
 bh-referencia.html
@@ -508,6 +527,7 @@ $ bh_find -exe ~/Downloads
 Generates hash of file or list of file informed.
 .IP
 .RS 4
+.nf
 $ bh_hashes bashacks.sh README.md
 1fca0b44a77773ca1ec4976081cc60f1  bashacks.sh
 72e90888fc6b221729e3388582726dcb00522790  bashacks.sh
@@ -521,6 +541,7 @@ $
 Convert hex to binary
 .IP
 .RS 4
+.nf
 $ bh_hex2bin a 
 1010
 .RE
@@ -528,6 +549,7 @@ $ bh_hex2bin a
 Convert hexadecimal to decimal
 .IP
 .RS 4
+.nf
 $ bh_hex2dec a
 10
 $ bh_hex2dec 0x0a
@@ -537,6 +559,7 @@ $ bh_hex2dec 0x0a
 Converting hexadecimal to string
 .IP
 .RS 4
+.nf
 $ bh_hex2str '72 6f 63 6b'
 rock
 $ bh_hex2str 'rock'
@@ -550,6 +573,7 @@ rock
 Hex Calculator
 .IP
 .RS 4
+.nf
 $ bh_hexcalc 5f \* 2
 oxbee
 $ bh_hexcalc 0xdead / 0xdead
@@ -559,6 +583,7 @@ $ bh_hexcalc 0xdead / 0xdead
 Calculating amount of host on a network
 .IP
 .RS 4
+.nf
 $ bh_hostcalc 24
 254
 .RE 
@@ -566,6 +591,7 @@ $ bh_hostcalc 24
 Enables or disables intel interpreter for assembly instructions.
 .IP
 .RS 4
+.nf
 $ bh_intel on 
 $ bh_intel off
 .RE 
@@ -573,13 +599,15 @@ $ bh_intel off
 Convert ip address in binary
 .IP
 .RS 4
+.nf
 $ bh_ip2bin 10.0.0.1
 00001010.00000000.00000000.00000001
 .RE 
 .BR
 Bashacks makes it easy to validate that string or char is alpha.
 .IP
-.RS 4 
+.RS 4
+.nf
 $ bh_isalnum a1
 $ echo $? 
 0
@@ -597,6 +625,7 @@ other functions that do not exist by default and follows the same structure are.
 FUNNY Matrix
 .IP
 .RS 4
+.nf
 $ bh_matrix
 .RE
 .BR
@@ -604,6 +633,7 @@ Generates md5 without line break.
 .BR
 .IP
 .RS 4
+.nf
 $ bh_md5 '123456'
 e10adc3949ba59abbe56e057f20f883e
 $ bh_md5 /etc/passwd
@@ -613,6 +643,7 @@ $ bh_md5 /etc/passwd
 Show externa ip address, internet connection is required.
 .IP
 .RS 4
+.nf
 $ bh_myip
 189.107.50.133
 .RE
@@ -620,6 +651,7 @@ $ bh_myip
 Ever wondered how to make power of calculation in bash, it's actually quite simple, but we simplify more.
 .IP
 .RS 4
+.nf
 $ bh_pow 8 2
 64
 $ bh_pow 0xa 3
@@ -629,6 +661,7 @@ $ bh_pow 0xa 3
 rotall is an implementation that accesses rot generating 1..25 results to rot. 
 .IP
 .RS 4
+.nf
 $ bh_rotall urfn
 ROT1 vsgo
 ROT2 wthp
@@ -669,6 +702,7 @@ green
 Asm code generated through a shellcode, yes it is wonderful.
 .IP
 .RS 4
+.nf
 $ bh_sc2asm '\\x31\\xc0\\x40\\x40\\xcd\\x80\\xeb\\xf8'
 xor eax, eax            
 inc eax                 
@@ -680,6 +714,7 @@ jmp 0x0
 move bit.
 .IP
 .RS 4
+.nf
 # left
 $ bh_shl 4 1
 8
@@ -696,6 +731,7 @@ $ bh_shr 0x4 1
 Make url to download all content of web site and download all content.
 .IP
 .RS 4
+.nf
 $ bh_sitedl www.google.com.br 
 wget -crw 1 --user-agent Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0 www.google.com.br 
 
@@ -707,6 +743,7 @@ $ bh_dlsite www.google.com.br
 Uses to generate the code base.
 .IP
 .RS 4
+.nf
 # C BASE SOURCE CODE
 $ bh_skel_c
 #include <stdio.h>
@@ -728,6 +765,7 @@ if __name__ == __main__:
 Convert String to Hex.
 .IP
 .RS 4
+.nf
 $ bh_str2hex 'Fernando'
 46 65 72 6e 61 6e 64 6f
 $ bh_str2hex -x 'Fernando'
@@ -752,6 +790,7 @@ $ bh_str2hexr -s 'Fernando'
 Calculates exclusive OR of each char, uses int ou hex for key.
 .IP
 .RS 4
+.nf
 $ bh_strxor 4 'ieikjew$ewwewwmjew'
 mamonas assassinas
 .RE 
@@ -759,6 +798,7 @@ mamonas assassinas
 Decode a base64 string
 .IP
 .RS 4
+.nf
 $ bh_unbase64 b3p6eSBvc2JvdXJuZQ==
 ozzy osbourne
 .RE 
@@ -766,13 +806,15 @@ ozzy osbourne
 Attempt to identify string that generated hash, internet connection is required.
 .IP
 .RS 4
+.nf
 $ bh_unmd5 827ccb0eea8a706c4c34a16891f84e7b 
 12345
 .RE 
 .BR 
 Still give more rules ;) internet connection is required, google acesses to search.
 .IP
-.RS 4 
+.RS 4
+.nf
 $ bh_websearch -t file -e txt -d mentebinaria.com.br -p 2
 [ file ] IN mentebinaria.com.br txt
 [+] 0
@@ -821,6 +863,7 @@ joXXXXXXXXXX@XXX.com.br
 root is required for wifi scan, to scan scan functions below. 
 .IP
 .RS 4
+.nf
 # bh_wscan
 
 6	f8:1a:67:c2:be:0a	: -55.00	: Hunter
@@ -854,6 +897,7 @@ root is required for wifi scan, to scan scan functions below.
 Calculates the exclusive OR between two numbers, you can uses hex.
 .IP
 .RS 4
+.nf
 $ bh_xor 0xdead 0xdead
 0
 $ bh_xor 45 20
@@ -863,6 +907,7 @@ $ bh_xor 45 20
 To compress a file with password protecting (virus) use function below.
 .IP
 .RS 4
+.nf
 $ bh_zipmal bashacks.sh 
   adding: bashacks.sh (deflated 69%)
 -rw-r--r-- 1 wesley users 13K Dez 10 20:57 bashacks.zip
@@ -878,6 +923,7 @@ $
 To rename one or more files with md5 message digest generated by it.
 .IP
 .RS 4
+.nf
 $ bh_md5 bashacks.sh
 b99a81de3a206738f1339a091b81194c
 $ bh_md5 README.md 
@@ -892,6 +938,7 @@ $
 To validate if exists control char in line of file.
 .IP
 .RS 4
+.nf
 $ cat file.txt
 -> INI
 
@@ -912,6 +959,7 @@ $
 To validate whether char is space char.
 .IP
 .RS 4
+.nf
 To traverse a string or file is located char type: 
 DEC HEX   
  9  09 HT   
@@ -925,6 +973,28 @@ DEC HEX
 
 met condition is true.
 .RE
+.BR
+Downloads all the pages of a url on continuous mode and intervall between each pages is setted with bh_wgetr 
+.IP
+.RS 4
+.nf
+$ bh_wgetr http://www.mentebinaria.com.br 
+////// wget output /////
+$ ls -1 www.mentebinaria.com.BR
+index.html
+robots.txt
+style.css
+.RE
+.BR
+Download absolute url page continuos mode with bh_get
+.IP
+.RS 4
+.nf
+$ bh_get http://www.mentebinaria.com.br/artigos/0x1f/0x1f-maqengrevlnx.html
+$ ls -1
+0x1f-maqengrevlnx.html
+$
+.RE 
 
 .SH AUTHORS
 Written by Fernando Mercês and Wesley Henrique

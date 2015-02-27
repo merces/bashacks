@@ -93,6 +93,8 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new function: bh_wgetr() -  Downloads pages of a url on continuous mode and intervall randomly setted.
+  + new function: bh_get() - Download page from absolute url, only one page, is nonrecursive.
   + new function: bh_isspace() - validate whether char is space.
   + new function: bh_iscntrl() - validate char is controler char.
   + new function: bh_md5rename() - rename file with md5 message digest.
