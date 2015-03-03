@@ -31,7 +31,7 @@ bashacks - functions to hack with bash
 .TP
 .B bh_dumpmem [pid] [output filename]
 .TP
-.B bh_find [mime-type] [directory]
+.B bh_findmime [mime-type] [directory]
 .TP 
 .B bh_hashes [filename or files]
 .TP
@@ -162,7 +162,7 @@ Convert decimal to hex equivalent.
 .BR bh_dumpmem
 Creates file on disk with memory contents of a process.
 .TP
-.BR bh_find
+.BR bh_findmime
 Find file by mime type exe, msi, txt, zip.
 .TP
 .BR bh_hashes
@@ -514,13 +514,13 @@ Search mime type of file (txt, zip, exe and msi)
 .IP
 .RS 4
 .nf
-$ bh_find -txt
+$ bh_findmime -txt
 bashacks.sh
 bh-referencia.html
 Makefile
 README.md
 
-$ bh_find -exe ~/Downloads 
+$ bh_findmime -exe ~/Downloads 
 /home/bashacks/Downloads//putty.exe
 .RE 
 .BR 
