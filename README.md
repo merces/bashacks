@@ -103,7 +103,7 @@
   + new function: bh_isascii() - determines whether char is ascii.
   + new function: bh_ispunct() - determines whether char is punctuatio.
   + new function: bh_sitedl() - download an entire website with random request timeouts and custom User-Agent.
-  + new function: bh_find() - find files by true MIME type.
+  + new function: bh_findmime() - find files by true MIME type.
   + new function: bh_zipmal() - ZIP a malware file with 'virus' password.
   + new function: bh_isgraph() - determines whether char is graph.
   + new function: bh_isalpha() - determines whether string or char is alpha.
