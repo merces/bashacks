@@ -10,12 +10,8 @@ bh_asm2sc()
 
 	nasm -f $fmt -o $obj $in
 
-	objdump -M intel -D $obj |
-	 tr -d \\t |
-	 sed -nr 's/^.*:(([0-9a-f]{2} )*).*$/\1/p' | 
-	 tr -d \\n |
-	 sed 's/\(..\) /\\x\1/g'
+	objdump -D $obj | perl -ne's/\b([a-f0-9]{2})\b/print "\\x".$1/ge'
+	echo
 
-    echo
 	rm -f $obj
 }
