@@ -95,7 +95,7 @@
   * new name: bashacks
   + new function: bh_isperlm - validates perl module is installed return true or false
   + new function: bh_bin2sc - Generates 'shellcode' of a binary file
-  + new function: bh_urlencode - Decodes string standard web on human format
+  + new function: bh_urlencode - Decodes string web standar on human format
   + new function: bh_urldecode - Encodes string in web standard
   + new function: bh_wgetr() -  Downloads pages of a url on continuous mode and intervall randomly setted.
   + new function: bh_get() - Download page from absolute url, only one page, is nonrecursive.
