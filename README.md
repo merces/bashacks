@@ -93,7 +93,7 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
-  + new function: bh_isperlm - validates perl module is installed return true or false
+  + new function: bh_isperlm - validates perl module is installed return yes or no
   + new function: bh_bin2sc - Generates 'shellcode' of a binary file
   + new function: bh_urlencode - Decodes string standard web on human format
   + new function: bh_urldecode - Encodes string in web standard
