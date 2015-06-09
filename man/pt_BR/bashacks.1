@@ -120,6 +120,14 @@ bashacks - funções para hack com bash
 .B bh_wgetr [url]
 .TP
 .B bh_get [url absoluta]
+.TP
+.B bh_bin2sc [Arquivo binário]
+.TP
+.B bh_urlencode [string]
+.TP
+.B bh_urldecode [string]
+.TP
+.B bh_isperlm [Modulo]
 
 .SH FUNCTIONS
 .TP
@@ -299,6 +307,18 @@ Informado uma url baixa a mesma em modo recursivo e contínuo, intervalo entre c
 .TP
 .BR bh_get
 Informado uma url absoluta baixa a mesma em modo contínuo, apenas uma página.
+.TP
+.BR bh_bin2sc
+Gerar shellcode de um arquivo binário.
+.TP
+.BR bh_urlencode
+Codificar string ou url, retorna uma string com todos os caracteres que não são alphanum substituidos por % seguido de dois digitos em hexa.
+.TP
+.BR bh_urldecode
+Decodifica url ou string, retornando string decodificada em formato legível humano.
+.TP
+.BR bh_isperlm 
+Retorna verdadeiro ou falso na tentativa de detectar existencia de  modulo perl.
 
 .SH EXAMPLES
 Para converter ascii em decimal.
@@ -997,6 +1017,40 @@ $ ls -1
 0x1f-maqengrevlnx.html
 $
 .RE 
+.BR
+Gerar shellcode de um arquivo binary
+.IP
+.RS 4
+.nf
+$ bh_bin2sc ./exit
+\\x31\\xc0\\x40\\xcd\\x80
+.RE
+.BR
+Encodando string com bh_urlencode para trabalhar em padrão da web
+.IP
+.RS 4
+$ bh_urlencode '/zzz!@.#'
+%2fzzz%21%40%2e%23
+.RE
+.BR
+Decodificando string gerada para padrões web com bh_urldecode para formato legível
+.IP
+.RS 4
+$ bh_urldecode '%2fzzz%21%40%2e%23'
+/zzz!@.#
+.RE
+.BR
+Retorna verdadeiro ou falso na tentativa de encontrar modulo perl.
+.IP
+.RS 4
+$ bh_isperlm LWP
+$ echo $?
+0
+$ bh_isperlm x
+$ echo $?
+1
+.RE
+.BR
 
 .SH AUTHORS
 Escrito por Fernando Mercês e Wesley Henrique

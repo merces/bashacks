@@ -120,6 +120,14 @@ bashacks - functions to hack with bash
 .B bh_wgetr [url]
 .TP
 .B bh_get [absolute url]
+.TP
+.B bh_bin2sc [binary file]
+.TP
+.B bh_urlencode [string]
+.TP
+.B bh_urldecode [string]
+.TP
+.B bh_isperlm [module]
 
 .SH FUNCTIONS
 .TP
@@ -299,6 +307,19 @@ Informed the url page, gets the same recursive and continuous mode, interval bet
 .TP
 .BR bh_get
  Informed the absolute url, gets the same in continuous mode, only one page.
+.TP
+.BR bh_bin2sc
+Generates shellcode of a binary file
+.TP
+.BR bh_urlencode
+Encode url or string, returns a string in which all non-alphanumeric characters are replaced with % followed by two hex digits.
+.TP
+.BR bh_urldecode
+Decode url or string, returns string decode encoded string.
+.TP
+.BR bh_isperlm 
+Returns true or false in an attempt to detect module name
+
 
 .SH EXAMPLES
 To convert a ascii char in decimal code
@@ -995,6 +1016,41 @@ $ ls -1
 0x1f-maqengrevlnx.html
 $
 .RE 
+.BR
+Generates shellcode of a binary file
+.IP
+.RS 4
+.nf
+$ bh_bin2sc ./exit
+\\x31\\xc0\\x40\\xcd\\x80
+.RE
+.BR
+Encode string with bh_urlencode to web standard
+.IP
+.RS 4
+$ bh_urlencode '/zzz!@.#'
+%2fzzz%21%40%2e%23
+.RE
+.BR
+Decode string with bh_urldecode from web standard to human format 
+.IP
+.RS 4
+$ bh_urldecode '%2fzzz%21%40%2e%23'
+/zzz!@.#
+.RE
+.BR
+Detecting whether exist perl module.
+.IP
+.RS 4
+$ bh_isperlm LWP
+$ echo $?
+0
+$ bh_isperlm x
+$ echo $?
+1
+.RE
+.BR
+
 
 .SH AUTHORS
 Written by Fernando Mercês and Wesley Henrique
