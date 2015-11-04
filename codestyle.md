@@ -8,23 +8,8 @@ See this document as a source of recommendations and try permform this.
  * Limit your code in **78 col**
  * Avoid using more than one command per line.
  * All interaction with its function must be by **parameters** or **file** reading.
- * Keep your code indented use **TAB**.
- * The tab must have **4 spaces**
+ * Keep your code indented.
  * All development must be the develop branch.
-
-After cloning the repository.
-
-```bash
-$ git branchs
-  develop
-* master
-$ git checkout develop
-Switched to branch 'develop'
-$ git branch 
-* develop
-  master
-```
-
 
 ## Functions
  * The name of all functions must be prefixed with **bh_**.
@@ -86,10 +71,10 @@ bh_isreversedns() {
 ## code block 
 
  * When using commands with many parameters use **backslash** to keep readable code.
- * We Don't want to be boring in the use of **'if/the/else/fi'**, there are several ways of doing only want common sense.
+ * We Don't want to be boring in the use of **'if/then/else/fi'**, there are several ways of doing only want common sense.
  * Avoid using unnecessary blank spacing, use only one of each line.
  * To comment of your code use the character **'#'** 'be clear to do'.
- * Don''t use apostrophe, use **"$(...)"**
+ * Don't use apostrophe, use **"$(...)"**
  * Make sure that the outpu isn't committed to its validations, use the **/dev/null** always that necessary.
  * Always that use pipe uses **backslash** and send the pip for next line, with this we can identify which part of code is on the next line.
  * Use one row for each keyword **'if/then/else/fi'** **'for/do/done'** **'while/do/done'**
@@ -109,19 +94,18 @@ bh_isreversedns() {
  done < file.txt
 ```
 
-###### Correta:
+###### Corret:
 ```bash
 bh_isreversedns() {
     local ipaddress="$1"
     local fqdn="$2"
     local status=1
 
-    # para que a função cumpra seu objetivo são esperados dois argumentos
-    # se não forem informados saia retornando Falso.
+    # if not informed required arguments returning false.
     [ $# -ne 2 ] && return $status
     
-    # observer que antes do pipe foi escapado, e ao olhar sei que parte do código
-    # pertence a estrutura acima
+    # Note that before the pipe was cast, and the look I know that part of the code 
+    # belongs to structure above
     if host -t ptr "$ipaddress" \
                | cut -d ' ' -f5 \
                | grep "^$fqdn\.$" > /dev/null 
@@ -139,13 +123,6 @@ bh_isreversedns() {
 * The official language is English
 
 
-
-
-
 ###### Reference
 
 https://github.com/funcoeszz/funcoeszz/wiki/Coding-Style
-
-
-
-
