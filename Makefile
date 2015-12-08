@@ -1,4 +1,4 @@
-SRC = $(shell find '.' -type f -name '*.sh')
+SRC = $(shell find src/ -type f -name '*.sh')
 OUTFILE = bashacks.sh
 STLANGUAGE = $(shell echo $LANG | cut -d \. -f1) 
 MANDIR = /usr/share/man/man1
@@ -17,9 +17,9 @@ ifeq ("$(wildcard $(OUTFILE))","")
 endif	
 
 ifeq ($(STLANGUAGE), pt_BR)
-	install man/pt_BR/bashacks.1 $(MANDIR)
+	install doc/man/pt_BR/bashacks.1 $(MANDIR)
 else
-	install man/en/bashacks.1 $(MANDIR)
+	install doc/man/en/bashacks.1 $(MANDIR)
 endif
 
 	echo 'source $(shell pwd)/$(OUTFILE)' >> $(BAHSRCFILE)
