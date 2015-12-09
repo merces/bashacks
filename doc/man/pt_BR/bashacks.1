@@ -101,7 +101,7 @@ bashacks - funções para hack com bash
 .TP
 .B bh_unbase64 [string]
 .TP
-.B bh_unmd5 [md5 string]
+.B bh_unmd5 [md5, sha1, sha256, sha356, sha512 string]
 .TP
 .B bh_websearch [-t mail|file|phone|free] [-p number] [-d domainname] [-e file ext] [-s string]
 .TP
@@ -275,7 +275,7 @@ Calcula OU exclusivo para cada char em uma string com uma chave.
 .BR bh_unbase64
 Decodifica uma string codificada em base64.
 .TP
-.BR bh_unmd5
+.BR bh_unmd5, bh_unsha1, bh_unsha256, bh_unsha356, bh_unsha512
 Tenta idenficar qual string gerou o hash, utiliza a internet para tal.
 .TP
 .BR bh_utf8table

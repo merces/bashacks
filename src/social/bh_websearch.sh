@@ -90,7 +90,7 @@ bh_websearch()
     do
         echo "[+] ${i}"
         wget -q -T 30 -U "${AGENT}" -O - \
-            "http://www.google.com.br/search?q=${SEARCH}&btnG=&start=${i}" &>> ${TMP}
+            "http://www.google.com.br/search?q=${SEARCH}&btnG=&start=${i}" &> ${TMP}
     done
     
     echo "============================================="
@@ -107,7 +107,7 @@ bh_websearch()
         echo "Iniciando Download de $( cat ${LISTTMP} | wc -l ) Arquivos"
         # if elements exist - download
         [ $( wc -l ${LISTTMP} | cut -d" " -f1 ) -gt 0 ] &&
-                wget -P "${DOMAIN}" -i ${LISTTMP} &>>/dev/null
+                wget -P "${DOMAIN}" -i ${LISTTMP} &>/dev/null
         [ $? -eq 0 ] &&
             echo "Download feito em ${DOMAIN}"
 

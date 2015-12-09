@@ -30,7 +30,7 @@ bashacks_depinstall()
             [ -e '/tmp/download' ] &&
                 rm /tmp/download
 
-            wget http://sourceforge.net/projects/udis86/files/latest/download &>>/dev/null
+            wget http://sourceforge.net/projects/udis86/files/latest/download &> /dev/null
             tar -xf /tmp/download 
             sPathFile=$(ls -1 | grep 'udis86')
             cd ${sPathFile}

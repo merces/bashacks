@@ -93,9 +93,10 @@
 
  * bashacks 1.5 - ?
   * new name: bashacks
+  + new alias: bh_unsha1 bh_unsha256 bh_unsha356 bh_unsha512 and update bh_unmd5
   + new function: bh_isperlm - validates perl module is installed return yes or no
   + new function: bh_bin2sc - Generates 'shellcode' of a binary file
-  + new function: bh_urlencode - Decodes string standard web on human format
+  + new function: bh_urlencode - Decodes string web standar on human format
   + new function: bh_urldecode - Encodes string in web standard
   + new function: bh_wgetr() -  Downloads pages of a url on continuous mode and intervall randomly setted.
   + new function: bh_get() - Download page from absolute url, only one page, is nonrecursive.
