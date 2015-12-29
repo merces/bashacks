@@ -1,6 +1,8 @@
 bh_intel()
 {
-	local	GDBINIT="$HOME/.gdbinit"
+	local GDBINIT="$HOME/.gdbinit"
+
+	which -s gdb || return 1
 
 	if [ "$1" == "on" ]; then
 		grep -s 'disassembly-flavor' "$GDBINIT" &> /dev/null || \

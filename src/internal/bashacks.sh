@@ -1,4 +1,4 @@
 bashacks()
 {
-    echo "use -> man bashacks" 
+    echo -e "Try:\n\t$ man bashacks"
 }
