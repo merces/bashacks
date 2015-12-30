@@ -1,15 +1,15 @@
 bashacks_depinstall()
 {
     local sPktManager=
-    local sPkt="bc binutils file grep hexdump html2text perl sed ssh-keygen wget zip"
+    local sPkt="bc binutils coreutils file grep hexdump html2text perl sed wget zip"
 
-    if which -s apt-get; then # Debian-like
+    if which apt-get >/dev/null; then # Debian-like
         sPktManager="apt-get install -qqy"
-    elif which -s zypper; then # SuSE-like
+    elif which zypper >/dev/null; then # SuSE-like
         sPktManager="zypper -q --non-interactive install"
-    elif which -s yum; then # RedHat-like
+    elif which yum >/dev/null; then # RedHat-like
         sPktManager="yum -qy install"
-    elif which -s brew; then # OS X
+    elif which brew >/dev/null; then # OS X
         sPktManager="brew install"
     fi
 
