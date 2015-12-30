@@ -1,7 +1,7 @@
 bashacks_depinstall()
 {
     local sPktManager=
-    local sPkt="bc binutils file grep hexdump html2text perl sed ssh-keygen wget zip"
+    local sPkt="bc binutils file grep hexdump html2text perl sed wget zip"
 
     if which -s apt-get; then # Debian-like
         sPktManager="apt-get install -qqy"

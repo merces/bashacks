@@ -1,10 +1,14 @@
 bh_hashes()
 {
 	IFS=
-	[ -n "$1" ] || return
+	local i
+
+	[ -n "$1" ] || return 1
+	
 	for i in $*; do
-		md5sum "$i"
-		sha1sum "$i"
-		sha256sum "$i"
+		bh_cmd_md5 "$i"
+		bh_cmd_sha1 "$i"
+		bh_cmd_sha256 "$i"
+		bh_cmd_sha512 "$i"
 	done
 }

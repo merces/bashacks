@@ -1,5 +1,5 @@
 bh_myip()
 {
-    wget -q -T 10 'www.mentebinaria.com.br/ext/ip.php' -O -
+    bh_cmd_wget -q www.mentebinaria.com.br/ext/ip.php -O -
     echo
 }
