@@ -31,13 +31,13 @@
  * bash >= 4
  * bc
  * binutils
+ * coreutils
  * file
  * grep
  * hexdump
  * html2text
  * perl
  * sed
- * ssh-keygen
  * wget
  * zip
 
