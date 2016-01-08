@@ -1,1 +1,4 @@
 bashacks.sh
+*/build/*
+doc/Makefile
+*.orig
