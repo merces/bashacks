@@ -50,7 +50,7 @@ Opossed to ``bh_bin2dec`` this function expects a decimal for converting it into
 
     ``bh_dec2bin`` [decimal]
 
-    decimal :  string in decimal format.
+    decimal :  number in decimal format.
 
 
 .. code-block:: bash
@@ -64,15 +64,12 @@ Opossed to ``bh_bin2dec`` this function expects a decimal for converting it into
     $ bh_dec2bin 14
     1110
 
-
-.. code-block:: bash
-
     #Example 
 
-    $ for dec in {1..6} ;
-    > do
-    >    echo "$dec = $(bh_dec2bin $dec)" ;
-    > done 
+    $ for dec in {1..6};
+     do
+        echo "$dec = $(bh_dec2bin $dec)";
+     done 
 
     1 = 1
     2 = 10
@@ -86,8 +83,47 @@ Opossed to ``bh_bin2dec`` this function expects a decimal for converting it into
 bh_dec2hex
 ----------
 
+The function expects a input a decimal number it performs the conversion to hex.
+
+.. note:: 
+
+    Usage
+
+    ``bh_dec2hex`` [decimal]
+
+    decimal: number in decimal format
+
+
+.. code-block:: bash
+
+    $ bh_dec2hex 10
+    a
+
+    $ bh_dec2hex 255
+    ff
+
+
+
 bh_hex2bin
 ----------
+
+Capture all submitted arguments and convert to binary
+
+.. note:: 
+
+    Usage
+
+    ``bh_hex2bin`` [list or one hex digit]
+
+
+.. code-block:: bash
+
+    $ bh_hex2bin abcdef 1 2 3
+    101010111100110111101111 1 10 11
+
+    $ bh_hex2bin 10
+    10000
+
 
 bh_hex2dec
 ----------
