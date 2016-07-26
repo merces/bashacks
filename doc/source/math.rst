@@ -128,6 +128,10 @@ Capture all submitted arguments and convert to binary
 bh_hex2dec
 ----------
 
+This's a conversion function from hex digit to decimal digit
+
+
+
 bh_hexcalc
 ----------
 
