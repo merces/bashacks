@@ -2,3 +2,4 @@ bashacks.sh
 */build/*
 doc/Makefile
 *.orig
+tags
