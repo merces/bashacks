@@ -43,7 +43,7 @@ Download the final version, download on the ``SourceForge``. `Download Bashacks`
 GIT
 ---
 
-Since the end of version ``1.5.0`` are working with separate branches for various activities, can have errors and problems in ``devel`` repository, but try to keep always clean ``master`` branch to your advantage.
+Since the end of version ``1.5.0`` we are working with separate branches for various activities, can have errors and problems in ``devel`` repository, but try to keep always clean ``master`` branch to your advantage.
 
 
 .. code-block:: bash
