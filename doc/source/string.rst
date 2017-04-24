@@ -1,7 +1,7 @@
 String
 =======
 
-in this section, you are see funcions for manipulate string.
+In this section, you are see funcions for string manipulate.
 
 
 bh_asc2dec
@@ -24,7 +24,7 @@ This function performs the conversion of a char on it's decimal equivalent.
 bh_asciitable
 -------------
 
-Display in the terminal ascii table, if you are a programmer knows how important this is.
+Display in the terminal ascii table, if you are a programmer knows how this's important.
 
 .. note:: 
 
@@ -57,7 +57,7 @@ Display in the terminal ascii table, if you are a programmer knows how important
 bh_dec2asc
 ----------
 
-Once having to enter a decimal returns its equivalent in ascii.
+Once having to enter a decimal returns it's equivalent in ascii.
 
 .. note:: 
     
@@ -77,7 +77,9 @@ Once having to enter a decimal returns its equivalent in ascii.
 bh_hex2str
 ----------
 
-Converts one or more bytes into a hex string to str. Accepts as input all output formats str2hex function.
+Converts one or more bytes into a hex string to str. 
+
+Accepts as input all output formats str2hex function.
 
 .. note::
     
@@ -99,7 +101,7 @@ Converts one or more bytes into a hex string to str. Accepts as input all output
 bh_isalnum
 ----------
 
-Determines whether string or char is alphanumeric.
+Determines whether string or char is alphanumeric. (return true or false)
 
 Bashacks makes it easy to validate if string or char is alpha
 
@@ -122,128 +124,102 @@ Bashacks makes it easy to validate if string or char is alpha
 bh_isascii
 ----------
 
-Determines whether string has a equivalent in ascii table.
+Determines whether string has a equivalent in ascii table. (return true or false)
 
 .. note::
 
     ``bh_isascii`` [str or char]
-
-.. code-block:: bash
 
     
 
 bh_iscntrl
 ----------
 
-Determines whether string or char is a control byte
+Determines whether string or char is a control byte. (return true or false)
 
 .. note::
 
     ``bh_iscntrl`` [str or char]
 
-.. code-block:: bash
-
 
 bh_isdigit
 ----------
 
-Determines whether string or char is a digit.
+Determines whether string or char is a digit. (return true or false)
 
 .. note::
 
     ``bh_isdigit`` [str or char]
 
-.. code-block:: bash
-
 
 bh_isgraph
 ----------
 
-Determines whether string or char is a graph byte
+Determines whether string or char is a graph byte. (return true or false)
 
 .. note::
 
     ``bh_isgraph`` [str or char]
 
 
-.. code-block:: bash
-
 
 bh_islower
 ----------
 
-Determines whether string or char is a lower case.
+Determines whether string or char is a lower case. (return true or false)
 
 .. note::
 
     ``bh_islower`` [str or char]
 
-.. code-block:: bash
-
-
 bh_isprint
 ----------
 
-Determines whether string or char is a printable byte.
+Determines whether string or char is a printable byte. (return true or false)
 
 .. note::
 
     ``bh_isprint`` [str or char]
 
-.. code-block:: bash
-
 
 bh_ispunct
 ----------
 
-Determines whether string or char is a punctuation byte.
+Determines whether string or char is a punctuation byte. (return true or false)
 
 .. note::
 
     ``bh_ispunct`` [str or char]
 
-.. code-block:: bash
-
 
 bh_isspace
 ----------
 
-Determines whether string is a space.
+Determines whether string is a space. (return true or false)
 
 .. note::
 
     ``bh_isspace`` [str or char]
 
 
-.. code-block:: bash
-
-
-
 bh_isupper
 ----------
 
-Determines whether string or char is upper case byte.
+Determines whether string or char is upper case byte. (return true or false)
 
 .. note::
 
     ``bh_isupper`` [str or char]
 
-.. code-block:: bash
-
 
 bh_isxdigit
 -----------
 
-Determines whether char is a hex digit.
+Determines whether char is a hex digit. (return true or false)
 
 .. note::
 
     ``bh_isxdigit`` [str or char]
-
-    str or char: format of param that be validated
-
-
-.. code-block:: bash
 
 
 bh_str2hexr
@@ -343,4 +319,5 @@ Show UTF8 table.
     c2 a9 ©  c2 b5 µ  c3 81 Á  c3 8d Í  c3 99 Ù  c3 a5 å  c3 b1 ñ  c3 bd ý
     c2 aa ª  c2 b6 ¶  c3 82 Â  c3 8e Î  c3 9a Ú  c3 a6 æ  c3 b2 ò  c3 be þ
     c2 ab «  c2 b7 ·  c3 83 Ã  c3 8f Ï  c3 9b Û  c3 a7 ç  c3 b3 ó  c3 bf ÿ
+
 

@@ -170,11 +170,11 @@ In the same way as ``bh_charcalc``, however, work here with hexdigit.
 
 .. code-block:: bash
 
-    $ bh_hex2dec A
-    10
+    $ bh_hex2dec A \* 2
+    0xa0
 
-    $ bh_hex2bin FF
-    255
+    $ bh_hex2bin FF + 1
+    0x100
 
 bh_pow
 ------

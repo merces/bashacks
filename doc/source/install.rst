@@ -50,7 +50,7 @@ Since the end of version ``1.5.0`` we are working with separate branches for var
     
     $ git clone https://github.com/merces/bashacks.git
     $ cd bashacks
-    # this's optional, maybe many erros exist in devel branch
+    # this's a optional mode, maybe there's some error in the devel branch.
     $ git checkout devel
 
 
