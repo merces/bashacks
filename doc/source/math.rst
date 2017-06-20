@@ -153,7 +153,7 @@ This's a conversion function from hex digit to decimal digit
     $ bh_hex2dec A
     10
 
-    $ bh_hex2bin FF
+    $ bh_hex2dec FF
     255
 
 bh_hexcalc
