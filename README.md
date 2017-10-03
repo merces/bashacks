@@ -32,7 +32,6 @@
  * bc
  * binutils
  * coreutils
- * debugfs
  * file
  * grep
  * hexdump
@@ -61,31 +60,19 @@
 
  Try:
 
-    $ man bashacks
+   $ man bashacks
 
 ## 5. ChangeLog
 
  * bashacks 1.5 - ?
   * new name: bashacks
-  + new aliases: bh_unsha1 bh_unsha256 bh_unsha356 bh_unsha512 and updated bh_unmd5
   + new function: bh_fileinfo() - Retrieves advanced information from a file given.
   + new function: bh_urlencode - Decodes an URL-encoded string.
   + new function: bh_wgetr() -  site mirroring with random interval between resquests and custom User-Agent.
   + new function: bh_get() - simple GET with custom User-Agent.
-  + new function: bh_isspace() - checks if a character is space.
-  + new function: bh_iscntrl() - checks if a character is a control character.
   + new function: bh_md5rename() - renames files to their MD5 hash.
-  + new function: bh_isascii() - checks if a character is between ASCII set.
-  + new function: bh_ispunct() - checks if a character is punctuation.
   + new function: bh_findmime() - finds files by their MIME-type.
   + new function: bh_zipmal() - ZIP files with 'virus' password.
-  + new function: bh_isgraph() - checks if a character belongs to the graphical set.
-  + new function: bh_isalpha() - checks if a string contains only letters.
-  + new function: bh_isalnum() - checks if a string contains is alphanumeric.
-  + new function: bh_isupper() - checks if a string contains is all uppercase.
-  + new function: bh_islower() - checks if a string contains is all lowercase.
-  + new function: bh_isxdigit() - checks if a string contains is all hexadecimal digits.
-  + new function: bh_isdigit() - checks if a string contains is all digits.
   + new function: bh_depinstall() - installs all bashacks dependencies.
   + new function: bh_ip2geo() - approximately determines geographical location of an IPv4 address.
   + new function: bh_hostcalc() - returns the total hosts number for an IPv4 subnet.
