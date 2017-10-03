@@ -6,15 +6,8 @@ bh_md5rename()
 
 	[ -n "$1" ] || return
 
-	if which -s md5sum; then
-		for i in $*; do
-			md5_hash=$(md5sum "$i" | cut -d' ' -f1)
-			mv "$i" $md5_hash
-		done
-	elif which -s md5; then
-		for i in $*; do
-			md5_hash=$(md5 "$i" | cut -d= -f2 | tr -d ' ')
-			mv "$i" $md5_hash
-		done
-	fi
+	for i in $*; do
+		md5_hash=$(bh_cmd_md5 "$i" | grep -Eo '[0-9a-f]{32}')
+		mv "$i" $md5_hash
+	done
 }
