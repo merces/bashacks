@@ -1,3 +1,0 @@
-bh_unshortenit() {
-
-}
