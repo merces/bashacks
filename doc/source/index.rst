@@ -26,8 +26,6 @@ Contents:
 
 .. include:: math.rst
 
-.. include:: misc.rst
-
 .. include:: networking.rst
 
 .. include:: programming.rst
