@@ -123,26 +123,6 @@ Recursive and continue getting a partially-downloaded "if exist" file started by
     desktop.png
 
 
-
-bh_wget
---------
-
-Download a no-recursive file.
-
-.. note::
-
-    Usage
-    
-        ``bh_wget`` [ url ]
-
-.. code-block:: bash 
-
-    $ bh_wget http://www.mentebinaria.com.br/artigos/0x1e/0x1e-maqengrevwin.html
-    0x1e-maqengrevwin.html   100%[====================================>]   8.73K  --.-KB/s   in 0.001s]
-    $ ls -1 
-    0x1e-maqengrevwin.html
-
-
 bh_ipinfo
 ---------
 
