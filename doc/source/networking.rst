@@ -21,7 +21,7 @@ Convert a binary string into network ipaddress.
 
 bh_hostcalc
 -----------
-Enter a network mask and know the amount of hosts
+Enter a network CIDR mask and know the amount of hosts
 
 .. note::
     

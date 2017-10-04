@@ -1,7 +1,7 @@
 Math
 ====
 
-In this section, we will varios funcions of mathematics operations that helps us in everyday life.
+In this section, we will have many funcions of mathematics operations that help us in everyday life.
 
 They are not complex to assemble in bash, however, nothing better than a small function to assist, nothing better that send data and get or return result, always read the code.
 

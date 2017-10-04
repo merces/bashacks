@@ -1,6 +1,7 @@
 Programming
 ===========
 
+Session for the creation of facilitators for development in cli
 
 
 bh_skel_c

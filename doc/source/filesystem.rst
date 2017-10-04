@@ -58,7 +58,7 @@ Find file by mime type
 bh_hashes
 ---------
 
-Generate md5 message digest of file or list of files, 
+Generate md5 message digest of file or list of files. 
 
 .. note::
 
