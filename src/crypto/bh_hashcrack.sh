@@ -9,5 +9,5 @@ bh_hashcrack()
      | grep -FA1 'res-text' \
      | sed -n 's/^.*<span>\(.*\)<\/span>.*$/\1/p')
 
-    [[ "$sA" != "$sHash" ]] && echo "${sA}"
+    [[ "$sA" != "$sHash" ]] && echo "${sA}" | sort -u
 }
