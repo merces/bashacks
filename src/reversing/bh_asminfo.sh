@@ -1,21 +1,21 @@
 bh_asminfo()
 {
-    [ $# -lt 1 ] && return 1 
+    [[ $# -lt 1 ]] && return 1 
 
     local ins=$1
 
-    test -d $bh_cache || mkdir -p $bh_cache;
+    [[ -d $BASHACKS_CACHE ]] || mkdir -p $BASHACKS_CONFIG
 
-    if test -s $bh_cache/$ins.txt; then
-        cat $bh_cache/$ins.txt
-	else
+    if [[ -s $BASHACKS_CONFIG/$ins.txt ]]; then
+        cat $BASHACKS_CONFIG/$ins.txt
+    else
         bh_cmd_wget -q faydoc.tripod.com/cpu/$ins.htm -O - \
          | html2text \
          | sed -n '/^===.*/,$p' \
          | sed 's/^===.*/'${ins}'/' \
          | tr _ ' ' \
-         | tee -a $bh_cache/$ins.txt
+         | tee -a $BASHACKS_CONFIG/$ins.txt
     fi
 
-    test -s $bh_cache/$ins.txt || rm -f $bh_cache/$ins.txt
+    [[ -s $BASHACKS_CONFIG/$ins.txt ]] || rm -f $BASHACKS_CONFIG/$ins.txt
 }

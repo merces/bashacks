@@ -9,12 +9,12 @@ bh_hex2str()
     hex=$(echo $1 | sed 's/\(0x\|\\x\| \|{\|}\|,\)//g')
 
     # insert a space each two chars
-    hex=$(echo $hex | sed 's/../& /g')
+    #hex=$(echo $hex | sed 's/../& /g')
 
     # prefix with \x, needed by echo
     for i in $hex; do
     	str="$str\\x$i"
     done
 
-    echo -e $str
+    echo -e "$str"
 }

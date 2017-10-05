@@ -2,7 +2,12 @@ SRC = $(shell find src/ -type f -name '*.sh')
 OUTFILE = bashacks.sh
 STLANGUAGE = $(shell echo $LANG | cut -d \. -f1) 
 MANDIR = /usr/share/man/man1
-BAHSRCFILE = /etc/bash.bashrc
+BASHRCFILE = /etc/profile.d/bashacks_init.sh
+
+OS = $(shell uname -s)
+ifeq ($(OS), Darwin)
+	BASHRCFILE = /etc/bashrc
+endif
 
 all:
 	for file in $(SRC); do \
@@ -22,11 +27,11 @@ else
 	install doc/man/en/bashacks.1 $(MANDIR)
 endif
 
-	echo 'source $(shell pwd)/$(OUTFILE)' >> $(BAHSRCFILE)
+	echo 'source $(shell pwd)/$(OUTFILE)' >> $(BASHRCFILE)
 	
 clean:
 	rm -f bashacks.sh
 
 uninstall:
 	rm -f /usr/share/man/man1/bashacks.1
-	sed -i '/source $(shell pwd | sed 's/\//\\\//g')\/$(OUTFILE)/d' $(BAHSRCFILE)
+	sed -i .bak '/bashacks/d' $(BASHRCFILE)
