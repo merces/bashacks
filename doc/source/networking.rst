@@ -126,13 +126,13 @@ Recursive and continue getting a partially-downloaded "if exist" file started by
 bh_ipinfo
 ---------
 
-Query ipinfo.io returns reserved company network range to you, if domain not informed your network should be considered.
+Query ipinfo.io returns reserved company network range to you, if domain not informed, your network should be considered.
 
 .. note:: 
 
     Usage
         
-        ``bh_ipinfo`` [ domain ]
+        ``bh_ipinfo`` [ ipaddress ]
 
 .. code-block:: bash 
 
