@@ -2,7 +2,12 @@ SRC = $(shell find src/ -type f -name '*.sh')
 OUTFILE = bashacks.sh
 STLANGUAGE = $(shell echo $LANG | cut -d \. -f1) 
 MANDIR = /usr/share/man/man1
-BASHRCFILE = /etc/bash.bashrc
+BASHRCFILE = /etc/profile.d/bashacks_init.sh
+
+OS = $(shell uname -s)
+ifeq ($(OS), Darwin)
+	BASHRCFILE = /etc/bashrc
+endif
 
 all:
 	for file in $(SRC); do \
