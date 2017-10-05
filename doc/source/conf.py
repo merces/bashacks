@@ -48,8 +48,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'bashacks'
-copyright = '2015, Fernando Mercês, Wesley Leite'
-author = 'Fernando Mercês, Wesley Leite'
+copyright = '2015, Fernando Merces, Wesley Leite'
+author = 'Fernando Merces, Wesley Leite'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -225,7 +225,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   (master_doc, 'bashacks.tex', 'bashacks Documentation',
-   'Fernando Mercês, Wesley Leite', 'manual'),
+   'Fernando Merces, Wesley Leite', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
