@@ -1,5 +1,4 @@
-bh_bin2ip()
-{
+bh_bin2ip() {
 	local a=b=c=d=
 	
 	IFS=. read a b c d <<< "$1"								
