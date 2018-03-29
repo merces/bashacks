@@ -7,14 +7,29 @@ bh_findmime() {
 	[[ -d "$2" ]] && dir="$2"
 
 	case $1 in
-		'-txt')
+		# documents
+		-txt)
 			opt='text/';;
-		'-zip')
-			opt='application/zip';;
-		'-exe')
-			opt='application/x-dosexec';;
-		'-msi')
-			opt='application/vnd.ms-office';;
+		-pdf)
+			opt='pdf' ;;
+		-office)
+			opt='vnd\.openxmlformats\-officedocument' ;;
+
+		# compressed
+		-zip)
+			opt='zip';;
+		-rar)
+			opt='x\-rar' ;;
+
+		# executables
+		-pe)
+			opt='x\-dosexec' ;;
+		-msi)
+			opt='vnd\.ms\-office' ;;
+		-macho)
+			opt='x\-mach\-binary' ;;
+		-elf)
+			opt='x\-(executable|sharedlib)' ;;
 		*)
 			return
 	esac
@@ -22,8 +37,8 @@ bh_findmime() {
 	# buffering results
 	matches=$(for i in "$dir"/*; do
 		filetype=$(file -Nb --mime-type "$i")
-		[[ "$filetype" =~ "$opt" ]] && echo "${i#./*}"
+		[[ "$filetype" =~ application/$opt ]] && echo "${i#./*}"
 	done)
 
-	[ -n "$matches" ] && echo "$matches"
+	[[ -n "$matches" ]] && echo "$matches" | tr -s / /
 }

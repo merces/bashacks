@@ -5,7 +5,7 @@
  3. Installation
  4. Documentation
  5. Usage examples
- 6. ChangeLog
+ 6. Changelog
  7. Known bugs
 
 ## 1. What is that
@@ -66,7 +66,7 @@ Alphabetically add 4 to 'f'
 Check external IP address
 
     $ bh_myip
-    186.228.135.77
+    177.212.113.13
 
 Create a basic C program skeleton
 
@@ -87,12 +87,20 @@ Calculate common checksums for a given file
     e332cf8e1a78427f1368a5a0a67946ad1e7c8e28 /bin/ls
     5abf61c361e5ef91582e70634dfbf2214fbdb6f29c949160b69f27ae947d919d /bin/ls
 
-Find files by MIME type (ignores file extension)
+Find files by MIME type (ignores file extension):
 
-    $ bh_findmime -exe .
-    CRACKME.EXE
-    emo2.ex_
-    emotet.ex_
+    $ cd /bin
+    $ bh_findmime -macho
+    [
+    bash
+    cat
+
+You could pipe the results to xargs in order to calculate checksums quickly:
+
+    $ bh_findmime -pe ~/Downloads/ | xargs shasum
+    d9e49c4209087170e36cbef689d96240d736cf3b  /Users/menteb/Downloads/CSCWCNG.dll
+    50dfeea02e89f41caf52df152c7cb923c667bffc  /Users/menteb/Downloads/Receitanet-1.10.exe
+    86a5f89d43ab11456fb817aeceb14b83cc6c2608  /Users/menteb/Downloads/Xojo2017r3Setup.exe.opdownload
 
 Convert string to hex in different output formats
 
