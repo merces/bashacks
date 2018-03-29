@@ -4,7 +4,7 @@ BASHACKS_OS=$(uname -s)
 BASHACKS_WGET_USER_AGENT="Mozilla/5.0 (Windows NT 6.1; WOW64; rev:28.0) Gecko'20100101 Firefox/28.0"
 
 if [[ $BASHACKS_OS = 'Darwin' ]]; then
-	alias bh_cmd_md5='md5'
+	alias bh_cmd_md5='md5 -r'
 	alias bh_cmd_sha1='shasum -a 1'
 	alias bh_cmd_sha256='shasum -a 256'
 	alias bh_cmd_sha512='shasum -a 512'
