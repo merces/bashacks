@@ -1,9 +1,8 @@
-bh_hashes()
-{
+bh_hashes() {
 	IFS=
 	local i
 
-	[ -n "$1" ] || return 1
+	[[ -n "$1" ]] || return 1
 	
 	for i in $*; do
 		bh_cmd_md5 "$i"

@@ -1,6 +1,5 @@
-bh_hex2str()
-{
-	[ $# -ne 1 ] && return 1 
+bh_hex2str() {
+	[[ $# -ne 1 ]] && return 1 
 	
 	local hex
 	local oIFS

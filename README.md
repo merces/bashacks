@@ -23,7 +23,7 @@
  !!! IMPORTANT !!!
 
  There is no error handling in bashacks. That's a job
- for bash, called programs and your responsibility. :)
+ for bash, the programs you call and yourself. :)
 
 
 ## 2. Requirements
@@ -53,7 +53,7 @@
 
     $ bh_depinstall
 
- And that's all. You can now call the available functions from command line by typing *bh_* and pressing *<Tab>* key.
+ And that's all. You can now check the available functions from command line by typing *bh_* and pressing *<Tab>* key.
 
  
 ## 4. Documentation
@@ -80,6 +80,7 @@
   + new function: bh_skel_c() - outputs a blank C source file skeleton.
   + new function: bh_asminfo() - details an Assembly x86 instruction.
   + new function: bh_str2hexr() - converts a string to its reversed hexadecimal equivalent.
+  + new function: bh_epoch() - converts an Epoch date to its human-readable equivalent.
   + manpages added.
   + caching in $HOME/.bashacks/cache to speed up things!
 
@@ -106,5 +107,5 @@
 
 ## 6. Bugs
 
- If you think you find a bug, please fill it through
+ If you think you find a bug, please fill it at
  https://github.com/merces/bashacks/issues

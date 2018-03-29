@@ -1,6 +1,5 @@
-bh_charcalc()
-{
-    [ $# -ne 3 ] && return 1
+bh_charcalc() {
+    [[ $# -ne 3 ]] && return 1
 
     local char
     local chars

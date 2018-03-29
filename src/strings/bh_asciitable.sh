@@ -1,5 +1,4 @@
-bh_asciitable()
-{
+bh_asciitable() {
 	echo -en \
 	"Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex\n\
   0 00 NUL  16 10 DLE  32 20    48 30 0  64 40 @  80 50 P   96 60 \`  112 70 p\n\

@@ -1,6 +1,6 @@
-bh_strxor()
-{
-    [ $# -lt 2 ] && return 1
+bh_strxor() {
+
+    [[ $# -lt 2 ]] && return 1
 
     local str
     local xored

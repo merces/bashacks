@@ -1,4 +1,4 @@
-# Bashacks Code Style 
+# Bashacks Code Style
 
 See this document as a source of recommendations and try permform this.
 
@@ -20,7 +20,7 @@ See this document as a source of recommendations and try permform this.
  * To document their function use the man page, do not create help.
  * Always validate the arguments sent to a function, validate that the information is expected mode.
 
-###### Corret:
+###### Correct:
 ```bash
 bh_isreversedns() {
         return 0
@@ -94,7 +94,7 @@ bh_isreversedns() {
  done < file.txt
 ```
 
-###### Corret:
+###### Correct:
 ```bash
 bh_isreversedns() {
     local ipaddress="$1"
@@ -117,11 +117,10 @@ bh_isreversedns() {
 }
 ```
 
-## How much the manual page
+## How about manpages?
 
-* Each function will have its man page.
-* The official language is English
-
+* Each function have its own manpage.
+* The official language is English.
 
 ###### Reference
 

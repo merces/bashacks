@@ -1,5 +1,4 @@
-bh_epoch()
-{
+bh_epoch() {
 	[[ $# -eq 0 ]] && ( date +%s; return; )
 
 	if [[ "$1" =~ ^[0-9]+$ ]]; then

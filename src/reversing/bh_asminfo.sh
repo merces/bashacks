@@ -1,5 +1,4 @@
-bh_asminfo()
-{
+bh_asminfo() {
     [[ $# -lt 1 ]] && return 1 
 
     local ins=$1

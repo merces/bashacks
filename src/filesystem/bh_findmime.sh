@@ -1,11 +1,10 @@
-bh_findmime()
-{
+bh_findmime() {
 	local dir=.
 	local filetype
 	local opt
 	local matches
 
-	[ -d "$2" ] && dir="$2"
+	[[ -d "$2" ]] && dir="$2"
 
 	case $1 in
 		'-txt')

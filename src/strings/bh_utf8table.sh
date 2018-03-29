@@ -1,6 +1,5 @@
-bh_utf8table()
-{
-	echo -en \
+bh_utf8table() {
+	echo -ne \
 "Hex      Hex      Hex      Hex      Hex      Hex      Hex      Hex\n\
 c2 a0    c2 ac ¬  c2 b8 ¸  c3 84 Ä  c3 90 Ð  c3 9c Ü  c3 a8 è  c3 b4 ô\n\
 c2 a1 ¡  c2 ad ­  c2 b9 ¹  c3 85 Å  c3 91 Ñ  c3 9d Ý  c3 a9 é  c3 b5 õ\n\

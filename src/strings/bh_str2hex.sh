@@ -1,6 +1,5 @@
-bh_str2hex()
-{
-   [[ $# -eq 0 ]] && return 1 
+bh_str2hex() {
+	[[ $# -eq 0 ]] && return 1
 
 	# tr -d \\n is required by macOS and its sed version adds a newline to the end of output
 

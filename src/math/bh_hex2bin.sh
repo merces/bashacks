@@ -1,6 +1,5 @@
-bh_hex2bin()
-{
-    [ $# -eq 0 ] && return 1
+bh_hex2bin() {
+    [[ $# -eq 0 ]] && return 1
 
 	local bin
 	local i

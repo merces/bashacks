@@ -1,13 +1,12 @@
-bh_hashcrack()
-{
-    [ $# -eq 0 ] && return 1
+bh_hashcrack() {
+    [[ $# -eq 0 ]] && return 1
 
-    local sHash="$1"
-    local sSite="http://hashtoolkit.com/reverse-hash/?hash=$sHash"
+    local hash="$1"
+    local site="http://hashtoolkit.com/reverse-hash/?hash=$sHash"
 
-    sA=$(bh_cmd_wget -qO - "$sSite" \
+    res=$(bh_cmd_wget -qO - "$site" \
      | grep -FA1 'res-text' \
      | sed -n 's/^.*<span>\(.*\)<\/span>.*$/\1/p')
 
-    [[ "$sA" != "$sHash" ]] && echo "${sA}" | sort -u
+    [[ "$res" != "$hash" ]] && echo "$res" | sort -u
 }

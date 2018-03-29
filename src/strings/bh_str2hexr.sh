@@ -1,6 +1,5 @@
-bh_str2hexr()
-{
-    [ $# -eq 0 ] && return 1
+bh_str2hexr() {
+    [[ $# -eq 0 ]] && return 1
 
     case "$1" in
 	    "-x" | "-0x" | "-c" | "-s")
