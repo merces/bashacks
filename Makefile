@@ -1,11 +1,6 @@
 SRC = $(shell find src/ -type f -name '*.sh')
 OUTFILE = bashacks.sh
-BASHRCFILE = /etc/profile.d/bashacks_init.sh
-
-OS = $(shell uname -s)
-ifeq ($(OS), Darwin)
-	BASHRCFILE = /etc/bashrc
-endif
+BASHRCFILE = ~/.bash_profile
 
 all:
 	for file in $(SRC); do \
@@ -25,4 +20,4 @@ clean:
 	rm -f bashacks.sh
 
 uninstall:
-	sed -i .bak '/bashacks/d' $(BASHRCFILE)
+	sed -i .bak '/bashacks\.sh/d' $(BASHRCFILE)
