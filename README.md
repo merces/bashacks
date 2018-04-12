@@ -43,7 +43,7 @@
 Use *make* command to generate a single file containing all functions and add it to your ```/etc/bash.bashrc``` file:
 
     make
-    sudo make install
+    make install
 
  That's all. You can now check the available functions from command line by typing *bh_* and pressing the tab key.
 
