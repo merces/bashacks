@@ -14,10 +14,10 @@ ifeq ("$(wildcard $(OUTFILE))","")
 	$(error $(OUTFILE) not found. Try: make)
 endif	
 
-	echo 'source $(shell pwd)/$(OUTFILE)' >> $(BASHRCFILE)
+	echo "\n[[ -e $(shell pwd)/$(OUTFILE) ]] && source $(shell pwd)/$(OUTFILE)" >> $(BASHRCFILE)
 	
 clean:
 	rm -f bashacks.sh
 
 uninstall:
-	sed -i .bak '/bashacks\.sh/d' $(BASHRCFILE)
+	sed -i .bak "/bashacks\.sh/d" $(BASHRCFILE)
