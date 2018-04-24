@@ -1,25 +1,29 @@
 # vim: set noet ts=2 sw=2:
 
+.PHONY: all install uninstall
+
+define check_if_root
+	if [ "$(whoami)" != 'root' ]; then \
+		echo "ERROR: Need root privileges. Run with sudo."; \
+		exit; \
+	fi
+endef
+
 all:
-	@echo "Nothing to do. Plase, install as 'sudo make install'."; \
+	@echo "Nothing to do. Please, install with 'sudo make install' or uninstall with 'sudo make uninstall'."; \
 	exit
 
 install:
-	@if [ "`whoami`" != 'root' ]; then \
-		echo "ERROR: Need root privilege to install. Run as 'sudo make install'."; \
-		exit; \
-	fi; \
+	@$(call check_if_root); \
 	find src/ -type f -exec cp "{}" /usr/local/bin/ \; \
 	cp etc/* /usr/local/etc/; \
 	chmod 0755 /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
 	chown root: /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
 	echo 'Installed!'
 	
+# FIXME: Left bashacks.conf and asm "cache" behind... Please, fix!
 uninstall:
-	@if [ "`whoami`" != 'root' ]; then \
-		echo "ERROR: Need root privilege to install. Run as 'sudo make uninstall'."; \
-		exit; \
-	fi; \
+	@$(call check_if_root); \
 	rm -f /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
 	echo 'Uninstalled!'
 
