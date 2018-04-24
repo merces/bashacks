@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[ $# -ne 1 ] && exit 1;
+echo -ne "${1}" | perl -pe 's/\W/"%".unpack "H*",$&/gei'
+echo

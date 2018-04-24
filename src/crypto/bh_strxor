@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]
+then
+  echo 'Usage: bh_strxor <value> <string>'
+  exit 1
+fi
+
+BH_STR=$(bh_str2hex "${2}")
+BH_XORED=''
+
+for i in ${BH_STR}
+do
+  BH_XORED="${BH_XORED} $(bh_dec2hex $((0x${i}^${1})))"
+done
+
+bh_hex2str "$BH_XORED"

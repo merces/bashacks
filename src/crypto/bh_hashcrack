@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$*" ]
+then
+  echo 'Usage: bh_hashcrack <hash> [<hash> [... <hash>]]'
+  exit 1
+fi
+
+for i in "$@"
+do
+  BH_RESULT=$(bh_cmd_wget -qO - "http://hashtoolkit.com/reverse-hash/?hash=${i}" | \
+              grep -FA1 'res-text' | \
+              sed -n 's!^.*<span>\(.*\)</span>.*$!\1!p')
+
+  if [ "${BH_RESULT}" != "${i}" ]
+  then
+    echo "${BH_RESULT}" | sort -u
+  fi
+done
+

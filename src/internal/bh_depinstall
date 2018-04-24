@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if which apt-get > /dev/null
+then
+  BH_PKGMAN='apt-get -qqy install'
+elif which zypper > /dev/null
+then
+  BH_PKGMAN='zypper -q --non-interactive install'
+elif which yum > /dev/null
+then
+  BH_PKGMAN='yum -qy install'
+elif which brew > /dev/null
+then
+  BH_PKGMAN='brew install'
+elif
+  echo 'ERROR: Cannot find package(s) installer.'
+  exit 1
+fi
+
+BH_PACKAGES='bc binutils coreutils file grep hexdump html2text perl sed wget zip'
+
+${BH_PKGMAN} ${BH_PACKAGES}

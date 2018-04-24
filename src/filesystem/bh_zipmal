@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+  echo 'Usage: zipmal <filename>'
+  exit 1
+fi
+
+BH_FNAME="${1%\.*}.zip"
+zip --encrypt -P virus "$BH_FNAME" "$*"
+ls -lh "$BH_NAME"

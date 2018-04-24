@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+  echo 'Usage: bh_rotall <string>'
+  exit 1
+fi
+
+for i in {1..25}
+do
+  echo "ROT${i} $(bh_rot ${i} "${1}")"
+done

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[[ $# -ne 2 ]] && exit 1 
+bh_cmd_disasm "${2}" | grep --color -EC4 "${1}"

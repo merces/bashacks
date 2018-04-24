@@ -1,0 +1,29 @@
+#!/bin/bash
+
+BH_DIR='.'
+
+if [ -d "$2" ]
+then
+  BH_DIR="$2"
+fi
+
+case "$1" in
+  '-txt')     BH_OPT='text/';;
+  '-pdf')     BH_OPT='pdf';;
+  '-office')  BH_OPT='vnd\.openxmlformats\-officedocument';;
+  '-zip')     BH_OPT='zip';;
+  '-rar')     BH_OPT='x\-rar';;
+  '-pe')      BH_OPT='x\-dosexec';;
+  '-msi')     BH_OPT='vnd\.ms\-office';;
+  '-macho')   BH_OPT='x\-mach\-binary';;
+  '-elf')     BH_OPT='x\-(executable|sharedlib)';;
+  *)          exit 1
+esac
+
+# buffering results
+BH_MATCHES=$(for i in "${BH_DIR}/*"; do
+    BH_FILETYPE=$(file -Nb --mime-type "${i}")
+    [[ "${BH_FILETYPE}" =~ "application/${BH_OPT}" ]] && echo "${i#./*}"
+  done)
+
+[[ -n "${BH_MATCHES}" ]] && echo "${BH_MATCHES}" | tr -s / /

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z "$*" ]
+then
+  echo 'Usage: bh_hashes <string> [<string> [... <string>]]'
+  exit 1
+fi
+
+BH_OLDIFS=$IFS
+IFS=
+
+for i in "$@"
+do
+	bh_cmd_md5 "${i}"
+	bh_cmd_sha1 "${i}"
+	bh_cmd_sha256 "${i}"
+done | tr -s ' ' ' '
+
+IFS=${BH_OLDIFS}

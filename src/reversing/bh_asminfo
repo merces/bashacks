@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# FIXME!
+[[ $# -eq 1 ]] && exit 1 
+
+. /usr/local/etc/bashack.conf
+
+[[ -d "${BASHACKS_CACHE}" ]] || mkdir -p "${BASHACKS_CONFIG}"
+
+if [[ -s "${BASHACKS_CONFIG}/${1}.txt" ]]; then
+  cat "${BASHACKS_CONFIG}/${1}.txt"
+else
+  bh_cmd_wget -q faydoc.tripod.com/cpu/${1}.htm -O - | \
+    html2text | \
+    sed -n '/^===.*/,$p' | \
+    sed 's/^===.*/'${1}'/' | \
+    tr _ ' ' | \
+    tee -a "${BASHACKS_CONFIG}/${1}.txt"
+fi
+
+[[ -s "${BASHACKS_CONFIG}/${1}.txt" ]] || rm -f "${BASHACKS_CONFIG}/${1}.txt"

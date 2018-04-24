@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for i in "$@"
+do
+  cp -vi "${i}"{,.$(date +%Y%m%d)}
+done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[[ $# -ne 1 ]] && exit 1
+
+case "${1}" in
+  '-x' | '-0x' | '-c' | '-s')
+    bh_str2hex ${1} "$(echo "${2}" | rev)"
+    ;;
+  *)
+    bh_str2hex "$(echo "${1}" | rev)"
+    ;;
+esac

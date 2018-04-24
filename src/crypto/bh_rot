@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]
+then
+  echo 'Usage: bh_rot <num> <string>'
+  exit 1
+fi
+
+# BH_NUM receives the correspondent alphabet letter
+BH_NUM=$(echo -e \\x$(bh_dec2hex $(echo -e $((97+${1})))))
+BH_NUM2=$(echo ${BH_NUM} | tr a-z A-Z)
+
+# rot with tr command
+echo "${2}" | tr a-z ${BH_NUM}-za-z | tr A-Z ${BH_NUM2}-ZA-Z

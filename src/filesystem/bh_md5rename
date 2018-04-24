@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ ! "$*" ]
+then
+  echo 'Usage: md5rename <filename> [<filename> [... <filename>]]'
+  exit 1
+fi
+
+for i in "$@"
+do
+  bh_cmd_md5 "${i}" | cur -d= -f2 | tr -d ' '
+done
+

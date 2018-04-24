@@ -1,0 +1,11 @@
+#!/bin/bash
+
+BH_IPADDR="${1:-$(bh_myip)}"
+BH_COMPANY="$(bh_cmd_wget -qO - "http://ipinfo.io/${BH_IPADDR}/org")"
+BH_ASREP="${BH_COMPANY%% *}"
+
+echo "${BH_COMPANY}"
+
+[[ -n "${BH_COMPANY}" ]] && bh_cmd_wget -qO - "http://ipinfo.io/${BH_ASREG}" | \
+                            grep "${BH_ASREG}/" | \
+                            sed 's/<[^>]*>//g; s/^ *//g'

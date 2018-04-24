@@ -1,0 +1,7 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] && BH_IP="${1}" || BH_IP="$(bh_myip)"
+    
+bh_cmd_wget -q "http://xml.utrace.de/?query=${BH_IP}" -O - | \
+	sed -e '4d; s/<[^>]*>//g; /^$/d' | uniq | tr \\n ' '
+echo

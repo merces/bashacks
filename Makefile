@@ -1,23 +1,25 @@
-SRC = $(shell find src/ -type f -name '*.sh')
-OUTFILE = bashacks.sh
-BASHRCFILE = ~/.bash_profile
+# vim: set noet ts=2 sw=2:
 
 all:
-	for file in $(SRC); do \
-		cat $$file >> $(OUTFILE); \
-		echo >> $(OUTFILE); \
-	done
+	@echo "Nothing to do. Plase, install as 'sudo make install'."; \
+	exit
 
 install:
-
-ifeq ("$(wildcard $(OUTFILE))","")
-	$(error $(OUTFILE) not found. Try: make)
-endif	
-
-	echo "\n[[ -e $(shell pwd)/$(OUTFILE) ]] && source $(shell pwd)/$(OUTFILE)" >> $(BASHRCFILE)
+	@if [ "`whoami`" != 'root' ]; then \
+		echo "ERROR: Need root privilege to install. Run as 'sudo make install'."; \
+		exit; \
+	fi; \
+	find src/ -type f -exec cp "{}" /usr/local/bin/ \; \
+	cp etc/* /usr/local/etc/; \
+	chmod 0755 /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
+	chown root: /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
+	echo 'Installed!'
 	
-clean:
-	rm -f bashacks.sh
-
 uninstall:
-	sed -i .bak "/bashacks\.sh/d" $(BASHRCFILE)
+	@if [ "`whoami`" != 'root' ]; then \
+		echo "ERROR: Need root privilege to install. Run as 'sudo make uninstall'."; \
+		exit; \
+	fi; \
+	rm -f /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
+	echo 'Uninstalled!'
+

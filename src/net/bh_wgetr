@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[[ "$1" ]] || exit
+wget -crw $((($RANDOM%10)+1)) -U "${BASHACKS_WGET_USER_AGENT}" "${1}"
