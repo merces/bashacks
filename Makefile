@@ -1,10 +1,18 @@
 # vim: set noet ts=2 sw=2:
+SHELL=/bin/bash
 
 .PHONY: all install uninstall
 
 define check_if_root
-	if [ "$(whoami)" != 'root' ]; then \
+	if [ "$$(whoami)" != 'root' ]; then \
 		echo "ERROR: Need root privileges. Run with sudo."; \
+		exit; \
+	fi
+endef
+
+define check_bash_version
+	if [ "$${BASH_VERSINFO[0]}" -lt 4 ]; then \
+		echo "ERROR: Need bash version 4 or superior."; \
 		exit; \
 	fi
 endef
@@ -15,6 +23,7 @@ all:
 
 install:
 	@$(call check_if_root); \
+  $(call check_bash_version); \
 	find src/ -type f -exec cp "{}" /usr/local/bin/ \; \
 	cp etc/* /usr/local/etc/; \
 	chmod 0755 /usr/local/bin/bh_* /usr/local/etc/bashack.conf; \
