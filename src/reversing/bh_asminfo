@@ -1,21 +1,22 @@
 #!/bin/bash
 
-# FIXME!
-[[ $# -eq 1 ]] && exit 1 
+[[ $# -ne 1 ]] && exit 1 
 
 . /usr/local/etc/bashack.conf
 
-[[ -d "${BASHACKS_CACHE}" ]] || mkdir -p "${BASHACKS_CONFIG}"
+[[ -d "${BASHACKS_CACHEDIR}" ]] || mkdir -p "${BASHACKS_CACHEDIR}"
 
-if [[ -s "${BASHACKS_CONFIG}/${1}.txt" ]]; then
-  cat "${BASHACKS_CONFIG}/${1}.txt"
+BH_CACHEFILE="${BASHACKS_CACHEDIR}/${1}.txt"
+
+if [[ -s "${BH_CACHEFILE}" ]]; then
+  cat "${BH_CACHEFILE}"
 else
-  bh_cmd_wget -q faydoc.tripod.com/cpu/${1}.htm -O - | \
+  bh_cmd_wget -q http://faydoc.tripod.com/cpu/${1}.htm -O - | \
     html2text | \
     sed -n '/^===.*/,$p' | \
     sed 's/^===.*/'${1}'/' | \
     tr _ ' ' | \
-    tee -a "${BASHACKS_CONFIG}/${1}.txt"
+    tee -a "${BH_CACHEFILE}"
 fi
 
-[[ -s "${BASHACKS_CONFIG}/${1}.txt" ]] || rm -f "${BASHACKS_CONFIG}/${1}.txt"
+[[ -s "${BH_CACHEFILE}" ]] || rm -f "${BH_CACHEFILE}"

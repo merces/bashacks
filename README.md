@@ -40,82 +40,121 @@
 
 ## 3. Installation
 
-Use *make* command to generate a single file containing all functions and add it to your ```/etc/bash.bashrc``` file:
+Use *make* command to install all scripts and config files:
 
-    make
-    make install
+```bash
+sudo make install
+```
 
- That's all. You can now check the available functions from command line by typing *bh_* and pressing the tab key.
+That's all. You can now check the available functions from command line by typing *bh_* and pressing the tab key.
 
-## 4. Documentation
+## 4. Uninstall
 
-    man bashacks
+To uninstall, simply do:
 
-## 5. Usage examples
+```bash
+sudo make uninstall
+```
+
+## 5. Documentation
+
+```bash
+man bashacks
+```
+
+## 6. Usage examples
 
 What time is now in Epoch?
 
-    $ bh_epoch
-    1522324129
+```bash
+$ bh_epoch
+1522324129
+```
 
 Alphabetically add 4 to 'f'
 
-    $ bh_charcalc f + 4
-    j
+```bash
+$ bh_charcalc f + 4
+j
+```
 
 Check external IP address
 
-    $ bh_myip
-    177.212.113.13
+```bash
+$ bh_myip
+177.212.113.13
+```
 
 Create a basic C program skeleton
 
-    $ bh_skel_c > hello.c
-    $ cat hello.c
-    #include <stdio.h>
+```bash
+$ bh_skel_c > hello.c
+$ cat hello.c
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+//... place your header files here.
 
-    int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
+  //... your main code goes here.
 
-
-        return 0;
-    }
+  return 0;
+}
+```
 
 Calculate common checksums for a given file
 
-    $ bh_hashes /bin/ls
-    d77c1dd5bb8e39c2dd27c96c3fd2263e /bin/ls
-    e332cf8e1a78427f1368a5a0a67946ad1e7c8e28 /bin/ls
-    5abf61c361e5ef91582e70634dfbf2214fbdb6f29c949160b69f27ae947d919d /bin/ls
+```bash
+$ bh_hashes /bin/ls
+d77c1dd5bb8e39c2dd27c96c3fd2263e /bin/ls
+e332cf8e1a78427f1368a5a0a67946ad1e7c8e28 /bin/ls
+5abf61c361e5ef91582e70634dfbf2214fbdb6f29c949160b69f27ae947d919d /bin/ls
+```
 
 Find files by MIME type (ignores file extension):
 
-    $ cd /bin
-    $ bh_findmime -macho
-    [
-    bash
-    cat
+```bash
+$ cd /bin
+$ bh_findmime -macho
+[
+bash
+cat
+```
 
 You could pipe the results to xargs in order to calculate checksums quickly:
 
-    $ bh_findmime -pe ~/Downloads/ | xargs shasum
-    d9e49c4209087170e36cbef689d96240d736cf3b  /Users/menteb/Downloads/CSCWCNG.dll
-    50dfeea02e89f41caf52df152c7cb923c667bffc  /Users/menteb/Downloads/Receitanet-1.10.exe
-    86a5f89d43ab11456fb817aeceb14b83cc6c2608  /Users/menteb/Downloads/Xojo2017r3Setup.exe.opdownload
+```bash
+$ bh_findmime -pe ~/Downloads/ | xargs shasum
+d9e49c4209087170e36cbef689d96240d736cf3b  /Users/menteb/Downloads/CSCWCNG.dll
+50dfeea02e89f41caf52df152c7cb923c667bffc  /Users/menteb/Downloads/Receitanet-1.10.exe
+86a5f89d43ab11456fb817aeceb14b83cc6c2608  /Users/menteb/Downloads/Xojo2017r3Setup.exe.opdownload
+```
 
 Convert string to hex in different output formats
 
-    $ bh_str2hex mentebinaria
-    6d 65 6e 74 65 62 69 6e 61 72 69 61
+```bash
+$ bh_str2hex mentebinaria
+6d 65 6e 74 65 62 69 6e 61 72 69 61
 
-    $ bh_str2hex -x mentebinaria
-    \x6d\x65\x6e\x74\x65\x62\x69\x6e\x61\x72\x69\x61
+$ bh_str2hex -x mentebinaria
+\x6d\x65\x6e\x74\x65\x62\x69\x6e\x61\x72\x69\x61
 
-    $ bh_str2hex -c mentebinaria
-    { 0x6d, 0x65, 0x6e, 0x74, 0x65, 0x62, 0x69, 0x6e, 0x61, 0x72, 0x69, 0x61 }
+$ bh_str2hex -c mentebinaria
+{ 0x6d, 0x65, 0x6e, 0x74, 0x65, 0x62, 0x69, 0x6e, 0x61, 0x72, 0x69, 0x61 }
+```
 
 There's much more. Install it and see by your own.
 
-## 6. Changelog
+## 7. Changelog
+
+### bashacks 1.6 - April, 2018
+
+* all functions changed to isolated scripts.
+* scripts are installed at /usr/local/bin/
+* changed cache engine to $HOME/.cache/bashacks/
+* the configuration file now is installed at /usr/local/etc/
+* many bugs fixed.
 
 ### bashacks 1.5 - March, 2018
 
@@ -164,10 +203,12 @@ There's much more. Install it and see by your own.
 In some string functions you have to escape special characters because bash will try to
 interpret them. See the following example using bh_strxor function:
 
-    $ bh_strxor 0x41 fernando
-    '$3/ /%.
+```bash
+$ bh_strxor 0x41 fernando
+'$3/ /%.
 
-    $ bh_strxor 0x41 "'\$3/ /%." # string between double quotes and dollar sign escaped
-    fernando
+$ bh_strxor 0x41 "'\$3/ /%." # string between double quotes and dollar sign escaped
+fernando
+```
 
 If you think you find a bug, please fill it at <https://github.com/merces/bashacks/issues>

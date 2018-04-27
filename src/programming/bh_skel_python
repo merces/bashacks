@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# There is a \t char in the last line.
 cat <<EOF
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-

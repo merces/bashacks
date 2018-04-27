@@ -1,11 +1,14 @@
 #!/bin/bash
 
 cat <<EOF
+#include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
+//... place your header files here.
 
 int main(int argc, char *argv[])
 {
-
+  //... your main code goes here.
 
   return 0;
 }

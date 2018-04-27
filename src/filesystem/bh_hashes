@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$*" ]
+if [ ! "$*" ]
 then
   echo 'Usage: bh_hashes <string> [<string> [... <string>]]'
   exit 1

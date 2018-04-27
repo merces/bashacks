@@ -17,7 +17,7 @@ case "$1" in
   '-msi')     BH_OPT='vnd\.ms\-office';;
   '-macho')   BH_OPT='x\-mach\-binary';;
   '-elf')     BH_OPT='x\-(executable|sharedlib)';;
-  *)          exit 1
+  *)          exit 1;;
 esac
 
 # buffering results

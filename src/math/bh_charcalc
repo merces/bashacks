@@ -6,7 +6,7 @@ then
   exit 1
 fi
 
-case $2 in
+case "$2" in
   +|-)  for i in $(echo "${1}" | sed 's/./& /g'); 
         do
           char=$(bh_asc2dec ${i})
@@ -15,7 +15,8 @@ case $2 in
         done
         echo
         ;;
-  '*')  for (( i=0; i<$3; i++ )); do
+  '*')  for (( i=0; i<$3; i++ ))
+        do
           res="${res}${1}"
         done
         echo ${res}

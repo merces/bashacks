@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$1" ]
+if [ $# -ne 1 ]
 then
   echo 'Usage: zipmal <filename>'
   exit 1

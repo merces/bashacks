@@ -1,4 +1,4 @@
 #!/bin/bash
 
 [[ $# -ne 1 ]] && exit 1
-echo -e $(printf "\\\x%x" ${1})
+printf '\\x%x' ${1}

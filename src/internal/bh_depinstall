@@ -17,6 +17,6 @@ elif
   exit 1
 fi
 
-BH_PACKAGES='bc binutils coreutils file grep hexdump html2text perl sed wget zip'
+BH_PACKAGES='bc binutils coreutils file grep hexdump html2text perl sed wget zip gawk'
 
 ${BH_PKGMAN} ${BH_PACKAGES}
