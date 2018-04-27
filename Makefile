@@ -4,7 +4,7 @@ SHELL=/bin/bash
 .PHONY: all install uninstall
 
 define check_if_root
-	if [ "$$(whoami)" != 'root' ]; then \
+	if [ "$$(id -u)" -ne 0 ]; then \
 		echo "ERROR: Need root privileges. Run with sudo."; \
 		exit; \
 	fi
