@@ -150,3 +150,20 @@ Query ipinfo.io returns reserved company network range to you, if domain not inf
     255.200.200.0/24
 
 
+bh_unshort
+---------
+
+With this function you have the possibility to unshort a URL see below a example.
+
+.. note::
+
+    Usage
+        
+        ``bh_unshort`` [ URL string ] 
+        
+.. code-block:: bash
+
+    $ bh_unshort http://goo.gl/l6MS
+    http://googleblog.blogspot.com/2009/12/making-urls-shorter-for-google-toolbar.html
+    $
+
