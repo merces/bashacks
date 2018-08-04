@@ -49,7 +49,7 @@ Use *make* command to generate a single file containing all functions and add it
 
 ## 4. Documentation
 
-    man bashacks
+    [https://bashacks.readthedocs.io/](https://bashacks.readthedocs.io/)
 
 ## 5. Usage examples
 
