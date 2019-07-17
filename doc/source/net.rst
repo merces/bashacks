@@ -167,3 +167,45 @@ With this function you have the possibility to unshort a URL see below a example
     http://googleblog.blogspot.com/2009/12/making-urls-shorter-for-google-toolbar.html
     $
 
+
+bh_ipblacklist
+---------
+
+Search for occurrence of the ip address in some  blacklist returning [T] if positive and [F] if it is opposite..
+
+.. note::
+
+    Usage
+        
+        ``bh_ipblacklist`` [ ipaddress ] 
+        
+.. code-block:: bash
+
+    $ bh_ipblacklist 77.xxx.xx.xx
+    == 77.xxx.xx.xx ==
+    [F]    TALOS
+    [F]    Malc0de
+    [F]    ZeuStracker
+    [F]    Projecthoneypot.org
+    [F]    blocklist.de
+    [T]    Alienvault
+    [F]    nothinkSSH
+    [F]    nothinkMalwareIRC
+    [F]    nothinkMalwareHTTP
+    [F]    SANS-TOPSOURCE
+
+    #if ipaddress is not informed will be considered the outside
+
+    $ bh_ipblacklist
+    == 189.x.xxx.x ==
+    [F]    TALOS
+    [F]    Malc0de
+    [F]    ZeuStracker
+    [F]    Projecthoneypot.org
+    [F]    blocklist.de
+    [F]    Alienvault
+    [F]    nothinkSSH
+    [F]    nothinkMalwareIRC
+    [F]    nothinkMalwareHTTP
+    [F]    SANS-TOPSOURCE
+
