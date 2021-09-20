@@ -1,6 +1,7 @@
 SRC = $(shell find src/ -type f -name '*.sh')
 OUTFILE = bashacks.sh
 BASHRCFILE = ~/.bash_profile
+BASHACKS = $(shell pwd)/$(OUTFILE)
 
 all:
 	for file in $(SRC); do \
@@ -14,7 +15,7 @@ ifeq ("$(wildcard $(OUTFILE))","")
 	$(error $(OUTFILE) not found. Try: make)
 endif	
 
-	echo "\n[[ -e $(shell pwd)/$(OUTFILE) ]] && source $(shell pwd)/$(OUTFILE)" >> $(BASHRCFILE)
+	echo -e "\n[[ -e $(BASHACKS) ]] && source $(BASHACKS)" >> $(BASHRCFILE)
 	
 clean:
 	rm -f bashacks.sh
