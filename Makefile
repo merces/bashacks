@@ -11,7 +11,7 @@ all:
 
 install:
 	[ -e $(OUTFILE) ] && \
-		echo -e "\n[[ -e $(BASHACKS) ]] && source $(BASHACKS)" >> $(BASHRCFILE) \
+		echo -e "\n[ -e $(BASHACKS) ] && . $(BASHACKS)" >> $(BASHRCFILE) \
 	|| \
 		echo -e "$(OUTFILE) not found. Try: make\n"
 
