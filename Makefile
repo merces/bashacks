@@ -10,13 +10,11 @@ all:
 	done
 
 install:
+	[[ -e $(OUTFILE) ]] && \
+		echo -e "\n[[ -e $(BASHACKS) ]] && source $(BASHACKS)" >> $(BASHRCFILE) \
+	|| \
+		echo -e "$(OUTFILE) not found. Try: make\n"
 
-ifeq ("$(wildcard $(OUTFILE))","")
-	$(error $(OUTFILE) not found. Try: make)
-endif	
-
-	echo -e "\n[[ -e $(BASHACKS) ]] && source $(BASHACKS)" >> $(BASHRCFILE)
-	
 clean:
 	rm -f bashacks.sh
 
