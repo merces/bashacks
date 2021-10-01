@@ -1,6 +1,6 @@
-SRC = $(shell find src/ -type f -name '*.sh')
+SRC = `find src/ -type f -name '*.sh'`
 OUTFILE = bashacks.sh
-BASHRCFILE = ~/.bash_profile
+BASHRCFILE = ~/.profile
 BASHACKS = $(shell pwd)/$(OUTFILE)
 
 all:
@@ -10,7 +10,7 @@ all:
 	done
 
 install:
-	[[ -e $(OUTFILE) ]] && \
+	[ -e $(OUTFILE) ] && \
 		echo -e "\n[[ -e $(BASHACKS) ]] && source $(BASHACKS)" >> $(BASHRCFILE) \
 	|| \
 		echo -e "$(OUTFILE) not found. Try: make\n"
