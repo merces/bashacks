@@ -1,7 +1,7 @@
 SRC = `find src/ -type f -name '*.sh'`
 OUTFILE = bashacks.sh
 BASHRCFILE = ~/.profile
-BASHACKS = $(shell pwd)/$(OUTFILE)
+BASHACKS = `pwd`/$(OUTFILE)
 
 all:
 	for file in $(SRC); do \
