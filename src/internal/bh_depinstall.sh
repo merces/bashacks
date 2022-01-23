@@ -1,5 +1,4 @@
-bashacks_depinstall()
-{
+bashacks_depinstall() {
     local sPktManager=
     local sPkt="bc binutils coreutils file grep hexdump html2text perl sed wget zip"
 

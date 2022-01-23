@@ -1,6 +1,7 @@
-SRC = $(shell find src/ -type f -name '*.sh')
+SRC = `find src/ -type f -name '*.sh'`
 OUTFILE = bashacks.sh
-BASHRCFILE = ~/.bash_profile
+BASHRCFILE = ~/.profile
+BASHACKS = `pwd`/$(OUTFILE)
 
 all:
 	for file in $(SRC); do \
@@ -9,13 +10,11 @@ all:
 	done
 
 install:
+	[ -e $(OUTFILE) ] && \
+		echo -e "\n[ -e $(BASHACKS) ] && . $(BASHACKS)" >> $(BASHRCFILE) \
+	|| \
+		echo -e "$(OUTFILE) not found. Try: make\n"
 
-ifeq ("$(wildcard $(OUTFILE))","")
-	$(error $(OUTFILE) not found. Try: make)
-endif	
-
-	echo "\n[[ -e $(shell pwd)/$(OUTFILE) ]] && source $(shell pwd)/$(OUTFILE)" >> $(BASHRCFILE)
-	
 clean:
 	rm -f bashacks.sh
 

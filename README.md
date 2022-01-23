@@ -29,6 +29,7 @@
 * bc
 * binutils
 * coreutils
+* curl
 * file
 * grep
 * hexdump
@@ -117,7 +118,7 @@ There's much more. Install it and see by your own.
 
 ## 6. Changelog
 
-### bashacks 1.5 - March, 2018
+### bashacks 1.5 -
 
 * new name: bashacks
 * manpages added.
@@ -132,12 +133,16 @@ There's much more. Install it and see by your own.
 * new function: bh_hostcalc() - returns the total hosts number for an IPv4 subnet.
 * new function: bh_ip2geo() - approximately determines geographical location of an IPv4 address.
 * new function: bh_md5rename() - renames files to their MD5 hash.
+* new function: bh_nopstring() - fill a string with nullbytes in a binary file
+* new function: bh_sharefile() - upload a file to file.io and gives a download link that only works once.
 * new function: bh_skel_c() - outputs a blank C source file skeleton.
 * new function: bh_skel_python() - outputs a blank Python script skeleton.
+* new function: bh_skel_yara() - outputs a simple Yara rule skeleton.
 * new function: bh_str2hexr() - converts a string to its reversed hexadecimal equivalent.
+* new function: bh_unshort() - Gives the real URL behind shortened links
 * new function: bh_urlencode - Decodes an URL-encoded string.
 * new function: bh_wgetr() -  site mirroring with random interval between resquests and custom User-Agent.
-* new function: bh_zipmal() - ZIP files with 'virus' password.
+* new function: bh_zipmal() - ZIP files with 'infected' password.
 
 ### hack-functions 1.4 - February, 27 2012
 
@@ -170,4 +175,4 @@ interpret them. See the following example using bh_strxor function:
     $ bh_strxor 0x41 "'\$3/ /%." # string between double quotes and dollar sign escaped
     fernando
 
-If you think you find a bug, please fill it at <https://github.com/merces/bashacks/issues>
+If you think you found a bug, please fill it at <https://github.com/merces/bashacks/issues>
