@@ -1,25 +1,33 @@
 bh_hashcrack() {
-    [[ $# -eq 0 ]] && return 1
-    [[ -d "$BASHACKS_CACHEDIR" ]] || {
-        mkdir -p "$BASHACKS_CACHEDIR" 
-	>$BASHACKS_CACHEDIR/hash
-    }
-    
-    local hash="$1"
-    local site="https://hashtoolkit.com/decrypt-hash/?hash=$hash"
+	# argc must be equals to 1
+	[ $# -ne 1 ] && return 1
 
-    # cache search
-    CACHE=$(grep "$hash:" $BASHACKS_CACHEDIR/hash )
-    [[ "$CACHE" ]] && {
-         res=$(echo "$CACHE" \
-	  | cut -d ':' -f2)
-    } || {
+	# if '${HOME}/.config/bashacks/' not exist
+	[ ! -d "$BASHACKS_CACHEDIR" ] && {
+		mkdir -p "$BASHACKS_CACHEDIR"
+		> "${BASHACKS_CACHEDIR}/hash"
+   }
+    
+   local hash="$1"
+   local site="https://hashtoolkit.com/decrypt-hash/?hash=$hash"
+
+   # cache search
+   CACHE=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash" )
+
+   if [ "$CACHE" ]; then
+		res=$(cut -d ':' -f2 <<< "$CACHE")
+
+	# if the hash has not been looked up previously
+	else
+		# bh_cmd_wget is an alias, see: src/internal/bh_bootstrap.sh
       res=$(bh_cmd_wget -qO - "$site" \
-       | grep '"decrypted' \
-       | tr -d '[:blank:]' \
-       | sed -e 's/<[^>]*>//g')
-      #cache
-      [[ "$res" ]] && echo "$hash:$res" >>$BASHACKS_CACHEDIR/hash
-    }
-    echo "$res"
+			| sed -n '/.*generate-hash\/?text=\(.*\)\".*/{s//\1/p;q;}')
+
+      # cache
+      [ "$res" ] && \
+			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hash"
+	fi
+
+	echo "$res"
+
 }
