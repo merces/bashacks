@@ -1,17 +1,16 @@
 bh_strxor() {
-
-    [[ $# -lt 2 ]] && return 1
-
+    (( $# < 2 )) && return 1
+    
     local str
     local xored
     local i
 
     # $2 is the string and $1 is the xor key
-    str=$(bh_str2hex "$2")
+    str=$(bh_str2dec "$2")
 
     for i in $str; do
-       		xored="$xored $(bh_dec2hex $((0x$i^$1)))"
+        xored=$(( $i ^ $1 ))
+        echo -ne "$(bh_dec2asc $xored)"
    	done
-
-   	bh_hex2str "$xored"
+   	echo
 }

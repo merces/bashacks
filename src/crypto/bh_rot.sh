@@ -1,7 +1,8 @@
 bh_rot() {
-	local n
+	(( $# < 2 )) && return 1
 
-	[[ $# -eq 2 ]] || return 1
+	local n
+	local N
 
 	# n receives the correspondent alphabet letter
 	n=$(echo -e \\x$(bh_dec2hex $(( 97 + $1 )) ) )

@@ -1,20 +1,17 @@
 bh_hex2str() {
-	[[ $# -ne 1 ]] && return 1 
+	(( $# < 1 )) && return 1 
 	
 	local hex
-	local oIFS
 	local i
 	
-	hex=$(echo "$1" | bh_cmd_sed_ext 's/(0x|\\x| |{\|}|,)//g')
-	
-	# insert a space each two chars
-	hex=$(echo "$hex" | sed 's/../& /g')
+	# remove non-hexa characters
+	hex=$(echo "$1" | bh_cmd_sed_ext 's/(0x|\\x| |{|\||}|,)//g')
 
-	oIFS=$IFS
-	IFS=' '
+	# insert space every two characters
+	hex=$(echo "$hex" | bh_cmd_sed_ext 's/../& /g')
+	
 	for i in $hex; do
 		echo -ne "\\x$i"
 	done
 	echo
-	IFS=$oIFS
 }

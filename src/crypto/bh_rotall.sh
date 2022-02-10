@@ -1,7 +1,7 @@
 bh_rotall() {
-	local i
+	(( $# < 1 )) && return 1
 
-	test -n "$1" || { bh_rot ; return 1; }
+	local i
 
 	for i in {1..25}; do
 		echo "ROT$i $(bh_rot $i "$1")"
