@@ -1,5 +1,4 @@
-bh_rotall()
-{
+bh_rotall() {
 	local i
 
 	test -n "$1" || { bh_rot ; return 1; }
