@@ -5,7 +5,7 @@ bh_hex2str() {
 	local i
 	
 	# remove non-hexa characters
-	hex=$(echo "$1" | bh_cmd_sed_ext 's/(0x|\\x| |{|\||}|,)//g')
+	hex=$(echo "$1" | bh_cmd_sed_ext 's/(0x|\\x| |\{|\||\}|,)//g')
 
 	# insert space every two characters
 	hex=$(echo "$hex" | bh_cmd_sed_ext 's/../& /g')
