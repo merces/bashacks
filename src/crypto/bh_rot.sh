@@ -1,7 +1,7 @@
 bh_rot() {
 	local n
 
-	[ $# -eq 2 ] || return 1
+	[[ $# -eq 2 ]] || return 1
 
 	# n receives the correspondent alphabet letter
 	n=$(echo -e \\x$(bh_dec2hex $(( 97 + $1 )) ) )

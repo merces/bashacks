@@ -1,9 +1,9 @@
 bh_hashcrack() {
 	# argc must be equals to 1
-	[ $# -ne 1 ] && return 1
+	[[ $# -ne 1 ]] && return 1
 
 	# if '${HOME}/.config/bashacks/' not exist
-	[ ! -d "$BASHACKS_CACHEDIR" ] && {
+	[[ ! -d "$BASHACKS_CACHEDIR" ]] && {
 		mkdir -p "$BASHACKS_CACHEDIR"
 		> "${BASHACKS_CACHEDIR}/hash"
    }
@@ -14,7 +14,7 @@ bh_hashcrack() {
    # cache search
    CACHE=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash" )
 
-   if [ "$CACHE" ]; then
+   if [[ "$CACHE" ]]; then
 		# getting the plaintext that is hashed
 		res=$(cut -d ':' -f2 <<< "$CACHE")
 
@@ -25,7 +25,7 @@ bh_hashcrack() {
 			| sed -n '/.*generate-hash\/?text=\(.*\)\".*/{s//\1/p;q;}')
 
       # saving data on cache
-      [ "$res" ] && \
+      [[ "$res" ]] && \
 			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hash"
 	fi
 
