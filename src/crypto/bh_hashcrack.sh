@@ -5,7 +5,7 @@ bh_hashcrack() {
 	# if '${HOME}/.config/bashacks/' not exist
 	[[ ! -d "$BASHACKS_CACHEDIR" ]] && {
 		mkdir -p "$BASHACKS_CACHEDIR"
-		> "${BASHACKS_CACHEDIR}/hash"
+		> "${BASHACKS_CACHEDIR}/hashes.db"
    }
     
    local hash="$1"
