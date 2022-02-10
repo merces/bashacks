@@ -4,6 +4,7 @@ BASHRCFILE = ~/.profile
 BASHACKS = `pwd`/$(OUTFILE)
 
 all:
+	>$(OUTFILE)
 	for file in $(SRC); do \
 		cat $$file >> $(OUTFILE); \
 		echo >> $(OUTFILE); \
