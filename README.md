@@ -1,29 +1,12 @@
 # bashacks
 
- 1. What is that
- 2. Requirements
- 3. Installation
- 4. Documentation
- 5. Usage examples
- 6. Changelog
- 7. Known bugs
+## What?
 
-## 1. What is that
+bashacks started as a collection of bash functions most likely useful for programmers, security analysts, and general users that need some low level type of operations.
 
- bashacks is an open source (GPL) set of bash functions
- probably useful for programmers, security analysts and general
- users that need some low level type of operations.
+In fact, there is nothing really new in bashacks as all functions are written using exiting software in UNIX-like systems. However, it allows you to use shorter commands to run tasks that commonly would require many a few more lines of code.
 
- In fact, there is nothing really new in bashacks since
- all functions are written using exiting software in GNU/Linux
- distributions. But you still can take advantage in use short
- commands to run tasks that commonly would require many lines
- of code to be achieved.
-
- There is no error handling in bashacks. That's a job
- for bash, the programs you call and yourself. :kissing_heart:
-
-## 2. Requirements
+## Requirements
 
 * bash >= 4
 * bc
@@ -40,20 +23,20 @@
 * xxd
 * zip
 
-## 3. Installation
+## Installation
 
-Use *make* command to generate a single file containing all functions and add it to your ```/etc/bash.bashrc``` file:
+Use the *make* command to generate a single file containing all functions and add it to your ```/etc/bash.bashrc``` file:
 
     make
     make install
 
- That's all. You can now check the available functions from command line by typing *bh_* and pressing the tab key.
+ That's all. You can now check the available functions from command line by typing *bh_* and pressing TAB.
 
-## 4. Documentation
+## Documentation
 
-    [Work In Progress](https://bashacks.readthedocs.io/)
+A work-in-progress documentation maintained by [@wesleyleite](https://github.com/wesleyleite) is available [here](https://bashacks.readthedocs.io/).
 
-## 5. Usage examples
+## Usage
 
 What time is now in Epoch?
 
@@ -82,20 +65,39 @@ Create a basic C program skeleton
         return 0;
     }
 
-Calculate common checksums for a given file
+Calculate common checksums for files
 
-    $ bh_hashes /bin/ls
-    d77c1dd5bb8e39c2dd27c96c3fd2263e /bin/ls
-    e332cf8e1a78427f1368a5a0a67946ad1e7c8e28 /bin/ls
-    5abf61c361e5ef91582e70634dfbf2214fbdb6f29c949160b69f27ae947d919d /bin/ls
+    $ bh_hashes /bin/ip*
+    387478f58a0669173fb6557d392a58e9 /bin/ip
+    1dd0f3b100bd6efc4664da0cdefff801d7d2efd8 /bin/ip
+    1d418ae3a767280c7fc6026a25e5bb9774c0e8afc7b3387b547765b62cbe578f /bin/ip
+    78868acd29e4a33194fb786f6589d3d1 /bin/ipcmk
+    8c22a129ff4b5748cc62222a93ba8471d7fdce19 /bin/ipcmk
+    34a068d7f85e85746b3fc98502fa96a734cc51f3a9d49cad92911e8f239bd9c9 /bin/ipcmk
+    69c2bedc20e77c039912c9d5e7af33db /bin/ipcrm
+    7992a936b28359d7f087a448d2b8a2418ef4f112 /bin/ipcrm
+    cded383eb3b74467409c1731c2804350fe3d1123bdac7304c1c6f3af9e7976f7 /bin/ipcrm
+    499f17765c0aa55ac99739c9bcac1d0c /bin/ipcs
+    c476949e77ef8710398fd8ec4f78c8cf1d76a420 /bin/ipcs
+    33c77a5b625f4de919f55dc24207645d219a2fde2e0b92be27c5cda8c662cd72 /bin/ipcs
+    6a738c5c2506f7e87c9458e0c3df378f /bin/iptables-xml
+    ba97af2e429aca6beb5a2b8861e370bbf874dee9 /bin/iptables-xml
+    cb8c10461da5247e8d6d63a123ba563df95ae1e78f29e1717eb8bb02c2ca045b /bin/iptables-xml
 
 Find files by MIME type (ignores file extension):
 
     $ cd /bin
-    $ bh_findmime -macho
-    [
-    bash
-    cat
+    $ bh_findmime -elf | head
+    /bin/[
+    /bin/addpart
+    /bin/appres
+    /bin/apt
+    /bin/apt-cache
+    /bin/apt-cdrom
+    /bin/apt-config
+    /bin/apt-extracttemplates
+    /bin/apt-ftparchive
+    /bin/apt-get
 
 You could pipe the results to xargs in order to calculate checksums quickly:
 
@@ -115,56 +117,57 @@ Convert string to hex in different output formats
     $ bh_str2hex -c mentebinaria
     { 0x6d, 0x65, 0x6e, 0x74, 0x65, 0x62, 0x69, 0x6e, 0x61, 0x72, 0x69, 0x61 }
 
-There's much more. Install it and see by your own.
+There is very basic error handling in bashacks. If a function does not receive the arguments it needs, it justs returns `1`.
 
-## 6. Changelog
+There's much more. Install it and see for yourself. :)
 
-### bashacks 1.5 -
+## Changelog
+
+### bashacks 1.5 - Somewhen in 2022
 
 * new name: bashacks
 * manpages added.
 * many bugs fixed.
-* new cache engine at $HOME/.bashacks/cache to speed up things!
-* new function: bh_asminfo() - details an Assembly x86 instruction.
-* new function: bh_depinstall() - installs all bashacks dependencies.
-* new function: bh_epoch() - converts an Epoch date to its human-readable equivalent.
-* new function: bh_fileinfo() - Retrieves advanced information from a file given.
-* new function: bh_findmime() - finds files by their MIME-type.
-* new function: bh_get() - simple GET with custom User-Agent.
-* new function: bh_hostcalc() - returns the total hosts number for an IPv4 subnet.
-* new function: bh_md5rename() - renames files to their MD5 hash.
-* new function: bh_sharefile() - upload a file to file.io and gives a download link that only works once.
-* new function: bh_skel_c() - outputs a blank C source file skeleton.
-* new function: bh_skel_python() - outputs a blank Python script skeleton.
-* new function: bh_skel_yara() - outputs a simple Yara rule skeleton.
-* new function: bh_str2hexr() - converts a string to its reversed hexadecimal equivalent.
-* new function: bh_unshort() - Gives the real URL behind shortened links
-* new function: bh_urlencode - Decodes an URL-encoded string.
-* new function: bh_wgetr() -  site mirroring with random interval between resquests and custom User-Agent.
-* new function: bh_zerostring() - fill a string with nullbytes in a binary file
-* new function: bh_zipmal() - ZIP files with 'infected' password.
+* new cache engine at $HOME/.bashacks/cache used by internet dependent functions like `bh_asminfo` and `bh_hashcrack`.
+* new function: `bh_asminfo` - details an Assembly x86 instruction.
+* new function: `bh_epoch` - converts an Epoch date to its human-readable equivalent.
+* new function: `bh_findmime` - finds files by their MIME-type.
+* new function: `bh_hostcalc` - returns the total hosts number for an IPv4 subnet.
+* new function: `bh_md5rename` - renames files to their MD5 hash.
+* new function: `bh_sharefile` - upload a file to file.io and returns a download link that only works once.
+* new function: `bh_skel_c` - outputs a blank C source file skeleton.
+* new function: `bh_skel_python` - outputs a blank Python script skeleton.
+* new function: `bh_skel_yara` - outputs a simple Yara rule skeleton.
+* new function: `bh_str2hexr` - converts a string to its reversed hexadecimal equivalent.
+* new function: `bh_unshort` - gives the real URL behind shortened links.
+* new function: `bh_urlencode` - decodes an URL-encoded string.
+* new function: `bh_wgetr` -  site mirroring with random interval between resquests and custom User-Agent.
+* new function: `bh_zerostring` - fill a string with nullbytes in a binary file.
+* new function: `bh_zipmal` - zip files with 'infected' password.
 
 ### hack-functions 1.4 - February, 27 2012
 
-* new function: bh_charcalc() - perform character math.
-* new function: bh_intel() - set Intel syntax for disassembling.
-* new function: bh_rotall() - simultaneous ROT for strings (thanks to @laerciomasalla for suggesting it).
+* new function: `bh_charcalc` - performs math with characters.
+* new function: `bh_intel` - set Intel syntax for disassembling.
+* new function: `bh_rotall` - simultaneous ROT for strings (thanks to @laerciomasalla for suggesting it).
 * created reference guide in Portuguese.
-* bh_hexcalc() now supports the four basic math operations and the result is prefixed with '0x'.
-* bh_str2hex() and hex2str() now support the prefixes '0x', '\x', with or without spaces and C-array notation.
+* `bh_hexcalc` now supports the four basic math operations and the result is prefixed with `0x`.
+* `bh_str2hex` and `hex2str` now support the prefixes `0x`, `\x`, with or without spaces and C-array notation.
 
 ### hack-functions 1.2 - February, 24 2012
 
-* new functions: bh_bin2dec() and bh_asc2hex().
+* new functions: `bh_bin2dec` and `bh_asc2hex`.
 * added Intel syntax by default for gdb and objdump.
-* curl gets replaced by wget in bh_unmd5().
+* curl gets replaced by wget in `bh_unmd5`.
 * code optimization in many functions.
 
 ### hack-functions 1.0 - February, 24 2012
 
 * first public release containing 20 functions.
 
-## 7. Knwon bugs
+## Known Bugs
+
+### String escape
 
 In some string functions you have to escape special characters because bash will try to
 interpret them. See the following example using bh_strxor function:
@@ -174,5 +177,9 @@ interpret them. See the following example using bh_strxor function:
 
     $ bh_strxor 0x41 "'\$3/ /%." # string between double quotes and dollar sign escaped
     fernando
+    
+### ZSH support
 
-If you think you found a bug, please fill it at <https://github.com/merces/bashacks/issues>
+As bashacks uses the word splitting feature from bash, they don't work by default in ZSH. However, you can configure ZSH to perform word splitting with the following command:
+
+    $ setopt sh_word_split
