@@ -144,6 +144,8 @@ There's much more. Install it and see for yourself. :)
     * `bh_wgetr` -  site mirroring with random interval between resquests and custom User-Agent.
     * `bh_zerostring` - fill a string with nullbytes in a binary file.
     * `bh_zipmal` - zip files with 'infected' password.
+    * `bh_ipblocked` - checks if an IP address is blocked by a few security vendors.
+    * `bh_skel_latex` - outputs a LaTeX template.
 * Removed functions:
     * `bh_intel` is not needed anymore.
     * `bh_asc2hex` result is easily achieved with `echo a | hd`.
