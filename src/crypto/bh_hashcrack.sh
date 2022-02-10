@@ -15,6 +15,7 @@ bh_hashcrack() {
    CACHE=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash" )
 
    if [ "$CACHE" ]; then
+		# getting the plaintext that is hashed
 		res=$(cut -d ':' -f2 <<< "$CACHE")
 
 	# if the hash has not been looked up previously
@@ -23,7 +24,7 @@ bh_hashcrack() {
       res=$(bh_cmd_wget -qO - "$site" \
 			| sed -n '/.*generate-hash\/?text=\(.*\)\".*/{s//\1/p;q;}')
 
-      # cache
+      # saving data on cache
       [ "$res" ] && \
 			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hash"
 	fi
