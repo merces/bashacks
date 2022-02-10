@@ -31,7 +31,7 @@ bh_findmime() {
 		-macho)
 			opt='x\-mach\-binary' ;;
 		-elf)
-			opt='x\-(executable|sharedlib)' ;;
+			opt='x\-(executable|pie\-executable|sharedlib)' ;;
 		*)
 			return
 	esac
