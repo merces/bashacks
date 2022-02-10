@@ -1,3 +1,3 @@
 bashacks() {
-    echo -e "Try:\n\t$ man bashacks"
+    echo -e "Type bh_ and press TAB."
 }

@@ -1,6 +1,6 @@
 bh_hashcrack() {
 	# argc must be equals to 1
-	[[ $# -ne 1 ]] && return 1
+	(( $# < 1 )) && return 1
 
 	# if '${HOME}/.config/bashacks/' not exist
 	[[ ! -d "$BASHACKS_CACHEDIR" ]] && {
@@ -10,13 +10,14 @@ bh_hashcrack() {
     
    local hash="$1"
    local site="https://hashtoolkit.com/decrypt-hash/?hash=$hash"
+   local cache=
 
    # cache search
-   CACHE=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash" )
+   cache=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash")
 
-   if [[ "$CACHE" ]]; then
+   if [[ "$cache" ]]; then
 		# getting the plaintext that is hashed
-		res=$(cut -d ':' -f2 <<< "$CACHE")
+		res=$(cut -d ':' -f2 <<< "$cache")
 
 	# if the hash has not been looked up previously
 	else
@@ -24,7 +25,7 @@ bh_hashcrack() {
       res=$(bh_cmd_wget -qO - "$site" \
 			| sed -n '/.*generate-hash\/?text=\(.*\)\".*/{s//\1/p;q;}')
 
-      # saving data on cache
+      # saving data to cache
       [[ "$res" ]] && \
 			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hash"
 	fi

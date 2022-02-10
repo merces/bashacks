@@ -1,4 +1,6 @@
 bh_findmime() {
+	(( $# < 2 )) && return 1
+
 	local dir=.
 	local filetype
 	local opt

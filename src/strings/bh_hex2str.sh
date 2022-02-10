@@ -1,5 +1,5 @@
 bh_hex2str() {
-	(( $# < 1 )) && return 1 
+	(( $# < 1 )) && return 1
 	
 	local hex
 	local i

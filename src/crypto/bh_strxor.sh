@@ -10,7 +10,7 @@ bh_strxor() {
 
     for i in $str; do
         xored=$(( $i ^ $1 ))
-        echo -ne "$(bh_dec2asc $xored)"
+        echo -n "$(bh_dec2asc $xored)"
    	done
    	echo
 }

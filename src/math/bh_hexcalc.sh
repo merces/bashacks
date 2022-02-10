@@ -1,5 +1,5 @@
 bh_hexcalc() {
-	[[ $# -ne 3 ]] && return 1
+	(( $# < 3 )) && return 1
 
 	echo -n 0x
 	bh_dec2hex $((0x${1#0x} $2 0x${3#0x}))

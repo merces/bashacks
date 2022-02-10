@@ -5,4 +5,5 @@ bh_ip2bin() {
 	for i in $(echo "$1" | tr . ' '); do
 	    printf "%.8d." $(bh_dec2bin $i)
     done | sed "s/.$//"
+    echo
 }

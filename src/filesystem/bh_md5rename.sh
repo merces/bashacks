@@ -1,13 +1,11 @@
 bh_md5rename() {
-	IFS=
-	local md5_hash=
-	local i=
+	(( $# < 1 )) && return 1
 
-	[[ -n "$1" ]] || return 1
+	local md5_hash
+	local i
 
 	for i in $*; do
-		md5_hash=$(bh_cmd_md5 "$i" | cut -d= -f2 | tr -d ' ')
-		echo $md5_hash
-		#mv "$i" $md5_hash
+		md5_hash=$(bh_cmd_md5 "$i" | cut -d" " -f1)
+		[[ $md5_hash ]] && mv "$i" $(dirname "$i")/$md5_hash
 	done
 }

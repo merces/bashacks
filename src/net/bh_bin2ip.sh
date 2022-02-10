@@ -1,4 +1,6 @@
 bh_bin2ip() {
+	(( $# < 1 )) && return 1
+
 	local a=b=c=d=
 	
 	IFS=. read a b c d <<< "$1"								

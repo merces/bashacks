@@ -37,6 +37,7 @@
 * perl
 * sed
 * wget
+* xxd
 * zip
 
 ## 3. Installation
@@ -50,7 +51,7 @@ Use *make* command to generate a single file containing all functions and add it
 
 ## 4. Documentation
 
-    [a link](https://bashacks.readthedocs.io/)
+    [Work In Progress](https://bashacks.readthedocs.io/)
 
 ## 5. Usage examples
 
@@ -131,9 +132,7 @@ There's much more. Install it and see by your own.
 * new function: bh_findmime() - finds files by their MIME-type.
 * new function: bh_get() - simple GET with custom User-Agent.
 * new function: bh_hostcalc() - returns the total hosts number for an IPv4 subnet.
-* new function: bh_ip2geo() - approximately determines geographical location of an IPv4 address.
 * new function: bh_md5rename() - renames files to their MD5 hash.
-* new function: bh_nopstring() - fill a string with nullbytes in a binary file
 * new function: bh_sharefile() - upload a file to file.io and gives a download link that only works once.
 * new function: bh_skel_c() - outputs a blank C source file skeleton.
 * new function: bh_skel_python() - outputs a blank Python script skeleton.
@@ -142,6 +141,7 @@ There's much more. Install it and see by your own.
 * new function: bh_unshort() - Gives the real URL behind shortened links
 * new function: bh_urlencode - Decodes an URL-encoded string.
 * new function: bh_wgetr() -  site mirroring with random interval between resquests and custom User-Agent.
+* new function: bh_zerostring() - fill a string with nullbytes in a binary file
 * new function: bh_zipmal() - ZIP files with 'infected' password.
 
 ### hack-functions 1.4 - February, 27 2012
