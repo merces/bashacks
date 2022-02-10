@@ -125,25 +125,28 @@ There's much more. Install it and see for yourself. :)
 
 ### bashacks 1.5 - Somewhen in 2022
 
-* new name: bashacks
-* manpages added.
-* many bugs fixed.
-* new cache engine at $HOME/.bashacks/cache used by internet dependent functions like `bh_asminfo` and `bh_hashcrack`.
-* new function: `bh_asminfo` - details an Assembly x86 instruction.
-* new function: `bh_epoch` - converts an Epoch date to its human-readable equivalent.
-* new function: `bh_findmime` - finds files by their MIME-type.
-* new function: `bh_hostcalc` - returns the total hosts number for an IPv4 subnet.
-* new function: `bh_md5rename` - renames files to their MD5 hash.
-* new function: `bh_sharefile` - upload a file to file.io and returns a download link that only works once.
-* new function: `bh_skel_c` - outputs a blank C source file skeleton.
-* new function: `bh_skel_python` - outputs a blank Python script skeleton.
-* new function: `bh_skel_yara` - outputs a simple Yara rule skeleton.
-* new function: `bh_str2hexr` - converts a string to its reversed hexadecimal equivalent.
-* new function: `bh_unshort` - gives the real URL behind shortened links.
-* new function: `bh_urlencode` - decodes an URL-encoded string.
-* new function: `bh_wgetr` -  site mirroring with random interval between resquests and custom User-Agent.
-* new function: `bh_zerostring` - fill a string with nullbytes in a binary file.
-* new function: `bh_zipmal` - zip files with 'infected' password.
+* New name: bashacks
+* Bugs fixed.
+* New cache engine at $HOME/.bashacks/cache used by internet dependent functions like `bh_asminfo` and `bh_hashcrack`.
+* New functions:
+    * `bh_asminfo` - details an Assembly x86 instruction.
+    * `bh_epoch` - converts an Epoch date to its human-readable equivalent.
+    * `bh_findmime` - finds files by their MIME-type.
+    * `bh_hostcalc` - returns the total hosts number for an IPv4 subnet.
+    * `bh_md5rename` - renames files to their MD5 hash.
+    * `bh_sharefile` - upload a file to file.io and returns a download link that only works once.
+    * `bh_skel_c` - outputs a blank C source file skeleton.
+    * `bh_skel_python` - outputs a blank Python script skeleton.
+    * `bh_skel_yara` - outputs a simple Yara rule skeleton.
+    * `bh_str2hexr` - converts a string to its reversed hexadecimal equivalent.
+    * `bh_unshort` - gives the real URL behind shortened links.
+    * `bh_urlencode` - decodes an URL-encoded string.
+    * `bh_wgetr` -  site mirroring with random interval between resquests and custom User-Agent.
+    * `bh_zerostring` - fill a string with nullbytes in a binary file.
+    * `bh_zipmal` - zip files with 'infected' password.
+* Removed functions:
+    * `bh_intel` is not needed anymore.
+    * `bh_asc2hex` result is easily achieved with `echo a | hd`.
 
 ### hack-functions 1.4 - February, 27 2012
 
@@ -152,7 +155,7 @@ There's much more. Install it and see for yourself. :)
 * new function: `bh_rotall` - simultaneous ROT for strings (thanks to @laerciomasalla for suggesting it).
 * created reference guide in Portuguese.
 * `bh_hexcalc` now supports the four basic math operations and the result is prefixed with `0x`.
-* `bh_str2hex` and `hex2str` now support the prefixes `0x`, `\x`, with or without spaces and C-array notation.
+* `bh_str2hex` and `hex2str` now support the prefixes `0x`, `\x`, with or without spaces, and C-style arrays.
 
 ### hack-functions 1.2 - February, 24 2012
 
