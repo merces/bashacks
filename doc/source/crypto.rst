@@ -9,6 +9,7 @@ bh_hashcrack
 
 This is our old function ``bh_unmd5`` with many improvements, now can with several hashes, just update the name.
 
+In this new version we cache the hash that have already been found, improving delivery speed.
 
 .. note:: Usage 
 
