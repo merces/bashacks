@@ -56,29 +56,6 @@ Convert network ipaddress into binary string.
 
 
 
-bh_ip2geo
----------
-
-This command returnes the approximate location of informate ipaddress.
-
-limited to 70 queries per day.
-
-.. note::
-
-    Usage
-
-        ``bh_ip2geo`` [ ipaddress ]
-
-.. code-block:: bash
-
-    $ bh_ip2geo 8.8.8.8
-    Level 3 Communications Google Mountain View US 37.386001586914 -122.08380126953 1 
-
-    # last fiel represents the amount of queries
-    $ bh_ip2geo 107.155.91.162
-    Austin US 30.310600280762 -97.722702026367 2 
-
-
 bh_myip
 -------
 
@@ -126,7 +103,7 @@ Recursive and continue getting a partially-downloaded "if exist" file started by
 bh_ipinfo
 ---------
 
-Query ipinfo.io returns reserved company network range to you, if domain not informed, your network should be considered.
+Query ipinfo.io returns basic info about address.
 
 .. note:: 
 
@@ -136,18 +113,20 @@ Query ipinfo.io returns reserved company network range to you, if domain not inf
 
 .. code-block:: bash 
 
-    $ bh_ipinfo linuxfoundation.org
-    AS3701 Network for Education and Research in Oregon (NERO)
-    140.211.0.0/16
-    163.41.0.0/16
-    192.68.202.0/24 
-    ...
-
-    $ bh_ipinfo 
-    ASXXXXX YOUR-ISP
-    255.0.0.0/8
-    255.200.0.0/16
-    255.200.200.0/24
+    $ $ bh_ipinfo 8.8.8.8
+    {
+     "ip": "8.8.8.8",
+     "hostname": "dns.google",
+     "anycast": true,
+     "city": "Mountain View",
+     "region": "California",
+     "country": "US",
+     "loc": "37.4056,-122.0775",
+     "org": "AS15169 Google LLC",
+     "postal": "94043",
+     "timezone": "America/Los_Angeles",
+     "readme": "https://ipinfo.io/missingauth"
+    } 
 
 
 bh_unshort
@@ -165,10 +144,9 @@ With this function you have the possibility to unshort a URL see below a example
 
     $ bh_unshort http://goo.gl/l6MS
     http://googleblog.blogspot.com/2009/12/making-urls-shorter-for-google-toolbar.html
-    $
 
 
-bh_ipblacklist
+bh_ipisblacklisted
 ---------
 
 Search for occurrence of the ip address in some  blacklist returning [T] if positive and [F] if it is opposite..
@@ -185,13 +163,9 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
     == 77.xxx.xx.xx ==
     [F]    TALOS
     [F]    Malc0de
-    [F]    ZeuStracker
     [F]    Projecthoneypot.org
     [F]    blocklist.de
     [T]    Alienvault
-    [F]    nothinkSSH
-    [F]    nothinkMalwareIRC
-    [F]    nothinkMalwareHTTP
     [F]    SANS-TOPSOURCE
 
     #if ipaddress is not informed will be considered the outside
@@ -200,12 +174,7 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
     == 189.x.xxx.x ==
     [F]    TALOS
     [F]    Malc0de
-    [F]    ZeuStracker
-    [F]    Projecthoneypot.org
     [F]    blocklist.de
     [F]    Alienvault
-    [F]    nothinkSSH
-    [F]    nothinkMalwareIRC
-    [F]    nothinkMalwareHTTP
-    [F]    SANS-TOPSOURCE
+    [T]    SANS-TOPSOURCE
 
