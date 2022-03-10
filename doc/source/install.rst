@@ -10,14 +10,15 @@ Requirements
 * bc
 * binutils
 * coreutils
+* curl
 * file
 * grep
 * hexdump
 * html2text
-* objdump
 * perl
 * sed
 * wget
+* xxd
 * zip
 * make
 
@@ -66,14 +67,6 @@ Compile
     install   : Creates the file bashacks.sh, add entry in /etc/bash.bashrc and install man page
     clean     : Just remove the file bashacks.sh
     uninstall : remove reference the source of /etc/bash.bashrc and man page
-
-.. sidebar:: Install all Requirements
-
-    You are free to try resolve the dependencies manually, however, we try to help with one command. ;) 
-
-    .. code-block:: bash
-    
-        $ bashacks_depinstall 
 
 
 .. code-block:: bash
