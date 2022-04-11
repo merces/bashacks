@@ -64,28 +64,38 @@ Display information of instructions asm internet is required for help us.
 bh_replacestring
 ----------
 
-Display information of instructions asm internet is required for help us.
+Find and replace string occurrence in the file, attention: the original file will
+be replacede by the new generated file.
 
 .. note::
 
     Usage
     
-        ``bh_asminfo`` [ asm instruction ]
+        ``bh_replacestring`` [ file ] [ string to search ] [ string to replace ]
 
 .. code-block:: bash 
 
-    $ bh_asminfo mov 
-    mov
-                                                                              
-    |Code   |Mnemonic        |Description                                         |
-    |88 / r |MOV r/m8, r8    |Move r8 to r/m8                                     |
-    |89 / r |MOV r/m16, r16  |Move r16 to r/m16                                   |
-    |89 / r |MOV r/m32, r32  |Move r32 to r/m32                                   |
-    |8A / r |MOV r8, r/m8    |Move r/m8 to r8                                     |
-    |8B / r |MOV r16, r/m16  |Move r/m16 to r16                                   |
+    $ hexdump -C MB_DEV
     .......
+    00000690  2e 00 54 00 58 00 54 00  2e 00 00 00 73 00 77 00  |..T.X.T.....s.w.|
+    000006a0  e5 45 53 54 45 54 7e 31  53 57 58 20 00 65 a1 9b  |.ESTET~1SWX .e..|
+    000006b0  8b 54 8b 54 00 00 a1 9b  8b 54 00 00 00 00 00 00  |.T.T.....T......|
+    000006c0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    00005e00  4d 65 6e 74 65 42 69 6e  61 72 69 61 0a 00 00 00  |MenteBinaria....|
+    00005e10  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    $ bh_replacestring MB_DEV MenteBinaria BinariaMente
+    $ hexdump -C MB_DEV
     .......
-    .......
+    00000690  2e 00 54 00 58 00 54 00  2e 00 00 00 73 00 77 00  |..T.X.T.....s.w.|
+    000006a0  e5 45 53 54 45 54 7e 31  53 57 58 20 00 65 a1 9b  |.ESTET~1SWX .e..|
+    000006b0  8b 54 8b 54 00 00 a1 9b  8b 54 00 00 00 00 00 00  |.T.T.....T......|
+    000006c0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
+    00005e00  42 69 6e 61 72 69 61 4d  65 6e 74 65 0a 00 00 00  |BinariaMente....|
+    00005e10  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+    *
 
 
 bh_zerostring
