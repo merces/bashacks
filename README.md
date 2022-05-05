@@ -34,7 +34,7 @@ Use the *make* command to generate a single file containing all functions and ad
 
 ## Documentation
 
-A work-in-progress documentation maintained by [@wesleyleite](https://github.com/wesleyleite) is available [here](https://bashacks.readthedocs.io/).
+Click [here](https://bashacks.readthedocs.io/). 
 
 ## Usage
 
