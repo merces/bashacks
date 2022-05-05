@@ -36,9 +36,9 @@ Download
 
 .. sidebar:: GIT
     
-    We recommend the version available on ``sourceforge``, however, if you want to use the development version skip the session    that describe the steps of the GIT
+    We recommend the version available on ``MASTER REPOSITORY ON THE GITHUB``, however, if you want to use the development version skip the session    that describe the steps of the GIT
 
-Download the final version, download on the ``SourceForge``. `Download Bashacks`_
+Download the final version, download on the ``GITHUB``. `Download Bashacks`_
 
 
 GIT
@@ -79,6 +79,6 @@ Done that all functions can be used use ``bh`` ``TAB`` ``TAB`` and has a ``Sight
 
 
 
-.. _`Download bashacks`: http://sourceforge.net/projects/hackfunctions/?source=directory
+.. _`Download bashacks`: https://github.com/merces/bashacks/archive/refs/heads/master.zip 
 
 
