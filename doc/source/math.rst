@@ -31,10 +31,12 @@ This function expects a binary and return its equivalent in decimal.
     $ bh_bin2dec 1110
     14
 
+
 bh_charcalc
 -----------
 
 Think of a way to make operations with 'char', how to sum two positions for a 'char/string' and return letter c or sum of the other and multiply it by 10 and returns 10 
+
 .. note::
     
     Usage
@@ -53,6 +55,7 @@ Think of a way to make operations with 'char', how to sum two positions for a 'c
 
     $ bh_charcalc A \* 255
     AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.......
+
 
 bh_dec2bin
 ----------
@@ -94,6 +97,7 @@ Opossed to ``bh_bin2dec`` this function expects a decimal for converting it into
     5 = 101
     6 = 110
 
+
 bh_dec2hex
 ----------
 
@@ -116,6 +120,7 @@ The function expects a input a decimal number it performs the conversion to hex.
     $ bh_dec2hex 255
     ff
 
+
 bh_hex2bin
 ----------
 
@@ -136,6 +141,7 @@ Capture all submitted arguments and convert to binary
     $ bh_hex2bin 10
     10000
 
+
 bh_hex2dec
 ----------
 
@@ -155,6 +161,7 @@ This's a conversion function from hex digit to decimal digit
 
     $ bh_hex2dec FF
     255
+
 
 bh_hexcalc
 ----------
