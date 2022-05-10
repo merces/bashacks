@@ -10,14 +10,15 @@ Requirements
 * bc
 * binutils
 * coreutils
+* curl
 * file
 * grep
 * hexdump
 * html2text
-* objdump
 * perl
 * sed
 * wget
+* xxd
 * zip
 * make
 
@@ -35,9 +36,9 @@ Download
 
 .. sidebar:: GIT
     
-    We recommend the version available on ``sourceforge``, however, if you want to use the development version skip the session    that describe the steps of the GIT
+    We recommend the version available on ``MASTER REPOSITORY ON THE GITHUB``, however, if you want to use the development version skip the session    that describe the steps of the GIT
 
-Download the final version, download on the ``SourceForge``. `Download Bashacks`_
+Download the final version, download on the ``GITHUB``. `Download Bashacks`_
 
 
 GIT
@@ -67,14 +68,6 @@ Compile
     clean     : Just remove the file bashacks.sh
     uninstall : remove reference the source of /etc/bash.bashrc and man page
 
-.. sidebar:: Install all Requirements
-
-    You are free to try resolve the dependencies manually, however, we try to help with one command. ;) 
-
-    .. code-block:: bash
-    
-        $ bashacks_depinstall 
-
 
 .. code-block:: bash
 
@@ -86,6 +79,6 @@ Done that all functions can be used use ``bh`` ``TAB`` ``TAB`` and has a ``Sight
 
 
 
-.. _`Download bashacks`: http://sourceforge.net/projects/hackfunctions/?source=directory
+.. _`Download bashacks`: https://github.com/merces/bashacks/archive/refs/heads/master.zip 
 
 

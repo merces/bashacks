@@ -98,6 +98,29 @@ Accepts as input all output formats str2hex function.
     rock
 
 
+    
+bh_str2dec
+----------
+
+Convert one or more bytes to their decimal equivalent.
+
+
+.. note::
+    
+    ``bh_str2dec`` [char or string]
+   
+ 
+.. code-block:: bash
+
+    $ bh_str2dec A
+    65
+    $ bh_str2dec mbin
+    109 98 105 110
+    $ bh_str2dec root
+    114 111 111 116
+
+
+
 bh_str2hexr
 -----------
 
@@ -105,7 +128,7 @@ Converts string in hex byte equivalent to each char (hex string). reverse mode
 
 .. note::
 
-    ``bh_str2hexr`` [-x] [-0x] [-c] [-s] [string]
+    ``bh_str2hexr`` [-x] [-0x] [-c] [string]
 
 .. code-block:: bash
 
@@ -115,8 +138,6 @@ Converts string in hex byte equivalent to each char (hex string). reverse mode
      \x6f\x64\x6e\x61\x6e\x72\x65\x46
      $ bh_str2hexr -0x 'Fernado'
      0x6f 0x64 0x6e 0x61 0x6e 0x72 0x65 0x46
-     $ bh_str2hexr -s 'Fernando'
-     0x6f646e616e726546
 
 
 bh_str2hex
@@ -126,7 +147,7 @@ Converts string in hex byte equivalent to each char (hex string).
 
 .. note::
 
-    ``bh_str2hex`` [-x] [-0x] [-c] [-s] [string]
+    ``bh_str2hex`` [-x] [-0x] [-c] [string]
 
 .. code-block:: bash
 
@@ -136,8 +157,6 @@ Converts string in hex byte equivalent to each char (hex string).
     \x46\x65\x72\x6e\x61\x6e\x64\x6f
     $ bh_str2hex -0x 'Fernado'
     0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
-    $ bh_str2hex -s 'Fernando'
-    0x4665726e616e646f
 
 
 bh_urldecode

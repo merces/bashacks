@@ -6,7 +6,7 @@ This section in general has funcions for file handling.
 bh_bkp
 ------
 
-Do quick backup of file using the current system date to add the file name
+Do quick backup of file using the current system date posfixed to the filename
 
 .. note:: 
     Usage
@@ -58,7 +58,7 @@ Find file by mime type
 bh_hashes
 ---------
 
-Generate md5 message digest of file or list of files. 
+Generate message digest md5, sha1 and sha256 from file or list of file sent by parameters. 
 
 .. note::
 
@@ -69,13 +69,16 @@ Generate md5 message digest of file or list of files.
 
 .. code-block:: bash
 
-    problema
+    $ $ bh_hashes bashacks.sh 
+    5dab37cac730088fd959f8292636fc9b bashacks.sh
+    38be74a4e710a3eeb24b4fa2015cea990d4eda67 bashacks.sh
+    587b713bb31e3bf32de0b734805c3dd247f49a14cd9e9a5f35008e4f620d3f82 bashacks.sh
 
 
 bh_md5rename
 ------------
 
-Generate md5 message dgest to one or more files and rename it with result.
+Convert filename to equivalent digest md5.
 
 .. note::
     
@@ -86,12 +89,55 @@ Generate md5 message dgest to one or more files and rename it with result.
 
 .. code-block:: bash
 
-    problema
+    $ touch ment.bin
+    $ bh_md5rename ment.bin 
+    $ ls 
+    d41d8cd98f00b204e9800998ecf8427e
 
 
 .. sidebar:: TIP
     
     It's easy compress a file and send it by mail later or protection you from yourself.
+
+
+bh_secretfile
+---------
+
+A nice feature to any skill, use it to compress one or more files, automatically generating a password and upload to the file.io, in the end of process you'll get a URL and password to decompress file.
+
+.. note::
+
+    Usage
+
+    ``bh_secretfile`` [filename]
+
+
+.. code-block:: bash
+
+    $ cat > ment.bin
+    Hi, I'm send this file. 
+    $ bh_secretfile ment.bin 
+    adding: ment.bin (stored 0%)
+    https://file.io/Raan5CUW8ZTW
+    NRvC_ZniiEtlwgcrBbI_
+
+
+bh_sharefile
+---------
+
+Just as the bh_secretfile function uploads a file and returns the unique url to access it, this process will not have a password attached, anyone with the URL will be able to download it.
+
+.. note::
+
+    Usage
+
+    ``bh_sharefile`` [filename]
+
+
+.. code-block:: bash
+
+    $ bh_sharefile texto.txt 
+    https://file.io/EGQvRxqyagIY
 
 
 bh_zipmal
