@@ -5,7 +5,7 @@ bh_defaultpassword() {
 	local HTML
 
 	HTML="$(bh_cmd_wget -qO - $URL)" 
-	echo -b "$HTML" \
+	echo "$HTML" \
 		| sed '/table/,/\/table>/s/^/--/' \
 		| grep '^--' \
 		| sed 's/^--//g' \
