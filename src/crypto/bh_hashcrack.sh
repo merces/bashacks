@@ -2,7 +2,7 @@ bh_hashcrack() {
 	# argc must be equals to 1
 	(( $# < 1 )) && return 1
 
-	# if '${HOME}/.config/bashacks/' not exist
+	# if '${HOME}/.config/bashacks/' does not exist
 	[[ ! -d "$BASHACKS_CACHEDIR" ]] && {
 		mkdir -p "$BASHACKS_CACHEDIR"
 		> "${BASHACKS_CACHEDIR}/hashes.db"
@@ -13,7 +13,7 @@ bh_hashcrack() {
    local cache=
 
    # cache search
-   cache=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hash")
+   cache=$(grep "${hash}:" "${BASHACKS_CACHEDIR}/hashes.db")
 
    if [[ "$cache" ]]; then
 		# getting the plaintext that is hashed
@@ -27,9 +27,8 @@ bh_hashcrack() {
 
       # saving data to cache
       [[ "$res" ]] && \
-			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hash"
+			echo "${hash}:$res" >> "${BASHACKS_CACHEDIR}/hashes.db"
 	fi
 
 	echo "$res"
-
 }
