@@ -1,4 +1,4 @@
-bh_ipisblacklisted() {
+bh_ipisblocked() {
     (( $# < 1 )) && return 1
 
     local ipaddress="${1:-`bh_myip`}"
