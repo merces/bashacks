@@ -9,6 +9,8 @@ all:
 		cat $$file >> $(OUTFILE); \
 		echo >> $(OUTFILE); \
 	done
+	tr -d \\r < $(OUTFILE) > $(OUTFILE).tmp
+	mv $(OUTFILE).tmp $(OUTFILE)
 
 install:
 	[ -e $(OUTFILE) ] && \
