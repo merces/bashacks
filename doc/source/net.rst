@@ -155,11 +155,11 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
 
     Usage
         
-        ``bh_ipblacklist`` [ ipaddress ] 
+        ``bh_ipisblocked`` [ ipaddress ] 
         
 .. code-block:: bash
 
-    $ bh_ipblacklist 77.xxx.xx.xx
+    $ bh_ipisblocked 77.xxx.xx.xx
     == 77.xxx.xx.xx ==
     [F]    TALOS
     [F]    Malc0de
@@ -170,7 +170,7 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
 
     #if ipaddress is not informed will be considered the outside
 
-    $ bh_ipblacklist
+    $ bh_ipisblocked
     == 189.x.xxx.x ==
     [F]    TALOS
     [F]    Malc0de
