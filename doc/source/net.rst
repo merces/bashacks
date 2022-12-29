@@ -146,7 +146,7 @@ With this function you have the possibility to unshort a URL see below a example
     http://googleblog.blogspot.com/2009/12/making-urls-shorter-for-google-toolbar.html
 
 
-bh_ipisblacklisted
+bh_ipisblocked
 ---------
 
 Search for occurrence of the ip address in some  blacklist returning [T] if positive and [F] if it is opposite..
