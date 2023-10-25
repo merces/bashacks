@@ -25,7 +25,7 @@ bh_findmime() {
 
 		# executables
 		-pe)
-			opt='x\-dosexec' ;;
+			opt='(x\-dosexec|vnd\.microsoft\.portable\-executable)' ;;
 		-msi)
 			opt='vnd\.ms\-office' ;;
 		-macho)

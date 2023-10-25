@@ -86,8 +86,7 @@ Calculate common checksums for files
 
 Find files by MIME type (ignores file extension):
 
-    $ cd /bin
-    $ bh_findmime -elf | head
+    $ bh_findmime -elf /bin | head
     /bin/[
     /bin/addpart
     /bin/appres
@@ -123,7 +122,7 @@ There's much more. Install it and see for yourself. :)
 
 ## Changelog
 
-### bashacks 1.5 - Somewhen in 2022
+### bashacks 1.5 - 2023 maybe?
 
 * New name: bashacks
 * Bugs fixed.
