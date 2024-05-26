@@ -1,4 +1,4 @@
-SRC = `find src/ -type f -name '*.sh'`
+SRC = `find src/ -type f -name '*.sh'|LC_ALL=C sort`
 OUTFILE = bashacks.sh
 BASHRCFILE = ~/.profile
 BASHACKS = `pwd`/$(OUTFILE)
@@ -6,7 +6,7 @@ BASHACKS = `pwd`/$(OUTFILE)
 all:
 	>$(OUTFILE)
 	for file in $(SRC); do \
-		cat $$file >> $(OUTFILE); \
+		(echo '#!/bin/bash' && cat $$file) >> $(OUTFILE); \
 		echo >> $(OUTFILE); \
 	done
 	tr -d \\r < $(OUTFILE) > $(OUTFILE).tmp
