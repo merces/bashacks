@@ -1,0 +1,483 @@
+.TH BASHACKS 1 "November 2023" "bashacks 1.5" "User Commands"
+
+.SH NAME
+bashacks \- collection of useful bash functions for programmers
+
+.SH DESCRIPTION
+.B Bashacks
+.nf
+.fam C
+Is a collection of Bash functions for UNIX systems, designed to simplify low-level
+operations. Ideal for programmers, security analysts, and users seeking concise
+commands, enhancing script readability and productivity.
+.fam T
+.fi
+.SH SYNOPSIS
+.B bashacks
+[\fIOPTIONS\fP] \fIARGUMENTS\fP
+
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display help message and exit.
+
+.TP
+.B \-v, \-\-version
+Display version information and exit.
+
+.SH USAGE
+.nf
+.fam C
+The following Bashacks functions are available. Type the function name and press TAB
+to auto-complete:
+.B "Examples of Options": bh_"TAB"
+\fBbh_asc2dec\fR        \fBbh_cmd_sha1\fR       \fBbh_hex2bin\fR        \fBbh_rot\fR            \fBbh_str2hex\fR
+\fBbh_asciitable\fR     \fBbh_cmd_sha256\fR     \fBbh_hex2dec\fR        \fBbh_rot13\fR          \fBbh_str2hexr\fR
+\fBbh_asmgrep\fR        \fBbh_cmd_sha512\fR     \fBbh_hex2str\fR        \fBbh_rotall\fR         \fBbh_strxor\fR
+\fBbh_asminfo\fR        \fBbh_cmd_wget\fR       \fBbh_hexcalc\fR        \fBbh_secretfile\fR     \fBbh_unshort\fR
+\fBbh_bin2dec\fR        \fBbh_dec2asc\fR        \fBbh_hostcalc\fR       \fBbh_sharefile\fR      \fBbh_urldecode\fR
+\fBbh_bin2ip\fR         \fBbh_dec2bin\fR        \fBbh_ip2bin\fR         \fBbh_skel_c\fR         \fBbh_urlencode\fR
+\fBbh_bkp\fR            \fBbh_dec2hex\fR        \fBbh_ipinfo\fR         \fBbh_skel_go\fR        \fBbh_utf8table\fR
+\fBbh_charcalc\fR       \fBbh_epoch\fR          \fBbh_ipisblocked\fR    \fBbh_skel_latex\fR     \fBbh_wgetr\fR
+\fBbh_cmd_disasm\fR     \fBbh_findmime\fR       \fBbh_md5rename\fR      \fBbh_skel_python\fR    \fBbh_zerostring\fR
+\fBbh_cmd_md5\fR        \fBbh_hashcrack\fR      \fBbh_myip\fR           \fBbh_skel_yara\fR      \fBbh_zipmal\fR
+\fBbh_cmd_sed_ext\fR    \fBbh_hashes\fR         \fBbh_replacestring\fR  \fBbh_str2d\fR
+.fam T
+.fi
+
+.SH "CONTENTS
+.nf
+.fam C
+The Bashacks pack is organized into several subcategories for
+easy location of specific functions. Each subcategory addresses
+a set specific functionalities. Below the main subcategories are
+available.
+
+These subcategories help organize the package's functionalities,
+making it easier for users to find and use tools wanted.
+.fam T
+.fi
+
+.TP 2
+.SH "Crypto"
+Functions related to cryptography and hash manipulation.
+
+\fBbh_hashcrack\fR - Analyzes various types of hashes.
+
+\fBbh_rot\fR - Encrypts/Decrypts a string with the Caesar Cipher using n shifts to the right.
+
+\fBbh_strxor\fR - Calculates the exclusive OR of each character in a string with a key.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/crypto.html
+.UE
+
+
+.TP 2
+.SH "Filesystem"
+This section generally contains functions for file manipulation.
+
+\fBbh_bkp\fR - Performs a quick backup of the file using the current date.
+
+\fBbh_findmime\fR - Finds files by MIME type.
+
+\fBbh_hashes\fR - Generates the md5, sha1, and sha256 message digest of the file or list of files.
+
+\fBbh_md5rename\fR - Converts the filename to the equivalent md5 hash.
+
+\fBbh_secretfile\fR - Use it to compress and send files, automatically generating a password.
+
+\fBbh_sharefile\fR - Loads a file and provides a unique URL to access it without a password.
+
+\fBbh_zipmal\fR - Compresses the file in zip format with password protection. The password is "virus".
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/filesystem.html
+.UE
+
+
+.TP 2
+.SH "Math"
+Mathematical operations functions.
+
+\fBbh_bin2dec\fR - Converts binary to decimal.
+
+\fBbh_charcalc\fR - Performs operations with characters (char).
+
+\fBbh_dec2bin\fR - Converts decimal to binary.
+
+\fBbh_dec2hex\fR - Converts decimal to hexadecimal.
+
+\fBbh_hex2bi\fR - Converts hexadecimal to binary.
+
+\fBbh_hex2dec\fR - Converts hexadecimal to decimal.
+
+\fBbh_hexcalc\fR - In the same way as \fBbh_charcalc\fR, however, works here with hexdigits.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/math.html
+.UE
+
+
+.TP 2
+.SH "Net"
+Network operations and related tools.
+
+\fBbh_bin2ip\fR - Convert a binary string into a network IP address.
+
+\fBbh_hostcalc\fR - Enter a network CIDR mask and determine the number of hosts.
+
+\fBbh_ip2bin\fR - Convert a network IP address into a binary string.
+
+\fBbh_myip\fR - Returns the external IP address of your network connection.
+
+\fBbh_wgetr\fR - Operates recursively, building on a previous instance of wget.
+
+\fBbh_ipinfo\fR - Queries ipinfo.io and returns basic information about an address.
+
+\fBbh_unshort\fR - Makes it possible to unzip a URL.
+
+\fBbh_ipisblacklisted\fR - Finds the IP on a blacklist, returning [T] if positive and [F] if opposite.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/net.html
+.UE
+
+
+.TP 2
+.SH "Programming"
+Session for the creation of facilitators for development in cli
+
+\fBbh_skel_c\fR - Generates on the standard output a "C" skeleton.
+
+\fBbh_skel_go\fR - Generates on the standard output a "go" skeleton.
+
+\fBbh_skel_latex\fR - Generates on the standard output a "LaTeX" skeleton.
+
+\fBbh_skel_python\fR - Generates on the standard output a "python" skeleton.
+
+\fBbh_skel_yara\fR - Generates on the standard output a "yara" skeleton.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/programming.html
+.UE
+
+
+.TP 2
+.SH "Reversing"
+Reverse engineering utilities
+
+\fBbh_asmgrep\fR - With the binary, attempts to find assembly instructions and prints 4 lines around.
+
+\fBbh_asminfo\fR - Displays information about assembly instructions. Internet connection is required for help.
+
+\fBbh_replacestring\fR - Finds and replaces occurrences of a string in the file.
+
+\fBbh_zerostring\fR - Replaces occurrences with zero bytes in a block or a common file.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/reversing.html
+.UE
+
+
+.TP 2
+.SH "String"
+Functions for string manipulation.
+
+\fBbh_asc2dec\fR - Performs the conversion of a character into its decimal equivalent.
+
+\fBbh_asciitable\fR - Displays the ASCII table in the terminal.
+
+\fBbh_dec2asc\fR - Equivalent in ASCII for decimal numbers.
+
+\fBbh_hex2str\fR - Converts one or more bytes into a hex string.
+
+\fBbh_str2dec\fR - Converts one or more bytes to their decimal equivalent.
+
+\fBbh_str2hexr\fR - Converts a string to its hex byte equivalent for each character (hex string).
+
+\fBbh_str2hex\fR - Converts a string to its hex byte equivalent for each character (hex string).
+
+\fBbh_urldecode\fR - Decodes strings to web standard human-readable format.
+
+\fBbh_urlencode\fR - Encodes strings with bh_urlencode to web standard.
+
+\fBbh_utf8table\fR - Displays the UTF-8 table.
+
+\fBFor more details, see:\fR
+.UR file:///usr/share/doc/bashacks-doc/html/string.html
+.UE
+
+
+.SH EXAMPLES
+.nf
+.fam C
+\fBbh_hascrack\fR [hash string]
+usage:
+$ bh_hashcrack e10adc3949ba59abbe56e057f20f883e
+123456
+
+
+\fBbh_rot\fR [int] [string]
+usage:
+$ bh_rot 3 terra
+whuud
+
+
+\fBbh_strxor\fR [key] [string]
+usage:
+$ bh_strxor 15 'hack'
+gnld
+
+
+\fBbh_bkp\fR [filename]
+usage:
+$ bh_bkp bashacks.sh
+$ ls -1
+bashacks.sh
+bashacks.sh.20160122
+
+
+\fBbh_findmime\fR -[type] [directory]
+usage:
+$ bh_findmime -exe ~/Downloads
+/home/bashacks/Downloads//binario.ex
+
+
+\fBbh_hashes\fR [filename or list of files]
+usage:
+$ bh_hashes bashacks.sh
+5dab37cac730088fd959f8292636fc9b bashacks.sh
+38be74a4e710a3eeb24b4fa2015cea990d4eda67 bashacks.sh
+587b713bb31e3bf32de0b734805c3dd247f49a14cd9e9a5f35008e4f620d3f82 bashacks.sh
+
+
+\fBbh_md5rename\fR [filename or list of files]
+usage:
+$ touch ment.bin
+$ bh_md5rename ment.bin
+$ ls
+d41d8cd98f00b204e9800998ecf8427e
+
+
+\fBbh_bin2dec\fR [binary]
+usage:
+$ bh_bin2dec 1111111
+
+
+\fBbh_charcalc\fR [char/string] [operator] [number]
+usage:
+$ bh_charcalc A + 2
+C
+
+$ bh_charcalc A \\* 255
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+\fBbh_dec2bin\fR [decimal]
+usage:
+$ bh_dec2bin 255
+11111111
+
+
+\fBbh_dec2hex\fR [decimal]
+$ bh_dec2hex 10
+a
+
+
+\fBbh_hex2dec\fR [one or more hex digit]
+usage:
+$ bh_hex2dec A
+10
+
+
+\fBbh_hex2cal\fR [hex digit] [operator] [hex digit]
+usage:
+$ bh_hex2dec A \\* 2
+0xa0
+
+
+\fBbh_bin2ip\fR [binary string]
+usage:
+$ bh_bin2ip 00001010.00001010.00000000.00000001
+10.10.0.1
+
+
+\fBbh_hostcalc\fR [mask cidr]
+usage:
+$ bh_hostcalc 24
+256
+
+
+\fBbh_wgetr\fR [url]
+usage:
+$ bh_wgetr http://www.mentebinaria.com.br/artigos/0x1e/0x1e-maqengrevwin.html
+www.mentebinaria.com.br/art 100%[==========================================>]   8.73K  --.-KB/s   in 0s
+www.mentebinaria.com.br/rob 100%[==========================================>]     361  --.-KB/s   in 0s
+www.mentebinaria.com.br/art 100%[==========================================>]  66.18K   132KB/s   in 0.5s
+$ ls -1
+www.mentebinaria.com.br
+$ ls -1 www.mentebinaria.com.br/artigos/0x1e/
+0x1e-maqengrevwin.html
+desktop.png
+
+
+\fBbh_ipinfo\fR [ipaddress]
+usage:
+$ bh_ipinfo 8.8.8.8
+{
+ "ip": "8.8.8.8",
+ "hostname": "dns.google",
+ "anycast": true,
+ "city": "Mountain View",
+ "region": "California",
+ "country": "US",
+ "loc": "37.4056,-122.0775",
+ "org": "AS15169 Google LLC",
+ "postal": "94043",
+ "timezone": "America/Los_Angeles",
+ "readme": "https://ipinfo.io/missingauth"
+}
+
+
+\fBbh_ipblacklisted\fR [ipaddress]
+usage:
+$ bh_ipblacklist 77.xxx.xx.xx
+== 77.xxx.xx.xx ==
+[F]    TALOS
+[F]    Malc0de
+[F]    Projecthoneypot.org
+[F]    blocklist.de
+[T]    Alienvault
+[F]    SANS-TOPSOURCE
+
+
+\fBbh_skel_c\fR
+usage:
+$ bh_skel_c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+
+    return 0;
+}
+
+
+\fBbh_skel_latex\fR
+usage:
+$ bh_skel_latex
+\edocumentclass{article}
+
+\eusepackage[english]{babel}
+\eusepackage[utf8]{inputenc}
+\eusepackage[margin=1in]{geometry}
+
+\eauthor{}
+\etitle{}
+
+
+\fBbh_skel_python\fR
+usage:
+$ bh_skel_python
+#!/usr/bin/env python
+# *-* coding: utf-8 *-*
+
+if __name__ == '__main__':
+
+
+\fBbh_asmgrep\fR [asm instruction] [binary path]
+usage:
+$ bh_asmgrep mov /bin/ls
+
+409f2e:66 90                : xchg   %ax,%ax
+409f30:80 7c 13 ff 2f       : cmpb   $0x2f,-0x1(%rbx,%rdx,1)
+409f35:48 8d 42 ff          : lea    -0x1(%rdx),%rax
+409f39:75 08                : jne    409f43 <__sprintf_chk@plt+0x7783>
+409f3b:48 89 c2             : mov    %rax,%rdx
+409f3e:48 39 d5             : cmp    %rdx,%rbp
+409f41:75 ed                : jne    409f30 <__sprintf_chk@plt+0x7770>
+409f43:48 83 c4 08          : add    $0x8,%rsp
+--
+
+
+\fBbh_asminfo\fR [asm instruction]
+usage:
+$ bh_asminfo mov
+mov
+|Code   |Mnemonic        |Description                                         |
+|88 / r |MOV r/m8, r8    |Move r8 to r/m8                                     |
+|89 / r |MOV r/m16, r16  |Move r16 to r/m16                                   |
+|89 / r |MOV r/m32, r32  |Move r32 to r/m32                                   |
+|8A / r |MOV r8, r/m8    |Move r/m8 to r8                                     |
+|8B / r |MOV r16, r/m16  |Move r/m16 to r16                                   |
+
+
+\fBbh_replacestring\fR [file] [string to search] [string to replace]
+usage:
+$ hexdump -C MB_DEV
+
+00000690  2e 00 54 00 58 00 54 00  2e 00 00 00 73 00 77 00  |..T.X.T.....s.w.|
+000006a0  e5 45 53 54 45 54 7e 31  53 57 58 20 00 65 a1 9b  |.ESTET~1SWX .e..|
+000006b0  8b 54 8b 54 00 00 a1 9b  8b 54 00 00 00 00 00 00  |.T.T.....T......|
+000006c0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00005e00  4d 65 6e 74 65 42 69 6e  61 72 69 61 0a 00 00 00  |MenteBinaria....|
+00005e10  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+
+
+\fBbh_zerostring\fR [file] [string to replace]
+usage:
+# hexdump -C MB_DEV
+
+00005860  41 4d 00 42 00 2d 00 66  00 69 00 0f 00 a1 6c 00  |AM.B.-.f.i....l.|
+00005870  65 00 2e 00 74 00 78 00  74 00 00 00 00 00 ff ff  |e...t.x.t.......|
+00005880  4d 42 2d 46 49 4c 45 20  54 58 54 20 00 41 26 be  |MB-FILE TXT .A&.|
+00005890  69 54 69 54 00 00 26 be  69 54 05 00 1b 00 00 00  |iTiT..&.iT......|
+
+
+\fBbh_asc2dec\fR [char]
+usage:
+$  bh_asc2dec a
+97
+
+
+\fBbh_dec2asc\fR [decimal]
+usage:
+$ bh_dec2asc 65
+A
+
+
+\fBbh_hex2str\fR [hex string]
+usage:
+$ bh_hex2str '72 6f 63 6b'
+rock
+
+
+\fBbh_str2hex\fR [-x] [-0x] [-c] [string]
+usage:
+$ bh_str2hex 'Fernando'
+46 65 72 6e 61 6e 64 6f
+$ bh_str2hex -0x 'Fernado'
+0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
+
+
+\fBbh_urldecode\fR [encoded string]
+usage:
+$ bh_urlencode '/zzz!@.#'
+%2fzzz%21%40%2e%23
+.fam T
+.fi
+
+.SH SEE ALSO
+For more information about bashacks visit:
+https://github.com/merces/bashacks/tree/master/doc/source
+
+.SH AUTHOR
+.fam C
+.nf
+Developed by Fernando Merces <contato@mentebinaria.com.br>
+.PP
+This manual page was written by Josenison Ferreira da Silva <nilsonfsilva@hotmail.com>
+for the Debian project (but may be used by others).
+.fam T
+.fi
