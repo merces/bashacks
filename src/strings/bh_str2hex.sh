@@ -21,3 +21,4 @@ bh_str2hex() {
 			;;
 	esac
 }
+
