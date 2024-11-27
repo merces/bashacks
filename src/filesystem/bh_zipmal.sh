@@ -4,4 +4,5 @@ bh_zipmal() {
 	local name=${1%\.*}.zip
 	zip --encrypt -P infected "$name" $@
 	ls -lh "$name"
+    echo "password: infected"
 }

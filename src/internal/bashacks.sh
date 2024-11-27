@@ -1,3 +1,3 @@
 bashacks() {
-    echo -e "Type bh_ and press TAB."
+    echo -e "This is not how you use it. Type bh_ and press <tab> instead."
 }
