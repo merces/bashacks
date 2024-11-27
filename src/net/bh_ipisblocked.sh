@@ -16,7 +16,7 @@ bh_ipisblocked() {
         pjlink="$(echo $project \
             | cut -d ';' -f2)"
 
-        if bh_cmd_wget $pjlink -q -O - \
+        if wget -T10 $pjlink -q -O - \
             | grep -Eo "([0-9]{1,3}\.){3}[0-9]{1,3}" \
             | grep -E ^$ipaddress$ > /dev/null 2>&1
         then
