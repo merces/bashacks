@@ -1,12 +1,12 @@
-SRC = `find src/ -type f -name '*.sh'|LC_ALL=C sort`
+SRC = `find src/ -type f -name 'bh_*.sh' | LC_ALL=C sort`
 OUTFILE = bashacks.sh
 BASHRCFILE = ~/.profile
 BASHACKS = `pwd`/$(OUTFILE)
 
 all:
-	>$(OUTFILE)
+	cat src/internal/bootstrap.sh > $(OUTFILE)
 	for file in $(SRC); do \
-		(echo '#!/bin/bash' && cat $$file) >> $(OUTFILE); \
+		cat $$file >> $(OUTFILE); \
 		echo >> $(OUTFILE); \
 	done
 	tr -d \\r < $(OUTFILE) > $(OUTFILE).tmp
