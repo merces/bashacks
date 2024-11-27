@@ -6,6 +6,6 @@ bh_md5rename() {
 
 	for i in $*; do
 		md5_hash=$(bh_cmd_md5 "$i" | cut -d" " -f1)
-		[[ $md5_hash ]] && mv "$i" $(dirname "$i")/$md5_hash
+		[[ $md5_hash ]] && mv -v "$i" $(dirname "$i")/$md5_hash
 	done
 }
