@@ -2,9 +2,9 @@
 
 ## What?
 
-bashacks started as a collection of bash functions most likely useful for programmers, security analysts, and general users that need some low level type of operations.
+bashacks is as a collection of bash functions most likely useful for programmers, security analysts, and general users that need some low level type of operations.
 
-In fact, there is nothing really new in bashacks as all functions are written using exiting software in UNIX-like systems. However, it allows you to use shorter commands to run tasks that commonly would require many a few more lines of code.
+In fact, there is nothing really new in bashacks as all functions are written using existing software in UNIX-like systems. However, it allows you to use shorter commands to achieve tasks that'd commonly require multiple commands.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ Use the *make* command to generate a single file containing all functions and ad
 
 ## Documentation
 
-Click [here](https://bashacks.readthedocs.io/). 
+There's some [here](https://bashacks.readthedocs.io/), but it is outdated. PRs are welcome!
 
 ## Usage
 
@@ -48,7 +48,7 @@ Alphabetically add 4 to 'f'
     $ bh_charcalc f + 4
     j
 
-Check external IP address
+Check my external IP address
 
     $ bh_myip
     177.212.113.13
@@ -122,7 +122,7 @@ There's much more. Install it and see for yourself. :)
 
 ## Changelog
 
-### bashacks 1.5 - 2023 maybe?
+### bashacks 1.5 - 2024 - soon
 
 * New name: bashacks
 * Bugs fixed.
@@ -147,7 +147,9 @@ There's much more. Install it and see for yourself. :)
     * `bh_skel_latex` - outputs a LaTeX template.
 * Removed functions:
     * `bh_intel` is not needed anymore.
+    * `bh_asc2dec` you can get the same results with `bh_str2dec`.
     * `bh_asc2hex` result is easily achieved with `echo a | hd`.
+    * `bh_hashcrack` the service previously used went down again, and this is hard to maintain.
 
 ### hack-functions 1.4 - February, 27 2012
 
@@ -182,8 +184,10 @@ interpret them. See the following example using bh_strxor function:
     $ bh_strxor 0x41 "'\$3/ /%." # string between double quotes and dollar sign escaped
     fernando
     
-### ZSH support
+### Zsh support
 
-As bashacks uses the word splitting feature from bash, they don't work by default in ZSH. However, you can configure ZSH to perform word splitting with the following command:
+Many bashacks functions use the word splitting feature from bash, so they don't work by default in Zsh. However, you can configure Zsh to perform word splitting with the following command:
 
     $ setopt sh_word_split
+
+Then things should work.
