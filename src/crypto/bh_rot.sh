@@ -4,10 +4,10 @@ bh_rot() {
 	local n
 	local N
 
-	# n receives the correspondent alphabet letter
+	# n gets the alphabet letter
 	n=$(echo -e \\x$(bh_dec2hex $(( 97 + $1 )) ) )
 
-	# bash idiom to turn our text in uppercase letters
+	# N gets uppercase n
 	N="${n^^}"
 
 	# rot with tr command
