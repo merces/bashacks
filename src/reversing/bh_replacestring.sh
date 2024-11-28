@@ -10,7 +10,8 @@ bh_replacestring() {
 
     local tmpfile=$(mktemp)
 
-    xxd -p $fil | tr -d \\n | sed "s/${srchex::-2}/${dsthex::-2}/g" | xxd -rp >  $tmpfile
+    # xxd -r -p works, while xxd -rp or xxd -pr doesn't O.o
+    xxd -p $fil | tr -d \\n | sed "s/${srchex::-2}/${dsthex::-2}/g" | xxd -r -p >  $tmpfile
     
     [[ -s $tmpfile ]] && mv $tmpfile $fil
 }
