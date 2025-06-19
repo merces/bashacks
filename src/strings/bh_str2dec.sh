@@ -1,7 +1,9 @@
 bh_str2dec() {
 	(( $# < 1 )) && return 1
 
-	echo -n "$1" | hexdump -ve '/1 "%d "' | sed 's/\(.*\) /\1/'
+	for i in ${1//?/& }; do
+		printf "%d " "'$i'"
+	done
 	echo
 }
 
