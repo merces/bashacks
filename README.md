@@ -72,6 +72,11 @@ Create a basic C program skeleton
 ```shell
 $ bh_skel_c > hello.c
 $ cat hello.c
+```
+
+This would output:
+
+```c
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
@@ -148,12 +153,12 @@ There is very basic error handling in bashacks. If a function does not receive t
 
 There's much more. Install it and see for yourself. :)
 
-## Known Bugs
+## Known issues
 
 ### String escape
 
 In some string functions you have to escape special characters because bash will try to
-interpret them. See the following example using bh_strxor function:
+interpret them. See the following example using `bh_strxor` function:
 
 ```shell
 $ bh_strxor 0x41 fernando
