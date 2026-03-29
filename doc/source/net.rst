@@ -130,7 +130,7 @@ Query ipinfo.io returns basic info about address.
 
 
 bh_unshort
----------
+----------
 
 With this function you have the possibility to unshort a URL see below a example.
 
@@ -147,7 +147,7 @@ With this function you have the possibility to unshort a URL see below a example
 
 
 bh_ipisblacklisted
----------
+-------------------
 
 Search for occurrence of the ip address in some  blacklist returning [T] if positive and [F] if it is opposite..
 
