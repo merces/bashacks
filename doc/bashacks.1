@@ -1,4 +1,4 @@
-.TH BASHACKS 1 "November 2023" "bashacks 1.5" "User Commands"
+.TH BASHACKS 1 "November 2026" "bashacks 1.5" "User Commands"
 
 .SH NAME
 bashacks \- collection of useful bash functions for programmers
@@ -31,7 +31,6 @@ Display version information and exit.
 The following Bashacks functions are available. Type the function name and press TAB
 to auto-complete:
 .B "Examples of Options": bh_"TAB"
-\fBbh_asc2dec\fR        \fBbh_cmd_sha1\fR       \fBbh_hex2bin\fR        \fBbh_rot\fR            \fBbh_str2hex\fR
 \fBbh_asciitable\fR     \fBbh_cmd_sha256\fR     \fBbh_hex2dec\fR        \fBbh_rot13\fR          \fBbh_str2hexr\fR
 \fBbh_asmgrep\fR        \fBbh_cmd_sha512\fR     \fBbh_hex2str\fR        \fBbh_rotall\fR         \fBbh_strxor\fR
 \fBbh_asminfo\fR        \fBbh_cmd_wget\fR       \fBbh_hexcalc\fR        \fBbh_secretfile\fR     \fBbh_unshort\fR
@@ -40,8 +39,9 @@ to auto-complete:
 \fBbh_bkp\fR            \fBbh_dec2hex\fR        \fBbh_ipinfo\fR         \fBbh_skel_go\fR        \fBbh_utf8table\fR
 \fBbh_charcalc\fR       \fBbh_epoch\fR          \fBbh_ipisblocked\fR    \fBbh_skel_latex\fR     \fBbh_wgetr\fR
 \fBbh_cmd_disasm\fR     \fBbh_findmime\fR       \fBbh_md5rename\fR      \fBbh_skel_python\fR    \fBbh_zerostring\fR
-\fBbh_cmd_md5\fR        \fBbh_hashcrack\fR      \fBbh_myip\fR           \fBbh_skel_yara\fR      \fBbh_zipmal\fR
-\fBbh_cmd_sed_ext\fR    \fBbh_hashes\fR         \fBbh_replacestring\fR  \fBbh_str2dec\fR
+\fBbh_cmd_md5\fR        \fBbh_hashes\fR         \fBbh_myip\fR           \fBbh_skel_yara\fR      \fBbh_zipmal\fR
+\fBbh_cmd_sed_ext\fR    \fBbh_hex2bin\fR        \fBbh_replacestring\fR  \fBbh_str2dec\fR
+\fBbh_cmd_sha1\fR       \fBbh_rot\fR            \fBbh_str2hex\fR
 .fam T
 .fi
 
@@ -61,8 +61,6 @@ making it easier for users to find and use tools wanted.
 .TP 2
 .SH "Crypto"
 Functions related to cryptography and hash manipulation.
-
-\fBbh_hashcrack\fR - Analyzes various types of hashes.
 
 \fBbh_rot\fR - Encrypts/Decrypts a string with the Caesar Cipher using n shifts to the right.
 
@@ -89,7 +87,7 @@ This section generally contains functions for file manipulation.
 
 \fBbh_sharefile\fR - Loads a file and provides a unique URL to access it without a password.
 
-\fBbh_zipmal\fR - Compresses the file in zip format with password protection. The password is "virus".
+\fBbh_zipmal\fR - Compresses the file in zip format with password protection. The password is "infected".
 
 \fBFor more details, see:\fR
 .UR file:///usr/share/doc/bashacks-doc/html/filesystem.html
@@ -108,7 +106,7 @@ Mathematical operations functions.
 
 \fBbh_dec2hex\fR - Converts decimal to hexadecimal.
 
-\fBbh_hex2bi\fR - Converts hexadecimal to binary.
+\fBbh_hex2bin\fR - Converts hexadecimal to binary.
 
 \fBbh_hex2dec\fR - Converts hexadecimal to decimal.
 
@@ -129,15 +127,15 @@ Network operations and related tools.
 
 \fBbh_ip2bin\fR - Convert a network IP address into a binary string.
 
-\fBbh_myip\fR - Returns the external IP address of your network connection.
-
-\fBbh_wgetr\fR - Operates recursively, building on a previous instance of wget.
+\fBbh_ipisblocked\fR - Checks if an IP address is blocked by several security vendors, returning [T] if positive and [F] if opposite.
 
 \fBbh_ipinfo\fR - Queries ipinfo.io and returns basic information about an address.
 
-\fBbh_unshort\fR - Makes it possible to unzip a URL.
+\fBbh_myip\fR - Returns the external IP address of your network connection.
 
-\fBbh_ipisblacklisted\fR - Finds the IP on a blacklist, returning [T] if positive and [F] if opposite.
+\fBbh_unshort\fR - Reveals the real URL behind shortened links.
+
+\fBbh_wgetr\fR - Operates recursively, building on a previous instance of wget.
 
 \fBFor more details, see:\fR
 .UR file:///usr/share/doc/bashacks-doc/html/net.html
@@ -184,23 +182,23 @@ Reverse engineering utilities
 .SH "String"
 Functions for string manipulation.
 
-\fBbh_asc2dec\fR - Performs the conversion of a character into its decimal equivalent.
-
 \fBbh_asciitable\fR - Displays the ASCII table in the terminal.
 
 \fBbh_dec2asc\fR - Equivalent in ASCII for decimal numbers.
+
+\fBbh_epoch\fR - Converts a Unix epoch timestamp to a human-readable date and time.
 
 \fBbh_hex2str\fR - Converts one or more bytes into a hex string.
 
 \fBbh_str2dec\fR - Converts one or more bytes to their decimal equivalent.
 
-\fBbh_str2hexr\fR - Converts a string to its hex byte equivalent for each character (hex string).
-
 \fBbh_str2hex\fR - Converts a string to its hex byte equivalent for each character (hex string).
+
+\fBbh_str2hexr\fR - Converts a string to its reversed hexadecimal equivalent.
 
 \fBbh_urldecode\fR - Decodes strings to web standard human-readable format.
 
-\fBbh_urlencode\fR - Encodes strings with bh_urlencode to web standard.
+\fBbh_urlencode\fR - Encodes strings to web standard format.
 
 \fBbh_utf8table\fR - Displays the UTF-8 table.
 
@@ -212,12 +210,6 @@ Functions for string manipulation.
 .SH EXAMPLES
 .nf
 .fam C
-\fBbh_hascrack\fR [hash string]
-usage:
-$ bh_hashcrack e10adc3949ba59abbe56e057f20f883e
-123456
-
-
 \fBbh_rot\fR [int] [string]
 usage:
 $ bh_rot 3 terra
@@ -240,8 +232,9 @@ bashacks.sh.20160122
 
 \fBbh_findmime\fR -[type] [directory]
 usage:
-$ bh_findmime -exe ~/Downloads
-/home/bashacks/Downloads//binario.ex
+$ bh_findmime -elf /usr/bin
+/usr/bin/[
+/usr/bin/411toppm
 
 
 \fBbh_hashes\fR [filename or list of files]
@@ -258,6 +251,14 @@ $ touch ment.bin
 $ bh_md5rename ment.bin
 $ ls
 d41d8cd98f00b204e9800998ecf8427e
+
+
+\fBbh_zipmal\fR [filename]
+usage:
+$ bh_zipmal file.txt
+  adding: file.txt (deflated 69%)
+-rw-rw-r-- 1 user user 577 mar 29 10:43 file.zip
+password: infected
 
 
 \fBbh_bin2dec\fR [binary]
@@ -291,9 +292,9 @@ $ bh_hex2dec A
 10
 
 
-\fBbh_hex2cal\fR [hex digit] [operator] [hex digit]
+\fBbh_hexcalc\fR [hex digit] [operator] [hex digit]
 usage:
-$ bh_hex2dec A \\* 2
+$ bh_hexcalc A \\* 2
 0xa0
 
 
@@ -303,10 +304,28 @@ $ bh_bin2ip 00001010.00001010.00000000.00000001
 10.10.0.1
 
 
-\fBbh_hostcalc\fR [mask cidr]
+\fBbh_hostcalc\fR [network/prefix]
 usage:
-$ bh_hostcalc 24
-256
+$ bh_hostcalc 192.168.1.0/24
+254
+
+
+\fBbh_ipisblocked\fR [ipaddress]
+usage:
+$ bh_ipisblocked 77.xxx.xx.xx
+== 77.xxx.xx.xx ==
+[F]    TALOS
+[F]    Malc0de
+[F]    Projecthoneypot.org
+[F]    blocklist.de
+[T]    Alienvault
+[F]    SANS-TOPSOURCE
+
+
+\fBbh_unshort\fR [url]
+usage:
+$ bh_unshort https://bit.ly/3example
+http://websitedoctors.blogspot.com/2010/11/best-search-engine-optimization-seo.html
 
 
 \fBbh_wgetr\fR [url]
@@ -340,18 +359,6 @@ $ bh_ipinfo 8.8.8.8
 }
 
 
-\fBbh_ipblacklisted\fR [ipaddress]
-usage:
-$ bh_ipblacklist 77.xxx.xx.xx
-== 77.xxx.xx.xx ==
-[F]    TALOS
-[F]    Malc0de
-[F]    Projecthoneypot.org
-[F]    blocklist.de
-[T]    Alienvault
-[F]    SANS-TOPSOURCE
-
-
 \fBbh_skel_c\fR
 usage:
 $ bh_skel_c
@@ -360,6 +367,18 @@ $ bh_skel_c
 int main(int argc, char *argv[]) {
 
     return 0;
+}
+
+
+\fBbh_skel_go\fR
+usage:
+$ bh_skel_go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, World!")
 }
 
 
@@ -385,6 +404,23 @@ $ bh_skel_python
 if __name__ == '__main__':
 
 
+\fBbh_skel_yara\fR
+usage:
+$ bh_skel_yara
+rule test {
+    meta:
+        author = "username"
+        description = ""
+        date = "2026-03-29"
+        ref = ""
+        hash = ""
+    strings:
+        $a = "test" ascii wide
+    condition:
+        all of them
+}
+
+
 \fBbh_asmgrep\fR [asm instruction] [binary path]
 usage:
 $ bh_asmgrep mov /bin/ls
@@ -402,14 +438,14 @@ $ bh_asmgrep mov /bin/ls
 
 \fBbh_asminfo\fR [asm instruction]
 usage:
-$ bh_asminfo mov
-mov
+$ bh_asminfo push
+push
 |Code   |Mnemonic        |Description                                         |
-|88 / r |MOV r/m8, r8    |Move r8 to r/m8                                     |
-|89 / r |MOV r/m16, r16  |Move r16 to r/m16                                   |
-|89 / r |MOV r/m32, r32  |Move r32 to r/m32                                   |
-|8A / r |MOV r8, r/m8    |Move r/m8 to r8                                     |
-|8B / r |MOV r16, r/m16  |Move r/m16 to r16                                   |
+|FF /6  |PUSH r/m16      |Push r/m16                                          |
+|FF /6  |PUSH r/m32      |Push r/m32                                          |
+|50+rw  |PUSH r16        |Push r16                                            |
+|50+rd  |PUSH r32        |Push r32                                            |
+|6A     |PUSH imm8       |Push imm8                                           |
 
 
 \fBbh_replacestring\fR [file] [string to search] [string to replace]
@@ -427,18 +463,17 @@ $ hexdump -C MB_DEV
 
 \fBbh_zerostring\fR [file] [string to replace]
 usage:
-# hexdump -C MB_DEV
+$ cp /usr/bin/true /tmp/true_test
+$ bh_zerostring /tmp/true_test "error"
+5+0 records in
+5+0 records out
+5 bytes copied
 
-00005860  41 4d 00 42 00 2d 00 66  00 69 00 0f 00 a1 6c 00  |AM.B.-.f.i....l.|
-00005870  65 00 2e 00 74 00 78 00  74 00 00 00 00 00 ff ff  |e...t.x.t.......|
-00005880  4d 42 2d 46 49 4c 45 20  54 58 54 20 00 41 26 be  |MB-FILE TXT .A&.|
-00005890  69 54 69 54 00 00 26 be  69 54 05 00 1b 00 00 00  |iTiT..&.iT......|
 
-
-\fBbh_asc2dec\fR [char]
+\fBbh_epoch\fR [timestamp]
 usage:
-$  bh_asc2dec a
-97
+$ bh_epoch 1743249600
+sáb 29 mar 2026 09:00:00 -03
 
 
 \fBbh_dec2asc\fR [decimal]
@@ -457,11 +492,23 @@ rock
 usage:
 $ bh_str2hex 'Fernando'
 46 65 72 6e 61 6e 64 6f
-$ bh_str2hex -0x 'Fernado'
+$ bh_str2hex -0x 'Fernando'
 0x46 0x65 0x72 0x6e 0x61 0x6e 0x64 0x6f
 
 
+\fBbh_str2hexr\fR [string]
+usage:
+$ bh_str2hexr "hello"
+6f 6c 6c 65 68
+
+
 \fBbh_urldecode\fR [encoded string]
+usage:
+$ bh_urldecode '%2fzzz%21%40%2e%23'
+/zzz!@.#
+
+
+\fBbh_urlencode\fR [string]
 usage:
 $ bh_urlencode '/zzz!@.#'
 %2fzzz%21%40%2e%23
@@ -477,7 +524,7 @@ https://github.com/merces/bashacks/tree/master/doc/source
 .nf
 Developed by Fernando Merces <contato@mentebinaria.com.br>
 .PP
-This manual page was written by Josenison Ferreira da Silva <nilsonfsilva@hotmail.com>
+This manual page was written by Josenilson Ferreira da Silva <nilsonfsilva@hotmail.com>
 for the Debian project (but may be used by others).
 .fam T
 .fi
