@@ -26,7 +26,7 @@ Generates on the standard  output ``C`` skeleton.
 
 
 bh_skel_go
----------
+----------
 Generates on the standard  output ``go`` skeleton.
 
 .. note::
@@ -51,7 +51,7 @@ Generates on the standard  output ``go`` skeleton.
 
 
 bh_skel_latex
----------
+-------------
 Generates on the standard  output ``latex`` skeleton.
 
 .. note::

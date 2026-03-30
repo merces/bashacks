@@ -62,7 +62,7 @@ Display information of instructions asm internet is required for help us.
 
 
 bh_replacestring
-----------
+----------------
 
 Find and replace string occurrence in the file, attention: the original file will
 be replacede by the new generated file.

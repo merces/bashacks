@@ -6,7 +6,7 @@ bh_zerostring() {
 
 	# 'tr' is needed here because the strings command
     # might output lines starting with two spaces
-	local pos=$(strings -t d "$fil" | grep -F "$search" | tr -s ' ' ' ' | cut -d' ' -f1)
+	local pos=$(strings -t d "$fil" | grep -F "$search" | tr -s ' ' ' ' | cut -d' ' -f2)
 
 	local siz=${#search}
 	for i in $pos; do

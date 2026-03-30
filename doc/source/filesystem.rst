@@ -101,7 +101,7 @@ Convert filename to equivalent digest md5.
 
 
 bh_secretfile
----------
+-------------
 
 A nice feature to any skill, use it to compress one or more files, automatically generating a password and upload to the file.io, in the end of process you'll get a URL and password to decompress file.
 
@@ -123,7 +123,7 @@ A nice feature to any skill, use it to compress one or more files, automatically
 
 
 bh_sharefile
----------
+------------
 
 Just as the bh_secretfile function uploads a file and returns the unique url to access it, this process will not have a password attached, anyone with the URL will be able to download it.
 
