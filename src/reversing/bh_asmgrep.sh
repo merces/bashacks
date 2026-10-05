@@ -1,3 +1,4 @@
+# bh_asmgrep endbr64 /bin/ls
 bh_asmgrep() {
     (( $# < 2 )) && return 1
 
