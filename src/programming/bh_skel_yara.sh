@@ -5,7 +5,7 @@ bh_skel_yara() {
         author = \"$(whoami)\"
         description = \"\"
         date = \"$(date +%Y-%m-%d)\"
-        ref = \"\"
+        reference = \"\"
         hash = \"\"
 
     strings:
