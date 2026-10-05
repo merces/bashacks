@@ -27,7 +27,6 @@
     * `bh_intel` is not needed anymore.
     * `bh_asc2dec` you can get the same results with `bh_str2dec`.
     * `bh_asc2hex` result is easily achieved with `echo a | hd`.
-    * `bh_hashcrack` the service previously used went down again, and this is hard to maintain.
 
 ## hack-functions 1.4 - February, 27 2012
 
