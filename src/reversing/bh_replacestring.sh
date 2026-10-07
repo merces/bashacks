@@ -1,6 +1,6 @@
 # bh_replacestring file string new_string
 #
-# example: bh_replacestring ./bin/ls 
+# example: bh_replacestring ./bin/ls total t0ta1
 #
 # cp /bin/ls .
 # chmod +x ./ls
