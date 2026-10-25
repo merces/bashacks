@@ -3,7 +3,7 @@ bh_ipisblocked() {
 
     local ipaddress="${1:-`bh_myip`}"
     local url_projects='TALOS;https://www.talosintelligence.com/documents/ip-blacklist
-    Malc0de;http://malc0de.com/bl/IP_Blacklist.txt
+    NetAPI;https://netapi.com/zf-api/f/compromised/ip/live/
     Projecthoneypot.org;https://www.projecthoneypot.org/list_of_ips.php
     blocklist.de;http://lists.blocklist.de/lists/all.txt
     Alienvault;https://reputation.alienvault.com/reputation.generic
