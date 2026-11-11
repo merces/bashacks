@@ -162,7 +162,7 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
     $ bh_ipblacklist 77.xxx.xx.xx
     == 77.xxx.xx.xx ==
     [F]    TALOS
-    [F]    Malc0de
+    [F]    NetAPI
     [F]    Projecthoneypot.org
     [F]    blocklist.de
     [T]    Alienvault
@@ -173,7 +173,7 @@ Search for occurrence of the ip address in some  blacklist returning [T] if posi
     $ bh_ipblacklist
     == 189.x.xxx.x ==
     [F]    TALOS
-    [F]    Malc0de
+    [F]    NetAPI
     [F]    blocklist.de
     [F]    Alienvault
     [T]    SANS-TOPSOURCE
